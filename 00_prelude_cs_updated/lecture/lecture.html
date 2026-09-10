@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>lecture</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="../styles/style.css" />
+  <script defer=""
+  src="/usr/share/javascript/katex/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <link rel="stylesheet"
+  href="/usr/share/javascript/katex/katex.min.css" />
+</head>
+<body>
+<h1 id="calculus-and-analytical-geometry">Calculus and Analytical
+Geometry</h1>
+<h2 id="prelude">Prelude</h2>
+<h3 id="dr.-aamir-alaud-din">Dr. Aamir Alaud Din</h3>
+<h3 id="september-7-2026">September 7, 2026</h3>
+<h1 id="about-the-instructor">About the Instructor</h1>
+<h2 id="education">Education</h2>
+<ul>
+<li>PhD Environmental Engineering
+<ul>
+<li>Gwangju Institute of Science and Technology, South Korea</li>
+</ul></li>
+<li>MS Environmental Engineering
+<ul>
+<li>Gwangju Institute of Science and Technology, South Korea</li>
+</ul></li>
+<li>BS Chemical Engineering
+<ul>
+<li>University of the Punjab, Lahore</li>
+</ul></li>
+</ul>
+<h2 id="experience">Experience</h2>
+<ul>
+<li>COMSATS University Islamabad, Lahore Campus
+<ul>
+<li>2008 - 2013</li>
+</ul></li>
+<li>Khwaja Fareed University of Engineering and Information Technology,
+Rahim Yar Khan
+<ul>
+<li>2018 - 2022</li>
+</ul></li>
+<li>National University of Sciences and Technology, Islamabad
+<ul>
+<li>2022 - To Date</li>
+</ul></li>
+</ul>
+<h2 id="speciality">Speciality</h2>
+<ul>
+<li>Modelling and Simulation
+<ul>
+<li>Mathematics</li>
+<li>Computer Programming</li>
+<li>Physics</li>
+<li>Chemical Engineering</li>
+<li>Environmental Engineering</li>
+</ul></li>
+</ul>
+<h1 id="why-are-you-studying-calculus">Why are you studying
+Calculus?</h1>
+<p>You may be wondering:</p>
+<p><strong>“I am a Computer Science student. Why do I need
+Calculus?”</strong></p>
+<p>The answer is that Computer Science is not only about programming.
+Many areas of modern Computer Science are built on mathematics, and
+<strong>calculus is one of the mathematical tools used to understand
+change, optimization, continuous functions, data, and computational
+models.</strong></p>
+<p>There are five major reasons for studying Calculus.</p>
+<h2 id="to-understand-how-things-change">1. To understand how things
+change</h2>
+<p>Computers and mathematical models often deal with quantities that
+change.</p>
+<p>The derivative tells us <strong>how fast a quantity
+changes</strong>:</p>
+<p><span class="math display">
+f&#39;(x)=\frac{df}{dx}.
+</span></p>
+<p>This idea becomes important in data analysis, simulations, computer
+graphics, scientific computing, and machine learning.</p>
+<h2 id="to-understand-optimization">2. To understand optimization</h2>
+<p>A huge number of problems in Computer Science involve finding the
+<strong>best solution</strong>.</p>
+<p>For example:</p>
+<ul>
+<li>minimize an error</li>
+<li>minimize computational cost</li>
+<li>maximize performance</li>
+<li>find the best parameters for a model</li>
+<li>optimize a system</li>
+</ul>
+<p>Calculus provides the mathematical foundation for finding maximum and
+minimum values.</p>
+<p>This becomes especially important in <strong>Machine Learning and
+Artificial Intelligence</strong>, where models are trained by minimizing
+a loss function.</p>
+<h2 id="to-understand-machine-learning-and-artificial-intelligence">3.
+To understand Machine Learning and Artificial Intelligence</h2>
+<p>Modern AI relies heavily on mathematics.</p>
+<p>Suppose a machine-learning model has a loss function</p>
+<p><span class="math display">
+L(w).
+</span></p>
+<p>The derivative</p>
+<p><span class="math display">
+\frac{dL}{dw}
+</span></p>
+<p>tells us how the loss changes when the parameter (w) changes.</p>
+<p>This idea leads to <strong>gradient-based optimization</strong>,
+which is fundamental to machine learning and deep learning.</p>
+<p>The chain rule that you study in calculus also becomes a foundation
+for <strong>backpropagation in neural networks</strong>.</p>
+<p>So you can think of:</p>
+<p><span class="math display">
+\boxed{
+\text{Calculus}
+\rightarrow
+\text{Derivatives}
+\rightarrow
+\text{Optimization}
+\rightarrow
+\text{Machine Learning}
+\rightarrow
+\text{Deep Learning}
+}
+</span></p>
+<h2 id="to-understand-data-and-probability">4. To understand data and
+probability</h2>
+<p>When data is modeled using continuous probability distributions,
+integration is used to calculate probabilities and statistical
+quantities.</p>
+<p>For example,</p>
+<p><span class="math display">
+P(a\leq X\leq b)
+=
+\int_a^b f(x)\,dx.
+</span></p>
+<p>Therefore, calculus provides an important foundation for <strong>Data
+Science, Statistics, Machine Learning, and AI</strong>.</p>
+<h2
+id="to-build-the-mathematical-foundation-for-advanced-computer-science">5.
+To build the mathematical foundation for advanced Computer Science</h2>
+<p>Calculus will support your later studies in areas such as:</p>
+<ul>
+<li>Data Science</li>
+<li>Machine Learning</li>
+<li>Deep Learning</li>
+<li>Artificial Intelligence</li>
+<li>Computer Graphics</li>
+<li>Computer Vision</li>
+<li>Robotics</li>
+<li>Scientific Computing</li>
+<li>Numerical Methods</li>
+<li>Simulation</li>
+<li>Optimization</li>
+</ul>
+<p>You may not use calculus directly in every programming course, but
+the mathematical thinking developed through calculus becomes valuable in
+many specialized areas of Computer Science.</p>
+<h2 id="the-big-picture">The big picture</h2>
+<p>You can think of calculus as giving you three important mathematical
+abilities:</p>
+<p><span class="math display">
+\boxed{\text{Change}}
+\quad\rightarrow\quad
+\boxed{\text{Derivative}}
+</span></p>
+<p><span class="math display">
+\boxed{\text{Accumulation}}
+\quad\rightarrow\quad
+\boxed{\text{Integral}}
+</span></p>
+<p><span class="math display">
+\boxed{\text{Best/Optimal Solution}}
+\quad\rightarrow\quad
+\boxed{\text{Optimization}}
+</span></p>
+<p>These ideas eventually connect mathematics with algorithms, data,
+machine learning, and artificial intelligence.</p>
+<h3 id="whys-of-calculus-in-a-single-shot">Whys of Calculus in a Single
+Shot?</h3>
+<p><span class="math display">
+\boxed{
+\text{Calculus teaches you how to mathematically understand change,
+accumulation, and optimization—ideas that form an important foundation
+for modern Computer Science.}
+}
+</span></p>
+<h2 class="red" id="important-note">Important Note</h2>
+<p>The above discussion is to convince you on the reasons, scope, and
+importance of studying calculus and is not required to prepare with
+reference to exams.</p>
+<h1 id="instructors-point-of-view">Instructor’s Point of View</h1>
+<h2 id="mathematics-is-a-language">Mathematics is a Language</h2>
+<p>Mathematics is the language of science. A single mathematical model
+describes the reality (real physical world).</p>
+<p>Consider,</p>
+<p><span class="math display">
+s = ut + \frac12at^2
+</span></p>
+<p>What is <span class="math inline">ut</span>?</p>
+<p>What is <span class="math inline">at^2</span>?</p>
+<h2
+id="major-math-models-in-computer-science-courses-dont-involve-assumptions">Major
+Math Models in Computer Science Courses Don’t Involve Assumptions</h2>
+<ul>
+<li>Multivariate Analysis</li>
+<li>Machine Learning</li>
+<li>Deep Learning</li>
+<li>Artificial Intelligence
+<ul>
+<li>Robots and Chatbots</li>
+</ul></li>
+<li>All subjects</li>
+</ul>
+<h2 id="understand-mathematics">Understand Mathematics</h2>
+<p>Understanding the language of Mathematics is primary focus, solving
+is secondary focus give both equal weightage for success in Computer
+Science.</p>
+<h1 id="course-outline">Course Outline</h1>
+<ul>
+<li><p>Review of vectors, scalar and vector products</p></li>
+<li><p>Three-dimensional coordinate system and equation of straight line
+and plane</p></li>
+<li><p>Limits &amp; continuity, techniques of finding limits.</p></li>
+<li><p>Techniques of differentiation, Tangent lines and rates of
+change</p></li>
+<li><p>Extrema of functions, Rolle’s and Mean value theorems,
+Concavity</p></li>
+<li><p>Riemann sum, definite integrals, and properties of
+integrals</p></li>
+<li><p>Solids of revolution, volume of solids of revolution by
+cylindrical shell &amp; Cross section methods</p></li>
+<li><p>Arc length, surface of revolution, Centre of mass</p></li>
+<li><p>Indeterminate forms and L Hospital rule, trigonometric
+integrals</p></li>
+<li><p>Improper Integrals</p></li>
+<li><p>Convergence and divergence of sequences and series, positive term
+series, integral test</p></li>
+<li><p>Basic comparison test, limit comparison test, the ratio and root
+tests, alternating series, absolute and conditional convergence</p></li>
+<li><p>Power series, Maclaurin and Taylor series</p></li>
+</ul>
+<h1 id="assessments">Assessments</h1>
+<h2 id="homeworks">Homeworks</h2>
+<ul>
+<li>Weightage: 10%</li>
+<li>Number of Homeworks: 3 - 4</li>
+</ul>
+<h2 id="quizzes">Quizzes</h2>
+<ul>
+<li>Weightage: 15%</li>
+<li>Number of Quizzes: 4 (Best three will be counted)</li>
+<li>Announced Quiz: All the material from last quiz to the upcoming
+quiz</li>
+<li>Unannounced Quiz: Limited to last 3 lectures</li>
+<li>No make up quizzes at all</li>
+<li>Since best 3 out of 4 quizzes will be counted, absence in one quiz
+will be counted as the quiz with zero marks</li>
+<li>Since there are no make up quizzes, don’t be absent from the class
+which otherwise may lead to missing more than one quizzes</li>
+</ul>
+<h2 id="mid-semester-exam">Mid Semester Exam</h2>
+<ul>
+<li>Weightage: 30%</li>
+<li>Number of Exams: 1</li>
+</ul>
+<h2 id="end-semester-exam">End Semester Exam</h2>
+<ul>
+<li>Weightage: 45%</li>
+<li>Number of Exams: 1</li>
+</ul>
+<h2 id="question-types">Question Types</h2>
+<ul>
+<li>Only quizzes may contain objective type question (very rare)</li>
+<li>All assessments will be comprised of full lenght questions</li>
+<li>Questions may be from theory</li>
+<li>There will be full length questions (unseen)</li>
+<li>75-80% average</li>
+<li>20-25% challenge</li>
+</ul>
+<h2 class="red" id="important-note-1">Important Note</h2>
+<p>You need hard work on theoretical as well as solution part. Practice
+both on registers.</p>
+<h1 id="course-material">Course Material</h1>
+<ul>
+<li>Soon the course material will be available on LMS</li>
+<li>You can also download the lecture material from the GitHub
+repository by <a href="https://github.com/aamirai2025/fall26">clicking
+here</a></li>
+<li>Course material may include python programs which only to play with
+for the understanding of the topic and you can also skip them. However,
+playing with these graphs will lead to deeper understanding.</li>
+</ul>
+<h1 id="lecture-format">Lecture Format</h1>
+<h2 id="header">Header</h2>
+<ul>
+<li>Contains course title, topic, author, and date as can be seen in the
+header of this ongoing discussion.</li>
+</ul>
+<h2 id="objectives">Objectives</h2>
+<ul>
+<li>Objectives of the lectures to be read before the start of the
+lecture and review thoroughly again after preparing the lecture.</li>
+</ul>
+<h2 id="the-why-section">The Why Section</h2>
+<ul>
+<li>Corresponding to each objective, we will discuss the reasons of
+studying the topic objectives.</li>
+</ul>
+<h2 id="subtopics-and-subsubtopics">Subtopics and Subsubtopics</h2>
+<ul>
+<li>Subtopics appear as maroon headings and subsubtopics appear as
+purple headings.</li>
+</ul>
+<h2 id="subtopic">Subtopic</h2>
+<h3 id="subsubtopic">Subsubtopic</h3>
+<h2 id="definitions">Definitions</h2>
+<h2 class="blue" id="definition-color">Definition: Color</h2>
+<ul>
+<li>Definitions appear in blue headings and a blue box represents the
+definition end.</li>
+</ul>
+<div class="definition-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 id="solved-examples">Solved Examples</h2>
+<ul>
+<li>Solved examples and solutions appear in green headings and a green
+box indicates end of solution. Examples may be solved on board and also
+left as an exercise depending upon the complexity of the problem</li>
+</ul>
+<h2 class="green" id="example">Example</h2>
+<h2 class="green" id="solution">Solution</h2>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 id="theorems-and-proofs">Theorems and Proofs</h2>
+<ul>
+<li>Theorems and Proofs headings are in orange heading and an orange box
+will be for the completeness of theorem or proof.</li>
+</ul>
+<h2 class="orange" id="theorem">Theorem</h2>
+<h2 class="orange" id="proof">Proof</h2>
+<div class="theorem-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 id="quick-checks">Quick Checks</h2>
+<ul>
+<li>After covering each subtopic, there will be a quick check sections
+and you need to be attentive during the lecture to answer these
+questions. These questions are in red color and a red box confirms the
+end of quick check section.</li>
+</ul>
+<h2 class="red" id="question-no.-1">Question No. 1</h2>
+<h2 class="red" id="question-no.-2">Question No. 2</h2>
+<div class="questions-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 id="summary">Summary</h2>
+<p>Self study summary aftere preparing the topic gives a bird’s eye view
+of the topic and main points.</p>
+<h2 id="exercise">Exercise</h2>
+<p>Mandatory part of the lecture and indicates the understanding of the
+topic. Assessment questions will be unseen. Exercises prepare you to
+solve those unseen questions.</p>
+<h1 id="rules">Rules</h1>
+<h2 id="attendance">Attendance</h2>
+<ul>
+<li><p>Class attendance of 75% or above is mandatory to sit in the final
+exam. An attendance of 74.99% in Qalam leads to ineligibility to appear
+in the final exam. There is no concept of leave, sickness, urgent piece
+of works, family functions etc. and you have to use the cushion of 25%
+in attendance for such occasions. Once availed, you don’t have any
+cushion for emergency or unforseen absents from the class.</p></li>
+<li><p>After 10 minutes, attendance will be closed. Late comers are
+allowed to join the class, however, their attendance will not be
+marked.</p></li>
+</ul>
+<h2 id="mobile-phones">Mobile Phones</h2>
+<ul>
+<li>Use of mobile phones is strictly prohibited in the class. If any
+student is caught of using phone in the class, his/her marks in the quiz
+will be halved from one quiz. Upon similar activity next time, marks
+from other quizzes will be halved. Fifth time homeworks marks will be
+considered zero.</li>
+</ul>
+<h2 id="why-are-rules-and-instructors-point-of-view">Why are Rules and
+Instructor’s Point of View?</h2>
+<p>Hard work <span class="math inline">\ne</span> No work/Just
+prepare</p>
+<p>Everyone is the same for me</p>
+<figure>
+<img src="../images/book.png" alt="book" />
+<figcaption aria-hidden="true">book</figcaption>
+</figure>
+</body>
+</html>

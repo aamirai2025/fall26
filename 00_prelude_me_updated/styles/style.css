@@ -1,0 +1,247 @@
+/* ==========================================================
+ *  Global Document Settings
+ *  ========================================================== */
+
+body {
+    font-family: "Ubuntu", sans-serif;
+    font-size: 26pt;
+    line-height: 1.5;
+
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+/* ==========================================================
+ *  Headings
+ *  ========================================================== */
+
+h1 {
+    font-family: "Ubuntu", sans-serif;
+    font-size: 50pt;
+    font-weight: bold;
+    line-height: 1.5;
+    color: black;
+}
+
+h2 {
+    font-family: "Ubuntu", sans-serif;
+    font-size: 42pt;
+    font-weight: bold;
+    line-height: 1.5;
+    color: rgb(186, 0, 0);
+}
+
+h3 {
+    font-family: "Ubuntu", sans-serif;
+    font-size: 34pt;
+    font-weight: bold;
+    line-height: 1.5;
+    color: rgb(116, 0, 151);
+}
+
+/* ==========================================================
+ *  Paragraphs
+ *  ========================================================== */
+
+p {
+    font-family: "Ubuntu", sans-serif;
+    font-size: 26pt;
+    line-height: 1.5;
+}
+
+/* ==========================================================
+ *  Lists
+ *  ========================================================== */
+
+ul,
+ol,
+li {
+    font-family: "Ubuntu", sans-serif;
+    font-size: 26pt;
+}
+
+/* ==========================================================
+ *  Tables
+ *  ========================================================== */
+
+table {
+    border-collapse: collapse;
+    margin: 0.5em auto;
+    border: 2px solid #c7d0db;
+}
+
+th {
+    border: 2px solid #c7d0db;
+    background: #f6f8fa;
+    font-weight: bold;
+    padding: 8px 14px;
+}
+
+td {
+    border: 2px solid #c7d0db;
+    padding: 8px 14px;
+}
+
+/* ==========================================================
+ *  Block Quotes
+ *  ========================================================== */
+
+blockquote {
+    font-family: "Ubuntu", sans-serif;
+    font-size: 26pt;
+}
+
+h1.red {
+    color: red;
+}
+
+h2.red {
+    color: red;
+}
+
+h3.red {
+    color: red;
+}
+
+h1.blue {
+    color: blue;
+}
+
+h2.blue {
+    color: blue;
+}
+
+h3.blue {
+    color: blue;
+}
+
+h1.orange {
+    color: orange;
+}
+
+h2.orange {
+    color: orange;
+}
+
+h3.orange {
+    color: orange;
+}
+
+h1.green {
+    color: green;
+}
+
+h2.green {
+    color: green;
+}
+
+h3.green {
+    color: green;
+}
+
+h3.orange {
+    color: orange;
+}
+
+/* ==========================================================
+ *  Code
+ *  ========================================================== */
+
+/* Inline code */
+
+code {
+    font-family: "Ubuntu Mono", monospace;
+    font-size: 26pt;
+    background-color: #f2f2f2;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+/* Code blocks */
+
+pre {
+    font-family: "Ubuntu Mono", monospace;
+    font-size: 26pt;
+    background-color: #f2f2f2;
+    border: 1px solid #d0d0d0;
+    border-radius: 6px;
+    padding: 12px;
+    overflow-x: auto;
+}
+
+pre code {
+    background: transparent;
+    border: none;
+    padding: 0;
+}
+
+/* ==========================================================
+ *  MathJax (Display + Inline)
+ *  ========================================================== */
+
+/* Display equations */
+
+.MathJax,
+mjx-container {
+    font-size: 26pt !important;
+}
+
+/* Inline equations */
+
+mjx-container[jax="CHTML"][display="false"] {
+    font-size: 26pt !important;
+}
+
+/* Display equations */
+
+mjx-container[jax="CHTML"][display="true"] {
+    font-size: 26pt !important;
+}
+
+/* ==========================================================
+ *  Example End Marker
+ *  ========================================================== */
+
+.example-end {
+    text-align: right;
+    color: green;
+    font-size: 26pt;
+    line-height: 1;
+    margin-top: -0.2em;
+}
+
+/* ==========================================================
+ *  Definition End Marker
+ *  ========================================================== */
+
+.definition-end {
+    text-align: right;
+    color: blue;
+    font-size: 26pt;
+    line-height: 1;
+    margin-top: -0.2em;
+}
+
+/* ==========================================================
+ *  Theorem End Marker
+ *  ========================================================== */
+
+.theorem-end {
+    text-align: right;
+    color: orange;
+    font-size: 26pt;
+    line-height: 1;
+    margin-top: -0.2em;
+}
+
+/* ==========================================================
+ *  Questions End Marker
+ *  ========================================================== */
+
+.questions-end {
+    text-align: right;
+    color: red;
+    font-size: 26pt;
+    line-height: 1;
+    margin-top: -0.2em;
+}
