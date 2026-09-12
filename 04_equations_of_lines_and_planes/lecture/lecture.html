@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>lecture</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="../styles/style.css" />
+  <script defer=""
+  src="/usr/share/javascript/katex/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <link rel="stylesheet"
+  href="/usr/share/javascript/katex/katex.min.css" />
+</head>
+<body>
+<h1 id="calculus-and-analytical-geometry">Calculus and Analytical
+Geometry</h1>
+<h2 id="equations-of-lines-and-planes">Equations of Lines and
+Planes</h2>
+<h3 id="dr.-aamir-alaud-din">Dr. Aamir Alaud Din</h3>
+<h3 id="september-8-2026">September 8, 2026</h3>
+<h1 id="objectives">Objectives</h1>
+<p>After preparing this topic, you should be able to:</p>
+<ol type="1">
+<li><p><strong>Describe lines in three-dimensional space using vector,
+parametric, and symmetric equations, and use these representations to
+analyze lines and their relationships.</strong></p></li>
+<li><p><strong>Describe planes in three-dimensional space using normal
+vectors and scalar equations, and use these equations to determine
+intersections, parallelism, and angles between planes.</strong></p></li>
+</ol>
+<h1 id="the-why-section">The Why Section</h1>
+<h2 id="objective-1-why-study-equations-of-lines">Objective 1: Why Study
+Equations of Lines?</h2>
+<ul>
+<li><p>In three-dimensional engineering and computing applications, we
+often need to describe the position and direction of an object
+mathematically.</p></li>
+<li><p>For example, consider a robotic arm moving its end-effector
+through three-dimensional space. The robot may move along a straight
+path from one position to another, so we need a mathematical equation
+that describes every point on that path.</p></li>
+<li><p>A point alone tells us <strong>where</strong> the motion starts,
+but it does not tell us <strong>which direction</strong> the object
+moves.</p></li>
+<li><p>A direction vector together with a point completely determines a
+line in space.</p></li>
+<li><p>Once the line is represented mathematically, we can determine the
+position of the object for different values of a parameter, find where
+its path intersects a plane, and determine whether two paths intersect,
+are parallel, or are skew.</p></li>
+<li><p>Therefore, vector, parametric, and symmetric equations provide
+mathematical tools for describing and analyzing straight-line motion in
+three-dimensional space.</p></li>
+<li><p>A robotic-arm positioning problem of this type can be solved by
+studying the first objective.</p></li>
+</ul>
+<h2 id="objective-2-why-study-equations-of-planes">Objective 2: Why
+Study Equations of Planes?</h2>
+<ul>
+<li><p>In engineering and computer science, many important objects and
+boundaries are naturally represented by planes.</p></li>
+<li><p>For example, a computer-controlled cutting machine may move a
+tool toward a flat surface, while a robot may need to determine where a
+straight trajectory intersects a planar surface.</p></li>
+<li><p>To describe such a surface mathematically, we need more
+information than a single point.</p></li>
+<li><p>A vector perpendicular to the plane, called a <strong>normal
+vector</strong>, provides the direction that uniquely determines the
+orientation of the plane.</p></li>
+<li><p>Once a point on the plane and a normal vector are known, we can
+construct an equation that describes every point on the plane.</p></li>
+<li><p>Plane equations also allow us to determine whether two planes are
+parallel, find the angle between them, and determine the line where two
+nonparallel planes intersect.</p></li>
+<li><p>Therefore, equations of planes provide a mathematical framework
+for describing flat surfaces and analyzing their geometric relationships
+in three-dimensional space.</p></li>
+<li><p>A robotic-tool and planar-surface positioning problem of this
+type can be solved by studying the second objective.</p></li>
+</ul>
+<h1 id="objective-1-lines">Objective 1: Lines</h1>
+<h2 id="vector-equation-of-a-line">Vector Equation of a Line</h2>
+<ul>
+<li><p>A line in the <span class="math inline">xy</span>-plane is
+determined when a point on the line and its direction are
+known.</p></li>
+<li><p>The same basic idea applies to a line in three-dimensional
+space.</p></li>
+<li><p>Suppose a line <span class="math inline">L</span> passes through
+the point <span class="math inline">P_0(x_0,y_0,z_0)</span> and has
+direction vector <span class="math inline">\mathbf v</span>.</p></li>
+<li><p>Let <span class="math inline">\mathbf r_0</span> be the position
+vector of <span class="math inline">P_0</span> and let <span
+class="math inline">\mathbf r</span> be the position vector of an
+arbitrary point <span class="math inline">P(x,y,z)</span> on the
+line.</p></li>
+<li><p>The vector from <span class="math inline">P_0</span> to <span
+class="math inline">P</span> is parallel to the direction vector <span
+class="math inline">\mathbf v</span>.</p></li>
+<li><p>Therefore, there is a scalar <span class="math inline">t</span>
+such that</p></li>
+</ul>
+<p><span class="math display">
+\mathbf r-\mathbf r_0=t\mathbf v
+</span></p>
+<ul>
+<li>Hence, the vector equation of the line is</li>
+</ul>
+<p><span class="math display">
+\mathbf r=\mathbf r_0+t\mathbf v
+</span></p>
+<ul>
+<li>As the parameter <span class="math inline">t</span> varies through
+all real numbers, the tip of <span class="math inline">\mathbf r</span>
+traces out the line.</li>
+</ul>
+<div style="text-align: center;">
+<p><img src="../images/0401.png" style="width: 816px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 1.</strong> A line in three-dimensional space
+determined by a point and a direction vector.</span></p>
+</div>
+<ul>
+<li>If the direction vector is written in component form as <span
+class="math inline">\mathbf v=\langle a,b,c\rangle</span> and <span
+class="math inline">\mathbf r_0=\langle x_0,y_0,z_0\rangle</span> then
+the vector equation becomes</li>
+</ul>
+<p><span class="math display">
+\langle x,y,z\rangle
+=
+\langle x_0,y_0,z_0\rangle
++t\langle a,b,c\rangle
+</span></p>
+<ul>
+<li>Equating corresponding components gives the parametric
+equations.</li>
+</ul>
+<p><span class="math display">
+\langle x, y, z \rangle = \langle x_0 + at, y_0 + bt, z_0 + ct \rangle
+</span></p>
+<h2 id="parametric-equations-of-a-line">Parametric Equations of a
+Line</h2>
+<ul>
+<li>The parametric equations of a line through <span
+class="math inline">P_0(x_0,y_0,z_0)</span> parallel to the direction
+vector <span class="math inline">\langle a,b,c\rangle</span> are</li>
+</ul>
+<p><span class="math display">
+x=x_0+at
+</span></p>
+<p><span class="math display">
+y=y_0+bt
+</span></p>
+<p><span class="math display">
+z=z_0+ct
+</span></p>
+<ul>
+<li><p>Every value of <span class="math inline">t</span> gives a point
+on the line.</p></li>
+<li><p>Different choices of the starting point or a parallel direction
+vector can produce different-looking equations for the same
+line.</p></li>
+</ul>
+<div style="text-align: center;">
+<p><img src="../images/0402.png" style="width: 662px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 2.</strong> A line traced by the position vector
+as the parameter <span class="math inline">t</span> varies.</span></p>
+</div>
+<h2 class="green" id="example-1">Example 1</h2>
+<p>Find a vector equation and parametric equations for the line that
+passes through the point <span class="math inline">(5,1,3)</span> and is
+parallel to the vector <span class="math inline">\mathbf i+4\mathbf
+j-2\mathbf k</span>.</p>
+<p>Find two other points on the line.</p>
+<h2 class="green" id="solution">Solution</h2>
+<p>The given point has position vector</p>
+<p><span class="math display">
+\mathbf r_0=5\mathbf i+\mathbf j+3\mathbf k
+</span></p>
+<p>The direction vector is</p>
+<p><span class="math display">
+\mathbf v=\mathbf i+4\mathbf j-2\mathbf k
+</span></p>
+<p>Therefore, using the vector equation of a line,</p>
+<p><span class="math display">
+\mathbf r
+=
+(5\mathbf i+\mathbf j+3\mathbf k)
++t(\mathbf i+4\mathbf j-2\mathbf k)
+</span></p>
+<p>Equivalently,</p>
+<p><span class="math display">
+\boxed{
+\mathbf r
+=
+(5+t)\mathbf i+(1+4t)\mathbf j+(3-2t)\mathbf k
+}
+</span></p>
+<p>Therefore, the parametric equations are</p>
+<p><span class="math display">
+\boxed{x=5+t}
+</span></p>
+<p><span class="math display">
+\boxed{y=1+4t}
+</span></p>
+<p><span class="math display">
+\boxed{z=3-2t}
+</span></p>
+<p>For <span class="math inline">t=1</span>,</p>
+<p><span class="math display">
+x=6,\qquad y=5,\qquad z=1
+</span></p>
+<p>Thus, one other point on the line is</p>
+<p><span class="math display">
+\boxed{(6,5,1)}
+</span></p>
+<p>For <span class="math inline">t=-1</span>,</p>
+<p><span class="math display">
+x=4,\qquad y=-3,\qquad z=5
+</span></p>
+<p>Thus, another point is</p>
+<p><span class="math display">
+\boxed{(4,-3,5)}
+</span></p>
+<div style="text-align: center;">
+<p><img src="../images/0403.png" style="width: 714px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 3.</strong> A line and the given points used to
+describe its direction and position.</span></p>
+</div>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 id="direction-numbers-and-symmetric-equations">Direction Numbers and
+Symmetric Equations</h2>
+<ul>
+<li><p>If a direction vector of a line is <span
+class="math inline">\mathbf v=\langle a,b,c\rangle</span> then <span
+class="math inline">a</span>, <span class="math inline">b</span>, and
+<span class="math inline">c</span> are called the <strong>direction
+numbers</strong> of the line.</p></li>
+<li><p>Consider the parametric equations</p></li>
+</ul>
+<p><span class="math display">
+x=x_0+at,\qquad y=y_0+bt,\qquad z=z_0+ct
+</span></p>
+<ul>
+<li>From these equations, we can solve for <span
+class="math inline">t</span> when the corresponding direction number is
+nonzero.</li>
+</ul>
+<p><span class="math display">
+t=\frac{x-x_0}{a}
+</span></p>
+<p><span class="math display">
+t=\frac{y-y_0}{b}
+</span></p>
+<p><span class="math display">
+t=\frac{z-z_0}{c}
+</span></p>
+<ul>
+<li>Equating these expressions gives the symmetric equations of the
+line.</li>
+</ul>
+<p><span class="math display">
+\frac{x-x_0}{a}
+=
+\frac{y-y_0}{b}
+=
+\frac{z-z_0}{c}
+</span></p>
+<ul>
+<li>If one of the direction numbers is zero, the corresponding
+coordinate remains constant rather than appearing as a denominator.</li>
+</ul>
+<h2 class="green" id="example-2">Example 2</h2>
+<p>Find parametric equations and symmetric equations of the line that
+passes through the points <span class="math inline">A(2,4,-3)</span> and
+<span class="math inline">B(3,-1,1)</span>.</p>
+<p>At what point does this line intersect the <span
+class="math inline">xy</span>-plane?</p>
+<h2 class="green" id="solution-1">Solution</h2>
+<p>A direction vector for the line is obtained from <span
+class="math inline">\overrightarrow{AB}</span>.</p>
+<p><span class="math display">
+\mathbf v
+=
+\langle
+3-2,-1-4,1-(-3)
+\rangle
+</span></p>
+<p><span class="math display">
+\mathbf v=\langle1,-5,4\rangle
+</span></p>
+<p>Taking <span class="math inline">A(2,4,-3)</span> as the point on the
+line, the parametric equations are</p>
+<p><span class="math display">
+\boxed{x=2+t}
+</span></p>
+<p><span class="math display">
+\boxed{y=4-5t}
+</span></p>
+<p><span class="math display">
+\boxed{z=-3+4t}
+</span></p>
+<p>Therefore, the symmetric equations are</p>
+<p><span class="math display">
+\boxed{
+\frac{x-2}{1}
+=
+\frac{y-4}{-5}
+=
+\frac{z+3}{4}
+}
+</span></p>
+<p>To find where the line intersects the <span
+class="math inline">xy</span>-plane, we use <span
+class="math inline">z=0</span>.</p>
+<p><span class="math display">
+-3+4t=0
+</span></p>
+<p>Hence,</p>
+<p><span class="math display">
+t=\frac34
+</span></p>
+<p>Substituting this value into the equations for <span
+class="math inline">x</span> and <span class="math inline">y</span>
+gives</p>
+<p><span class="math display">
+x=2+\frac34=\frac{11}{4}
+</span></p>
+<p><span class="math display">
+y=4-5\left(\frac34\right)=\frac14
+</span></p>
+<p>Therefore, the line intersects the <span
+class="math inline">xy</span>-plane at</p>
+<p><span class="math display">
+\boxed{\left(\frac{11}{4},\frac14,0\right)}
+</span></p>
+<div style="text-align: center;">
+<p><img src="../images/0404.png" style="width: 677px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 4.</strong> Line <span
+class="math inline">L</span> and point <span
+class="math inline">P</span> where it intersects the <span
+class="math inline">xy</span>-plane.</span></p>
+</div>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 id="line-segments">Line Segments</h2>
+<ul>
+<li><p>A line extends indefinitely in both directions, but sometimes we
+need only the portion between two points.</p></li>
+<li><p>Suppose the position vectors of two endpoints are <span
+class="math inline">\mathbf r_0</span> and <span
+class="math inline">\mathbf r_1</span>.</p></li>
+<li><p>The line through the two points can be written as</p></li>
+</ul>
+<p><span class="math display">
+\mathbf r=\mathbf r_0+t(\mathbf r_1-\mathbf r_0)
+</span></p>
+<ul>
+<li>For the line segment, the parameter is restricted to</li>
+</ul>
+<p><span class="math display">
+0\leq t\leq1
+</span></p>
+<ul>
+<li>Therefore, the vector equation of the line segment from <span
+class="math inline">\mathbf r_0</span> to <span
+class="math inline">\mathbf r_1</span> is</li>
+</ul>
+<p><span class="math display">
+\boxed{
+\mathbf r(t)=(1-t)\mathbf r_0+t\mathbf r_1
+\qquad 0\leq t\leq1
+}
+</span></p>
+<h2 id="relationships-between-lines">Relationships Between Lines</h2>
+<ul>
+<li><p>Two lines in space can be <strong>parallel</strong>,
+<strong>intersecting</strong>, or <strong>skew</strong>.</p></li>
+<li><p>Two lines are parallel when their direction vectors are
+parallel.</p></li>
+<li><p>If their direction vectors are not parallel, we can determine
+whether they intersect by solving their parametric equations
+simultaneously.</p></li>
+<li><p>If two nonparallel lines do not intersect, they are called
+<strong>skew lines</strong>.</p></li>
+</ul>
+<h3 class="green" id="example-3">Example 3</h3>
+<p>Show that the lines</p>
+<p><span class="math display">
+L_1:\quad x=1+t,\qquad y=-2+3t,\qquad z=4-t
+</span></p>
+<p><span class="math display">
+L_2:\quad x=2s,\qquad y=3+s,\qquad z=-3+4s
+</span></p>
+<p>are skew lines.</p>
+<h2 class="green" id="solution-2">Solution</h2>
+<p>The direction vectors are</p>
+<p><span class="math display">
+\mathbf v_1=\langle1,3,-1\rangle
+</span></p>
+<p>and</p>
+<p><span class="math display">
+\mathbf v_2=\langle2,1,4\rangle
+</span></p>
+<p>These vectors are not scalar multiples of each other, so the lines
+are not parallel.</p>
+<p>If the lines intersect, there must be values of <span
+class="math inline">t</span> and <span class="math inline">s</span>
+satisfying all three equations simultaneously.</p>
+<p>Equating corresponding coordinates gives</p>
+<p><span class="math display">
+1+t=2s
+</span></p>
+<p><span class="math display">
+-2+3t=3+s
+</span></p>
+<p><span class="math display">
+4-t=-3+4s
+</span></p>
+<p>Solving the first two equations gives</p>
+<p><span class="math display">
+t=\frac{11}{5}
+\qquad\text{and}\qquad
+s=\frac85
+</span></p>
+<p>However, these values do not satisfy the third equation.</p>
+<p>Therefore, the two lines do not intersect.</p>
+<p>Since the lines are neither parallel nor intersecting, they are skew
+lines.</p>
+<p><span class="math display">
+\boxed{L_1\text{ and }L_2\text{ are skew lines}}
+</span></p>
+<div style="text-align: center;">
+<p><img src="../images/0405.png" style="width: 718px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 5.</strong> Two skew lines in three-dimensional
+space.</span></p>
+</div>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="quick-check">Quick Check</h1>
+<h2 class="red" id="question-1">Question 1</h2>
+<p>Find parametric equations for the line through <span
+class="math inline">P(1,2,-1)</span> parallel to <span
+class="math inline">\mathbf v=\langle2,-3,4\rangle</span>.</p>
+<h2 class="red" id="question-2">Question 2</h2>
+<p>Are the lines</p>
+<p><span class="math display">
+L_1:\quad x=1+t,\quad y=2+2t,\quad z=3-t
+</span></p>
+<p>and</p>
+<p><span class="math display">
+L_2:\quad x=4+2s,\quad y=8+4s,\quad z=1-2s
+</span></p>
+<p>parallel?</p>
+<div class="question-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="objective-2-planes">Objective 2: Planes</h1>
+<h2 id="normal-vector-to-a-plane">Normal Vector to a Plane</h2>
+<ul>
+<li><p>A line in space is determined by a point and a direction vector,
+but a plane requires a different type of directional
+information.</p></li>
+<li><p>A vector perpendicular to a plane completely determines the
+orientation of that plane.</p></li>
+</ul>
+<h2 class="blue" id="definition-normal-vector">Definition: Normal
+Vector</h2>
+<p>A <strong>normal vector</strong> to a plane is a nonzero vector that
+is perpendicular to every direction lying in the plane.</p>
+<div class="definition-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<ul>
+<li>Suppose a plane contains the point <span
+class="math inline">P_0(x_0,y_0,z_0)</span> and has normal vector</li>
+</ul>
+<p><span class="math display">
+\mathbf n=\langle a,b,c\rangle
+</span></p>
+<ul>
+<li><p>Let <span class="math inline">P(x,y,z)</span> be any point on the
+plane.</p></li>
+<li><p>The vector from <span class="math inline">P_0</span> to <span
+class="math inline">P</span> is</p></li>
+</ul>
+<p><span class="math display">
+\mathbf r-\mathbf r_0
+</span></p>
+<ul>
+<li>Since this vector lies in the plane and <span
+class="math inline">\mathbf n</span> is perpendicular to the plane,
+their dot product is zero.</li>
+</ul>
+<p><span class="math display">
+\boxed{
+\mathbf n\cdot(\mathbf r-\mathbf r_0)=0
+}
+</span></p>
+<ul>
+<li>Equivalently,</li>
+</ul>
+<p><span class="math display">
+\boxed{
+\mathbf n\cdot\mathbf r=\mathbf n\cdot\mathbf r_0
+}
+</span></p>
+<div style="text-align: center;">
+<p><img src="../images/0406.png" style="width: 688px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 6.</strong> A plane determined by a point and a
+normal vector.</span></p>
+</div>
+<h2 id="scalar-equation-of-a-plane">Scalar Equation of a Plane</h2>
+<ul>
+<li><p>Let <span class="math inline">\mathbf n=\langle
+a,b,c\rangle</span> and <span class="math inline">\mathbf r=\langle
+x,y,z\rangle</span>.</p></li>
+<li><p>If <span class="math inline">P_0=(x_0,y_0,z_0)</span> then the
+vector equation <span class="math inline">\mathbf n\cdot(\mathbf
+r-\mathbf r_0)=0</span> becomes</p></li>
+</ul>
+<p><span class="math display">
+\langle a,b,c\rangle
+\cdot
+\langle x-x_0,y-y_0,z-z_0\rangle
+=0
+</span></p>
+<ul>
+<li>Taking the dot product gives the scalar equation of the plane.</li>
+</ul>
+<p><span class="math display">
+\boxed{
+a(x-x_0)+b(y-y_0)+c(z-z_0)=0
+}
+</span></p>
+<ul>
+<li>Expanding this equation gives the familiar linear form</li>
+</ul>
+<p><span class="math display">
+\boxed{ax+by+cz+d=0}
+</span></p>
+<ul>
+<li>Here <span class="math inline">\langle a,b,c\rangle</span> is a
+normal vector to the plane.</li>
+</ul>
+<h2 class="green" id="example-4">Example 4</h2>
+<p>Find an equation of the plane through the point <span
+class="math inline">(2,4,-1)</span> with normal vector <span
+class="math inline">\mathbf n=(2,3,4)</span>. Find the intercepts and
+sketch the plane.</p>
+<h2 class="green" id="solution-3">Solution</h2>
+<p>The point is</p>
+<p><span class="math display">
+(x_0,y_0,z_0)=(2,4,-1)
+</span></p>
+<p>The normal vector is</p>
+<p><span class="math display">
+\mathbf n=\langle2,3,4\rangle
+</span></p>
+<p>Using the scalar equation of a plane,</p>
+<p><span class="math display">
+a(x-x_0)+b(y-y_0)+c(z-z_0)=0
+</span></p>
+<p>we obtain</p>
+<p><span class="math display">
+2(x-2)+3(y-4)+4(z+1)=0
+</span></p>
+<p>Expanding,</p>
+<p><span class="math display">
+2x-4+3y-12+4z+4=0
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+\boxed{2x+3y+4z=12}
+</span></p>
+<p>To find the <span class="math inline">x</span>-intercept, set <span
+class="math inline">y=z=0</span>.</p>
+<p><span class="math display">
+2x=12
+</span></p>
+<p><span class="math display">
+x=6
+</span></p>
+<p>Thus, the <span class="math inline">x</span>-intercept is <span
+class="math inline">(6,0,0)</span>.</p>
+<p>Similarly, setting <span class="math inline">x=z=0</span> gives</p>
+<p><span class="math display">
+y=4
+</span></p>
+<p>Thus, the <span class="math inline">y</span>-intercept is <span
+class="math inline">(0,4,0)</span>.</p>
+<p>Setting <span class="math inline">x=y=0</span> gives</p>
+<p><span class="math display">
+z=3
+</span></p>
+<p>Thus, the <span class="math inline">z</span>-intercept is <span
+class="math inline">(0,0,3)</span>.</p>
+<div style="text-align: center;">
+<p><img src="../images/0407.png" style="width: 675px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 7.</strong> Plane through <span
+class="math inline">(2,4,-1)</span> with intercepts on the coordinate
+axes.</span></p>
+</div>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 id="finding-a-plane-through-three-points">Finding a Plane Through
+Three Points</h2>
+<ul>
+<li><p>Three noncollinear points determine a unique plane.</p></li>
+<li><p>Suppose a plane contains the points <span
+class="math inline">P</span>, <span class="math inline">Q</span>, and
+<span class="math inline">R</span>.</p></li>
+<li><p>Two vectors lying in the plane can be formed as <span
+class="math inline">\mathbf a=\overrightarrow{PQ}</span> and <span
+class="math inline">\mathbf b=\overrightarrow{PR}</span>.</p></li>
+<li><p>Both vectors lie in the plane.</p></li>
+<li><p>Therefore, their cross product is perpendicular to both vectors
+and hence is a normal vector to the plane.</p></li>
+</ul>
+<p><span class="math display">
+\boxed{\mathbf n=\mathbf a\times\mathbf b}
+</span></p>
+<h2 class="green" id="example-5">Example 5</h2>
+<p>Find an equation of the plane that passes through the points</p>
+<p><span class="math display">
+P(1,3,2),\qquad Q(3,-1,6),\qquad R(5,2,0)
+</span></p>
+<h2 class="green" id="solution-4">Solution</h2>
+<p>First find two vectors lying in the plane.</p>
+<p><span class="math display">
+\mathbf a=\overrightarrow{PQ}
+</span></p>
+<p><span class="math display">
+\mathbf a
+=
+\langle3-1,-1-3,6-2\rangle
+=
+\langle2,-4,4\rangle
+</span></p>
+<p>Similarly,</p>
+<p><span class="math display">
+\mathbf b=\overrightarrow{PR}
+</span></p>
+<p><span class="math display">
+\mathbf b
+=
+\langle5-1,2-3,0-2\rangle
+=
+\langle4,-1,-2\rangle
+</span></p>
+<p>A normal vector is obtained from their cross product.</p>
+<p><span class="math display">
+\mathbf n=\mathbf a\times\mathbf b
+</span></p>
+<p><span class="math display">
+\mathbf n=
+\begin{vmatrix}
+\mathbf i&amp;\mathbf j&amp;\mathbf k\\
+2&amp;-4&amp;4\\
+4&amp;-1&amp;-2
+\end{vmatrix}
+</span></p>
+<p>Expanding,</p>
+<p><span class="math display">
+\mathbf n
+=
+12\mathbf i+20\mathbf j+14\mathbf k
+</span></p>
+<p>Therefore, a normal vector is</p>
+<p><span class="math display">
+\mathbf n=\langle12,20,14\rangle
+</span></p>
+<p>Using point <span class="math inline">P(1,3,2)</span>, the equation
+of the plane is</p>
+<p><span class="math display">
+12(x-1)+20(y-3)+14(z-2)=0
+</span></p>
+<p>Dividing by <span class="math inline">2</span> gives</p>
+<p><span class="math display">
+6(x-1)+10(y-3)+7(z-2)=0
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+\boxed{6x+10y+7z=50}
+</span></p>
+<div style="text-align: center;">
+<p><img src="../images/0408.png" style="width: 609px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 8.</strong> Portion of the plane through the
+three points <span class="math inline">P</span>, <span
+class="math inline">Q</span>, and <span
+class="math inline">R</span>.</span></p>
+</div>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 id="intersection-of-a-line-and-a-plane">Intersection of a Line and a
+Plane</h2>
+<ul>
+<li><p>A line and a plane may intersect at one point, be parallel, or in
+special cases the line may lie entirely in the plane.</p></li>
+<li><p>When the line is given parametrically, we can substitute its
+coordinates into the equation of the plane.</p></li>
+</ul>
+<h2 class="green" id="example-6">Example 6</h2>
+<p>Find the point at which the line with parametric equations</p>
+<p><span class="math display">
+x=2+3t,\qquad y=-4t,\qquad z=5+t
+</span></p>
+<p>intersects the plane</p>
+<p><span class="math display">
+4x+5y-2z=18
+</span></p>
+<h2 class="green" id="solution-5">Solution</h2>
+<p>Substitute the parametric expressions for <span
+class="math inline">x</span>, <span class="math inline">y</span>, and
+<span class="math inline">z</span> into the plane equation.</p>
+<p><span class="math display">
+4(2+3t)+5(-4t)-2(5+t)=18
+</span></p>
+<p>Simplifying,</p>
+<p><span class="math display">
+8+12t-20t-10-2t=18
+</span></p>
+<p><span class="math display">
+-10t-2=18
+</span></p>
+<p><span class="math display">
+-10t=20
+</span></p>
+<p><span class="math display">
+t=-2
+</span></p>
+<p>Substitute <span class="math inline">t=-2</span> into the parametric
+equations.</p>
+<p><span class="math display">
+x=2+3(-2)=-4
+</span></p>
+<p><span class="math display">
+y=-4(-2)=8
+</span></p>
+<p><span class="math display">
+z=5+(-2)=3
+</span></p>
+<p>Therefore, the point of intersection is</p>
+<p><span class="math display">
+\boxed{(-4,8,3)}
+</span></p>
+<div style="text-align: center;">
+<p><img src="../images/0409.png" style="width: 728px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 9.</strong> Intersection of line and
+plane.</span></p>
+</div>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 id="relationships-between-planes">Relationships Between Planes</h2>
+<ul>
+<li><p>The relationship between two planes can be determined from their
+normal vectors.</p></li>
+<li><p>If two normal vectors are parallel, the planes are
+parallel.</p></li>
+<li><p>For example, the planes <span
+class="math inline">x+2y-3z=4</span> and <span
+class="math inline">2x+4y-6z=3</span> have normal vectors <span
+class="math inline">\mathbf n_1=\langle1,2,-3\rangle</span> and <span
+class="math inline">\mathbf n_2=\langle2,4,-6\rangle</span>.</p></li>
+<li><p>Since <span class="math inline">\mathbf n_2=2\mathbf n_1</span>
+the planes are parallel.</p></li>
+<li><p>If the normal vectors are not parallel, the planes intersect in a
+line.</p></li>
+<li><p>The angle between two planes is defined as the acute angle
+between their normal vectors.</p></li>
+<li><p>If <span class="math inline">\theta</span> is the angle between
+the planes and <span class="math inline">\mathbf n_1</span> and <span
+class="math inline">\mathbf n_2</span> are normal vectors, then</p></li>
+</ul>
+<p><span class="math display">
+\boxed{
+\cos\theta
+=
+\frac{|\mathbf n_1\cdot\mathbf n_2|}
+{|\mathbf n_1||\mathbf n_2|}
+}
+</span></p>
+<h2 class="green" id="example-7">Example 7</h2>
+<p>Find the angle between the planes</p>
+<p><span class="math display">
+x+y+z=1
+</span></p>
+<p>and</p>
+<p><span class="math display">
+x-2y+3z=1
+</span></p>
+<p>Find symmetric equations for the line of intersection <span
+class="math inline">L</span> of these two planes.</p>
+<h2 class="green" id="solution-6">Solution</h2>
+<h3 class="green" id="part-a-angle-between-the-planes">Part (a): Angle
+Between the Planes</h3>
+<p>The normal vectors are</p>
+<p><span class="math display">
+\mathbf n_1=\langle1,1,1\rangle
+</span></p>
+<p>and</p>
+<p><span class="math display">
+\mathbf n_2=\langle1,-2,3\rangle
+</span></p>
+<p>Their dot product is</p>
+<p><span class="math display">
+\mathbf n_1\cdot\mathbf n_2
+=
+1(1)+1(-2)+1(3)
+=
+2
+</span></p>
+<p>Their magnitudes are</p>
+<p><span class="math display">
+|\mathbf n_1|=\sqrt3
+</span></p>
+<p>and</p>
+<p><span class="math display">
+|\mathbf n_2|=\sqrt{1+4+9}=\sqrt{14}
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+\cos\theta
+=
+\frac{2}{\sqrt3\sqrt{14}}
+=
+\frac{2}{\sqrt{42}}
+</span></p>
+<p>Hence,</p>
+<p><span class="math display">
+\boxed{
+\theta=\cos^{-1}\left(\frac{2}{\sqrt{42}}\right)\approx72^\circ
+}
+</span></p>
+<div style="text-align: center;">
+<p><img src="../images/0410.png" style="width: 724px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 10.</strong> Two planes with normal vectors
+showing the angle between the planes.</span></p>
+</div>
+<h3 class="green" id="part-b-line-of-intersection">Part (b): Line of
+Intersection</h3>
+<p>First find a point on the line of intersection.</p>
+<p>Set <span class="math inline">z=0</span> in the two plane
+equations.</p>
+<p><span class="math display">
+x+y=1
+</span></p>
+<p><span class="math display">
+x-2y=1
+</span></p>
+<p>Solving these equations gives</p>
+<p><span class="math display">
+x=1,\qquad y=0
+</span></p>
+<p>Thus, a point on the intersection line is</p>
+<p><span class="math display">
+P=(1,0,0)
+</span></p>
+<p>The line of intersection is perpendicular to both normal vectors.</p>
+<p>Therefore, its direction vector is parallel to their cross
+product.</p>
+<p><span class="math display">
+\mathbf v=\mathbf n_1\times\mathbf n_2
+</span></p>
+<p><span class="math display">
+\mathbf v=
+\begin{vmatrix}
+\mathbf i&amp;\mathbf j&amp;\mathbf k\\
+1&amp;1&amp;1\\
+1&amp;-2&amp;3
+\end{vmatrix}
+</span></p>
+<p><span class="math display">
+\mathbf v
+=
+5\mathbf i-2\mathbf j-3\mathbf k
+</span></p>
+<p>Thus,</p>
+<p><span class="math display">
+\mathbf v=\langle5,-2,-3\rangle
+</span></p>
+<p>Using the point <span class="math inline">(1,0,0)</span> and this
+direction vector, the symmetric equations are</p>
+<p><span class="math display">
+\boxed{
+\frac{x-1}{5}
+=
+\frac{y}{-2}
+=
+\frac{z}{-3}
+}
+</span></p>
+<div style="text-align: center;">
+<p><img src="../images/0411.png" style="width: 733px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 11.</strong> Two intersecting planes and their
+line of intersection.</span></p>
+</div>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="quick-check-1">Quick Check</h1>
+<h2 class="red" id="question-1-1">Question 1</h2>
+<p>Find an equation of the plane through the point <span
+class="math inline">(1,2,3)</span> with normal vector</p>
+<p><span class="math display">
+\mathbf n=\langle2,-1,4\rangle
+</span></p>
+<h2 class="red" id="question-2-1">Question 2</h2>
+<p>Are the planes</p>
+<p><span class="math display">
+2x+4y-6z=5
+</span></p>
+<p>and</p>
+<p><span class="math display">
+x+2y-3z=7
+</span></p>
+<p>parallel?</p>
+<div class="question-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="scenario-problem">Scenario Problem</h1>
+<h2 class="green" id="problem">Problem</h2>
+<p>A robotic positioning system moves the end-effector along a straight
+path in three-dimensional space. Its initial position is</p>
+<p><span class="math display">
+P_0=(1,2,3)
+</span></p>
+<p>and its direction of motion is represented by</p>
+<p><span class="math display">
+\mathbf v=\langle2,-1,2\rangle
+</span></p>
+<p>A flat calibration surface is represented by the plane</p>
+<p><span class="math display">
+x+y+z=12
+</span></p>
+<p>Determine the point at which the robotic end-effector’s straight-line
+path intersects the calibration surface.</p>
+<h2 class="green" id="solution-7">Solution</h2>
+<p>The line passes through <span class="math inline">P_0=(1,2,3)</span>
+and has direction vector</p>
+<p><span class="math display">
+\mathbf v=\langle2,-1,2\rangle
+</span></p>
+<p>Therefore, its parametric equations are</p>
+<p><span class="math display">
+x=1+2t
+</span></p>
+<p><span class="math display">
+y=2-t
+</span></p>
+<p><span class="math display">
+z=3+2t
+</span></p>
+<p>The calibration surface is</p>
+<p><span class="math display">
+x+y+z=12
+</span></p>
+<p>Substitute the parametric expressions into the plane equation.</p>
+<p><span class="math display">
+(1+2t)+(2-t)+(3+2t)=12
+</span></p>
+<p>Simplifying,</p>
+<p><span class="math display">
+6+3t=12
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+t=2
+</span></p>
+<p>Substituting <span class="math inline">t=2</span> into the line
+equations gives</p>
+<p><span class="math display">
+x=1+2(2)=5
+</span></p>
+<p><span class="math display">
+y=2-2=0
+</span></p>
+<p><span class="math display">
+z=3+2(2)=7
+</span></p>
+<p>Therefore, the robotic end-effector reaches the calibration surface
+at</p>
+<p><span class="math display">
+\boxed{(5,0,7)}
+</span></p>
+<p>This problem illustrates why equations of lines and planes are useful
+in robotics and mechatronics: the line describes the robot’s
+straight-line trajectory, while the plane describes the physical
+surface, and their intersection gives the exact position where the
+trajectory reaches the surface.</p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="summary">Summary</h1>
+<ul>
+<li><p>A line in three-dimensional space is determined by a point on the
+line and a direction vector.</p></li>
+<li><p>The vector equation of a line through <span
+class="math inline">\mathbf r_0</span> with direction vector <span
+class="math inline">\mathbf v</span> is <span
+class="math inline">\mathbf r=\mathbf r_0+t\mathbf v</span>.</p></li>
+<li><p>Parametric equations describe the coordinates of points on a line
+as functions of a parameter <span class="math inline">t</span>.</p></li>
+<li><p>Symmetric equations can be obtained from the parametric equations
+when the direction numbers are nonzero.</p></li>
+<li><p>Two lines in space may be parallel, intersecting, or skew, with
+skew lines being neither parallel nor intersecting.</p></li>
+<li><p>A plane is determined by a point on the plane and a normal vector
+perpendicular to the plane.</p></li>
+<li><p>The scalar equation of a plane through <span
+class="math inline">(x_0,y_0,z_0)</span> with normal vector <span
+class="math inline">\langle a,b,c\rangle</span> is <span
+class="math inline">a(x-x_0)+b(y-y_0)+c(z-z_0)=0</span>.</p></li>
+<li><p>Three noncollinear points determine a plane, and a normal vector
+can be obtained by taking the cross product of two vectors lying in the
+plane.</p></li>
+<li><p>Two planes are parallel when their normal vectors are parallel,
+while nonparallel planes intersect in a line whose direction is
+perpendicular to both normal vectors.</p></li>
+<li><p>Equations of lines and planes provide essential mathematical
+tools for describing trajectories, surfaces, intersections, and spatial
+relationships in engineering, robotics, computer graphics, and other
+three-dimensional applications.</p></li>
+</ul>
+<h1 id="exercises">Exercises</h1>
+<h2 id="exercises-set-1">Exercises Set 1</h2>
+<p>Solve the odd number exercises from exercise 1 to 68.</p>
+<ul>
+<li><p>Exercises help transform theoretical concepts into practical
+understanding.</p></li>
+<li><p>Mathematics is learned by doing and solving exercises will train
+you to analyze problems, select appropriate methods, and construct
+logical solutions.</p></li>
+<li><p>Attempting problems sometimes leads to mistakes which provide
+opportunities for learning and improvement.</p></li>
+<li><p>Regular practice increases speed, accuracy, and
+confidence.</p></li>
+<li><p>Exercises are given in the Exercises file and you are expected to
+solve them on your own.</p></li>
+</ul>
+</body>
+</html>
