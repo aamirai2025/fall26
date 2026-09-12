@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>lecture</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="../styles/style.css" />
+  <script defer=""
+  src="/usr/share/javascript/katex/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <link rel="stylesheet"
+  href="/usr/share/javascript/katex/katex.min.css" />
+</head>
+<body>
+<h1 id="calculus-and-analytical-geometry">Calculus and Analytical
+Geometry</h1>
+<h2 id="the-dot-product">The Dot Product</h2>
+<h3 id="dr.-aamir-alaud-din">Dr. Aamir Alaud Din</h3>
+<h3 id="september-08-2026">September 08, 2026</h3>
+<h1 id="objectives">Objectives</h1>
+<p>After preparing this topic, you should be able to:</p>
+<ol type="1">
+<li><p>Calculate the dot product of two vectors from their components
+and use its algebraic and geometric properties to determine
+relationships between vectors.</p></li>
+<li><p>Determine the direction angles and direction cosines of a nonzero
+vector and use them to describe its orientation relative to the
+coordinate axes.</p></li>
+<li><p>Calculate the scalar and vector projections of one vector onto
+another and interpret projection as the component of one vector in a
+specified direction.</p></li>
+<li><p>Apply the dot product and vector projections to calculate the
+work done by a constant force acting through a displacement.</p></li>
+</ol>
+<h1 id="the-why-section">The Why Section</h1>
+<h2 id="objective-1-why-study-the-dot-product-of-two-vectors">Objective
+1: Why Study the Dot Product of Two Vectors?</h2>
+<ul>
+<li><p>In engineering and computer science, vectors often describe
+quantities such as forces, velocities, displacements, and
+directions.</p></li>
+<li><p>Sometimes vector addition and scalar multiplication are not
+enough because we need a single number that tells us how strongly two
+vectors are aligned with each other.</p></li>
+<li><p>The <strong>dot product</strong> provides this information by
+combining two vectors to produce a scalar.</p></li>
+<li><p>For example, in a robotic arm, two vectors may represent the
+direction of a joint force and the direction in which a component is
+moving.</p></li>
+<li><p>The dot product can determine whether the two directions are
+generally aligned, perpendicular, or opposed.</p></li>
+<li><p>This type of mechanical-engineering or mechatronics problem can
+be analyzed systematically by studying the dot product.</p></li>
+</ul>
+<h2
+id="objective-2-why-study-direction-angles-and-direction-cosines">Objective
+2: Why Study Direction Angles and Direction Cosines?</h2>
+<ul>
+<li><p>In three-dimensional engineering systems, a vector can point in
+an arbitrary direction.</p></li>
+<li><p>Knowing its components tells us its orientation mathematically,
+but we may also want to know the angles that the vector makes with the
+positive <span class="math inline">x</span>-, <span
+class="math inline">y</span>-, and <span
+class="math inline">z</span>-axes.</p></li>
+<li><p>Direction angles and direction cosines provide a convenient way
+to describe this orientation.</p></li>
+<li><p>For example, the orientation of a robotic arm, aircraft velocity
+vector, or force acting on a mechanical component can be described using
+its direction angles.</p></li>
+<li><p>This type of three-dimensional orientation problem can be handled
+by studying direction angles and direction cosines.</p></li>
+</ul>
+<h2 id="objective-3-why-study-projections">Objective 3: Why Study
+Projections?</h2>
+<ul>
+<li><p>In many physical problems, only the component of a vector acting
+in a particular direction is important.</p></li>
+<li><p>For example, a force may act at an angle to the direction in
+which a mechanical component moves.</p></li>
+<li><p>The entire force does not contribute equally to motion in that
+direction.</p></li>
+<li><p>Projection allows us to determine the part of one vector that
+lies along the direction of another vector.</p></li>
+<li><p>Therefore, scalar and vector projections provide mathematical
+tools for separating a vector into a component along a specified
+direction.</p></li>
+<li><p>This type of force-analysis problem can be solved by studying
+vector projections.</p></li>
+</ul>
+<h2
+id="objective-4-why-study-the-application-of-the-dot-product-to-work">Objective
+4: Why Study the Application of the Dot Product to Work?</h2>
+<ul>
+<li><p>In mechanics, a force does not necessarily act in the same
+direction as the displacement of an object.</p></li>
+<li><p>Only the component of the force in the direction of displacement
+contributes to the work done.</p></li>
+<li><p>The dot product combines the magnitude of the force, the
+magnitude of the displacement, and the angle between them into a single
+quantity.</p></li>
+<li><p>Therefore, the work done by a constant force can be expressed
+directly using the dot product.</p></li>
+<li><p>For example, pulling a wagon with a handle inclined above the
+horizontal requires the force and displacement to be treated as
+vectors.</p></li>
+<li><p>This mechanical-engineering problem can be solved by applying the
+dot product to force and displacement.</p></li>
+</ul>
+<h1 id="objective-1-the-dot-product-of-two-vectors">Objective 1: The Dot
+Product of Two Vectors</h1>
+<h2 id="the-dot-product-of-two-vectors">The Dot Product of Two
+Vectors</h2>
+<ul>
+<li><p>The dot product is a way of multiplying two vectors so that the
+result is a scalar rather than another vector.</p></li>
+<li><p>If <span class="math inline">\mathbf a</span> and <span
+class="math inline">\mathbf b</span> are three-dimensional vectors with
+components <span class="math inline">\mathbf a=\langle
+a_1,a_2,a_3\rangle</span> and <span class="math inline">\mathbf
+b=\langle b_1,b_2,b_3\rangle</span>, then their dot product is obtained
+by multiplying corresponding components and adding the results.</p></li>
+</ul>
+<h2 class="blue" id="definition-the-dot-product">Definition: The Dot
+Product</h2>
+<p>If <span class="math inline">\mathbf a=\langle
+a_1,a_2,a_3\rangle</span> and <span class="math inline">\mathbf
+b=\langle b_1,b_2,b_3\rangle</span>, then the dot product of <span
+class="math inline">\mathbf a</span> and <span
+class="math inline">\mathbf b</span>, denoted by <span
+class="math inline">\mathbf a\cdot\mathbf b</span>, is</p>
+<p><span class="math display">
+\mathbf a\cdot\mathbf b=a_1b_1+a_2b_2+a_3b_3
+</span></p>
+<div class="definition-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<ul>
+<li><p>The result of a dot product is a real number, not a
+vector.</p></li>
+<li><p>For this reason, the dot product is also called the
+<strong>scalar product</strong> or <strong>inner
+product</strong>.</p></li>
+<li><p>For two-dimensional vectors, the same idea gives</p></li>
+</ul>
+<p><span class="math display">
+\langle a_1,a_2\rangle\cdot\langle b_1,b_2\rangle
+=
+a_1b_1+a_2b_2
+</span></p>
+<h2 class="green" id="example-1">Example 1</h2>
+<p>Find the following dot products.</p>
+<p><span class="math display">
+\langle2,4\rangle\cdot\langle3,-1\rangle
+</span></p>
+<p><span class="math display">
+\langle-1,7,4\rangle \cdot \left \langle 6,2,-\frac12 \right \rangle
+</span></p>
+<p><span class="math display">
+(\mathbf i+2\mathbf j-3\mathbf k)\cdot(2\mathbf j-\mathbf k)
+</span></p>
+<h2 class="green" id="solution">Solution</h2>
+<p>For the first product,</p>
+<p><span class="math display">
+\begin{aligned}
+\langle2,4\rangle\cdot\langle3,-1\rangle
+&amp;=2(3)+4(-1)\\
+&amp;=2
+\end{aligned}
+</span></p>
+<p>For the second product,</p>
+<p><span class="math display">
+\begin{aligned}
+\langle-1,7,4\rangle
+\cdot
+\left \langle6,2,-\frac12 \right \rangle
+&amp;=(-1)(6)+7(2)+4\left(-\frac12\right)\\
+&amp;=6
+\end{aligned}
+</span></p>
+<p>For the third product,</p>
+<p><span class="math display">
+\begin{aligned}
+(\mathbf i+2\mathbf j-3\mathbf k)
+\cdot
+(2\mathbf j-\mathbf k)
+&amp;=(1)(0)+(2)(2)+(-3)(-1)\\
+&amp;=7
+\end{aligned}
+</span></p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 id="properties-of-the-dot-product">Properties of the Dot
+Product</h2>
+<ul>
+<li>The dot product satisfies several properties similar to ordinary
+multiplication of real numbers.</li>
+</ul>
+<h2 class="orange" id="theorem-properties-of-the-dot-product">Theorem:
+Properties of the Dot Product</h2>
+<p>If <span class="math inline">\mathbf a</span>, <span
+class="math inline">\mathbf b</span>, and <span
+class="math inline">\mathbf c</span> are vectors in <span
+class="math inline">\mathbb R^3</span> and <span
+class="math inline">c</span> is a scalar, then</p>
+<ol type="1">
+<li><p><span class="math inline">\mathbf a\cdot\mathbf a=|\mathbf
+a|^2</span></p></li>
+<li><p><span class="math inline">\mathbf a\cdot\mathbf b=\mathbf
+b\cdot\mathbf a</span></p></li>
+<li><p><span class="math inline">\mathbf a\cdot(\mathbf b+\mathbf
+c)=\mathbf a\cdot\mathbf b+\mathbf a\cdot\mathbf c</span></p></li>
+<li><p><span class="math inline">(c\mathbf a)\cdot\mathbf b=c(\mathbf
+a\cdot\mathbf b)=\mathbf a\cdot(c\mathbf b)</span></p></li>
+<li><p><span class="math inline">\mathbf 0\cdot\mathbf
+a=0</span></p></li>
+</ol>
+<h2 class="orange" id="proof">Proof</h2>
+<p>For example, consider the first property.</p>
+<p><span class="math display">
+\begin{aligned}
+\mathbf a\cdot\mathbf a
+&amp;=a_1^2+a_2^2+a_3^2\\
+&amp;=|\mathbf a|^2
+\end{aligned}
+</span></p>
+<p>For the distributive property,</p>
+<p><span class="math display">
+\begin{aligned}
+\mathbf a\cdot(\mathbf b+\mathbf c)
+&amp;=\langle a_1,a_2,a_3\rangle
+\cdot
+\langle b_1+c_1,b_2+c_2,b_3+c_3\rangle\\
+&amp;=a_1(b_1+c_1)+a_2(b_2+c_2)+a_3(b_3+c_3)\\
+&amp;=(a_1b_1+a_2b_2+a_3b_3)
++(a_1c_1+a_2c_2+a_3c_3)\\
+&amp;=\mathbf a\cdot\mathbf b+\mathbf a\cdot\mathbf c
+\end{aligned}
+</span></p>
+<p>The remaining properties follow similarly from the definition of the
+dot product.</p>
+<div class="theorem-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 id="geometric-interpretation-of-the-dot-product">Geometric
+Interpretation of the Dot Product</h2>
+<ul>
+<li><p>The dot product can also be interpreted geometrically using the
+angle between two vectors.</p></li>
+<li><p>Let <span class="math inline">\theta</span> be the angle between
+nonzero vectors <span class="math inline">\mathbf a</span> and <span
+class="math inline">\mathbf b</span>, where <span
+class="math inline">0\leq\theta\leq\pi</span>.</p></li>
+</ul>
+<div style="text-align: center;">
+<p><img src="../images/0201.png" style="width: 722px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 1.</strong> The geometric interpretation of the
+dot product using the angle between vectors <span
+class="math inline">\mathbf a</span> and <span
+class="math inline">\mathbf b</span>.</span></p>
+</div>
+<ul>
+<li>The dot product is related to the magnitudes of the vectors and the
+angle between them.</li>
+</ul>
+<h2 class="orange" id="theorem-dot-product-and-angle">Theorem: Dot
+Product and Angle</h2>
+<p>If <span class="math inline">\theta</span> is the angle between the
+vectors <span class="math inline">\mathbf a</span> and <span
+class="math inline">\mathbf b</span>, then</p>
+<p><span class="math display">
+\boxed{\mathbf a\cdot\mathbf b=|\mathbf a||\mathbf b|\cos\theta}
+</span></p>
+<h2 class="orange" id="proof-1">Proof</h2>
+<p>Applying the Law of Cosines to the triangle formed by <span
+class="math inline">\mathbf a</span>, <span class="math inline">\mathbf
+b</span>, and <span class="math inline">\mathbf a-\mathbf b</span>
+gives</p>
+<p><span class="math display">
+|\mathbf a-\mathbf b|^2
+=
+|\mathbf a|^2+|\mathbf b|^2
+-2|\mathbf a||\mathbf b|\cos\theta
+</span></p>
+<p>On the other hand,</p>
+<p><span class="math display">
+\begin{aligned}
+|\mathbf a-\mathbf b|^2
+&amp;=(\mathbf a-\mathbf b)\cdot(\mathbf a-\mathbf b)\\
+&amp;=\mathbf a\cdot\mathbf a
+-\mathbf a\cdot\mathbf b
+-\mathbf b\cdot\mathbf a
++\mathbf b\cdot\mathbf b\\
+&amp;=|\mathbf a|^2-2\mathbf a\cdot\mathbf b+|\mathbf b|^2
+\end{aligned}
+</span></p>
+<p>Comparing the two expressions gives</p>
+<p><span class="math display">
+\mathbf a\cdot\mathbf b
+=
+|\mathbf a||\mathbf b|\cos\theta
+</span></p>
+<div class="theorem-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="green" id="example-2">Example 2</h2>
+<p>If the vectors <span class="math inline">\mathbf a</span> and <span
+class="math inline">\mathbf b</span> have lengths <span
+class="math inline">4</span> and <span class="math inline">6</span>, and
+the angle between them is <span class="math inline">\pi/3</span>, find
+<span class="math inline">\mathbf a\cdot\mathbf b</span>.</p>
+<h2 class="green" id="solution-1">Solution</h2>
+<p>Using the dot-product formula,</p>
+<p><span class="math display">
+\mathbf a\cdot\mathbf b
+=
+|\mathbf a||\mathbf b|\cos\theta
+</span></p>
+<p>Substituting the given values gives</p>
+<p><span class="math display">
+\mathbf a\cdot\mathbf b
+=
+(4)(6)\cos\left(\frac{\pi}{3}\right)
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+\boxed{\mathbf a\cdot\mathbf b=12}
+</span></p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 id="finding-the-angle-between-two-vectors">Finding the Angle Between
+Two Vectors</h2>
+<ul>
+<li>The geometric formula can be rearranged to determine the angle
+between two nonzero vectors.</li>
+</ul>
+<h2 class="orange" id="corollary">Corollary</h2>
+<p>If <span class="math inline">\theta</span> is the angle between the
+nonzero vectors <span class="math inline">\mathbf a</span> and <span
+class="math inline">\mathbf b</span>, then</p>
+<p><span class="math display">
+\boxed{\cos\theta=\frac{\mathbf a\cdot\mathbf b}{|\mathbf a||\mathbf
+b|}}
+</span></p>
+<div class="theorem-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="green" id="example-3">Example 3</h2>
+<p>Find the angle between the vectors</p>
+<p><span class="math display">
+\mathbf a=\langle2,2,-1\rangle
+</span></p>
+<p>and</p>
+<p><span class="math display">
+\mathbf b=\langle5,-3,2\rangle
+</span></p>
+<h2 class="green" id="solution-2">Solution</h2>
+<p>First calculate the magnitudes.</p>
+<p><span class="math display">
+|\mathbf a|
+=
+\sqrt{2^2+2^2+(-1)^2}
+=
+3
+</span></p>
+<p>and</p>
+<p><span class="math display">
+|\mathbf b|
+=
+\sqrt{5^2+(-3)^2+2^2}
+=
+\sqrt{38}
+</span></p>
+<p>The dot product is</p>
+<p><span class="math display">
+\mathbf a\cdot\mathbf b
+=
+2(5)+2(-3)+(-1)(2)
+=
+2
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+\cos\theta
+=
+\frac{2}{3\sqrt{38}}
+</span></p>
+<p>Hence,</p>
+<p><span class="math display">
+\theta
+=
+\cos^{-1}\left(\frac{2}{3\sqrt{38}}\right)
+\approx1.46
+</span></p>
+<p>Thus,</p>
+<p><span class="math display">
+\boxed{\theta\approx84^\circ}
+</span></p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 id="orthogonal-vectors">Orthogonal Vectors</h2>
+<ul>
+<li><p>Two nonzero vectors are called <strong>perpendicular</strong> or
+<strong>orthogonal</strong> if the angle between them is <span
+class="math inline">\pi/2</span>.</p></li>
+<li><p>Since <span class="math inline">\cos(\pi/2)=0</span>, their dot
+product is zero.</p></li>
+</ul>
+<h2 class="orange" id="theorem-orthogonality">Theorem:
+Orthogonality</h2>
+<p>Two vectors <span class="math inline">\mathbf a</span> and <span
+class="math inline">\mathbf b</span> are orthogonal if and only if</p>
+<p><span class="math display">
+\boxed{\mathbf a\cdot\mathbf b=0}
+</span></p>
+<div class="theorem-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="green" id="example-4">Example 4</h2>
+<p>Show that</p>
+<p><span class="math display">
+2\mathbf i+2\mathbf j-\mathbf k
+</span></p>
+<p>is perpendicular to</p>
+<p><span class="math display">
+5\mathbf i-4\mathbf j+2\mathbf k
+</span></p>
+<h2 class="green" id="solution-3">Solution</h2>
+<p>Calculate the dot product.</p>
+<p><span class="math display">
+\begin{aligned}
+(2\mathbf i+2\mathbf j-\mathbf k)
+\cdot
+(5\mathbf i-4\mathbf j+2\mathbf k)
+&amp;=2(5)+2(-4)+(-1)(2)\\
+&amp;=0
+\end{aligned}
+</span></p>
+<p>Therefore, the two vectors are perpendicular.</p>
+<p><span class="math display">
+\boxed{\text{The vectors are orthogonal}}
+</span></p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h3 id="interpreting-the-sign-of-the-dot-product">Interpreting the Sign
+of the Dot Product</h3>
+<ul>
+<li><p>If the angle between two nonzero vectors is less than <span
+class="math inline">\pi/2</span>, then <span
+class="math inline">\cos\theta&gt;0</span> and therefore <span
+class="math inline">\mathbf a\cdot\mathbf b&gt;0</span>.</p></li>
+<li><p>If the vectors are perpendicular, then <span
+class="math inline">\mathbf a\cdot\mathbf b=0</span>.</p></li>
+<li><p>If the angle is greater than <span
+class="math inline">\pi/2</span>, then <span
+class="math inline">\cos\theta&lt;0</span> and therefore <span
+class="math inline">\mathbf a\cdot\mathbf b&lt;0</span>.</p></li>
+<li><p>Thus, the sign of the dot product provides information about the
+general directional relationship between two vectors.</p></li>
+</ul>
+<h1 id="quick-check">Quick Check</h1>
+<h2 class="red" id="question-1">Question 1</h2>
+<p>If</p>
+<p><span class="math display">
+\mathbf a=\langle2,1,3\rangle
+</span></p>
+<p>and</p>
+<p><span class="math display">
+\mathbf b=\langle1,-2,4\rangle
+</span></p>
+<p>find <span class="math inline">\mathbf a\cdot\mathbf b</span>.</p>
+<h2 class="red" id="question-2">Question 2</h2>
+<p>Are the vectors</p>
+<p><span class="math display">
+\mathbf u=\langle1,2,-1\rangle
+</span></p>
+<p>and</p>
+<p><span class="math display">
+\mathbf v=\langle2,-1,0\rangle
+</span></p>
+<p>orthogonal?</p>
+<div class="question-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="objective-2-direction-angles-and-direction-cosines">Objective 2:
+Direction Angles and Direction Cosines</h1>
+<h2 id="direction-angles">Direction Angles</h2>
+<ul>
+<li><p>A nonzero vector in three-dimensional space has a definite
+orientation relative to the coordinate axes.</p></li>
+<li><p>The <strong>direction angles</strong> of a vector <span
+class="math inline">\mathbf a</span> are the angles <span
+class="math inline">\alpha</span>, <span
+class="math inline">\beta</span>, and <span
+class="math inline">\gamma</span> that the vector makes with the
+positive <span class="math inline">x</span>-, <span
+class="math inline">y</span>-, and <span
+class="math inline">z</span>-axes, respectively.</p></li>
+</ul>
+<div style="text-align: center;">
+<p><img src="../images/0203.png" style="width: 738px; border-radius: 12px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 2.</strong> Direction angles <span
+class="math inline">\alpha</span>, <span
+class="math inline">\beta</span>, and <span
+class="math inline">\gamma</span> of a vector in three-dimensional
+space.</span></p>
+</div>
+<ul>
+<li><p>The corresponding cosines <span
+class="math inline">\cos\alpha</span>, <span
+class="math inline">\cos\beta</span>, and <span
+class="math inline">\cos\gamma</span> are called the <strong>direction
+cosines</strong> of the vector.</p></li>
+<li><p>If <span class="math inline">\mathbf a=\langle
+a_1,a_2,a_3\rangle</span> then the magnitude of the vector is</p></li>
+</ul>
+<p><span class="math display">
+|\mathbf a|
+=
+\sqrt{a_1^2+a_2^2+a_3^2}
+</span></p>
+<ul>
+<li>Taking the dot product of <span class="math inline">\mathbf a</span>
+with the standard unit vector <span class="math inline">\mathbf i</span>
+gives</li>
+</ul>
+<p><span class="math display">
+\mathbf a\cdot\mathbf i
+=
+|\mathbf a||\mathbf i|\cos\alpha
+</span></p>
+<ul>
+<li>Since <span class="math inline">|\mathbf i|=1</span> and <span
+class="math inline">\mathbf a\cdot\mathbf i=a_1</span>, we obtain</li>
+</ul>
+<p><span class="math display">
+\boxed{\cos\alpha=\frac{a_1}{|\mathbf a|}}
+</span></p>
+<ul>
+<li>Similarly,</li>
+</ul>
+<p><span class="math display">
+\boxed{\cos\beta=\frac{a_2}{|\mathbf a|}, \qquad
+\cos\gamma=\frac{a_3}{|\mathbf a|}}
+</span></p>
+<ul>
+<li>These three numbers are the direction cosines of <span
+class="math inline">\mathbf a</span>.</li>
+</ul>
+<h2 id="direction-cosine-identity">Direction Cosine Identity</h2>
+<ul>
+<li>Since the direction cosines are the components of the unit vector in
+the direction of <span class="math inline">\mathbf a</span>, they
+satisfy</li>
+</ul>
+<p><span class="math display">
+\boxed{\cos^2\alpha+\cos^2\beta+\cos^2\gamma=1}
+</span></p>
+<ul>
+<li>Therefore, the unit vector in the direction of <span
+class="math inline">\mathbf a</span> can be written as</li>
+</ul>
+<p><span class="math display">
+\frac{1}{|\mathbf a|}\mathbf a
+=
+\langle\cos\alpha,\cos\beta,\cos\gamma\rangle
+</span></p>
+<h2 class="green" id="example-5">Example 5</h2>
+<p>Find the direction angles of the vector</p>
+<p><span class="math display">
+\mathbf a=\langle1,2,3\rangle
+</span></p>
+<h2 class="green" id="solution-4">Solution</h2>
+<p>First find the magnitude.</p>
+<p><span class="math display">
+|\mathbf a|
+=
+\sqrt{1^2+2^2+3^2}
+=
+\sqrt{14}
+</span></p>
+<p>The direction cosines are therefore</p>
+<p><span class="math display">
+\cos\alpha=\frac1{\sqrt{14}}
+</span></p>
+<p><span class="math display">
+\cos\beta=\frac2{\sqrt{14}}
+</span></p>
+<p>and</p>
+<p><span class="math display">
+\cos\gamma=\frac3{\sqrt{14}}
+</span></p>
+<p>Thus,</p>
+<p><span class="math display">
+\alpha=\cos^{-1}\left(\frac1{\sqrt{14}}\right)\approx74^\circ
+</span></p>
+<p><span class="math display">
+\beta=\cos^{-1}\left(\frac2{\sqrt{14}}\right)\approx58^\circ
+</span></p>
+<p>and</p>
+<p><span class="math display">
+\gamma=\cos^{-1}\left(\frac3{\sqrt{14}}\right)\approx37^\circ
+</span></p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="quick-check-1">Quick Check</h1>
+<h2 class="red" id="question-1-1">Question 1</h2>
+<p>Find the direction cosines of</p>
+<p><span class="math display">
+\mathbf a=\langle2,2,1\rangle
+</span></p>
+<h2 class="red" id="question-2-1">Question 2</h2>
+<p>For a vector with direction angles <span
+class="math inline">\alpha</span>, <span
+class="math inline">\beta</span>, and <span
+class="math inline">\gamma</span>, what relation must its direction
+cosines satisfy?</p>
+<div class="question-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="objective-3-projections">Objective 3: Projections</h1>
+<h2 id="vector-projection">Vector Projection</h2>
+<ul>
+<li><p>Projection is useful when we want to determine how much of one
+vector acts in the direction of another vector.</p></li>
+<li><p>Consider vectors <span class="math inline">\mathbf a</span> and
+<span class="math inline">\mathbf b</span> with a common initial
+point.</p></li>
+</ul>
+<div style="text-align: center;">
+<p><img src="../images/0204.png" style="width: 405px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 3.</strong> Vector projections of <span
+class="math inline">\mathbf b</span> onto <span
+class="math inline">\mathbf a</span>.</span></p>
+</div>
+<ul>
+<li><p>The vector projection of <span class="math inline">\mathbf
+b</span> onto <span class="math inline">\mathbf a</span> is the vector
+component of <span class="math inline">\mathbf b</span> that lies in the
+direction of <span class="math inline">\mathbf a</span>.</p></li>
+<li><p>The scalar projection gives the signed length of this
+component.</p></li>
+<li><p>If <span class="math inline">\theta</span> is the angle between
+<span class="math inline">\mathbf a</span> and <span
+class="math inline">\mathbf b</span>, then the scalar projection is
+<span class="math inline">|\mathbf b|\cos\theta</span>.</p></li>
+<li><p>From the dot-product theorem,</p></li>
+</ul>
+<p><span class="math display">
+\mathbf a\cdot\mathbf b
+=
+|\mathbf a||\mathbf b|\cos\theta
+</span></p>
+<ul>
+<li>Dividing by <span class="math inline">|\mathbf a|</span> gives</li>
+</ul>
+<p><span class="math display">
+|\mathbf b|\cos\theta
+=
+\frac{\mathbf a\cdot\mathbf b}{|\mathbf a|}
+</span></p>
+<h2 id="scalar-projection">Scalar Projection</h2>
+<ul>
+<li>The scalar projection of <span class="math inline">\mathbf b</span>
+onto <span class="math inline">\mathbf a</span> is</li>
+</ul>
+<p><span class="math display">
+\boxed{\operatorname{comp}_{\mathbf a}\mathbf b
+=
+\frac{\mathbf a\cdot\mathbf b}{|\mathbf a|}}
+</span></p>
+<ul>
+<li><p>This quantity may be positive or negative depending on the
+direction of the projection.</p></li>
+<li><p>It is positive when the component of <span
+class="math inline">\mathbf b</span> points generally in the direction
+of <span class="math inline">\mathbf a</span> and negative when it
+points generally opposite to <span class="math inline">\mathbf
+a</span>.</p></li>
+</ul>
+<h2 id="vector-projection-1">Vector Projection</h2>
+<ul>
+<li>The unit vector in the direction of <span
+class="math inline">\mathbf a</span> is</li>
+</ul>
+<p><span class="math display">
+\frac{\mathbf a}{|\mathbf a|}
+</span></p>
+<ul>
+<li>Multiplying the scalar projection by this unit vector gives the
+vector projection.</li>
+</ul>
+<p><span class="math display">
+\boxed{
+\operatorname{proj}_{\mathbf a}\mathbf b
+=
+\left(
+\frac{\mathbf a\cdot\mathbf b}{|\mathbf a|}
+\right)
+\frac{\mathbf a}{|\mathbf a|}
+}
+</span></p>
+<ul>
+<li>Therefore,</li>
+</ul>
+<p><span class="math display">
+\boxed{
+\operatorname{proj}_{\mathbf a}\mathbf b
+=
+\frac{\mathbf a\cdot\mathbf b}{|\mathbf a|^2}\mathbf a
+}
+</span></p>
+<div style="text-align: center;">
+<p><img src="../images/0205.png" style="width: 437px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 4.</strong> Scalar projection of <span
+class="math inline">\mathbf b</span> onto <span
+class="math inline">\mathbf a</span>.</span></p>
+</div>
+<ul>
+<li>The scalar projection tells us the signed magnitude of the
+component, while the vector projection gives both its magnitude and
+direction.</li>
+</ul>
+<h2 class="green" id="example-6">Example 6</h2>
+<p>Find the scalar projection and vector projection of</p>
+<p><span class="math display">
+\mathbf b=\langle1,1,2\rangle
+</span></p>
+<p>onto</p>
+<p><span class="math display">
+\mathbf a=\langle-2,3,1\rangle
+</span></p>
+<h2 class="green" id="solution-5">Solution</h2>
+<p>First find the magnitude of <span class="math inline">\mathbf
+a</span>.</p>
+<p><span class="math display">
+|\mathbf a|
+=
+\sqrt{(-2)^2+3^2+1^2}
+=
+\sqrt{14}
+</span></p>
+<p>Now calculate the dot product.</p>
+<p><span class="math display">
+\mathbf a\cdot\mathbf b
+=
+(-2)(1)+(3)(1)+(1)(2)
+=
+3
+</span></p>
+<p>Therefore, the scalar projection is</p>
+<p><span class="math display">
+\boxed{
+\operatorname{comp}_{\mathbf a}\mathbf b
+=
+\frac3{\sqrt{14}}
+}
+</span></p>
+<p>The vector projection is</p>
+<p><span class="math display">
+\operatorname{proj}_{\mathbf a}\mathbf b
+=
+\frac3{\sqrt{14}}
+\frac{\mathbf a}{|\mathbf a|}
+</span></p>
+<p>Thus,</p>
+<p><span class="math display">
+\begin{aligned}
+\operatorname{proj}_{\mathbf a}\mathbf b
+&amp;=
+\frac3{14}\langle-2,3,1\rangle\\
+&amp;=
+\left\langle-\frac37,\frac9{14},\frac3{14}\right\rangle
+\end{aligned}
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+\boxed{
+\operatorname{proj}_{\mathbf a}\mathbf b
+=
+\left\langle-\frac37,\frac9{14},\frac3{14}\right\rangle
+}
+</span></p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="quick-check-2">Quick Check</h1>
+<h2 class="red" id="question-1-2">Question 1</h2>
+<p>Find the scalar projection of</p>
+<p><span class="math display">
+\mathbf b=\langle2,1\rangle
+</span></p>
+<p>onto</p>
+<p><span class="math display">
+\mathbf a=\langle1,0\rangle
+</span></p>
+<h2 class="red" id="question-2-2">Question 2</h2>
+<p>What is the vector projection of <span class="math inline">\mathbf
+b</span> onto <span class="math inline">\mathbf a</span> if <span
+class="math inline">\mathbf a\cdot\mathbf b=0</span>?</p>
+<div class="question-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="objective-4-application-work">Objective 4: Application —
+Work</h1>
+<h2 id="work-and-the-dot-product">Work and the Dot Product</h2>
+<ul>
+<li><p>One important application of vector projections occurs in physics
+when calculating work.</p></li>
+<li><p>If a constant force <span class="math inline">\mathbf F</span>
+acts on an object while the object moves through a displacement <span
+class="math inline">\mathbf D</span>, only the component of the force in
+the direction of the displacement contributes to the work.</p></li>
+<li><p>If <span class="math inline">\theta</span> is the angle between
+<span class="math inline">\mathbf F</span> and <span
+class="math inline">\mathbf D</span>, the scalar component of the force
+along the displacement is</p></li>
+</ul>
+<p><span class="math display">
+|\mathbf F|\cos\theta
+</span></p>
+<ul>
+<li>Therefore, the work is</li>
+</ul>
+<p><span class="math display">
+W=(|\mathbf F|\cos\theta)|\mathbf D|
+</span></p>
+<ul>
+<li>From the dot-product theorem,</li>
+</ul>
+<p><span class="math display">
+\boxed{W=\mathbf F\cdot\mathbf D}
+</span></p>
+<ul>
+<li>Thus, the work done by a constant force is the dot product of the
+force vector and the displacement vector.</li>
+</ul>
+<div style="text-align: center;">
+<p><img src="../images/0206.png" style="width: 700px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 5.</strong> Force vector <span
+class="math inline">\mathbf F</span> and displacement vector <span
+class="math inline">\mathbf D</span> showing the component of force in
+the direction of motion.</span></p>
+</div>
+<h2 class="green" id="example-7">Example 7</h2>
+<p>A wagon is pulled a distance of <span
+class="math inline">100;m</span> along a horizontal path by a constant
+force of <span class="math inline">70;N</span>. The handle of the wagon
+is held at an angle of <span class="math inline">35^\circ</span> above
+the horizontal. Find the work done by the force.</p>
+<h2 class="green" id="solution-6">Solution</h2>
+<p>The force and displacement vectors have magnitudes</p>
+<p><span class="math display">
+|\mathbf F|=70\;N
+</span></p>
+<p>and</p>
+<p><span class="math display">
+|\mathbf D|=100\;m
+</span></p>
+<p>The angle between them is</p>
+<p><span class="math display">
+\theta=35^\circ
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+\begin{aligned}
+W
+&amp;=\mathbf F\cdot\mathbf D\\
+&amp;=|\mathbf F||\mathbf D|\cos35^\circ\\
+&amp;=(70)(100)\cos35^\circ
+\end{aligned}
+</span></p>
+<p>Hence,</p>
+<p><span class="math display">
+\boxed{W\approx5734\;J}
+</span></p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="green" id="example-8">Example 8</h2>
+<p>A force is given by the vector</p>
+<p><span class="math display">
+\mathbf F=3\mathbf i+4\mathbf j+5\mathbf k
+</span></p>
+<p>and moves a particle from the point <span
+class="math inline">P(2,1,0)</span> to the point <span
+class="math inline">Q(4,6,2)</span>. Find the work done.</p>
+<h2 class="green" id="solution-7">Solution</h2>
+<p>The displacement vector is</p>
+<p><span class="math display">
+\mathbf D=\overrightarrow{PQ}
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+\mathbf D
+=
+\langle4-2,6-1,2-0\rangle
+=
+\langle2,5,2\rangle
+</span></p>
+<p>The work is the dot product of the force and displacement.</p>
+<p><span class="math display">
+\begin{aligned}
+W
+&amp;=\mathbf F\cdot\mathbf D\\
+&amp;=\langle3,4,5\rangle\cdot\langle2,5,2\rangle\\
+&amp;=3(2)+4(5)+5(2)\\
+&amp;=36
+\end{aligned}
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+\boxed{W=36\;J}
+</span></p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="quick-check-3">Quick Check</h1>
+<h2 class="red" id="question-1-3">Question 1</h2>
+<p>A constant force</p>
+<p><span class="math display">
+\mathbf F=\langle4,3\rangle\;N
+</span></p>
+<p>moves an object through</p>
+<p><span class="math display">
+\mathbf D=\langle5,2\rangle\;m
+</span></p>
+<p>Find the work done.</p>
+<h2 class="red" id="question-2-3">Question 2</h2>
+<p>A force and displacement are perpendicular. What is the work done by
+the force?</p>
+<div class="question-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="scenario-problem">Scenario Problem</h1>
+<h2 class="green" id="problem">Problem</h2>
+<p>A robotic gripper in a mechatronic system applies a constant
+force</p>
+<p><span class="math display">
+\mathbf F=30\mathbf i+40\mathbf j\;N
+</span></p>
+<p>while moving an object from</p>
+<p><span class="math display">
+P(1,2)
+</span></p>
+<p>to</p>
+<p><span class="math display">
+Q(7,10)
+</span></p>
+<p>where the coordinates are measured in meters.</p>
+<p>Determine the displacement vector and the work done by the
+gripper.</p>
+<h2 class="green" id="solution-8">Solution</h2>
+<p>The displacement vector is obtained from the initial and terminal
+points.</p>
+<p><span class="math display">
+\mathbf D
+=
+\overrightarrow{PQ}
+=
+\langle7-1,10-2\rangle
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+\mathbf D=\langle6,8\rangle\;m
+</span></p>
+<p>The work done by the constant force is the dot product of the force
+and displacement vectors.</p>
+<p><span class="math display">
+\begin{aligned}
+W
+&amp;=\mathbf F\cdot\mathbf D\\
+&amp;=\langle30,40\rangle\cdot\langle6,8\rangle\\
+&amp;=30(6)+40(8)\\
+&amp;=180+320\\
+&amp;=500
+\end{aligned}
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+\boxed{W=500\;J}
+</span></p>
+<p>This scenario combines the vector representation and vector
+operations developed earlier with the dot-product application to work.
+The uploaded vector lecture establishes displacement vectors from two
+points and component-based vector operations, while the Stewart material
+develops work as the dot product of force and displacement.</p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="summary">Summary</h1>
+<ul>
+<li><p>The <strong>dot product</strong> of two vectors is a scalar
+obtained by multiplying corresponding components and adding the
+results.</p></li>
+<li><p>The dot product satisfies important properties including
+commutativity, distributivity, scalar multiplication, and <span
+class="math inline">\mathbf a\cdot\mathbf a=|\mathbf
+a|^2</span>.</p></li>
+<li><p>Geometrically, the dot product is related to the angle between
+two vectors by <span class="math inline">\mathbf a\cdot\mathbf
+b=|\mathbf a||\mathbf b|\cos\theta</span>.</p></li>
+<li><p>Two vectors are orthogonal if and only if their dot product is
+zero.</p></li>
+<li><p>The <strong>direction angles</strong> <span
+class="math inline">\alpha</span>, <span
+class="math inline">\beta</span>, and <span
+class="math inline">\gamma</span> describe the angles a vector makes
+with the positive coordinate axes.</p></li>
+<li><p>The corresponding direction cosines satisfy <span
+class="math inline">\cos\alpha=a_1/|\mathbf a|</span>, <span
+class="math inline">\cos\beta=a_2/|\mathbf a|</span>, and <span
+class="math inline">\cos\gamma=a_3/|\mathbf a|</span>.</p></li>
+<li><p>The direction cosines satisfy <span
+class="math inline">\cos^2\alpha+\cos^2\beta+\cos^2\gamma=1</span>.</p></li>
+<li><p>The scalar projection of <span class="math inline">\mathbf
+b</span> onto <span class="math inline">\mathbf a</span> is <span
+class="math inline">\operatorname{comp}*{\mathbf a}\mathbf b=(\mathbf
+a\cdot\mathbf b)/|\mathbf a|</span>, while the vector projection is
+<span class="math inline">\operatorname{proj}*{\mathbf a}\mathbf
+b=(\mathbf a\cdot\mathbf b)\mathbf a/|\mathbf a|^2</span>.</p></li>
+<li><p>The work done by a constant force <span
+class="math inline">\mathbf F</span> through a displacement <span
+class="math inline">\mathbf D</span> is given by <span
+class="math inline">W=\mathbf F\cdot\mathbf D</span>.</p></li>
+<li><p>The central idea of this topic is that <strong>the dot product
+converts directional information between vectors into a scalar quantity
+that can be used to analyze angles, orthogonality, projections, and
+physical work</strong>.</p></li>
+</ul>
+<h1 id="exercises">Exercises</h1>
+<ul>
+<li><p>Exercises help transform theoretical concepts into practical
+understanding.</p></li>
+<li><p>Mathematics is learned by doing and solving exercises will train
+you to analyze problems, select appropriate methods, and construct
+logical solutions.</p></li>
+<li><p>Attempting problems sometimes leads to mistakes which provide
+opportunities for learning and improvement.</p></li>
+<li><p>Regular practice increases speed, accuracy, and
+confidence.</p></li>
+<li><p>Exercises are given in the Exercises file and you are expected to
+solve them on your own.</p></li>
+</ul>
+<h2 id="exercises-set-1">Exercises Set 1</h2>
+<ul>
+<li>Solve odd number exercises from exercise 1 to 30.</li>
+</ul>
+<h2 id="exercises-set-2">Exercises Set 2</h2>
+<ul>
+<li>Solve odd number exercises from exercise 33 to 48.</li>
+</ul>
+<h2 id="exercises-set-3">Exercises Set 3</h2>
+<ul>
+<li>Solve exercises from exercise 49 to 60.</li>
+</ul>
+</body>
+</html>

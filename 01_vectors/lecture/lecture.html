@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>lecture</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="../styles/style.css" />
+  <script defer=""
+  src="/usr/share/javascript/katex/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <link rel="stylesheet"
+  href="/usr/share/javascript/katex/katex.min.css" />
+</head>
+<body>
+<h1 id="calculus-and-analytical-geometry">Calculus and Analytical
+Geometry</h1>
+<h2 id="vectors-and-vector-operations">Vectors and Vector
+Operations</h2>
+<h3 id="dr.-aamir-alaud-din">Dr. Aamir Alaud Din</h3>
+<h3 id="september-7-2026">September 7, 2026</h3>
+<h1 id="objectives">Objectives</h1>
+<p>After preparing this topic, you should be able to:</p>
+<ol type="1">
+<li><p>Describe vectors geometrically as quantities having both
+magnitude and direction, and perform vector addition, subtraction, and
+scalar multiplication using the Triangle Law and Parallelogram
+Law.</p></li>
+<li><p>Represent vectors algebraically using components, determine the
+magnitude and unit vector of a vector, and perform vector operations
+using component and standard unit-vector notation.</p></li>
+<li><p>Apply vectors to practical problems involving physical quantities
+such as forces, tensions, velocity, displacement, and motion in
+engineering systems.</p></li>
+</ol>
+<h1 id="the-why-section">The Why Section</h1>
+<h2
+id="objective-1-why-study-the-geometric-description-of-vectors">Objective
+1: Why Study the Geometric Description of Vectors?</h2>
+<ul>
+<li><p>In mechanical engineering, many physical quantities cannot be
+completely described by their magnitude alone because their direction
+also affects the physical result.</p></li>
+<li><p>For example, a force of <span class="math inline">100;N</span>
+acting toward the right does not have the same effect as a force of
+<span class="math inline">100;N</span> acting upward.</p></li>
+<li><p>Vectors provide a convenient mathematical representation of such
+quantities because the length of an arrow represents magnitude while its
+direction represents the direction of the physical quantity.</p></li>
+<li><p>When several forces or displacements act successively on a
+mechanical system, their combined effect can be represented by adding
+the corresponding vectors.</p></li>
+<li><p>The geometric laws of vector addition therefore provide a visual
+method for determining the resultant effect of several physical
+quantities.</p></li>
+<li><p>A similar idea is used in robotics and mechatronics, where
+movements of a robotic mechanism can be represented by displacement
+vectors and combined to determine the overall movement.</p></li>
+<li><p>A scenario involving several forces acting on a mechanical
+component can be solved by representing each force as a vector and
+combining the vectors using the geometric laws of vector
+addition.</p></li>
+</ul>
+<h2 id="objective-2-why-study-the-components-of-a-vector">Objective 2:
+Why Study the Components of a Vector?</h2>
+<ul>
+<li><p>Geometric constructions are useful for understanding vectors, but
+numerical calculations require an algebraic representation.</p></li>
+<li><p>In engineering and computer science, vectors are usually stored
+and manipulated using their numerical components.</p></li>
+<li><p>For example, the movement of a robot can be represented by a
+vector such as <span class="math inline">\langle 4,3\rangle</span>
+rather than by a drawing.</p></li>
+<li><p>Components allow vector addition, subtraction, and scalar
+multiplication to be performed efficiently using ordinary
+arithmetic.</p></li>
+<li><p>The magnitude of a vector can also be calculated from its
+components using the distance formula.</p></li>
+<li><p>Unit vectors allow us to separate the magnitude of a vector from
+its direction and provide a convenient way to express vectors in terms
+of standard coordinate directions.</p></li>
+<li><p>A scenario involving the movement of an autonomous robot through
+a two- or three-dimensional workspace can therefore be solved
+efficiently by representing its movements using vector
+components.</p></li>
+</ul>
+<h2 id="objective-3-why-study-applications-of-vectors">Objective 3: Why
+Study Applications of Vectors?</h2>
+<ul>
+<li><p>Vectors are used extensively in physics and engineering because
+quantities such as force, velocity, acceleration, and displacement have
+both magnitude and direction.</p></li>
+<li><p>When several forces act on an object, the resultant force is
+obtained by adding the force vectors.</p></li>
+<li><p>For example, a suspended mechanical component may be supported by
+several wires, and the tensions in those wires must balance the weight
+of the component.</p></li>
+<li><p>Similarly, the actual velocity of an aircraft or boat can be
+determined by combining its velocity with the velocity of the
+surrounding air or water.</p></li>
+<li><p>These problems cannot be solved correctly by adding magnitudes
+alone because the directions of the physical quantities must also be
+considered.</p></li>
+<li><p>Vector components provide a systematic method for converting such
+physical problems into algebraic equations that can be solved to
+determine unknown forces, velocities, or directions.</p></li>
+</ul>
+<h1 id="objective-1-geometric-description-of-vectors">Objective 1:
+Geometric Description of Vectors</h1>
+<h2 id="vector">Vector</h2>
+<ul>
+<li><p>A vector is a quantity that has both magnitude and
+direction.</p></li>
+<li><p>For example, to describe the velocity of a moving object, we must
+specify both its speed and its direction of motion.</p></li>
+<li><p>A vector is often represented by an arrow or directed line
+segment.</p></li>
+<li><p>The length of the arrow represents the magnitude of the vector,
+while the arrow points in the direction of the vector.</p></li>
+<li><p>Other physical quantities such as force, displacement, and
+acceleration can also be represented by vectors.</p></li>
+</ul>
+<div style="text-align: center;">
+<p><img src="../images/0101.png" style="width: 624px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 1.</strong> Representation of vectors for real
+physical quantities.</span></p>
+</div>
+<ul>
+<li><p>A vector can be denoted by a bold letter such as <span
+class="math inline">\mathbf v</span> or by placing an arrow above the
+letter as <span class="math inline">\vec v</span>.</p></li>
+<li><p>Suppose a particle moves along a line segment from point <span
+class="math inline">A</span> to point <span
+class="math inline">B</span>.</p></li>
+<li><p>The corresponding displacement vector has initial point <span
+class="math inline">A</span>, called the tail, and terminal point <span
+class="math inline">B</span>, called the tip.</p></li>
+</ul>
+<p><span class="math display">
+\mathbf v=\overrightarrow{AB}
+</span></p>
+<ul>
+<li><p>Two vectors are equal or equivalent when they have the same
+magnitude and the same direction, even if they are located at different
+positions.</p></li>
+<li><p>The zero vector, denoted by <span class="math inline">\mathbf
+0</span>, has magnitude zero and therefore has no specific
+direction.</p></li>
+</ul>
+<h2 id="vector-addition">Vector Addition</h2>
+<ul>
+<li><p>Suppose a particle moves from <span class="math inline">A</span>
+to <span class="math inline">B</span> with displacement <span
+class="math inline">\overrightarrow{AB}</span> and then from <span
+class="math inline">B</span> to <span class="math inline">C</span> with
+displacement <span
+class="math inline">\overrightarrow{BC}</span>.</p></li>
+<li><p>The combined displacement is the displacement from <span
+class="math inline">A</span> to <span
+class="math inline">C</span>.</p></li>
+</ul>
+<p><span class="math display">
+\overrightarrow{AC}
+=
+\overrightarrow{AB}
++
+\overrightarrow{BC}
+</span></p>
+<ul>
+<li><p>In general, to add two vectors <span class="math inline">\mathbf
+u</span> and <span class="math inline">\mathbf v</span>, place the tail
+of <span class="math inline">\mathbf v</span> at the tip of <span
+class="math inline">\mathbf u</span>.</p></li>
+<li><p>The vector from the initial point of <span
+class="math inline">\mathbf u</span> to the terminal point of <span
+class="math inline">\mathbf v</span> represents <span
+class="math inline">\mathbf u+\mathbf v</span>.</p></li>
+<li><p>This method is called the <strong>Triangle Law</strong> of vector
+addition.</p></li>
+</ul>
+<div style="text-align: center;">
+<p><img src="../images/0103.png" style="width: 370px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 2.</strong> Triangle Law for vector
+addition.</span></p>
+</div>
+<ul>
+<li><p>The same two vectors can also be placed with their initial points
+together.</p></li>
+<li><p>If the vectors are used as two sides of a parallelogram, the
+diagonal from their common initial point represents their sum.</p></li>
+</ul>
+<div style="text-align: center;">
+<p><img src="../images/0104.png" style="width: 391px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 3.</strong> Parallelogram Law for vector
+addition.</span></p>
+</div>
+<ul>
+<li><p>This method is called the <strong>Parallelogram Law</strong> of
+vector addition.</p></li>
+<li><p>For several vectors, the tail of each successive vector is placed
+at the tip of the preceding vector.</p></li>
+<li><p>The vector from the tail of the first vector to the tip of the
+last vector represents the resultant of all the vectors.</p></li>
+<li><p>This method is commonly called the <strong>head-to-tail
+rule</strong>.</p></li>
+</ul>
+<h2 class="green" id="example-1">Example 1</h2>
+<p>Draw the sum of the vectors <span class="math inline">\mathbf
+a</span> and <span class="math inline">\mathbf b</span> shown in Figure
+5.</p>
+<div style="text-align: center;">
+<p><img src="../images/0105.png" style="width: 491px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 4.</strong> Vectors <span
+class="math inline">\mathbf a</span> and <span
+class="math inline">\mathbf b</span>.</span></p>
+</div>
+<h2 class="green" id="solution">Solution</h2>
+<p>First place the tail of <span class="math inline">\mathbf b</span> at
+the tip of <span class="math inline">\mathbf a</span> while keeping its
+magnitude and direction unchanged.</p>
+<p>Then draw a vector from the tail of <span class="math inline">\mathbf
+a</span> to the tip of the translated copy of <span
+class="math inline">\mathbf b</span>.</p>
+<p><span class="math display">
+\mathbf a+\mathbf b
+</span></p>
+<p>Alternatively, place <span class="math inline">\mathbf a</span> and
+<span class="math inline">\mathbf b</span> with their tails at the same
+point and complete the parallelogram.</p>
+<p>The diagonal beginning at their common initial point represents <span
+class="math inline">\mathbf a+\mathbf b</span>.</p>
+<div style="text-align: center;">
+<p><img src="../images/0106.png" style="width: 1108px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 5.</strong> Geometric construction of <span
+class="math inline">\mathbf a+\mathbf b</span> using the Triangle Law
+and Parallelogram Law.</span></p>
+</div>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 id="scalar-multiplication">Scalar Multiplication</h2>
+<ul>
+<li><p>A real number multiplied by a vector is called a <strong>scalar
+multiple</strong> of the vector.</p></li>
+<li><p>If <span class="math inline">c</span> is a scalar and <span
+class="math inline">\mathbf v</span> is a vector, then <span
+class="math inline">c\mathbf v</span> has magnitude <span
+class="math inline">|c|</span> times the magnitude of <span
+class="math inline">\mathbf v</span>.</p></li>
+<li><p>If <span class="math inline">c&gt;0</span>, the scalar multiple
+has the same direction as <span class="math inline">\mathbf
+v</span>.</p></li>
+<li><p>If <span class="math inline">c&lt;0</span>, the scalar multiple
+has the opposite direction.</p></li>
+<li><p>If <span class="math inline">c=0</span> or <span
+class="math inline">\mathbf v=\mathbf0</span>, then</p></li>
+</ul>
+<p><span class="math display">
+c\mathbf v=\mathbf0
+</span></p>
+<ul>
+<li>Thus, a scalar acts as a scaling factor for a vector.</li>
+</ul>
+<div style="text-align: center;">
+<p><img src="../images/0107.png" style="width: 1208px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 6.</strong> Scalar multiples of a
+vector.</span></p>
+</div>
+<ul>
+<li>In particular,</li>
+</ul>
+<p><span class="math display">
+-\mathbf v=(-1)\mathbf v
+</span></p>
+<ul>
+<li>The vector <span class="math inline">-\mathbf v</span> has the same
+magnitude as <span class="math inline">\mathbf v</span> but points in
+the opposite direction.</li>
+</ul>
+<h2 id="vector-subtraction">Vector Subtraction</h2>
+<ul>
+<li>The difference between two vectors is defined in terms of vector
+addition.</li>
+</ul>
+<p><span class="math display">
+\mathbf u-\mathbf v=\mathbf u+(-\mathbf v)
+</span></p>
+<ul>
+<li>Therefore, to construct <span class="math inline">\mathbf u-\mathbf
+v</span>, first construct <span class="math inline">-\mathbf v</span>
+and then add it to <span class="math inline">\mathbf u</span>.</li>
+</ul>
+<div style="text-align: center;">
+<p><img src="../images/0108.png" style="width: 1481px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 7.</strong> Geometric construction of <span
+class="math inline">\mathbf u-\mathbf v</span>.</span></p>
+</div>
+<ul>
+<li>If <span class="math inline">\mathbf u</span> and <span
+class="math inline">\mathbf v</span> have the same initial point, the
+vector <span class="math inline">\mathbf u-\mathbf v</span> connects the
+tip of <span class="math inline">\mathbf v</span> to the tip of <span
+class="math inline">\mathbf u</span>.</li>
+</ul>
+<h2 class="green" id="example-2">Example 2</h2>
+<p>If <span class="math inline">\mathbf a</span> and <span
+class="math inline">\mathbf b</span> are the vectors shown in Figure 9,
+draw <span class="math inline">\mathbf a-2\mathbf b</span>.</p>
+<div style="text-align: center;">
+<p><img src="../images/0109.png" style="width: 420px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 8.</strong> Vectors <span
+class="math inline">\mathbf a</span> and <span
+class="math inline">\mathbf b</span>.</span></p>
+</div>
+<h2 class="green" id="solution-1">Solution</h2>
+<p>First construct <span class="math inline">-2\mathbf b</span>.</p>
+<p>Since the scalar is negative, <span class="math inline">-2\mathbf
+b</span> points in the direction opposite to <span
+class="math inline">\mathbf b</span> and has twice its magnitude.</p>
+<p>Place the tail of <span class="math inline">-2\mathbf b</span> at the
+tip of <span class="math inline">\mathbf a</span>.</p>
+<p>The vector from the tail of <span class="math inline">\mathbf
+a</span> to the tip of <span class="math inline">-2\mathbf b</span>
+represents <span class="math inline">\mathbf a-2\mathbf b</span>.</p>
+<div style="text-align: center;">
+<p><img src="../images/0110.png" style="width: 441px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 9.</strong> Geometric construction of <span
+class="math inline">\mathbf a-2\mathbf b</span>.</span></p>
+</div>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="quick-check">Quick Check</h1>
+<h2 class="red" id="question-1">Question 1</h2>
+<p>Two displacement vectors <span class="math inline">\mathbf u</span>
+and <span class="math inline">\mathbf v</span> are placed with their
+tails at the same point. Which geometric construction represents <span
+class="math inline">\mathbf u+\mathbf v</span>?</p>
+<h2 class="red" id="question-2">Question 2</h2>
+<p>If <span class="math inline">\mathbf v</span> is a nonzero vector,
+what happens to its direction and magnitude when it is multiplied by
+<span class="math inline">-3</span>?</p>
+<div class="questions-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="objective-2-components-of-a-vector">Objective 2: Components of a
+Vector</h1>
+<h2 id="components-of-a-vector">Components of a Vector</h2>
+<ul>
+<li><p>A coordinate system allows vectors to be represented
+algebraically.</p></li>
+<li><p>If the initial point of a vector is placed at the origin, the
+coordinates of its terminal point give the components of the
+vector.</p></li>
+<li><p>In two dimensions, a vector can be written as</p></li>
+</ul>
+<p><span class="math display">
+\mathbf a=\langle a_1,a_2\rangle
+</span></p>
+<ul>
+<li>In three dimensions, a vector can be written as</li>
+</ul>
+<p><span class="math display">
+\mathbf a=\langle a_1,a_2,a_3\rangle
+</span></p>
+<div style="text-align: center;">
+<p><img src="../images/0111.png" style="width: 1300px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 10.</strong> Representation of a vector in two
+and three dimensions using components.</span></p>
+</div>
+<ul>
+<li><p>The ordered pair or ordered triple inside angle brackets
+represents a vector, whereas parentheses are used for the coordinates of
+a point.</p></li>
+<li><p>All vectors having the same components represent the same vector
+regardless of their position.</p></li>
+</ul>
+<div style="text-align: center;">
+<p><img src="../images/0112.png" style="width: 658px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 11.</strong> Different geometric representations
+of <span class="math inline">\mathbf
+a=\langle3,2\rangle</span>.</span></p>
+</div>
+<ul>
+<li><p>The vector from the origin to the point <span
+class="math inline">P(3,2)</span> is called the <strong>position
+vector</strong> of <span class="math inline">P</span>.</p></li>
+<li><p>If a vector <span class="math inline">\mathbf
+v=\overrightarrow{PQ}</span> has initial point <span
+class="math inline">P(x_1,y_1,z_1)</span> and terminal point <span
+class="math inline">Q(x_2,y_2,z_2)</span> then its components are
+obtained by subtracting the coordinates of the initial point from the
+corresponding coordinates of the terminal point.</p></li>
+</ul>
+<h2 class="blue" id="definition-component-form-of-a-vector">Definition:
+Component Form of a Vector</h2>
+<p>Given the points <span class="math inline">P(x_1,y_1,z_1)</span> and
+<span class="math inline">Q(x_2,y_2,z_2)</span>, the vector represented
+by <span class="math inline">\overrightarrow{PQ}</span> is</p>
+<p><span class="math display">
+\overrightarrow{PQ}
+=
+\langle x_2-x_1,y_2-y_1,z_2-z_1\rangle
+</span></p>
+<div class="definition-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<div style="text-align: center;">
+<p><img src="../images/0113.png" style="width: 731px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 12.</strong> A vector <span
+class="math inline">\overrightarrow{PQ}</span> and its equivalent
+standard position vector.</span></p>
+</div>
+<h2 id="magnitude-of-a-vector">Magnitude of a Vector</h2>
+<ul>
+<li><p>The magnitude or length of a vector is denoted by <span
+class="math inline">|\mathbf v|</span> or <span
+class="math inline">|\mathbf v|</span>.</p></li>
+<li><p>For a three-dimensional vector <span class="math inline">\mathbf
+v=\langle v_1,v_2,v_3\rangle</span>, its magnitude is obtained from the
+distance formula.</p></li>
+</ul>
+<p><span class="math display">
+|\mathbf v|
+=
+\sqrt{v_1^2+v_2^2+v_3^2}
+</span></p>
+<ul>
+<li>For a two-dimensional vector <span class="math inline">\mathbf
+v=\langle v_1,v_2\rangle</span>, the corresponding formula is</li>
+</ul>
+<p><span class="math display">
+|\mathbf v|
+=
+\sqrt{v_1^2+v_2^2}
+</span></p>
+<h2 class="green" id="example-3">Example 3</h2>
+<p>Find the vector represented by the directed line segment with initial
+point <span class="math inline">A(2,-3,4)</span> and terminal point
+<span class="math inline">B(-2,1,1)</span>.</p>
+<h2 class="green" id="solution-2">Solution</h2>
+<p>We subtract the coordinates of the initial point from the coordinates
+of the terminal point.</p>
+<p><span class="math display">
+\begin{aligned}
+\mathbf v
+&amp;=
+\langle-2-2,1-(-3),1-4\rangle\\
+&amp;=
+\langle-4,4,-3\rangle
+\end{aligned}
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+\boxed{\mathbf v=\langle-4,4,-3\rangle}
+</span></p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="green" id="example-4">Example 4</h2>
+<p>Find the <strong>(a)</strong> component form and <strong>(b)</strong>
+length of the vector with initial point <span
+class="math inline">P(-3,4,1)</span> and terminal point <span
+class="math inline">Q(-5,2,2)</span>.</p>
+<h2 class="green" id="solution-3">Solution</h2>
+<h3 class="green" id="a-component-form">(a) Component form</h3>
+<p><span class="math display">
+\begin{aligned}
+\overrightarrow{PQ}
+&amp;=
+\langle-5-(-3),2-4,2-1\rangle\\
+&amp;=
+\langle-2,-2,1\rangle
+\end{aligned}
+</span></p>
+<h3 class="green" id="b-length">(b) Length</h3>
+<p><span class="math display">
+\begin{aligned}
+|\overrightarrow{PQ}|
+&amp;=
+\sqrt{(-2)^2+(-2)^2+(1)^2}\\
+&amp;=3
+\end{aligned}
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+\boxed{|\overrightarrow{PQ}|=3}
+</span></p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 id="vector-addition-and-scalar-multiplication-in-components">Vector
+Addition and Scalar Multiplication in Components</h2>
+<ul>
+<li><p>Suppose <span class="math inline">\mathbf u=\langle
+u_1,u_2,u_3\rangle</span> and <span class="math inline">\mathbf
+v=\langle v_1,v_2,v_3\rangle</span>.</p></li>
+<li><p>Vector addition is performed by adding corresponding
+components.</p></li>
+</ul>
+<p><span class="math display">
+\mathbf u+\mathbf v
+=
+\langle
+u_1+v_1,
+u_2+v_2,
+u_3+v_3
+\rangle
+</span></p>
+<ul>
+<li>Scalar multiplication is performed by multiplying every component by
+the scalar.</li>
+</ul>
+<p><span class="math display">
+k\mathbf u
+=
+\langle
+ku_1,
+ku_2,
+ku_3
+\rangle
+</span></p>
+<ul>
+<li>Vector subtraction is therefore</li>
+</ul>
+<p><span class="math display">
+\mathbf u-\mathbf v
+=
+\langle
+u_1-v_1,
+u_2-v_2,
+u_3-v_3
+\rangle
+</span></p>
+<div style="text-align: center;">
+<p><img src="../images/0114.png" style="width: 678px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 13.</strong> Addition of vectors using their
+components.</span></p>
+</div>
+<ul>
+<li>The magnitude of a scalar multiple satisfies</li>
+</ul>
+<p><span class="math display">
+|k\mathbf u|=|k||\mathbf u|
+</span></p>
+<div style="text-align: center;">
+<p><img src="../images/0115.png" style="width: 615px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 14.</strong> Geometric interpretation of scalar
+multiplication.</span></p>
+</div>
+<h2 id="properties-of-vectors">Properties of Vectors</h2>
+<ul>
+<li><p>Vector addition and scalar multiplication satisfy familiar
+algebraic properties.</p></li>
+<li><p>For vectors <span class="math inline">\mathbf a</span>, <span
+class="math inline">\mathbf b</span>, and <span
+class="math inline">\mathbf c</span> and scalars <span
+class="math inline">c</span> and <span class="math inline">d</span>,
+these include</p></li>
+</ul>
+<p><span class="math display">
+\mathbf a+\mathbf b=\mathbf b+\mathbf a
+</span></p>
+<p><span class="math display">
+\mathbf a+(\mathbf b+\mathbf c)
+=
+(\mathbf a+\mathbf b)+\mathbf c
+</span></p>
+<p><span class="math display">
+\mathbf a+\mathbf0=\mathbf a
+</span></p>
+<p><span class="math display">
+\mathbf a+(-\mathbf a)=\mathbf0
+</span></p>
+<p><span class="math display">
+c(\mathbf a+\mathbf b)=c\mathbf a+c\mathbf b
+</span></p>
+<p><span class="math display">
+(c+d)\mathbf a=c\mathbf a+d\mathbf a
+</span></p>
+<p><span class="math display">
+(cd)\mathbf a=c(d\mathbf a)
+</span></p>
+<p><span class="math display">
+1\mathbf a=\mathbf a
+</span></p>
+<ul>
+<li>These properties can be verified algebraically by using the
+component definitions.</li>
+</ul>
+<h2 id="standard-unit-vectors">Standard Unit Vectors</h2>
+<ul>
+<li>The standard unit vectors in three dimensions are</li>
+</ul>
+<p><span class="math display">
+\mathbf i=\langle1,0,0\rangle
+</span></p>
+<p><span class="math display">
+\mathbf j=\langle0,1,0\rangle
+</span></p>
+<p><span class="math display">
+\mathbf k=\langle0,0,1\rangle
+</span></p>
+<div style="text-align: center;">
+<p><img src="../images/0117.png" style="width: 1528px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 15.</strong> Standard basis vectors in two and
+three dimensions.</span></p>
+</div>
+<ul>
+<li>Every three-dimensional vector can be expressed in terms of <span
+class="math inline">\mathbf i</span>, <span class="math inline">\mathbf
+j</span>, and <span class="math inline">\mathbf k</span>.</li>
+</ul>
+<p><span class="math display">
+\mathbf a
+=
+a_1\mathbf i+a_2\mathbf j+a_3\mathbf k
+</span></p>
+<ul>
+<li>Similarly, in two dimensions,</li>
+</ul>
+<p><span class="math display">
+\mathbf a=a_1\mathbf i+a_2\mathbf j
+</span></p>
+<ul>
+<li>Thus, for example,</li>
+</ul>
+<p><span class="math display">
+\langle1,-2,6\rangle
+=
+\mathbf i-2\mathbf j+6\mathbf k
+</span></p>
+<h2 id="unit-vectors">Unit Vectors</h2>
+<ul>
+<li><p>A vector whose magnitude is <span class="math inline">1</span> is
+called a <strong>unit vector</strong>.</p></li>
+<li><p>The standard unit vectors <span class="math inline">\mathbf
+i</span>, <span class="math inline">\mathbf j</span>, and <span
+class="math inline">\mathbf k</span> are examples of unit
+vectors.</p></li>
+<li><p>If <span class="math inline">\mathbf a\neq\mathbf0</span>, then
+the vector having the same direction as <span
+class="math inline">\mathbf a</span> and magnitude <span
+class="math inline">1</span> is obtained by dividing <span
+class="math inline">\mathbf a</span> by its magnitude.</p></li>
+</ul>
+<h2 class="blue"
+id="definition-unit-vector-in-the-direction-of-a-vector">Definition:
+Unit Vector in the Direction of a Vector</h2>
+<p>For a nonzero vector <span class="math inline">\mathbf a</span>, the
+unit vector in the direction of <span class="math inline">\mathbf
+a</span> is</p>
+<p><span class="math display">
+\mathbf u=\frac{\mathbf a}{|\mathbf a|}
+</span></p>
+<div class="definition-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<ul>
+<li>Consequently, every nonzero vector can be expressed as its magnitude
+multiplied by its direction.</li>
+</ul>
+<p><span class="math display">
+\mathbf a
+=
+|\mathbf a|
+\frac{\mathbf a}{|\mathbf a|}
+</span></p>
+<h2 class="green" id="example-5">Example 5</h2>
+<p>If <span class="math inline">\mathbf a=\mathbf i+2\mathbf j-3\mathbf
+k</span> and <span class="math inline">\mathbf b=4\mathbf i+7\mathbf
+k</span>, express the vector <span class="math inline">2\mathbf
+a+3\mathbf b</span> in terms of <span class="math inline">\mathbf
+i</span>, <span class="math inline">\mathbf j</span>, and <span
+class="math inline">\mathbf k</span>.</p>
+<h2 class="green" id="solution-4">Solution</h2>
+<p>First multiply each vector by its scalar.</p>
+<p><span class="math display">
+2\mathbf a
+=
+2\mathbf i+4\mathbf j-6\mathbf k
+</span></p>
+<p><span class="math display">
+3\mathbf b
+=
+12\mathbf i+21\mathbf k
+</span></p>
+<p>Now add corresponding components.</p>
+<p><span class="math display">
+\begin{aligned}
+2\mathbf a+3\mathbf b
+&amp;=
+(2\mathbf i+4\mathbf j-6\mathbf k)
++
+(12\mathbf i+21\mathbf k)\\
+&amp;=
+14\mathbf i+4\mathbf j+15\mathbf k
+\end{aligned}
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+\boxed{2\mathbf a+3\mathbf b=14\mathbf i+4\mathbf j+15\mathbf k}
+</span></p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="green" id="example-6">Example 6</h2>
+<p>Find the unit vector in the direction of the vector <span
+class="math inline">2\mathbf i-\mathbf j-2\mathbf k</span>.</p>
+<h2 class="green" id="solution-5">Solution</h2>
+<p>Let</p>
+<p><span class="math display">
+\mathbf a=2\mathbf i-\mathbf j-2\mathbf k
+</span></p>
+<p>Its magnitude is</p>
+<p><span class="math display">
+|\mathbf a|
+=
+\sqrt{2^2+(-1)^2+(-2)^2}
+=
+3
+</span></p>
+<p>Therefore, the required unit vector is</p>
+<p><span class="math display">
+\begin{aligned}
+\mathbf u
+&amp;=
+\frac{\mathbf a}{|\mathbf a|}\\
+&amp;=
+\frac13(2\mathbf i-\mathbf j-2\mathbf k)
+\end{aligned}
+</span></p>
+<p>Hence,</p>
+<p><span class="math display">
+\boxed{
+\mathbf u=
+\frac23\mathbf i-\frac13\mathbf j-\frac23\mathbf k
+}
+</span></p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="quick-check-1">Quick Check</h1>
+<h2 class="red" id="question-1-1">Question 1</h2>
+<p>Find the component form of the vector from <span
+class="math inline">A(3,-2,1)</span> to <span
+class="math inline">B(-1,4,5)</span>.</p>
+<h2 class="red" id="question-2-1">Question 2</h2>
+<p>Find a unit vector in the direction of</p>
+<p><span class="math display">
+\mathbf v=3\mathbf i+4\mathbf j
+</span></p>
+<div class="questions-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="objective-3-applications">Objective 3: Applications</h1>
+<h2 id="vectors-in-physics-and-engineering">Vectors in Physics and
+Engineering</h2>
+<ul>
+<li><p>Vectors are used extensively in physics and engineering to
+represent quantities such as force, displacement, velocity, and
+acceleration.</p></li>
+<li><p>When several forces act on an object, the resultant force is
+obtained by adding the corresponding force vectors.</p></li>
+<li><p>Components are particularly useful because the vector equation
+can be separated into equations in the coordinate directions.</p></li>
+<li><p>This allows an engineering problem to be converted into algebraic
+equations for unknown magnitudes or directions.</p></li>
+</ul>
+<h2 class="green" id="example-7">Example 7</h2>
+<p>A <span class="math inline">100;kg</span> weight hangs from two wires
+as shown in Figure 19. Find the tensions <span
+class="math inline">\mathbf T_1</span> and <span
+class="math inline">\mathbf T_2</span> in the wires and the magnitudes
+of these tensions.</p>
+<div style="text-align: center;">
+<p><img src="../images/0119.png" style="width: 610px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 16.</strong> A <span
+class="math inline">100;kg</span> weight suspended by two
+wires.</span></p>
+</div>
+<h2 class="green" id="solution-6">Solution</h2>
+<div style="text-align: center;">
+<p><img src="../images/0120.png" style="width: 526px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 17.</strong> Component representation of the
+tension forces and weight.</span></p>
+</div>
+<p>The weight is</p>
+<p><span class="math display">
+\mathbf F=-980\mathbf j
+</span></p>
+<p>The tension vectors are</p>
+<p><span class="math display">
+\mathbf T_1
+=
+-|\mathbf T_1|\cos50^\circ\mathbf i
++
+|\mathbf T_1|\sin50^\circ\mathbf j
+</span></p>
+<p><span class="math display">
+\mathbf T_2
+=
+|\mathbf T_2|\cos32^\circ\mathbf i
++
+|\mathbf T_2|\sin32^\circ\mathbf j
+</span></p>
+<p>Since the system is in equilibrium,</p>
+<p><span class="math display">
+\mathbf T_1+\mathbf T_2=980\mathbf j
+</span></p>
+<p>Equating components gives</p>
+<p><span class="math display">
+-|\mathbf T_1|\cos50^\circ
++
+|\mathbf T_2|\cos32^\circ
+=
+0
+</span></p>
+<p><span class="math display">
+|\mathbf T_1|\sin50^\circ
++
+|\mathbf T_2|\sin32^\circ
+=
+980
+</span></p>
+<p>From the first equation,</p>
+<p><span class="math display">
+|\mathbf T_2|
+=
+|\mathbf T_1|
+\frac{\cos50^\circ}{\cos32^\circ}
+</span></p>
+<p>Substituting into the second equation gives</p>
+<p><span class="math display">
+|\mathbf T_1|
+\left(
+\sin50^\circ
++
+\cos50^\circ\tan32^\circ
+\right)
+=
+980
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+|\mathbf T_1|\approx839\;N
+</span></p>
+<p>Substitution into the first equation gives</p>
+<p><span class="math display">
+|\mathbf T_2|\approx636\;N
+</span></p>
+<p>Thus, the tension vectors are approximately</p>
+<p><span class="math display">
+\boxed{
+\mathbf T_1=-539\mathbf i+643\mathbf j
+}
+</span></p>
+<p><span class="math display">
+\boxed{
+\mathbf T_2=539\mathbf i+337\mathbf j
+}
+</span></p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="green" id="example-8">Example 8</h2>
+<p>A woman launches a boat from the south shore of a straight river that
+flows directly west at <span class="math inline">4;km/h</span>. She
+wants to land at the point directly across on the opposite shore. If the
+speed of the boat relative to the water is <span
+class="math inline">8;km/h</span>, in what direction should she steer
+the boat in order to arrive at the desired landing point?</p>
+<div style="text-align: center;">
+<p><img src="../images/0121.png" style="width: 726px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 18.</strong> Velocity vectors for the boat and
+river current.</span></p>
+</div>
+<h2 class="green" id="solution-7">Solution</h2>
+<p>Choose the coordinate axes with the origin at the initial position of
+the boat.</p>
+<p>The velocity of the river is</p>
+<p><span class="math display">
+\mathbf v_c=-4\mathbf i
+</span></p>
+<p>If the boat is steered at an angle <span
+class="math inline">\theta</span> east of north, its velocity relative
+to the water is</p>
+<p><span class="math display">
+\mathbf v_b
+=
+8\cos\theta\mathbf i
++
+8\sin\theta\mathbf j
+</span></p>
+<p>The resultant velocity is</p>
+<p><span class="math display">
+\begin{aligned}
+\mathbf v
+&amp;=
+\mathbf v_b+\mathbf v_c\\
+&amp;=
+(8\cos\theta-4)\mathbf i
++
+8\sin\theta\mathbf j
+\end{aligned}
+</span></p>
+<p>To arrive directly opposite the starting point, the resultant
+velocity must have no horizontal component.</p>
+<p><span class="math display">
+8\cos\theta-4=0
+</span></p>
+<p>Hence,</p>
+<p><span class="math display">
+\cos\theta=\frac12
+</span></p>
+<p>so</p>
+<p><span class="math display">
+\theta=60^\circ
+</span></p>
+<p>Therefore, the boat should be steered in the direction</p>
+<p><span class="math display">
+\boxed{\theta=60^\circ}
+</span></p>
+<p>This is equivalent to a direction of <span
+class="math inline">N30^\circ E</span>.</p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="quick-check-2">Quick Check</h1>
+<h2 class="red" id="question-1-2">Question 1</h2>
+<p>A force of magnitude <span class="math inline">100;N</span> acts at
+an angle of <span class="math inline">30^\circ</span> above the positive
+<span class="math inline">x</span>-axis. Express the force vector in
+terms of <span class="math inline">\mathbf i</span> and <span
+class="math inline">\mathbf j</span>.</p>
+<h2 class="red" id="question-2-2">Question 2</h2>
+<p>A river current flows west at <span
+class="math inline">3;km/h</span>. A boat moves north at <span
+class="math inline">5;km/h</span> relative to the water. What are the
+magnitude and direction of its ground velocity?</p>
+<div class="questions-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="scenario-problem">Scenario Problem</h1>
+<h2 class="green" id="problem">Problem</h2>
+<p>A robotic lifting mechanism is holding a <span
+class="math inline">75;N</span> load using two cables. The left cable
+makes an angle of <span class="math inline">50^\circ</span> with the
+horizontal and the right cable makes an angle of <span
+class="math inline">32^\circ</span> with the horizontal.</p>
+<p>Determine the magnitudes of the two cable tensions required to keep
+the load stationary.</p>
+<h2 class="green" id="solution-8">Solution</h2>
+<p>Let the magnitudes of the cable tensions be <span
+class="math inline">T_1</span> and <span
+class="math inline">T_2</span>.</p>
+<p>The downward force due to the load is</p>
+<p><span class="math display">
+\mathbf F=-75\mathbf j
+</span></p>
+<p>The two cable tensions can be represented by their components.</p>
+<p><span class="math display">
+\mathbf T_1
+=
+-T_1\cos50^\circ\mathbf i
++
+T_1\sin50^\circ\mathbf j
+</span></p>
+<p>and</p>
+<p><span class="math display">
+\mathbf T_2
+=
+T_2\cos32^\circ\mathbf i
++
+T_2\sin32^\circ\mathbf j
+</span></p>
+<p>Since the robotic mechanism is stationary, the resultant force must
+be zero.</p>
+<p><span class="math display">
+\mathbf T_1+\mathbf T_2=75\mathbf j
+</span></p>
+<p>Equating horizontal components gives</p>
+<p><span class="math display">
+-T_1\cos50^\circ+T_2\cos32^\circ=0
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+T_2
+=
+T_1\frac{\cos50^\circ}{\cos32^\circ}
+</span></p>
+<p>Equating vertical components gives</p>
+<p><span class="math display">
+T_1\sin50^\circ+T_2\sin32^\circ=75
+</span></p>
+<p>Substituting the expression for <span class="math inline">T_2</span>
+gives</p>
+<p><span class="math display">
+T_1
+\left(
+\sin50^\circ+
+\cos50^\circ\tan32^\circ
+\right)
+=
+75
+</span></p>
+<p>Hence,</p>
+<p><span class="math display">
+T_1
+=
+\frac{75}
+{\sin50^\circ+\cos50^\circ\tan32^\circ}
+</span></p>
+<p><span class="math display">
+T_1\approx64.3\;N
+</span></p>
+<p>Substituting this value into the expression for <span
+class="math inline">T_2</span> gives</p>
+<p><span class="math display">
+T_2
+=
+T_1\frac{\cos50^\circ}{\cos32^\circ}
+</span></p>
+<p><span class="math display">
+T_2\approx48.7\;N
+</span></p>
+<p>Therefore, the required cable tensions are</p>
+<p><span class="math display">
+\boxed{T_1\approx64.3\;N}
+</span></p>
+<p>and</p>
+<p><span class="math display">
+\boxed{T_2\approx48.7\;N}
+</span></p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="summary">Summary</h1>
+<ul>
+<li><p>A vector is a quantity having both magnitude and direction and
+can be represented geometrically by a directed line segment.</p></li>
+<li><p>Vectors can be added geometrically using the Triangle Law,
+Parallelogram Law, or head-to-tail rule.</p></li>
+<li><p>Scalar multiplication changes the magnitude of a vector and may
+reverse its direction when the scalar is negative.</p></li>
+<li><p>A vector can be represented algebraically by its components, and
+the vector from <span class="math inline">P</span> to <span
+class="math inline">Q</span> is obtained by subtracting the coordinates
+of <span class="math inline">P</span> from those of <span
+class="math inline">Q</span>.</p></li>
+<li><p>The magnitude of a vector is obtained from the distance formula
+using its components.</p></li>
+<li><p>Vector addition, subtraction, and scalar multiplication can be
+performed component by component.</p></li>
+<li><p>The standard unit vectors <span class="math inline">\mathbf
+i</span>, <span class="math inline">\mathbf j</span>, and <span
+class="math inline">\mathbf k</span> provide the standard coordinate
+directions, and every vector can be expressed as a linear combination of
+them.</p></li>
+<li><p>A unit vector has magnitude <span class="math inline">1</span>,
+and the unit vector in the direction of a nonzero vector <span
+class="math inline">\mathbf a</span> is <span
+class="math inline">\mathbf a/|\mathbf a|</span>.</p></li>
+<li><p>Vectors allow engineering quantities such as forces and
+velocities to be resolved into components and combined systematically.
+The Stewart material illustrates this with cable tensions and boat
+motion in a river.</p></li>
+<li><p>The central idea of this topic is that <strong>vectors provide a
+mathematical language for quantities whose magnitude and direction must
+be considered together, allowing geometric physical problems to be
+converted into systematic algebraic calculations</strong>.</p></li>
+</ul>
+<h1 id="exercises">Exercises</h1>
+<ul>
+<li><p>Exercises help transform theoretical concepts into practical
+understanding.</p></li>
+<li><p>Mathematics is learned by doing and solving exercises will train
+you to analyze problems, select appropriate methods, and construct
+logical solutions.</p></li>
+<li><p>Attempting problems sometimes leads to mistakes which provide
+opportunities for learning and improvement.</p></li>
+<li><p>Regular practice increases speed, accuracy, and
+confidence.</p></li>
+<li><p>Exercises are given in the Exercises file and you are expected to
+solve them on your own.</p></li>
+</ul>
+<h2 id="exercises-set-1">Exercises Set 1</h2>
+<ul>
+<li>Solve all the odd number exercises from exercise 1 to 28.</li>
+</ul>
+<h2 id="exercises-set-2">Exercises Set 2</h2>
+<ul>
+<li>Solve all the exercises from exercise 29 to 40.</li>
+</ul>
+</body>
+</html>

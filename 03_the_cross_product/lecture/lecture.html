@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>lecture</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="../styles/style.css" />
+  <script defer=""
+  src="/usr/share/javascript/katex/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <link rel="stylesheet"
+  href="/usr/share/javascript/katex/katex.min.css" />
+</head>
+<body>
+<h1 id="calculus-and-analytical-geometry">Calculus and Analytical
+Geometry</h1>
+<h2 id="the-cross-product">The Cross Product</h2>
+<h3 id="dr.-aamir-alaud-din">Dr. Aamir Alaud Din</h3>
+<h3 id="september-8-2026">September 8, 2026</h3>
+<h1 id="objectives">Objectives</h1>
+<p>After preparing this topic, you should be able to:</p>
+<ol type="1">
+<li><p>Compute the cross product of two vectors in <span
+class="math inline">\mathbb R^3</span> using component and determinant
+forms and interpret its direction and magnitude geometrically.</p></li>
+<li><p>Apply the properties of the cross product to determine
+perpendicular vectors, areas, and torque in physical and engineering
+applications.</p></li>
+</ol>
+<h1 id="the-why-section">The Why Section</h1>
+<h2
+id="objective-1-why-study-the-cross-product-of-two-vectors">Objective 1:
+Why Study the Cross Product of Two Vectors?</h2>
+<ul>
+<li><p>In three-dimensional engineering problems, we often need to find
+a vector that is perpendicular to two given vectors.</p></li>
+<li><p>For example, consider a robotic arm in a three-dimensional
+workspace. The arm may have two directions represented by vectors, and
+its controller may need to determine a direction perpendicular to both
+of them.</p></li>
+<li><p>The cross product provides a systematic way to obtain such a
+vector.</p></li>
+<li><p>The magnitude of the cross product also has a geometric meaning
+because it gives the area of the parallelogram formed by the two
+vectors.</p></li>
+<li><p>Therefore, the cross product gives us both a
+<strong>perpendicular direction</strong> and useful geometric
+information about two vectors.</p></li>
+<li><p>The following type of mechatronics problem can be solved by
+studying the cross product.</p></li>
+<li><p>A robotic mechanism has two nonparallel links represented by
+vectors <span class="math inline">\mathbf a</span> and <span
+class="math inline">\mathbf b</span>. The controller needs a vector
+perpendicular to both links to determine the orientation of a surface
+attached to the mechanism.</p></li>
+</ul>
+<h2
+id="objective-2-why-study-the-properties-of-the-cross-product">Objective
+2: Why Study the Properties of the Cross Product?</h2>
+<ul>
+<li><p>Knowing how to calculate a cross product is not sufficient for
+many engineering applications.</p></li>
+<li><p>We also need to understand how the cross product behaves when the
+order of the vectors is changed, when vectors are added or multiplied by
+scalars, and when vectors are parallel or perpendicular.</p></li>
+<li><p>These properties allow us to simplify calculations and understand
+the geometric meaning of the resulting vector.</p></li>
+<li><p>The magnitude of the cross product is related to the area of a
+parallelogram formed by two vectors.</p></li>
+<li><p>The same idea appears in mechanics when a force produces a
+tendency to rotate an object.</p></li>
+<li><p>For example, the torque produced by a force <span
+class="math inline">\mathbf F</span> applied at a position vector <span
+class="math inline">\mathbf r</span> is given by the cross product <span
+class="math inline">\mathbf r\times\mathbf F</span>.</p></li>
+<li><p>Thus, the properties of the cross product provide the
+mathematical foundation for analyzing rotation and torque in mechanical
+systems.</p></li>
+</ul>
+<h1 id="objective-1-the-cross-product-of-two-vectors">Objective 1: The
+Cross Product of Two Vectors</h1>
+<h2 id="the-idea-of-the-cross-product">The Idea of the Cross
+Product</h2>
+<ul>
+<li><p>Given two nonzero vectors <span class="math inline">\mathbf
+a</span> and <span class="math inline">\mathbf b</span> in
+three-dimensional space, we can construct a vector that is perpendicular
+to both of them.</p></li>
+<li><p>The cross product of <span class="math inline">\mathbf a</span>
+and <span class="math inline">\mathbf b</span> is denoted by <span
+class="math inline">\mathbf a\times\mathbf b</span>.</p></li>
+<li><p>If <span class="math inline">\mathbf a=\langle
+a_1,a_2,a_3\rangle</span> and <span class="math inline">\mathbf
+b=\langle b_1,b_2,b_3\rangle</span> then their cross product is</p></li>
+</ul>
+<p><span class="math display">
+\mathbf a\times\mathbf b
+=
+\langle
+a_2b_3-a_3b_2,
+a_3b_1-a_1b_3,
+a_1b_2-a_2b_1
+\rangle
+</span></p>
+<ul>
+<li><p>Unlike the dot product, which produces a scalar, the cross
+product produces a <strong>vector</strong>.</p></li>
+<li><p>The cross product is defined for vectors in three-dimensional
+space.</p></li>
+</ul>
+<h2 id="determinant-form-of-the-cross-product">Determinant Form of the
+Cross Product</h2>
+<ul>
+<li><p>The component formula can be conveniently remembered using a
+determinant involving the standard basis vectors <span
+class="math inline">\mathbf i</span>, <span class="math inline">\mathbf
+j</span>, and <span class="math inline">\mathbf k</span>.</p></li>
+<li><p>If <span class="math inline">\mathbf a=a_1\mathbf i+a_2\mathbf
+j+a_3\mathbf k</span> and <span class="math inline">\mathbf b=b_1\mathbf
+i+b_2\mathbf j+b_3\mathbf k</span>, then</p></li>
+</ul>
+<p><span class="math display">
+\mathbf a\times\mathbf b
+=
+\begin{vmatrix}
+\mathbf i&amp;\mathbf j&amp;\mathbf k\\
+a_1&amp;a_2&amp;a_3\\
+b_1&amp;b_2&amp;b_3
+\end{vmatrix}
+</span></p>
+<ul>
+<li>Expanding this determinant gives</li>
+</ul>
+<p><span class="math display">
+\mathbf a\times\mathbf b
+=
+\begin{vmatrix}
+a_2&amp;a_3\\
+b_2&amp;b_3
+\end{vmatrix}\mathbf i
+-
+\begin{vmatrix}
+a_1&amp;a_3\\
+b_1&amp;b_3
+\end{vmatrix}\mathbf j
++
+\begin{vmatrix}
+a_1&amp;a_2\\
+b_1&amp;b_2
+\end{vmatrix}\mathbf k
+</span></p>
+<ul>
+<li>Therefore,</li>
+</ul>
+<p><span class="math display">
+\mathbf a\times\mathbf b
+=
+(a_2b_3-a_3b_2)\mathbf i
+-
+(a_1b_3-a_3b_1)\mathbf j
++
+(a_1b_2-a_2b_1)\mathbf k
+</span></p>
+<h2 class="green" id="example-1">Example 1</h2>
+<p>If <span class="math inline">\mathbf a=\langle1,3,4\rangle</span> and
+<span class="math inline">\mathbf b=\langle2,7,-5\rangle</span>, find
+<span class="math inline">\mathbf a\times\mathbf b</span>.</p>
+<h2 class="green" id="solution">Solution</h2>
+<p>We write the cross product as a determinant.</p>
+<p><span class="math display">
+\mathbf a\times\mathbf b
+=
+\begin{vmatrix}
+\mathbf i&amp;\mathbf j&amp;\mathbf k\\
+1&amp;3&amp;4\\
+2&amp;7&amp;-5
+\end{vmatrix}
+</span></p>
+<p>Expanding along the first row gives</p>
+<p><span class="math display">
+\mathbf a\times\mathbf b
+=
+\begin{vmatrix}
+3&amp;4\\
+7&amp;-5
+\end{vmatrix}\mathbf i
+-
+\begin{vmatrix}
+1&amp;4\\
+2&amp;-5
+\end{vmatrix}\mathbf j
++
+\begin{vmatrix}
+1&amp;3\\
+2&amp;7
+\end{vmatrix}\mathbf k
+</span></p>
+<p>Evaluate the three determinants.</p>
+<p><span class="math display">
+\mathbf a\times\mathbf b
+=
+(3(-5)-4(7))\mathbf i
+-
+(1(-5)-4(2))\mathbf j
++
+(1(7)-3(2))\mathbf k
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+\mathbf a\times\mathbf b
+=
+-43\mathbf i+13\mathbf j+\mathbf k
+</span></p>
+<p>Hence,</p>
+<p><span class="math display">
+\boxed{\mathbf a\times\mathbf b=-43\mathbf i+13\mathbf j+\mathbf k}
+</span></p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 id="direction-of-the-cross-product">Direction of the Cross
+Product</h2>
+<ul>
+<li><p>The cross product <span class="math inline">\mathbf
+a\times\mathbf b</span> is perpendicular to both <span
+class="math inline">\mathbf a</span> and <span
+class="math inline">\mathbf b</span>.</p></li>
+<li><p>If <span class="math inline">\mathbf a</span> and <span
+class="math inline">\mathbf b</span> are represented by directed line
+segments with the same initial point, the direction of <span
+class="math inline">\mathbf a\times\mathbf b</span> is determined by the
+<strong>right-hand rule</strong>.</p></li>
+<li><p>Curl the fingers of your right hand from the direction of <span
+class="math inline">\mathbf a</span> toward the direction of <span
+class="math inline">\mathbf b</span> through an angle less than <span
+class="math inline">180^\circ</span>.</p></li>
+<li><p>Your thumb then points in the direction of <span
+class="math inline">\mathbf a\times\mathbf b</span>.</p></li>
+</ul>
+<div style="text-align: center;">
+<p><img src="../images/0301.png" style="width: 683px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 1.</strong> The right-hand rule showing the
+direction of <span class="math inline">\mathbf a\times\mathbf b</span>
+relative to <span class="math inline">\mathbf a</span> and <span
+class="math inline">\mathbf b</span>.</span></p>
+</div>
+<h2 class="orange" id="theorem">Theorem</h2>
+<p>The vector <span class="math inline">\mathbf a\times\mathbf b</span>
+is orthogonal to both <span class="math inline">\mathbf a</span> and
+<span class="math inline">\mathbf b</span>.</p>
+<h2 class="orange" id="proof">Proof</h2>
+<p>Let</p>
+<p><span class="math display">
+\mathbf a=\langle a_1,a_2,a_3\rangle
+</span></p>
+<p>and</p>
+<p><span class="math display">
+\mathbf b=\langle b_1,b_2,b_3\rangle
+</span></p>
+<p>Then</p>
+<p><span class="math display">
+\mathbf a\times\mathbf b
+=
+\langle
+a_2b_3-a_3b_2,
+a_3b_1-a_1b_3,
+a_1b_2-a_2b_1
+\rangle
+</span></p>
+<p>Take the dot product of <span class="math inline">\mathbf
+a\times\mathbf b</span> with <span class="math inline">\mathbf
+a</span>.</p>
+<p><span class="math display">
+\begin{aligned}
+(\mathbf a\times\mathbf b)\cdot\mathbf a
+&amp;=
+(a_2b_3-a_3b_2)a_1
++(a_3b_1-a_1b_3)a_2
++(a_1b_2-a_2b_1)a_3\\
+&amp;=
+a_1a_2b_3-a_1a_3b_2
++a_2a_3b_1-a_1a_2b_3
++a_1a_3b_2-a_2a_3b_1\\
+&amp;=0
+\end{aligned}
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+(\mathbf a\times\mathbf b)\cdot\mathbf a=0
+</span></p>
+<p>so <span class="math inline">\mathbf a\times\mathbf b</span> is
+perpendicular to <span class="math inline">\mathbf a</span>.</p>
+<p>Similarly,</p>
+<p><span class="math display">
+(\mathbf a\times\mathbf b)\cdot\mathbf b=0
+</span></p>
+<p>so <span class="math inline">\mathbf a\times\mathbf b</span> is
+perpendicular to <span class="math inline">\mathbf b</span>.</p>
+<p>Hence,</p>
+<p><span class="math display">
+\boxed{\mathbf a\times\mathbf b\perp\mathbf a
+\quad\text{and}\quad
+\mathbf a\times\mathbf b\perp\mathbf b}
+</span></p>
+<h2 class="green" id="example-2">Example 2</h2>
+<p>Show that <span class="math inline">\mathbf a\times\mathbf
+a=\mathbf0</span> for any vector <span class="math inline">\mathbf
+a</span> in <span class="math inline">V_3</span>.</p>
+<h2 class="green" id="solution-1">Solution</h2>
+<p>Let</p>
+<p><span class="math display">
+\mathbf a=\langle a_1,a_2,a_3\rangle
+</span></p>
+<p>Then</p>
+<p><span class="math display">
+\mathbf a\times\mathbf a
+=
+\begin{vmatrix}
+\mathbf i&amp;\mathbf j&amp;\mathbf k\\
+a_1&amp;a_2&amp;a_3\\
+a_1&amp;a_2&amp;a_3
+\end{vmatrix}
+</span></p>
+<p>Expanding gives</p>
+<p><span class="math display">
+\mathbf a\times\mathbf a
+=
+(a_2a_3-a_3a_2)\mathbf i
+-
+(a_1a_3-a_3a_1)\mathbf j
++
+(a_1a_2-a_2a_1)\mathbf k
+</span></p>
+<p>Each component is zero.</p>
+<p><span class="math display">
+\mathbf a\times\mathbf a
+=
+0\mathbf i+0\mathbf j+0\mathbf k
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+\boxed{\mathbf a\times\mathbf a=\mathbf0}
+</span></p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 id="magnitude-of-the-cross-product">Magnitude of the Cross
+Product</h2>
+<ul>
+<li>If <span class="math inline">\theta</span> is the angle between two
+vectors <span class="math inline">\mathbf a</span> and <span
+class="math inline">\mathbf b</span>, where <span
+class="math inline">0\leq\theta\leq\pi</span>, then the magnitude of
+their cross product is</li>
+</ul>
+<p><span class="math display">
+\boxed{|\mathbf a\times\mathbf b|
+=
+|\mathbf a||\mathbf b|\sin\theta}
+</span></p>
+<ul>
+<li><p>This formula shows that the magnitude depends on the lengths of
+the two vectors and the sine of the angle between them.</p></li>
+<li><p>When the vectors are perpendicular, <span
+class="math inline">\theta=\pi/2</span>, so</p></li>
+</ul>
+<p><span class="math display">
+|\mathbf a\times\mathbf b|
+=
+|\mathbf a||\mathbf b|
+</span></p>
+<ul>
+<li>When the vectors are parallel, <span
+class="math inline">\theta=0</span> or <span
+class="math inline">\pi</span>, so</li>
+</ul>
+<p><span class="math display">
+|\mathbf a\times\mathbf b|=0
+</span></p>
+<h2 id="geometric-meaning-of-the-magnitude">Geometric Meaning of the
+Magnitude</h2>
+<ul>
+<li><p>Suppose <span class="math inline">\mathbf a</span> and <span
+class="math inline">\mathbf b</span> form two adjacent sides of a
+parallelogram.</p></li>
+<li><p>The base of the parallelogram is <span
+class="math inline">|\mathbf a|</span>.</p></li>
+<li><p>The corresponding height is <span class="math inline">|\mathbf
+b|\sin\theta</span>.</p></li>
+<li><p>Therefore, its area is</p></li>
+</ul>
+<p><span class="math display">
+A=|\mathbf a|(|\mathbf b|\sin\theta)
+</span></p>
+<ul>
+<li>Thus,</li>
+</ul>
+<p><span class="math display">
+A=|\mathbf a\times\mathbf b|
+</span></p>
+<ul>
+<li>Therefore, the magnitude of the cross product equals the area of the
+parallelogram determined by the two vectors.</li>
+</ul>
+<div style="text-align: center;">
+<p><img src="../images/0302.png" style="width: 555px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 2.</strong> Geometric characterization of <span
+class="math inline">\mathbf a\times\mathbf b</span> showing the
+parallelogram determined by <span class="math inline">\mathbf a</span>
+and <span class="math inline">\mathbf b</span>.</span></p>
+</div>
+<h2 class="green" id="example-3">Example 3</h2>
+<p>Find a vector perpendicular to the plane that passes through the
+points <span class="math inline">P(1,4,6)</span>, <span
+class="math inline">Q(-2,5,-1)</span>, and <span
+class="math inline">R(1,-1,1)</span>.</p>
+<h2 class="green" id="solution-2">Solution</h2>
+<p>We first find two vectors lying in the plane.</p>
+<p><span class="math display">
+\overrightarrow{PQ}
+=
+\langle-2-1,5-4,-1-6\rangle
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+\overrightarrow{PQ}
+=
+\langle-3,1,-7\rangle
+</span></p>
+<p>Similarly,</p>
+<p><span class="math display">
+\overrightarrow{PR}
+=
+\langle1-1,-1-4,1-6\rangle
+</span></p>
+<p>Thus,</p>
+<p><span class="math display">
+\overrightarrow{PR}
+=
+\langle0,-5,-5\rangle
+</span></p>
+<p>A vector perpendicular to both vectors is their cross product.</p>
+<p><span class="math display">
+\overrightarrow{PQ}\times\overrightarrow{PR}
+=
+\begin{vmatrix}
+\mathbf i&amp;\mathbf j&amp;\mathbf k\\
+-3&amp;1&amp;-7\\
+0&amp;-5&amp;-5
+\end{vmatrix}
+</span></p>
+<p>Expanding,</p>
+<p><span class="math display">
+\begin{aligned}
+\overrightarrow{PQ}\times\overrightarrow{PR}
+&amp;=
+(1(-5)-(-7)(-5))\mathbf i\\
+&amp;\quad-
+((-3)(-5)-(-7)(0))\mathbf j\\
+&amp;\quad+
+((-3)(-5)-1(0))\mathbf k
+\end{aligned}
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+\boxed{
+\overrightarrow{PQ}\times\overrightarrow{PR}
+=
+-40\mathbf i-15\mathbf j+15\mathbf k
+}
+</span></p>
+<p>Hence, one vector perpendicular to the plane is</p>
+<p><span class="math display">
+\boxed{\langle-40,-15,15\rangle}
+</span></p>
+<p>Any nonzero scalar multiple of this vector is also perpendicular to
+the plane.</p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="green" id="example-4">Example 4</h2>
+<p>Find the area of the triangle with vertices <span
+class="math inline">P(1,4,6)</span>, <span
+class="math inline">Q(-2,5,-1)</span>, and <span
+class="math inline">R(1,-1,1)</span>.</p>
+<h2 class="green" id="solution-3">Solution</h2>
+<p>From Example 3,</p>
+<p><span class="math display">
+\overrightarrow{PQ}\times\overrightarrow{PR}
+=
+\langle-40,-15,15\rangle
+</span></p>
+<p>The area of the parallelogram determined by <span
+class="math inline">\overrightarrow{PQ}</span> and <span
+class="math inline">\overrightarrow{PR}</span> is</p>
+<p><span class="math display">
+|\overrightarrow{PQ}\times\overrightarrow{PR}|
+=
+\sqrt{(-40)^2+(-15)^2+(15)^2}
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+|\overrightarrow{PQ}\times\overrightarrow{PR}|
+=
+\sqrt{1600+225+225}
+</span></p>
+<p><span class="math display">
+=\sqrt{2050}
+</span></p>
+<p><span class="math display">
+=5\sqrt{82}
+</span></p>
+<p>The triangle has half the area of the parallelogram.</p>
+<p><span class="math display">
+A=\frac12(5\sqrt{82})
+</span></p>
+<p>Hence,</p>
+<p><span class="math display">
+\boxed{A=\frac{5\sqrt{82}}2}
+</span></p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="quick-check">Quick Check</h1>
+<h2 class="red" id="question-1">Question 1</h2>
+<p>If</p>
+<p><span class="math display">
+\mathbf a=\langle1,0,0\rangle
+\qquad\text{and}\qquad
+\mathbf b=\langle0,1,0\rangle
+</span></p>
+<p>find <span class="math inline">\mathbf a\times\mathbf b</span>.</p>
+<h2 class="red" id="question-2">Question 2</h2>
+<p>If <span class="math inline">\mathbf a</span> and <span
+class="math inline">\mathbf b</span> are parallel nonzero vectors, what
+is <span class="math inline">\mathbf a\times\mathbf b</span>?</p>
+<div class="question-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="objective-2-properties-of-the-cross-product">Objective 2:
+Properties of the Cross Product</h1>
+<h2 id="anticommutative-property">Anticommutative Property</h2>
+<ul>
+<li><p>The cross product is <strong>not commutative</strong>.</p></li>
+<li><p>Reversing the order of the vectors reverses the direction of the
+resulting vector.</p></li>
+</ul>
+<p><span class="math display">
+\boxed{\mathbf a\times\mathbf b=-\mathbf b\times\mathbf a}
+</span></p>
+<ul>
+<li>Consequently, in general</li>
+</ul>
+<p><span class="math display">
+\mathbf a\times\mathbf b\neq\mathbf b\times\mathbf a
+</span></p>
+<ul>
+<li>For example, the standard basis vectors satisfy</li>
+</ul>
+<p><span class="math display">
+\mathbf i\times\mathbf j=\mathbf k
+</span></p>
+<ul>
+<li>Therefore,</li>
+</ul>
+<p><span class="math display">
+\mathbf j\times\mathbf i=-\mathbf k
+</span></p>
+<ul>
+<li>This difference in direction is consistent with the right-hand
+rule.</li>
+</ul>
+<h2 id="cross-products-of-the-standard-unit-vectors">Cross Products of
+the Standard Unit Vectors</h2>
+<ul>
+<li>The standard unit vectors satisfy</li>
+</ul>
+<p><span class="math display">
+\mathbf i\times\mathbf j=\mathbf k
+</span></p>
+<p><span class="math display">
+\mathbf j\times\mathbf k=\mathbf i
+</span></p>
+<p><span class="math display">
+\mathbf k\times\mathbf i=\mathbf j
+</span></p>
+<ul>
+<li>Reversing the order changes the sign.</li>
+</ul>
+<p><span class="math display">
+\mathbf j\times\mathbf i=-\mathbf k
+</span></p>
+<p><span class="math display">
+\mathbf k\times\mathbf j=-\mathbf i
+</span></p>
+<p><span class="math display">
+\mathbf i\times\mathbf k=-\mathbf j
+</span></p>
+<ul>
+<li>A vector crossed with itself is zero.</li>
+</ul>
+<p><span class="math display">
+\mathbf i\times\mathbf i
+=
+\mathbf j\times\mathbf j
+=
+\mathbf k\times\mathbf k
+=
+\mathbf0
+</span></p>
+<h2 id="other-properties">Other Properties</h2>
+<ul>
+<li>If <span class="math inline">\mathbf a</span>, <span
+class="math inline">\mathbf b</span>, and <span
+class="math inline">\mathbf c</span> are vectors and <span
+class="math inline">c</span> is a scalar, the cross product satisfies
+the following properties.</li>
+</ul>
+<p><span class="math display">
+\mathbf a\times\mathbf b=-\mathbf b\times\mathbf a
+</span></p>
+<p><span class="math display">
+(c\mathbf a)\times\mathbf b
+=
+c(\mathbf a\times\mathbf b)
+=
+\mathbf a\times(c\mathbf b)
+</span></p>
+<p><span class="math display">
+\mathbf a\times(\mathbf b+\mathbf c)
+=
+\mathbf a\times\mathbf b+\mathbf a\times\mathbf c
+</span></p>
+<p><span class="math display">
+\mathbf a+\mathbf b)\times\mathbf c
+=
+\mathbf a\times\mathbf c+\mathbf b\times\mathbf c
+</span></p>
+<p><span class="math display">
+\mathbf a\cdot(\mathbf b\times\mathbf c)
+=
+(\mathbf a\times\mathbf b)\cdot\mathbf c
+</span></p>
+<ul>
+<li>The cross product does not generally satisfy the associative
+law.</li>
+</ul>
+<p><span class="math display">
+(\mathbf a\times\mathbf b)\times\mathbf c
+\neq
+\mathbf a\times(\mathbf b\times\mathbf c)
+</span></p>
+<ul>
+<li>Thus, the order and grouping of vectors are important when working
+with cross products.</li>
+</ul>
+<h2 class="orange" id="corollary">Corollary</h2>
+<p>Two nonzero vectors <span class="math inline">\mathbf a</span> and
+<span class="math inline">\mathbf b</span> are parallel if and only
+if</p>
+<p><span class="math display">
+\mathbf a\times\mathbf b=\mathbf0
+</span></p>
+<h2 class="orange" id="proof-1">Proof</h2>
+<p>From the magnitude formula,</p>
+<p><span class="math display">
+|\mathbf a\times\mathbf b|
+=
+|\mathbf a||\mathbf b|\sin\theta
+</span></p>
+<p>For nonzero vectors,</p>
+<p><span class="math display">
+|\mathbf a||\mathbf b|&gt;0
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+|\mathbf a\times\mathbf b|=0
+</span></p>
+<p>exactly when</p>
+<p><span class="math display">
+\sin\theta=0
+</span></p>
+<p>This occurs when</p>
+<p><span class="math display">
+\theta=0
+\qquad\text{or}\qquad
+\theta=\pi
+</span></p>
+<p>These are precisely the angles for parallel vectors.</p>
+<p>Hence,</p>
+<p><span class="math display">
+\boxed{\mathbf a\times\mathbf b=\mathbf0
+\iff
+\mathbf a\parallel\mathbf b}
+</span></p>
+<p>The supplied material states this result as a corollary.</p>
+<h2 id="application-torque">Application: Torque</h2>
+<ul>
+<li><p>A major physical application of the cross product occurs in
+rotational mechanics.</p></li>
+<li><p>Suppose a force <span class="math inline">\mathbf F</span> acts
+on a rigid body at a point whose position relative to the origin is
+represented by the vector <span class="math inline">\mathbf
+r</span>.</p></li>
+<li><p>The torque <span class="math inline">\boldsymbol\tau</span>
+produced by the force about the origin is defined by</p></li>
+</ul>
+<p><span class="math display">
+\boldsymbol\tau=\mathbf r\times\mathbf F
+</span></p>
+<ul>
+<li><p>The direction of the torque vector gives the axis about which the
+force tends to rotate the object.</p></li>
+<li><p>Its direction is determined by the right-hand rule.</p></li>
+<li><p>If <span class="math inline">\theta</span> is the angle between
+<span class="math inline">\mathbf r</span> and <span
+class="math inline">\mathbf F</span>, then the magnitude of the torque
+is</p></li>
+</ul>
+<p><span class="math display">
+|\boldsymbol\tau|
+=
+|\mathbf r||\mathbf F|\sin\theta
+</span></p>
+<ul>
+<li><p>This shows that only the component of the force perpendicular to
+<span class="math inline">\mathbf r</span> contributes to the magnitude
+of the torque.</p></li>
+<li><p>The torque magnitude is also equal to the area of the
+parallelogram determined by <span class="math inline">\mathbf r</span>
+and <span class="math inline">\mathbf F</span>.</p></li>
+</ul>
+<div style="text-align: center;">
+<p><img src="../images/0304.png" style="width: 586px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 3.</strong> Torque produced by a force <span
+class="math inline">\mathbf F</span> acting at a position vector <span
+class="math inline">\mathbf r</span>.</span></p>
+</div>
+<h2 class="green" id="example-5">Example 5</h2>
+<p>A bolt is tightened by applying a <span
+class="math inline">40</span>-N force to a <span
+class="math inline">0.25</span>-m wrench, as shown in Figure 5. Find the
+magnitude of the torque about the center of the bolt.</p>
+<p>Location of Figure 5: A <span class="math inline">40</span>-N force
+applied to a <span class="math inline">0.25</span>-m wrench at an angle
+of <span class="math inline">75^\circ</span>.</p>
+<h2 class="green" id="solution-4">Solution</h2>
+<p>The magnitude of the torque is</p>
+<p><span class="math display">
+|\boldsymbol\tau|
+=
+|\mathbf r||\mathbf F|\sin\theta
+</span></p>
+<p>Here,</p>
+<p><span class="math display">
+|\mathbf r|=0.25\;m
+</span></p>
+<p><span class="math display">
+|\mathbf F|=40\;N
+</span></p>
+<p>and</p>
+<p><span class="math display">
+\theta=75^\circ
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+|\boldsymbol\tau|
+=
+(0.25)(40)\sin75^\circ
+</span></p>
+<p><span class="math display">
+=10\sin75^\circ
+</span></p>
+<p>Using</p>
+<p><span class="math display">
+\sin75^\circ\approx0.9659
+</span></p>
+<p>we obtain</p>
+<p><span class="math display">
+|\boldsymbol\tau|
+\approx9.66\;N\cdot m
+</span></p>
+<p>Hence,</p>
+<p><span class="math display">
+\boxed{|\boldsymbol\tau|\approx9.66\;N\cdot m}
+</span></p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="quick-check-1">Quick Check</h1>
+<h2 class="red" id="question-1-1">Question 1</h2>
+<p>If</p>
+<p><span class="math display">
+\mathbf a\times\mathbf b=\mathbf c
+</span></p>
+<p>what is</p>
+<p><span class="math display">
+\mathbf b\times\mathbf a
+</span></p>
+<h2 class="red" id="question-2-1">Question 2</h2>
+<p>A force of magnitude <span class="math inline">50;N</span> acts at
+the end of a <span class="math inline">0.4;m</span> lever arm. If the
+angle between the lever arm and force is <span
+class="math inline">90^\circ</span>, find the magnitude of the
+torque.</p>
+<div class="question-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="scenario-problem">Scenario Problem</h1>
+<h2 class="green" id="problem">Problem</h2>
+<p>A robotic gripper in a three-dimensional manufacturing system applies
+a force</p>
+<p><span class="math display">
+\mathbf F=30\mathbf i+40\mathbf j\;N
+</span></p>
+<p>at a point whose position relative to the rotation axis is</p>
+<p><span class="math display">
+\mathbf r=0.2\mathbf k\;m
+</span></p>
+<p>Determine the torque vector produced by the force and its
+magnitude.</p>
+<h2 class="green" id="solution-5">Solution</h2>
+<p>The torque is obtained from the cross product</p>
+<p><span class="math display">
+\boldsymbol\tau=\mathbf r\times\mathbf F
+</span></p>
+<p>Substituting the given vectors gives</p>
+<p><span class="math display">
+\boldsymbol\tau
+=
+(0.2\mathbf k)\times(30\mathbf i+40\mathbf j)
+</span></p>
+<p>Using the distributive property,</p>
+<p><span class="math display">
+\boldsymbol\tau
+=
+6(\mathbf k\times\mathbf i)
++
+8(\mathbf k\times\mathbf j)
+</span></p>
+<p>The standard unit-vector cross products are</p>
+<p><span class="math display">
+\mathbf k\times\mathbf i=\mathbf j
+</span></p>
+<p>and</p>
+<p><span class="math display">
+\mathbf k\times\mathbf j=-\mathbf i
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+\boldsymbol\tau
+=
+6\mathbf j-8\mathbf i
+</span></p>
+<p>Hence,</p>
+<p><span class="math display">
+\boxed{\boldsymbol\tau=-8\mathbf i+6\mathbf j\;N\cdot m}
+</span></p>
+<p>The magnitude is</p>
+<p><span class="math display">
+|\boldsymbol\tau|
+=
+\sqrt{(-8)^2+6^2}
+</span></p>
+<p><span class="math display">
+=\sqrt{64+36}
+</span></p>
+<p><span class="math display">
+=10
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+\boxed{|\boldsymbol\tau|=10\;N\cdot m}
+</span></p>
+<p>Thus, the cross product gives the robotic system both the
+<strong>direction of the rotational effect</strong> and its
+<strong>magnitude</strong>.</p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="summary">Summary</h1>
+<ul>
+<li><p>The cross product of two vectors in <span
+class="math inline">\mathbb R^3</span> produces a vector perpendicular
+to both given vectors.</p></li>
+<li><p>For <span class="math inline">\mathbf a=\langle
+a_1,a_2,a_3\rangle</span> and <span class="math inline">\mathbf
+b=\langle b_1,b_2,b_3\rangle</span>, the cross product can be calculated
+using its component formula or determinant form.</p></li>
+<li><p>The direction of <span class="math inline">\mathbf a\times\mathbf
+b</span> is determined by the right-hand rule.</p></li>
+<li><p>The magnitude of the cross product is <span
+class="math inline">|\mathbf a\times\mathbf b|=|\mathbf a||\mathbf
+b|\sin\theta</span>.</p></li>
+<li><p>The magnitude of a cross product equals the area of the
+parallelogram determined by the two vectors.</p></li>
+<li><p>Two nonzero vectors are parallel if and only if their cross
+product is the zero vector.</p></li>
+<li><p>The cross product is anticommutative, so <span
+class="math inline">\mathbf a\times\mathbf b=-\mathbf b\times\mathbf
+a</span>.</p></li>
+<li><p>The cross product obeys useful scalar and distributive properties
+but is not generally associative.</p></li>
+<li><p>In mechanics, torque is represented by the cross product <span
+class="math inline">\boldsymbol\tau=\mathbf r\times\mathbf F</span>, and
+its magnitude is <span class="math inline">|\mathbf r||\mathbf
+F|\sin\theta</span>.</p></li>
+<li><p>The central idea is that the cross product provides a
+mathematical way to obtain a perpendicular direction and quantify the
+geometric or rotational effect produced by two three-dimensional
+vectors.</p></li>
+</ul>
+<h1 id="exercises">Exercises</h1>
+<h2 id="exercises-set-1">Exercises Set 1</h2>
+<p>Solve the odd number exercises from exercise 1 to 68.</p>
+<ul>
+<li><p>Exercises help transform theoretical concepts into practical
+understanding.</p></li>
+<li><p>Mathematics is learned by doing and solving exercises will train
+you to analyze problems, select appropriate methods, and construct
+logical solutions.</p></li>
+<li><p>Attempting problems sometimes leads to mistakes which provide
+opportunities for learning and improvement.</p></li>
+<li><p>Regular practice increases speed, accuracy, and
+confidence.</p></li>
+<li><p>Exercises are given in the Exercises file and you are expected to
+solve them on your own.</p></li>
+</ul>
+</body>
+</html>
