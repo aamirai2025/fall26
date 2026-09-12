@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>lecture</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    q { quotes: "“" "”" "‘" "’"; }
+  </style>
+  <link rel="stylesheet" href="../styles/style.css" />
+  <script defer=""
+  src="/usr/share/javascript/katex/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <link rel="stylesheet"
+  href="/usr/share/javascript/katex/katex.min.css" />
+</head>
+<body>
+<h1 id="calculus-and-analyticl-geometry">Calculus and Analyticl
+Geometry</h1>
+<h2 id="intervals-inequalities-and-absolute-values">Intervals,
+Inequalities, and Absolute Values</h2>
+<h3 id="dr.-aamir-alaud-din">Dr. Aamir Alaud Din</h3>
+<h3 id="august-25-2026">August 25, 2026</h3>
+<h1 id="objectives">Objectives</h1>
+<p>After preparing this topic, you should be able</p>
+<ol type="1">
+<li><p>To represent and interpret intervals and inequalities on the real
+number line.</p></li>
+<li><p>To understand absolute value as distance and solve absolute-value
+equations and inequalities.</p></li>
+<li><p>To translate distance statements into intervals and use them to
+understand the language of limits.</p></li>
+</ol>
+<h1 id="the-why-section">The Why Section</h1>
+<h2 id="objective-1-why-study-intervals-and-inequalities">Objective 1:
+Why Study Intervals and Inequalities?</h2>
+<ul>
+<li><p>Before studying <strong>limits</strong>, we need a precise
+language for describing <strong>where a variable can be and how close it
+can get to a particular number</strong>.</p></li>
+<li><p>Intervals and inequalities provide this language.</p></li>
+<li><p>We study these concepts because they allow us to:</p>
+<ul>
+<li><p><strong>Describe the location of numbers on the real number
+line</strong></p>
+<ul>
+<li><p>Inequalities and intervals help us clearly identify regions such
+as <span class="math inline">(x&lt;4)</span>, <span
+class="math inline">(x&gt;2)</span>, or <span
+class="math inline">(2&lt;x&lt;5)</span>.</p></li>
+<li><p>This is essential for describing the values of (x) near a
+point.</p></li>
+</ul></li>
+<li><p><strong>Express whether endpoints are included or
+excluded</strong></p>
+<ul>
+<li><p>The distinction between <span class="math inline">(&lt;)</span>
+and <span class="math inline">(\leq)</span>, and between parentheses
+<span class="math inline">((,))</span> and brackets <span
+class="math inline">([,])</span>, becomes crucial when discussing
+<strong>open intervals around a number</strong>.</p></li>
+<li><p>Limits frequently consider values <em>near</em> <span
+class="math inline">(c)</span> without necessarily allowing <span
+class="math inline">(x=c)</span>.</p></li>
+</ul></li>
+<li><p><strong>Describe the domain and conditions under which functions
+are studied</strong></p>
+<ul>
+<li><p>Many functions are defined only on certain intervals or under
+certain inequalities.</p></li>
+<li><p>Being able to translate between inequalities, interval notation,
+and the number line prepares us to describe <strong>domains,
+neighborhoods, and the values of <span class="math inline">(x)</span>
+used in limits</strong>.</p></li>
+</ul></li>
+</ul></li>
+</ul>
+<h3 id="connection-to-limits">Connection to Limits</h3>
+<ul>
+<li><p>The central idea we will soon need is:</p>
+<ul>
+<li><strong>A limit studies what happens to <span
+class="math inline">(f(x))</span> when <span
+class="math inline">(x)</span> gets close to a particular number <span
+class="math inline">(c)</span>.</strong></li>
+</ul></li>
+<li><p>To say that <span class="math inline">(x)</span> is <strong>close
+to <span class="math inline">(c)</span></strong>, we need intervals and
+inequalities such as the following two statement.</p></li>
+</ul>
+<p><span class="math display">
+c-\delta&lt;x&lt;c+\delta
+</span></p>
+<p><span class="math display">
+x\in(c-\delta,c+\delta).
+</span></p>
+<ul>
+<li>Thus, <strong>intervals and inequalities are the mathematical
+language that allows us to describe “close to” precisely</strong>—one of
+the fundamental ideas behind limits.</li>
+</ul>
+<h2 id="objective-2-why-study-absolute-value-as-distance">Objective 2:
+Why Study Absolute Value as Distance?</h2>
+<ul>
+<li><p>After learning how <strong>inequalities and intervals describe
+the position of numbers</strong>, we now need a way to describe
+<strong>how far one number is from another</strong>.</p></li>
+<li><p>Absolute value provides exactly this idea and creates a direct
+bridge to limits.</p></li>
+<li><p>We study absolute value because we need to:</p>
+<ul>
+<li><p><strong>Measure the distance between two numbers</strong></p>
+<ul>
+<li><p>The expression <span class="math inline">|x-c|</span> represents
+the distance between <span class="math inline">(x)</span> and <span
+class="math inline">(c)</span>.</p></li>
+<li><p>This gives us a precise mathematical meaning for phrases such as
+<strong>“close to <span class="math inline">(c)</span>”</strong> or
+<strong>“within a certain distance of <span
+class="math inline">(c)</span>”</strong>.</p></li>
+</ul></li>
+<li><p><strong>Describe numbers near a particular point</strong></p>
+<ul>
+<li>Expressions such as <span class="math inline">|x-c| \lt a</span>
+tell us that <span class="math inline">(x)</span> lies within <span
+class="math inline">(a)</span> units of <span
+class="math inline">(c)</span> and mathematically</li>
+</ul>
+<p><span class="math display">
+  c-a&lt;x&lt;c+a.
+  </span></p>
+<ul>
+<li>This is exactly the language we will use when discussing values of
+<span class="math inline">(x)</span> <strong>approaching a
+number</strong>.</li>
+</ul></li>
+<li><p><strong>Build the foundation for the precise definition of a
+limit</strong></p>
+<ul>
+<li><p>The concept of a limit depends on controlling the distance
+between <span class="math inline">(x)</span> and <span
+class="math inline">(c)</span>, and later between <span
+class="math inline">(f(x))</span> and <span
+class="math inline">(L)</span>.</p></li>
+<li><p>The expressions <span class="math inline">|x-c| \lt \delta,
+|f(x)-L| \lt \varepsilon</span> are at the heart of the formal
+definition of a limit.</p></li>
+</ul></li>
+</ul></li>
+</ul>
+<h3 id="connection-to-limits-1">Connection to Limits</h3>
+<ul>
+<li><p>The key idea we are preparing for is:</p>
+<ul>
+<li><p><strong>A limit asks what happens to <span
+class="math inline">(f(x))</span> when <span
+class="math inline">(x)</span> gets arbitrarily close to <span
+class="math inline">(c)</span>.</strong></p></li>
+<li><p>The phrase <strong>“<span class="math inline">(x)</span> gets
+close to <span class="math inline">(c)</span>”</strong> can be expressed
+precisely as</p>
+<p><span class="math display">
+  |x-c|&lt;\delta
+  </span></p></li>
+</ul></li>
+<li><p>Therefore, understanding <strong>absolute value as
+distance</strong> is not merely an algebraic technique—it gives us the
+mathematical language needed to make the intuitive idea of
+<strong>closeness</strong> precise in calculus.</p></li>
+</ul>
+<h2
+id="objective-3-why-study-from-distance-to-the-language-of-limits">Objective
+3: Why Study “From Distance to the Language of Limits”?</h2>
+<ul>
+<li><p>We study distance as the language of limits because:</p>
+<ul>
+<li><p><strong>Make the idea of “closeness” precise</strong></p>
+<ul>
+<li><p>In everyday language, “close to <span
+class="math inline">(c)</span>” is vague.</p></li>
+<li><p>The expression <span class="math inline">|x-c| \lt \delta</span>
+gives a precise mathematical meaning: <span
+class="math inline">(x)</span> is less than <span
+class="math inline">(\delta)</span> units away from <span
+class="math inline">(c)</span>.</p></li>
+<li><p>This allows us to replace informal descriptions with exact
+conditions.</p></li>
+</ul></li>
+<li><p><strong>Understand what “approaching” means in a
+limit</strong></p>
+<ul>
+<li><p>When we write <span class="math inline">x\to c</span>, <span
+class="math inline">(x)</span> gets closer and closer to <span
+class="math inline">(c)</span>, but <span class="math inline">(x)</span>
+does not have to equal <span class="math inline">(c)</span>.</p></li>
+<li><p>The condition <span class="math inline">0 \lt |x-c| \lt
+\delta</span> captures this idea precisely and introduces the concept of
+a <strong>deleted neighborhood</strong>.</p></li>
+</ul></li>
+<li><p><strong>Build the foundation for the formal definition of a
+limit</strong></p>
+<ul>
+<li>A limit connects two kinds of closeness:</li>
+</ul>
+<p><span class="math display">
+  |x-c| \to \text{(input distance)}
+  </span></p>
+<p><span class="math display">
+  |f(x)-L| \to \text{(output distance)}
+  </span></p></li>
+</ul></li>
+<li><p>Understanding these distances prepares us to understand the
+precise statement that <strong>making <span
+class="math inline">(x)</span> sufficiently close to <span
+class="math inline">(c)</span> makes <span
+class="math inline">(f(x))</span> sufficiently close to <span
+class="math inline">(L)</span></strong>.</p></li>
+</ul>
+<h3 id="connection-to-limits-2">Connection to Limits</h3>
+<ul>
+<li>The entire purpose of this section is to prepare us for the language
+of the limit:</li>
+</ul>
+<p><span class="math display">
+0&lt;|x-c|&lt;\delta
+\quad\Longrightarrow\quad
+|f(x)-L|&lt;\varepsilon
+</span></p>
+<ul>
+<li><p>In words, <q><strong>If (x) is sufficiently close to (c), but not
+equal to (c), then (f(x)) is sufficiently close to
+(L).</strong></q></p></li>
+<li><p>Thus, this objective forms the <strong>bridge between the
+elementary concepts of intervals, inequalities, and distance and the
+formal mathematical definition of a limit</strong>.</p></li>
+</ul>
+<h1 id="objective-1-intervals-and-inequalities">Objective 1: Intervals
+and Inequalities</h1>
+<h2 id="the-real-number-line">The Real Number Line</h2>
+<ul>
+<li>The real number line gives us a way to represent every real number
+as a point.</li>
+</ul>
+<div style="text-align: center;">
+<p><img src="../images/0501.png" style="width: 1573px; border-radius: 12px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 1.</strong> The real number line.</span></p>
+</div>
+<ul>
+<li><p>Moving to the right means numbers become larger.</p></li>
+<li><p>Moving to the left means numbers become smaller.</p></li>
+<li><p>For example, <span class="math inline">-2 \lt 3</span> because
+<span class="math inline">-2</span> lies to the left of <span
+class="math inline">3</span>.</p></li>
+</ul>
+<h2 id="inequalities">Inequalities</h2>
+<ul>
+<li><p>An inequality compares two quantities.</p></li>
+<li><p>The four basic symbols are:</p>
+<ol type="1">
+<li><p><span
+class="math inline">\lt\;\;\;\Longrightarrow\;\;\;</span>Less then
+symbol</p></li>
+<li><p><span
+class="math inline">\gt\;\;\;\Longrightarrow\;\;\;</span>Greater then
+symbol</p></li>
+<li><p><span
+class="math inline">\leq\;\;\;\Longrightarrow\;\;\;</span>Less than or
+equal to symbol</p></li>
+<li><p><span
+class="math inline">\geq\;\;\;\Longrightarrow\;\;\;</span>Greater than
+or equal to symbol</p></li>
+</ol></li>
+<li><p>For example, <span class="math inline">x \lt 4</span> means <span
+class="math inline">x</span> is somewhere to the left of <span
+class="math inline">4</span>.</p></li>
+<li><p>Similarly, <span class="math inline">x \gt 4</span> means <span
+class="math inline">x</span> is somewhere to the right of <span
+class="math inline">4</span>.</p></li>
+</ul>
+<h2 id="open-and-closed-endpoints">Open and Closed Endpoints</h2>
+<ul>
+<li><p>Consider <span class="math inline">x&lt;4</span>.</p></li>
+<li><p>The number <span class="math inline">4</span> is not
+included.</p></li>
+<li><p>We represent this using an open endpoint <span
+class="math inline">\circ</span>.</p></li>
+<li><p>But, <span class="math inline">x \leq 4</span> includes <span
+class="math inline">4</span>, so we use a filled endpoint <span
+class="math inline">\bullet</span>.</p></li>
+</ul>
+<div style="text-align: center;">
+<p><img src="../images/0502.png" style="width: 1573px; border-radius: 12px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 2.</strong> Open and close end points on number
+line.</span></p>
+</div>
+<ul>
+<li>This distinction will later matter when we discuss open intervals
+around the point <span class="math inline">c</span>.</li>
+</ul>
+<h2 id="intervals">Intervals</h2>
+<ul>
+<li><p>An interval is a set of real numbers between two
+endpoints.</p></li>
+<li><p>For example, <span class="math inline">2 \lt x \lt 5</span> means
+all numbers between <span class="math inline">2</span> and <span
+class="math inline">5</span>.</p></li>
+<li><p>In interval notation <span class="math inline">(2,5)</span>, the
+parentheses mean that <span class="math inline">2</span> and <span
+class="math inline">5</span> are not included.</p></li>
+</ul>
+<div style="text-align: center;">
+<p><img src="../images/0503.png" style="width: 1573px; border-radius: 12px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 3.</strong> Representation of <span
+class="math inline">(2,5)</span> on real number line.</span></p>
+</div>
+<h2 id="important-types-of-intervals">Important Types of Intervals</h2>
+<ul>
+<li><p>Open interval <span class="math inline">a \lt x \lt b</span>
+becomes <span class="math inline">(a,b)</span>.</p></li>
+<li><p>Closed interval <span class="math inline">a \leq x \leq b</span>
+becomes <span class="math inline">[a,b]</span>.</p></li>
+<li><p>Left-closed, right-open <span class="math inline">a \leq x \lt
+b</span> becomes <span class="math inline">[a,b)</span>. ​</p></li>
+<li><p>Left-open, right-closed <span class="math inline">a \lt x \leq
+b</span> becomes <span class="math inline">(a,b]</span>.</p></li>
+</ul>
+<h2 id="intervals-extending-to-infinity">Intervals Extending to
+Infinity</h2>
+<ul>
+<li><p>For <span class="math inline">x \gt 3</span>, we write <span
+class="math inline">(3,\infty)</span>.</p></li>
+<li><p>For <span class="math inline">x \leq 3</span>, we write <span
+class="math inline">(−\infty,3]</span>.</p></li>
+<li><p>Remember that <span class="math inline">\infty</span> is not a
+real number, so we always use a parenthesis with infinity.</p></li>
+</ul>
+<h2 class="green" id="example-1">Example 1</h2>
+<p>Write <span class="math inline">−2 \lt x \lt 4</span> in interval
+notation.</p>
+<h2 class="green" id="solution">Solution</h2>
+<p>The endpoints are both excluded. Therefore, <span
+class="math inline">\boxed{x \in (−2,4)}</span></p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="green" id="example-2">Example 2</h2>
+<p>Write <span class="math inline">[−3,5)</span> as an inequality.</p>
+<h2 class="green" id="solution-1">Solution</h2>
+<p>The square bracket at −3 means included, so</p>
+<p><span class="math display">
+x \geq −3
+</span></p>
+<p>The parenthesis at 5 means excluded, so</p>
+<p><span class="math display">
+x \lt 5
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+\boxed{−3 \leq x \lt 5}
+</span></p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="green" id="example-3">Example 3</h2>
+<p>Solve</p>
+<p><span class="math display">
+3x−2 \lt 10
+</span></p>
+<h2 class="green" id="solution-2">Solution</h2>
+<p>Adding <span class="math inline">2</span> to both sides, we get</p>
+<p><span class="math display">
+3x \lt 12
+</span></p>
+<p>Dividing both sides of above inequality by <span
+class="math inline">3</span>, we get</p>
+<p><span class="math display">
+x \lt 4
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+\boxed{x\in(−\infty,4)}
+</span> ​</p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="green" id="example-4">Example 4</h2>
+<p>Solve</p>
+<p><span class="math display">
+−2x+3 \lt 7
+</span></p>
+<h2 class="green" id="solution-3">Solution</h2>
+<p>Subtracting <span class="math inline">3</span> from both sides of the
+given inequality, we get</p>
+<p><span class="math display">
+−2x \lt 4
+</span></p>
+<p>Dividing both sides of above inequality by <span
+class="math inline">−2</span>, we get</p>
+<p><span class="math display">
+x \gt -2
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+\boxed{x \in (−2,\infty)}
+</span> ​</p>
+<h3 class="red" id="important-note">Important Note</h3>
+<p>Multiplication or division by a negative number reverses the
+inequality.</p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="green" id="example-5">Example 5</h2>
+<p>Solve</p>
+<p><span class="math display">
+2 \lt 3x−1 \lt 8
+</span></p>
+<h2 class="green" id="solution-4">Solution</h2>
+<p>Adding <span class="math inline">1</span> to all three parts of the
+above inequality, we get</p>
+<p><span class="math display">
+3 \lt 3x \lt 9
+</span></p>
+<p>Dividing all parts of above inequality by <span
+class="math inline">3</span>, we get</p>
+<p><span class="math display">
+1 \lt x \lt 3
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+\boxed{x \in (1,3)}
+</span> ​</p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="quick-check">Quick Check</h1>
+<h2 class="red" id="question-no.-1">Question No. 1</h2>
+<p>Express the inequality</p>
+<p><span class="math display">
+−4 \leq x \lt 3
+</span></p>
+<p>in interval notation.</p>
+<h2 class="red" id="question-no.-2">Question No. 2</h2>
+<p>Solve</p>
+<p><span class="math display">
+−3x+6 \geq 12
+</span></p>
+<p>and express your answer in interval notation.</p>
+<div class="question-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="objective-2-absolute-value-as-distance">Objective 2: Absolute
+Value as Distance</h1>
+<ul>
+<li><p>Now we move from order to distance.</p></li>
+<li><p>This is where the material becomes directly connected to
+limits.</p></li>
+</ul>
+<h2 id="what-is-absolute-value">What Is Absolute Value?</h2>
+<ul>
+<li><p>The <strong>absolute value of a number</strong> is its
+<strong>distance from zero</strong>.</p></li>
+<li><p>For example, <span class="math inline">∣5∣=5</span> because <span
+class="math inline">5</span> is <span class="math inline">5</span> units
+from zero.</p></li>
+<li><p>Also, <span class="math inline">∣−5∣=5</span> because <span
+class="math inline">−5</span> is also <span class="math inline">5</span>
+units from zero.</p></li>
+</ul>
+<div style="text-align: center;">
+<p><img src="../images/0504.png" style="width: 1600px; border-radius: 12px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 4.</strong> Absolute value as distance from
+<span class="math inline">0</span>.</span></p>
+</div>
+<p>Therefore,</p>
+<p><span class="math display">
+∣x∣ \geq 0
+</span> ​</p>
+<h2 id="absolute-value-as-distance-between-two-numbers">Absolute Value
+as Distance Between Two Numbers</h2>
+<ul>
+<li><p>The distance between x and c is <span
+class="math inline">∣x−c∣</span>.</p></li>
+<li><p>For example, the distance between <span
+class="math inline">x=3</span> and <span class="math inline">c=7</span>
+is</p></li>
+</ul>
+<p><span class="math display">
+∣3−7|=∣−4∣=4=|7-3|
+</span></p>
+<p>The distance between <span class="math inline">x=9</span> and <span
+class="math inline">c=7</span> is</p>
+<p><span class="math display">
+∣9−7∣=2=|7-9|
+</span></p>
+<p>Thus,</p>
+<p><span class="math display">
+∣x−c∣= \text{distance from } x \text{ to } c
+</span> ​</p>
+<ul>
+<li>This interpretation is much more important for limits than simply
+memorizing the definition of absolute value.</li>
+</ul>
+<h2 id="absolute-value-equations">Absolute-Value Equations</h2>
+<ul>
+<li><p>Consider <span class="math inline">∣x∣=3</span>.</p></li>
+<li><p>Which numbers are exactly 3 units from zero?</p></li>
+<li><p>The numbers <span class="math inline">x=3</span> and <span
+class="math inline">x=−3</span> are exactly 3 units from zero.</p></li>
+<li><p>Therefore,</p></li>
+</ul>
+<p><span class="math display">
+\boxed{∣x∣=3 \iff x=\pm3}
+</span> ​</p>
+<h2 class="green" id="example-6">Example 6</h2>
+<p>Solve</p>
+<p><span class="math display">
+∣x−4∣=2
+</span></p>
+<h2 class="green" id="solution-5">Solution</h2>
+<p>The equality <span class="math inline">|x-4|=2</span> means <span
+class="math inline">x</span> is exactly <span
+class="math inline">2</span> units from <span
+class="math inline">4</span>.</p>
+<p>Therefore,</p>
+<p><span class="math display">
+x−4=2
+\qquad
+\text{or}
+\qquad
+x−4=−2
+</span></p>
+<p>Thus,</p>
+<p><span class="math display">
+x=6
+\qquad
+\text{or}
+\qquad
+x=2
+</span></p>
+<p>Hence,</p>
+<p><span class="math display">
+\boxed{x=2,6}
+</span> ​</p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 id="absolute-value-inequalities">Absolute-Value Inequalities</h2>
+<ul>
+<li>Now consider</li>
+</ul>
+<p><span class="math display">
+∣x∣ \lt 3
+</span></p>
+<ul>
+<li><p>This means the distance of <span class="math inline">x</span>
+from zero is less than 3.</p></li>
+<li><p>Therefore <span class="math inline">x</span> must lie between
+<span class="math inline">−3</span> and <span
+class="math inline">3</span>, <em>i.e.,</em></p></li>
+</ul>
+<p><span class="math display">
+−3 \lt x \lt 3
+</span> ​</p>
+<ul>
+<li>Thus,</li>
+</ul>
+<p><span class="math display">
+∣x∣ \lt 3 \iff −3 \lt x \lt 3
+</span></p>
+<h3 id="fundamental-rule">Fundamental Rule</h3>
+<ul>
+<li>For <span class="math inline">a \gt 0</span></li>
+</ul>
+<p><span class="math display">
+∣x∣ \lt a \iff −a \lt x \lt a
+</span> ​</p>
+<ul>
+<li>More generally,</li>
+</ul>
+<p><span class="math display">
+∣x−c∣ \lt a \iff c−a \lt x \lt c+a
+</span> ​</p>
+<ul>
+<li>This formula is extremely important for limits.</li>
+</ul>
+<h2 class="green" id="example-7">Example 7</h2>
+<p>Solve</p>
+<p><span class="math display">
+∣x−5∣ \lt 2
+</span></p>
+<h2 class="green" id="solution-6">Solution</h2>
+<p>Write the equivalent compound inequality</p>
+<p><span class="math display">
+−2 \lt x−5 \lt 2
+</span></p>
+<p><span class="math display">
+3 \lt x \lt 7
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+\boxed{x \in (3,7)}
+</span></p>
+<h3 class="green" id="logic">Logic</h3>
+<p><span class="math inline">∣x−5∣ \lt 2</span> means <span
+class="math inline">x</span> is within <span
+class="math inline">2</span> units of <span
+class="math inline">5</span>. So the interval is <span
+class="math inline">(5−2,5+2)=(3,7)</span>.</p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 id="absolute-value-greater-than-a-number">Absolute Value Greater
+Than a Number</h2>
+<ul>
+<li><p>Consider <span class="math inline">∣x∣ \gt 3</span>.</p></li>
+<li><p>This means <span class="math inline">x</span> is more than <span
+class="math inline">3</span> units away from zero.</p></li>
+<li><p>Therefore, <span class="math inline">x</span> must be outside the
+interval <span class="math inline">[−3,3]</span>.</p></li>
+<li><p>It means <span class="math inline">x \lt −3</span> or <span
+class="math inline">x \gt 3</span>.</p></li>
+<li><p>Hence,</p></li>
+</ul>
+<p><span class="math display">
+∣x∣ \gt 3 \iff x \lt −3 \text{ or } x \gt 3
+</span> ​</p>
+<ul>
+<li>This is an important contrast and the following key helps to
+remember it.</li>
+</ul>
+<p><span class="math display">
+∣x∣ \lt a \rightarrow \text{Between}
+\qquad
+∣x∣ \gt a \rightarrow \text{Outside}
+</span> ​</p>
+<h2 class="green" id="example-8">Example 8</h2>
+<p>Solve</p>
+<p><span class="math display">
+∣x−2∣ \gt 4
+</span></p>
+<h2 class="green" id="solution-7">Solution</h2>
+<p>We have two possibilities</p>
+<p><span class="math display">
+x−2 \lt −4
+\qquad
+\text{or}
+\qquad
+x−2 \gt 4
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+x \lt −2
+\qquad
+\text{or}
+\qquad
+x \gt 6
+</span></p>
+<p>Hence,</p>
+<p><span class="math display">
+\boxed{x \in (−\infty,−2)∪(6,\infty)}
+</span></p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="green" id="example-9">Example 9</h2>
+<p>Consider</p>
+<p><span class="math display">
+∣2x−8∣ \lt 2
+</span></p>
+<h2 class="green" id="solution-8">Solution</h2>
+<p>We write</p>
+<p><span class="math display">
+−2 \lt 2x−8 \lt 2
+</span></p>
+<p>Adding <span class="math inline">8</span> to all parts of above
+expression</p>
+<p><span class="math display">
+6 \lt 2x \lt 10
+</span></p>
+<p>Dividing all parts of above expression by <span
+class="math inline">2</span></p>
+<p><span class="math display">
+3 \lt x \lt 5
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+\boxed{x \in (3,5)}
+</span> ​</p>
+<p>Or, equivalently,</p>
+<p><span class="math display">
+\boxed{∣x−4∣ \lt 1}
+</span></p>
+<p>This last form is particularly important because it says, <q><span
+class="math inline">x</span> is within <span
+class="math inline">1</span> unit of <span
+class="math inline">4</span></q>. That is precisely the idea needed for
+limits.</p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="quick-check-1">Quick Check</h1>
+<h2 class="red" id="question-1">Question 1</h2>
+<p>Solve</p>
+<p><span class="math display">
+∣x−3∣ \lt 4
+</span></p>
+<h2 class="red" id="question-2">Question 2</h2>
+<p>Solve</p>
+<p><span class="math display">
+∣2x+4∣ \leq 6
+</span></p>
+<div class="question-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="objective-3-from-distance-to-the-language-of-limits">Objective
+3: From Distance to the Language of Limits</h1>
+<ul>
+<li><p>Now we connect everything.</p></li>
+<li><p>This is the most important objective of the lecture.</p></li>
+</ul>
+<h2 id="what-does-close-to-c-mean">What Does “Close to (c)” Mean?</h2>
+<ul>
+<li><p>Suppose we say, <q><span class="math inline">x</span> is close to
+<span class="math inline">c</span></q>.</p></li>
+<li><p>Mathematically, we need to specify how close.</p></li>
+<li><p>Suppose we choose a positive number <span
+class="math inline">\delta</span>, such that</p></li>
+</ul>
+<p><span class="math display">
+|x-c| \lt \delta
+</span></p>
+<ul>
+<li><p>Then <span class="math inline">x</span> is less than <span
+class="math inline">\delta</span> units away from <span
+class="math inline">c</span>.</p></li>
+<li><p>Using our absolute-value rule</p></li>
+</ul>
+<p><span class="math display">
+-\delta \lt x-c \lt \delta
+</span></p>
+<p>Add <span class="math inline">c</span> to all parts.</p>
+<p><span class="math display">
+c-\delta \lt x \lt c+\delta
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+\boxed{|x-c| \lt \delta \iff c-\delta \lt x \lt c+\delta}
+</span></p>
+<p>And in interval notation, we can write</p>
+<p><span class="math display">
+\boxed{|x-c| \lt \delta \iff x \in (c-\delta,c+\delta)}
+</span></p>
+<h2 id="this-is-a-neighborhood-around-c">This Is a Neighborhood Around
+<span class="math inline">c</span></h2>
+<ul>
+<li><p>The interval <span class="math inline">(c-\delta,c+\delta)</span>
+is centered at <span class="math inline">c</span>.</p></li>
+<li><p>Its radius is <span class="math inline">\delta</span>.</p></li>
+<li><p>For example, let</p></li>
+</ul>
+<p><span class="math display">
+c=4,\qquad\delta=1
+</span></p>
+<ul>
+<li><p>Then <span class="math inline">(c-\delta,c+\delta)</span> becomes
+<span class="math inline">(3,5)</span>.</p></li>
+<li><p>Thus,</p></li>
+</ul>
+<p><span class="math display">
+|x-4| \lt 1
+</span></p>
+<ul>
+<li>The above inequality means exactly the same thing as</li>
+</ul>
+<p><span class="math display">
+3 \lt x \lt 5
+</span></p>
+<h2 class="green" id="example-10">Example 10</h2>
+<p>Rewrite</p>
+<p><span class="math display">|x-6| \lt 0.5
+</span></p>
+<p>as an interval.</p>
+<h2 class="green" id="solution-9">Solution</h2>
+<p>Using <span class="math inline">|x-c| \lt \delta \iff c-\delta \lt x
+\lt c+\delta</span>, we get</p>
+<p><span class="math display">
+6-0.5 \lt x \lt 6+0.5
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+\boxed{5.5 \lt x \lt 6.5}
+</span></p>
+<p>Or,</p>
+<p><span class="math display">
+\boxed{x \in (5.5,6.5)}
+</span></p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 id="what-does-approaching-c-mean">What Does “Approaching <span
+class="math inline">c</span>” Mean?</h2>
+<ul>
+<li><p>When we write <span class="math inline">x\to c</span>$, we mean
+that <span class="math inline">x</span> gets closer and closer to <span
+class="math inline">c</span>.</p></li>
+<li><p>But in a limit, <span class="math inline">x</span> is not
+required to equal <span class="math inline">c</span>.</p></li>
+<li><p>Therefore we use</p></li>
+</ul>
+<p><span class="math display">
+0 \lt |x-c| \lt \delta
+</span></p>
+<ul>
+<li><p>The condition <span class="math inline">|x-c| \lt \delta</span>
+puts <span class="math inline">x</span> inside the
+neighborhood.</p></li>
+<li><p>The condition <span class="math inline">0 \lt |x-c|</span>
+removes the point <span class="math inline">x=c</span>.</p></li>
+<li><p>Thus, <span class="math inline">0 \lt |x-c| \lt \delta</span>
+means, <span class="math inline">x</span> is within <span
+class="math inline">\delta</span> units of <span
+class="math inline">c</span>, but <span class="math inline">x\ne
+c</span>.</p></li>
+</ul>
+<h2 id="deleted-neighborhood">Deleted Neighborhood</h2>
+<ul>
+<li><p>The interval <span class="math inline">(c-\delta,c+\delta)</span>
+contains <span class="math inline">c</span>.</p></li>
+<li><p>But <span class="math inline">0 \lt |x-c| \lt \delta</span>
+excludes <span class="math inline">c</span>.</p></li>
+<li><p>Therefore, <span
+class="math inline">(c-\delta,c)\cup(c,c+\delta)</span> is the
+corresponding deleted neighborhood.</p></li>
+<li><p>This distinction is important because the definition of a limit
+specifically uses the following expression</p></li>
+</ul>
+<p><span class="math display">
+0 \lt |x-c| \lt \delta
+</span></p>
+<ul>
+<li>The PDF emphasizes that the value of <span
+class="math inline">f(c)</span> itself does not influence the existence
+of the limit.</li>
+</ul>
+<h2 id="one-sided-neighborhoods">One-Sided Neighborhoods</h2>
+<ul>
+<li><p>Sometimes we approach <span class="math inline">c</span> only
+from one side.</p></li>
+<li><p>From the right</p></li>
+</ul>
+<p><span class="math display">
+x \gt c
+</span></p>
+<ul>
+<li>Within <span class="math inline">\delta</span> units</li>
+</ul>
+<p><span class="math display">
+c&lt;x&lt;c+\delta
+</span></p>
+<ul>
+<li>From the left</li>
+</ul>
+<p><span class="math display">
+x \lt c
+</span></p>
+<ul>
+<li>Within <span class="math inline">\delta</span> units</li>
+</ul>
+<p><span class="math display">
+c-\delta \lt x \lt c
+</span></p>
+<ul>
+<li>These are the interval structures that appear later in the PDF’s
+definitions of right-hand and left-hand limits.</li>
+</ul>
+<h2 class="green" id="example-11">Example 11</h2>
+<p>Let</p>
+<p><span class="math display">
+c=3,\qquad\delta=0.2
+</span></p>
+<p>Describe the points within <span class="math inline">0.2</span> units
+of <span class="math inline">3</span>, from the right.</p>
+<h2 class="green" id="solution-10">Solution</h2>
+<p>We need</p>
+<p><span class="math display">
+3 \lt x \lt 3.2
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+x \in (3,3.2)
+</span></p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="green" id="example-12">Example 12</h2>
+<p>Let</p>
+<p><span class="math display">
+c=3,\qquad\delta=0.2
+</span></p>
+<p>Describe the points within <span class="math inline">0.2</span> units
+of <span class="math inline">3</span>, from the left.</p>
+<h2 class="green" id="solution-11">Solution</h2>
+<p>We need</p>
+<p><span class="math display">
+2.8 \lt x \lt 3
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+x \in (2.8,3)
+</span></p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 id="from-output-distance-to-input-distance">From Output Distance to
+Input Distance</h2>
+<ul>
+<li><p>Now we reach the exact idea that motivates the precise definition
+of a limit.</p></li>
+<li><p>Suppose</p></li>
+</ul>
+<p><span class="math display">
+f(x)=2x-1
+</span></p>
+<ul>
+<li><p>We want <span class="math inline">f(x)</span> to be within <span
+class="math inline">2</span> units of <span
+class="math inline">7</span>.</p></li>
+<li><p>We write <span class="math inline">|f(x)-7| \lt
+2</span>.</p></li>
+<li><p>Substitution of <span class="math inline">f(x)</span> in the
+above inequality gives</p></li>
+</ul>
+<p><span class="math display">
+|2x-1-7| \lt 2
+</span></p>
+<ul>
+<li>Thus,</li>
+</ul>
+<p><span class="math display">
+|2x-8| \lt 2
+</span></p>
+<ul>
+<li><p>From Objective 2, <span class="math inline">3 \lt x \lt
+5</span>.</p></li>
+<li><p>So we have discovered</p></li>
+</ul>
+<p><span class="math display">
+|f(x)-7| \lt 2 \quad\text{whenever}\quad 3 \lt x \lt 5
+</span></p>
+<ul>
+<li>Since <span class="math inline">3 \lt x \lt 5</span> is equivalent
+to <span class="math inline">|x-4| \lt 1</span>, so we can write</li>
+</ul>
+<p><span class="math display">
+|f(x)-7| \lt 2 \quad\text{whenever}\quad |x-4| \lt 1
+</span></p>
+<ul>
+<li>This reasoning will be used in solving limits.</li>
+</ul>
+<h2 id="the-two-types-of-closeness">The Two Types of Closeness</h2>
+<ul>
+<li>This gives us two different distances.</li>
+</ul>
+<h3 id="input-distance">Input distance</h3>
+<ul>
+<li>The distance <span class="math inline">|x-c|</span> measures how far
+<span class="math inline">x</span> is from <span
+class="math inline">c</span>.</li>
+</ul>
+<h3 id="output-distance">Output distance</h3>
+<ul>
+<li><p>The distance <span class="math inline">|f(x)-L|</span> measures
+how far <span class="math inline">f(x)</span> is from <span
+class="math inline">L</span>.</p></li>
+<li><p>For a limit, <span class="math inline">x \to c</span> means we
+control <span class="math inline">|x-c|</span>.</p></li>
+<li><p>And we want this to force <span
+class="math inline">|f(x)-L|</span> to become small.</p></li>
+</ul>
+<h2 id="the-language-we-are-preparing-for">The Language We Are Preparing
+For</h2>
+<ul>
+<li>The precise definition of a limit says</li>
+</ul>
+<p><span class="math display">
+|f(x)-L| \lt \epsilon \quad\text{whenever}\quad 0 \lt |x-c| \lt \delta
+</span></p>
+<ul>
+<li><p>We are not proving this definition yet.</p></li>
+<li><p>We are simply understanding its language.</p></li>
+<li><p>The expression <span class="math inline">0 \lt |x-c| \lt
+\delta</span> means <span class="math inline">x</span> is close to <span
+class="math inline">c</span>, but <span class="math inline">x \ne
+c</span>.</p></li>
+<li><p>The expression <span class="math inline">|f(x)-L| \lt
+\epsilon</span> means <span class="math inline">f(x)</span> is close to
+<span class="math inline">L</span>.</p></li>
+<li><p>The PDF introduces exactly this definition after motivating the
+need to replace the vague phrase “gets arbitrarily close” with precise
+conditions.</p></li>
+</ul>
+<h2 class="green" id="example-13">Example 13</h2>
+<p>Suppose</p>
+<p><span class="math display">
+|x-5| \lt 0.1
+</span></p>
+<p>What interval contains <span class="math inline">x</span>?</p>
+<h2 class="green" id="solution-12">Solution</h2>
+<p>Using <span class="math inline">|x-c| \lt \delta \iff c-\delta \lt x
+\lt c+\delta</span>, we have <span class="math inline">5-0.1 \lt x \lt
+5+0.1</span>.</p>
+<p>Therefore,</p>
+<p><span class="math display">
+\boxed{4.9 \lt x \lt 5.1}
+</span></p>
+<p>Or,</p>
+<p><span class="math display">
+\boxed{x \in (4.9,5.1)}
+</span></p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="green" id="example-14">Example 14</h2>
+<p>Suppose</p>
+<p><span class="math display">
+0 \lt |x-5| \lt 0.1
+</span></p>
+<p>Find the interval in which <span class="math inline">x</span>
+exists.</p>
+<h2 class="green" id="solution-13">Solution</h2>
+<p>Then</p>
+<p><span class="math display">
+4.9 \lt x \lt 5.1
+</span></p>
+<p>but</p>
+<p><span class="math display">
+x \ne 5
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+\boxed{x \in (4.9,5)\cup(5,5.1)}
+</span></p>
+<h3 class="red" id="important-note-1">Important Note</h3>
+<p>This is exactly the type of input restriction used in the precise
+definition of a limit.</p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="green" id="example-15">Example 15</h2>
+<p>Suppose <span class="math inline">x</span> must remain inside <span
+class="math inline">(2,10)</span> and we want a symmetric interval
+around <span class="math inline">5</span></p>
+<p><span class="math display">
+(5-\delta,5+\delta)
+</span></p>
+<p>How large can <span class="math inline">\delta</span> be?</p>
+<h2 class="green" id="solution-14">Solution</h2>
+<p>Distance from <span class="math inline">5</span> to the left
+endpoint</p>
+<p><span class="math display">
+5-2=3
+</span></p>
+<p>Distance from <span class="math inline">5</span> to the right
+endpoint</p>
+<p><span class="math display">
+10-5=5
+</span></p>
+<p>The nearer endpoint is <span class="math inline">2</span>.</p>
+<p>Therefore,</p>
+<p><span class="math display">
+\boxed{\delta=3}
+</span></p>
+<p>This is the largest possible symmetric radius.</p>
+<p>Then</p>
+<p><span class="math display">
+(5-3,5+3)=(2,8)
+</span></p>
+<p>Thus,</p>
+<p><span class="math display">
+(2,8)\subset(2,10)
+</span></p>
+<h3 class="red" id="important-note-2">Important Note</h3>
+<p>This idea will also be used in limits.</p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="quick-check-2">Quick Check</h1>
+<h2 class="red" id="question-1-1">Question 1</h2>
+<p>Rewrite</p>
+<p><span class="math display">
+|x-4| \lt 0.2
+</span></p>
+<p>as an interval.</p>
+<h2 class="red" id="question-2-1">Question 2</h2>
+<p>If</p>
+<p><span class="math display">
+0 \lt |x-3| \lt 0.5
+</span></p>
+<p>Describe the corresponding interval(s) for <span
+class="math inline">x</span>.</p>
+<div class="question-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="summary">Summary</h1>
+<ul>
+<li><p>Today we built the mathematical language needed for
+limits.</p></li>
+<li><p>We learned how to describe regions of the real number
+line</p></li>
+</ul>
+<p><span class="math display">
+\boxed{a \lt x \lt b \iff x \in (a,b)}
+</span></p>
+<ul>
+<li><p>We also learned how to solve inequalities and remember,
+<q>multiplying or dividing by a negative reverses the
+inequality</q>.</p></li>
+<li><p>The most important interpretation is</p></li>
+</ul>
+<p><span class="math display">
+\boxed{|x-c|=\text{distance between }x\text{ and }c}
+</span></p>
+<ul>
+<li><p>Therefore, <span class="math inline">|x-c| \lt a</span> means
+that <span class="math inline">x</span> lies within <span
+class="math inline">a</span> units of <span
+class="math inline">c</span>.</p></li>
+<li><p>Equivalently,</p></li>
+</ul>
+<p><span class="math display">
+\boxed{|x-c| \lt a \iff c-a \lt x \lt c+a}
+</span></p>
+<ul>
+<li>We learned the crucial translation</li>
+</ul>
+<p><span class="math display">
+\boxed{|x-c| \lt \delta \iff c-\delta \lt x \lt c+\delta}
+</span></p>
+<ul>
+<li>Therefore</li>
+</ul>
+<p><span class="math display">
+\boxed{|x-c| \lt \delta \iff x\in(c-\delta,c+\delta)}
+</span></p>
+<ul>
+<li>If <span class="math inline">x=c</span> is excluded <span
+class="math inline">0 \lt |x-c| \lt \delta</span> means</li>
+</ul>
+<p><span class="math display">
+\boxed{ x\in(c-\delta,c)\cup(c,c+\delta)}
+</span></p>
+<ul>
+<li>Finally, we can now understand the basic language behind the precise
+definition of a limit</li>
+</ul>
+<p><span class="math display">
+\boxed{ 0 \lt |x-c| \lt \delta \quad\Longrightarrow\quad |f(x)-L| \lt
+\epsilon }
+</span></p>
+<ul>
+<li><p>In words,</p></li>
+<li><p>If <span class="math inline">x</span> is sufficiently close to
+<span class="math inline">c</span>, but not equal to <span
+class="math inline">c</span>, then <span class="math inline">f(x)</span>
+is as close to <span class="math inline">L</span> as we want.</p></li>
+<li><p>That is why intervals, inequalities, and absolute values are the
+essential prerequisites for understanding the precise definition of a
+limit.</p></li>
+</ul>
+<h1 id="exercises">Exercises</h1>
+<h2 class="red" id="important-note-the-lucky-day">Important Note: The
+Lucky Day</h2>
+<p>This is your lucky day, we don’t have exercises. But, you need to
+solve all the examples with their logical understanding. If you
+understand limits, you will be able to understand continuity. And, if
+you understand continuity, you will be able to understand logical
+understanding of the derivatives.</p>
+</body>
+</html>
