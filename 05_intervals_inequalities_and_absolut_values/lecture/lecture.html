@@ -60,207 +60,277 @@ equations and inequalities.</p></li>
 understand the language of limits.</p></li>
 </ol>
 <h1 id="the-why-section">The Why Section</h1>
+<ul>
+<li><p>Before studying limits, we need to understand three basic
+ideas:</p>
+<ol type="1">
+<li><strong>where a number is located,</strong></li>
+<li><strong>how far one number is from another, and</strong></li>
+<li><strong>how to describe “getting close” to a number
+precisely.</strong></li>
+</ol></li>
+<li><p>These three ideas form a natural progression toward the concept
+of a limit.</p></li>
+</ul>
 <h2 id="objective-1-why-study-intervals-and-inequalities">Objective 1:
 Why Study Intervals and Inequalities?</h2>
 <ul>
-<li><p>Before studying <strong>limits</strong>, we need a precise
-language for describing <strong>where a variable can be and how close it
-can get to a particular number</strong>.</p></li>
-<li><p>Intervals and inequalities provide this language.</p></li>
-<li><p>We study these concepts because they allow us to:</p>
-<ul>
-<li><p><strong>Describe the location of numbers on the real number
-line</strong></p>
-<ul>
-<li><p>Inequalities and intervals help us clearly identify regions such
-as <span class="math inline">(x&lt;4)</span>, <span
-class="math inline">(x&gt;2)</span>, or <span
-class="math inline">(2&lt;x&lt;5)</span>.</p></li>
-<li><p>This is essential for describing the values of (x) near a
-point.</p></li>
-</ul></li>
-<li><p><strong>Express whether endpoints are included or
-excluded</strong></p>
-<ul>
-<li><p>The distinction between <span class="math inline">(&lt;)</span>
-and <span class="math inline">(\leq)</span>, and between parentheses
-<span class="math inline">((,))</span> and brackets <span
-class="math inline">([,])</span>, becomes crucial when discussing
-<strong>open intervals around a number</strong>.</p></li>
-<li><p>Limits frequently consider values <em>near</em> <span
-class="math inline">(c)</span> without necessarily allowing <span
-class="math inline">(x=c)</span>.</p></li>
-</ul></li>
-<li><p><strong>Describe the domain and conditions under which functions
-are studied</strong></p>
-<ul>
-<li><p>Many functions are defined only on certain intervals or under
-certain inequalities.</p></li>
-<li><p>Being able to translate between inequalities, interval notation,
-and the number line prepares us to describe <strong>domains,
-neighborhoods, and the values of <span class="math inline">(x)</span>
-used in limits</strong>.</p></li>
-</ul></li>
-</ul></li>
+<li><p>At this stage, we are learning how to <strong>describe the
+location of numbers</strong> on the real number line.</p></li>
+<li><p>But why is this important for limits?</p></li>
+<li><p>When we study a limit, we are interested in what happens when the
+input <span class="math inline">x</span> is <strong>near a particular
+number <span class="math inline">c</span></strong>.</p></li>
+<li><p>Therefore, we must be able to describe precisely <strong>which
+values of <span class="math inline">x</span> are
+allowed</strong>.</p></li>
+<li><p>For example, the following inequality tells us that <span
+class="math inline">x</span> lies between <span
+class="math inline">2</span> and <span
+class="math inline">5</span>.</p></li>
 </ul>
-<h3 id="connection-to-limits">Connection to Limits</h3>
+<p><span class="math display">
+2&lt;x&lt;5
+</span></p>
 <ul>
-<li><p>The central idea we will soon need is:</p>
+<li>In interval notation,</li>
+</ul>
+<p><span class="math display">
+x\in(2,5).
+</span></p>
 <ul>
-<li><strong>A limit studies what happens to <span
-class="math inline">(f(x))</span> when <span
-class="math inline">(x)</span> gets close to a particular number <span
-class="math inline">(c)</span>.</strong></li>
-</ul></li>
-<li><p>To say that <span class="math inline">(x)</span> is <strong>close
-to <span class="math inline">(c)</span></strong>, we need intervals and
-inequalities such as the following two statement.</p></li>
+<li>Similarly, the following inequality describes all the values of
+<span class="math inline">x</span> lying in an interval around <span
+class="math inline">c</span>.</li>
 </ul>
 <p><span class="math display">
 c-\delta&lt;x&lt;c+\delta
 </span></p>
-<p><span class="math display">
-x\in(c-\delta,c+\delta).
-</span></p>
 <ul>
-<li>Thus, <strong>intervals and inequalities are the mathematical
-language that allows us to describe “close to” precisely</strong>—one of
-the fundamental ideas behind limits.</li>
+<li><p>Therefore, we study intervals and inequalities because they allow
+us to:</p>
+<ul>
+<li><strong>describe regions of the real number line;</strong></li>
+<li><strong>specify which values are included or excluded;</strong></li>
+<li><strong>describe the set of possible values of <span
+class="math inline">x</span>;</strong></li>
+<li><strong>describe the values of <span class="math inline">x</span>
+lying near a particular number.</strong></li>
+</ul></li>
+<li><p>This last idea is especially important.</p></li>
+<li><p>Later, when we say that <span class="math inline">x</span> is
+<strong>close to <span class="math inline">c</span></strong>, we will
+need a precise way to describe the corresponding interval of values of
+<span class="math inline">x</span>.</p></li>
+<li><p>So, the purpose of this objective is to learn how to describe
+where <span class="math inline">x</span> can be and to identify the
+interval of values near a particular number.</p></li>
 </ul>
 <h2 id="objective-2-why-study-absolute-value-as-distance">Objective 2:
 Why Study Absolute Value as Distance?</h2>
 <ul>
-<li><p>After learning how <strong>inequalities and intervals describe
-the position of numbers</strong>, we now need a way to describe
-<strong>how far one number is from another</strong>.</p></li>
-<li><p>Absolute value provides exactly this idea and creates a direct
-bridge to limits.</p></li>
-<li><p>We study absolute value because we need to:</p>
-<ul>
-<li><p><strong>Measure the distance between two numbers</strong></p>
-<ul>
-<li><p>The expression <span class="math inline">|x-c|</span> represents
-the distance between <span class="math inline">(x)</span> and <span
-class="math inline">(c)</span>.</p></li>
-<li><p>This gives us a precise mathematical meaning for phrases such as
-<strong>“close to <span class="math inline">(c)</span>”</strong> or
-<strong>“within a certain distance of <span
-class="math inline">(c)</span>”</strong>.</p></li>
-</ul></li>
-<li><p><strong>Describe numbers near a particular point</strong></p>
-<ul>
-<li>Expressions such as <span class="math inline">|x-c| \lt a</span>
-tell us that <span class="math inline">(x)</span> lies within <span
-class="math inline">(a)</span> units of <span
-class="math inline">(c)</span> and mathematically</li>
+<li><p>Intervals and inequalities tell us <strong>where a number
+is</strong>.</p></li>
+<li><p>But they do not directly tell us <strong>how far one number is
+from another</strong>.</p></li>
+<li><p>For example, if we want to describe how far <span
+class="math inline">x</span> is from <span class="math inline">c</span>,
+we need a mathematical measure of distance.</p></li>
+<li><p>That is exactly what absolute value provides:</p></li>
 </ul>
 <p><span class="math display">
-  c-a&lt;x&lt;c+a.
-  </span></p>
+|x-c|=\text{distance between }x\text{ and }c.
+</span></p>
 <ul>
-<li>This is exactly the language we will use when discussing values of
-<span class="math inline">(x)</span> <strong>approaching a
-number</strong>.</li>
-</ul></li>
-<li><p><strong>Build the foundation for the precise definition of a
-limit</strong></p>
-<ul>
-<li><p>The concept of a limit depends on controlling the distance
-between <span class="math inline">(x)</span> and <span
-class="math inline">(c)</span>, and later between <span
-class="math inline">(f(x))</span> and <span
-class="math inline">(L)</span>.</p></li>
-<li><p>The expressions <span class="math inline">|x-c| \lt \delta,
-|f(x)-L| \lt \varepsilon</span> are at the heart of the formal
-definition of a limit.</p></li>
-</ul></li>
-</ul></li>
+<li>For example, the following absolute value equality means that <span
+class="math inline">7</span> and <span class="math inline">3</span> are
+<span class="math inline">4</span> units apart.</li>
 </ul>
-<h3 id="connection-to-limits-1">Connection to Limits</h3>
-<ul>
-<li><p>The key idea we are preparing for is:</p>
-<ul>
-<li><p><strong>A limit asks what happens to <span
-class="math inline">(f(x))</span> when <span
-class="math inline">(x)</span> gets arbitrarily close to <span
-class="math inline">(c)</span>.</strong></p></li>
-<li><p>The phrase <strong>“<span class="math inline">(x)</span> gets
-close to <span class="math inline">(c)</span>”</strong> can be expressed
-precisely as</p>
 <p><span class="math display">
-  |x-c|&lt;\delta
-  </span></p></li>
-</ul></li>
-<li><p>Therefore, understanding <strong>absolute value as
-distance</strong> is not merely an algebraic technique—it gives us the
-mathematical language needed to make the intuitive idea of
-<strong>closeness</strong> precise in calculus.</p></li>
+|7-3|=4
+</span></p>
+<ul>
+<li><p>This interpretation becomes particularly useful when we want to
+express statements such as “<span class="math inline">x</span> is within
+<span class="math inline">2</span> units of <span
+class="math inline">c</span>.”</p></li>
+<li><p>Mathematically, we can write</p></li>
+</ul>
+<p><span class="math display">
+|x-c|&lt;2
+</span></p>
+<ul>
+<li>Using the properties of absolute-value inequalities, this can be
+rewritten as</li>
+</ul>
+<p><span class="math display">
+c-2&lt;x&lt;c+2
+</span></p>
+<ul>
+<li>Thus, absolute value allows us to translate between two equivalent
+ways of describing closeness:</li>
+</ul>
+<p><span class="math display">
+\boxed{|x-c|&lt;a}
+\qquad
+\text{and}
+\qquad
+\boxed{c-a&lt;x&lt;c+a}
+</span></p>
+<ul>
+<li><p>This is important for limits because a limit is concerned with
+what happens when <span class="math inline">x</span> gets <strong>closer
+and closer</strong> to a particular number.</p></li>
+<li><p>Therefore, we study absolute value as distance because it gives
+us a mathematical way to <strong>measure and describe
+closeness</strong>.</p></li>
+<li><p>So, the purpose of this objective is to learn how to measure the
+distance between <span class="math inline">x</span> and <span
+class="math inline">c</span>, so that we can describe precisely what it
+means for <span class="math inline">x</span> to be close to <span
+class="math inline">c</span>.</p></li>
 </ul>
 <h2
 id="objective-3-why-study-from-distance-to-the-language-of-limits">Objective
 3: Why Study “From Distance to the Language of Limits”?</h2>
 <ul>
-<li><p>We study distance as the language of limits because:</p>
-<ul>
-<li><p><strong>Make the idea of “closeness” precise</strong></p>
-<ul>
-<li><p>In everyday language, “close to <span
-class="math inline">(c)</span>” is vague.</p></li>
-<li><p>The expression <span class="math inline">|x-c| \lt \delta</span>
-gives a precise mathematical meaning: <span
-class="math inline">(x)</span> is less than <span
-class="math inline">(\delta)</span> units away from <span
-class="math inline">(c)</span>.</p></li>
-<li><p>This allows us to replace informal descriptions with exact
-conditions.</p></li>
-</ul></li>
-<li><p><strong>Understand what “approaching” means in a
-limit</strong></p>
-<ul>
-<li><p>When we write <span class="math inline">x\to c</span>, <span
-class="math inline">(x)</span> gets closer and closer to <span
-class="math inline">(c)</span>, but <span class="math inline">(x)</span>
-does not have to equal <span class="math inline">(c)</span>.</p></li>
-<li><p>The condition <span class="math inline">0 \lt |x-c| \lt
-\delta</span> captures this idea precisely and introduces the concept of
-a <strong>deleted neighborhood</strong>.</p></li>
-</ul></li>
-<li><p><strong>Build the foundation for the formal definition of a
-limit</strong></p>
-<ul>
-<li>A limit connects two kinds of closeness:</li>
+<li><p>Now we have two important ideas.</p></li>
+<li><p>From <strong>Objective 1</strong>, we know how to describe a
+region of values using intervals and inequalities.</p></li>
+<li><p>From <strong>Objective 2</strong>, we know how to describe
+distance using absolute value.</p></li>
+<li><p>The next question is how can we use these ideas to express what
+we mean when we say that <span class="math inline">x</span> approaches
+<span class="math inline">c</span>?</p></li>
+<li><p>In ordinary language, saying “<span class="math inline">x</span>
+gets close to <span class="math inline">c</span>” is not precise. How
+close is “close”?</p></li>
+<li><p>We can make the statement precise by introducing a positive
+distance <span class="math inline">\delta</span>:</p></li>
 </ul>
 <p><span class="math display">
-  |x-c| \to \text{(input distance)}
-  </span></p>
-<p><span class="math display">
-  |f(x)-L| \to \text{(output distance)}
-  </span></p></li>
-</ul></li>
-<li><p>Understanding these distances prepares us to understand the
-precise statement that <strong>making <span
-class="math inline">(x)</span> sufficiently close to <span
-class="math inline">(c)</span> makes <span
-class="math inline">(f(x))</span> sufficiently close to <span
-class="math inline">(L)</span></strong>.</p></li>
-</ul>
-<h3 id="connection-to-limits-2">Connection to Limits</h3>
+|x-c|&lt;\delta.
+</span></p>
 <ul>
-<li>The entire purpose of this section is to prepare us for the language
-of the limit:</li>
+<li><p>This means <span class="math inline">x</span> is less than <span
+class="math inline">\delta</span> units away from <span
+class="math inline">c</span>.</p></li>
+<li><p>Using our knowledge of absolute-value inequalities, we can also
+write</p></li>
+</ul>
+<p><span class="math display">
+c-\delta&lt;x&lt;c+\delta.
+</span></p>
+<ul>
+<li>Therefore,</li>
+</ul>
+<p><span class="math display">
+\boxed{|x-c|&lt;\delta
+\iff
+c-\delta&lt;x&lt;c+\delta}.
+</span></p>
+<ul>
+<li><p>Now we have a precise mathematical description of the phrase
+<strong>“<span class="math inline">x</span> is close to <span
+class="math inline">c</span>”</strong>.</p></li>
+<li><p>But a limit requires something slightly more specific.</p></li>
+<li><p>When we say <span class="math inline">x\to c</span>$, we are
+interested in values of <span class="math inline">x</span> that get
+close to <span class="math inline">c</span>, <strong>without requiring
+<span class="math inline">x=c</span></strong>.</p></li>
+<li><p>Therefore, we write</p></li>
 </ul>
 <p><span class="math display">
 0&lt;|x-c|&lt;\delta
-\quad\Longrightarrow\quad
-|f(x)-L|&lt;\varepsilon
 </span></p>
 <ul>
-<li><p>In words, <q><strong>If (x) is sufficiently close to (c), but not
-equal to (c), then (f(x)) is sufficiently close to
-(L).</strong></q></p></li>
-<li><p>Thus, this objective forms the <strong>bridge between the
-elementary concepts of intervals, inequalities, and distance and the
-formal mathematical definition of a limit</strong>.</p></li>
+<li><p>The first part, <span class="math inline">|x-c|&lt;\delta</span>,
+puts <span class="math inline">x</span> within <span
+class="math inline">\delta</span> units of <span
+class="math inline">c</span>.</p></li>
+<li><p>The second part, <span class="math inline">0&lt;|x-c|</span>,
+ensures that</p></li>
+</ul>
+<p><span class="math display">
+x\neq c
+</span></p>
+<ul>
+<li><p>Thus, <span
+class="math inline">\boxed{0&lt;|x-c|&lt;\delta}</span> means <span
+class="math inline">x</span> is within <span
+class="math inline">\delta</span> units of <span
+class="math inline">c</span>, but <span class="math inline">x</span> is
+not equal to <span class="math inline">c</span>.</p></li>
+<li><p>This is the basic language we need before we can understand the
+precise definition of a limit.</p></li>
+<li><p>Eventually, we will also need to describe what happens to the
+<strong>output</strong> <span class="math inline">f(x)</span>.</p></li>
+<li><p>The distance between <span class="math inline">f(x)</span> and a
+number <span class="math inline">L</span> is</p></li>
+</ul>
+<p><span class="math display">
+|f(x)-L|
+</span></p>
+<ul>
+<li>Thus, a limit connects two distances:</li>
+</ul>
+<p><span class="math display">
+\underbrace{|x-c|}_{\text{input distance}}
+\qquad\longrightarrow\qquad
+\underbrace{|f(x)-L|}_{\text{output distance}}.
+</span></p>
+<ul>
+<li>This leads to the central idea behind the formal definition of a
+limit:</li>
+</ul>
+<p><span class="math display">
+\boxed{
+0&lt;|x-c|&lt;\delta
+\quad\Longrightarrow\quad
+|f(x)-L|&lt;\varepsilon
+}
+</span></p>
+<ul>
+<li><p>In words, if <span class="math inline">x</span> is sufficiently
+close to <span class="math inline">c</span>, but not equal to <span
+class="math inline">c</span>, then <span class="math inline">f(x)</span>
+is sufficiently close to <span class="math inline">L</span>.</p></li>
+<li><p>So, the purpose of this objective is to combine intervals,
+inequalities, and distance into a precise mathematical language for
+describing how <span class="math inline">x</span> approaches <span
+class="math inline">c</span>, which prepares us for the definition of a
+limit.</p></li>
+</ul>
+<h2 id="the-overall-reason-for-these-three-objectives">The Overall
+Reason for These Three Objectives</h2>
+<ul>
+<li>The three objectives build the required ideas step by step:</li>
+</ul>
+<p><span class="math display">
+\boxed{
+\text{Location}
+\;\longrightarrow\;
+\text{Distance}
+\;\longrightarrow\;
+\text{Closeness}
+\;\longrightarrow\;
+\text{Limits}
+}
+</span></p>
+<ul>
+<li><p><strong>Intervals and inequalities</strong> tell us <strong>where
+<span class="math inline">x</span> is</strong>.</p></li>
+<li><p><strong>Absolute value</strong> tells us <strong>how far <span
+class="math inline">x</span> is from <span
+class="math inline">c</span></strong>.</p></li>
+<li><p><strong>The language of distance and inequalities</strong> allows
+us to describe <strong><span class="math inline">x</span> approaching
+<span class="math inline">c</span> precisely</strong>.</p></li>
+<li><p>This prepares us to understand the mathematical definition of a
+<strong>limit</strong>.</p></li>
+<li><p>Therefore, these are not three unrelated topics. They are three
+successive steps that build the mathematical language needed to
+understand limits.</p></li>
 </ul>
 <h1 id="objective-1-intervals-and-inequalities">Objective 1: Intervals
 and Inequalities</h1>
@@ -746,7 +816,8 @@ limits.</p>
 <li><p>Now we connect everything.</p></li>
 <li><p>This is the most important objective of the lecture.</p></li>
 </ul>
-<h2 id="what-does-close-to-c-mean">What Does “Close to (c)” Mean?</h2>
+<h2 id="what-does-close-to-c-mean">What Does “Close to <span
+class="math inline">c</span>” Mean?</h2>
 <ul>
 <li><p>Suppose we say, <q><span class="math inline">x</span> is close to
 <span class="math inline">c</span></q>.</p></li>

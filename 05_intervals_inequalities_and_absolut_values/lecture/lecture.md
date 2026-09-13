@@ -18,138 +18,215 @@ After preparing this topic, you should be able
 
 # The Why Section
 
-##  Objective 1: Why Study Intervals and Inequalities?
+* Before studying limits, we need to understand three basic ideas:
 
-- Before studying **limits**, we need a precise language for describing **where a variable can be and how close it can get to a particular number**.
+    1. **where a number is located,**
+    2. **how far one number is from another, and**
+    3. **how to describe “getting close” to a number precisely.**
 
-- Intervals and inequalities provide this language.
+* These three ideas form a natural progression toward the concept of a limit.
 
-- We study these concepts because they allow us to:
+## Objective 1: Why Study Intervals and Inequalities?
 
-    - **Describe the location of numbers on the real number line**
-        
-        - Inequalities and intervals help us clearly identify regions such as $(x<4)$, $(x>2)$, or $(2<x<5)$.
-        
-        - This is essential for describing the values of (x) near a point.
+* At this stage, we are learning how to **describe the location of numbers** on the real number line.
 
-    - **Express whether endpoints are included or excluded**
-        
-        - The distinction between $(<)$ and $(\leq)$, and between parentheses $((,))$ and brackets $([,])$, becomes crucial when discussing **open intervals around a number**.
-        
-        - Limits frequently consider values *near* $(c)$ without necessarily allowing $(x=c)$.
+* But why is this important for limits?
 
-    - **Describe the domain and conditions under which functions are studied**
-        
-        - Many functions are defined only on certain intervals or under certain inequalities.
-        
-        - Being able to translate between inequalities, interval notation, and the number line prepares us to describe **domains, neighborhoods, and the values of $(x)$ used in limits**.
+* When we study a limit, we are interested in what happens when the input $x$ is **near a particular number $c$**.
 
-### Connection to Limits
+* Therefore, we must be able to describe precisely **which values of $x$ are allowed**.
 
-- The central idea we will soon need is:
+* For example, the following inequality tells us that $x$ lies between $2$ and $5$.
 
-    - **A limit studies what happens to $(f(x))$ when $(x)$ gets close to a particular number $(c)$.**
+$$
+2<x<5
+$$
 
-- To say that $(x)$ is **close to $(c)$**, we need intervals and inequalities such as the following two statement.
+* In interval notation,
+
+$$
+x\in(2,5).
+$$
+
+* Similarly, the following inequality describes all the values of $x$ lying in an interval around $c$.
 
 $$
 c-\delta<x<c+\delta
 $$
 
-$$
-x\in(c-\delta,c+\delta).
-$$
+* Therefore, we study intervals and inequalities because they allow us to:
 
-- Thus, **intervals and inequalities are the mathematical language that allows us to describe “close to” precisely**—one of the fundamental ideas behind limits.
+    * **describe regions of the real number line;**
+    * **specify which values are included or excluded;**
+    * **describe the set of possible values of $x$;**
+    * **describe the values of $x$ lying near a particular number.**
+
+* This last idea is especially important.
+
+* Later, when we say that $x$ is **close to $c$**, we will need a precise way to describe the corresponding interval of values of $x$.
+
+* So, the purpose of this objective is to learn how to describe where $x$ can be and to identify the interval of values near a particular number.
 
 ## Objective 2: Why Study Absolute Value as Distance?
 
-- After learning how **inequalities and intervals describe the position of numbers**, we now need a way to describe **how far one number is from another**.
-- Absolute value provides exactly this idea and creates a direct bridge to limits.
+* Intervals and inequalities tell us **where a number is**.
 
-- We study absolute value because we need to:
+* But they do not directly tell us **how far one number is from another**.
 
-    - **Measure the distance between two numbers**
-        
-        - The expression $|x-c|$ represents the distance between $(x)$ and $(c)$.
-        
-        - This gives us a precise mathematical meaning for phrases such as **“close to $(c)$”** or **“within a certain distance of $(c)$”**.
+* For example, if we want to describe how far $x$ is from $c$, we need a mathematical measure of distance.
 
-    - **Describe numbers near a particular point**
-        
-        - Expressions such as $|x-c| \lt a$ tell us that $(x)$ lies within $(a)$ units of $(c)$ and mathematically
+* That is exactly what absolute value provides:
 
-        $$
-        c-a<x<c+a.
-        $$
+$$
+|x-c|=\text{distance between }x\text{ and }c.
+$$
 
-        - This is exactly the language we will use when discussing values of $(x)$ **approaching a number**.
+* For example, the following absolute value equality means that $7$ and $3$ are $4$ units apart.
 
-    - **Build the foundation for the precise definition of a limit**
-        
-        - The concept of a limit depends on controlling the distance between $(x)$ and $(c)$, and later between $(f(x))$ and $(L)$.
-        
-        - The expressions $|x-c| \lt \delta, |f(x)-L| \lt \varepsilon$ are at the heart of the formal definition of a limit.
+$$
+|7-3|=4
+$$
 
-### Connection to Limits
+* This interpretation becomes particularly useful when we want to express statements such as “$x$ is within $2$ units of $c$.”
 
-- The key idea we are preparing for is:
+* Mathematically, we can write
 
-    - **A limit asks what happens to $(f(x))$ when $(x)$ gets arbitrarily close to $(c)$.**
+$$
+|x-c|<2
+$$
 
-    - The phrase **“$(x)$ gets close to $(c)$”** can be expressed precisely as
+* Using the properties of absolute-value inequalities, this can be rewritten as
 
-        $$
-        |x-c|<\delta
-        $$
+$$
+c-2<x<c+2
+$$
 
-- Therefore, understanding **absolute value as distance** is not merely an algebraic technique—it gives us the mathematical language needed to make the intuitive idea of **closeness** precise in calculus.
+* Thus, absolute value allows us to translate between two equivalent ways of describing closeness:
+
+$$
+\boxed{|x-c|<a}
+\qquad
+\text{and}
+\qquad
+\boxed{c-a<x<c+a}
+$$
+
+* This is important for limits because a limit is concerned with what happens when $x$ gets **closer and closer** to a particular number.
+
+* Therefore, we study absolute value as distance because it gives us a mathematical way to **measure and describe closeness**.
+
+* So, the purpose of this objective is to learn how to measure the distance between $x$ and $c$, so that we can describe precisely what it means for $x$ to be close to $c$.
 
 ## Objective 3: Why Study “From Distance to the Language of Limits”?
 
-- We study distance as the language of limits because:
+* Now we have two important ideas.
 
-    - **Make the idea of “closeness” precise**
+* From **Objective 1**, we know how to describe a region of values using intervals and inequalities.
 
-        - In everyday language, “close to $(c)$” is vague.
-        
-        - The expression $|x-c| \lt \delta$ gives a precise mathematical meaning: $(x)$ is less than $(\delta)$ units away from $(c)$.
-        
-        - This allows us to replace informal descriptions with exact conditions.
+* From **Objective 2**, we know how to describe distance using absolute value.
 
-    - **Understand what “approaching” means in a limit**
+* The next question is how can we use these ideas to express what we mean when we say that $x$ approaches $c$?
 
-        - When we write $x\to c$, $(x)$ gets closer and closer to $(c)$, but $(x)$ does not have to equal $(c)$.
-        
-        - The condition $0 \lt |x-c| \lt \delta$ captures this idea precisely and introduces the concept of a **deleted neighborhood**.
+* In ordinary language, saying “$x$ gets close to $c$” is not precise. How close is “close”?
 
-    - **Build the foundation for the formal definition of a limit**
+* We can make the statement precise by introducing a positive distance $\delta$:
 
-        - A limit connects two kinds of closeness:
-   
-        $$
-        |x-c| \to \text{(input distance)}
-        $$
+$$
+|x-c|<\delta.
+$$
 
-        $$
-        |f(x)-L| \to \text{(output distance)}
-        $$
-   
-- Understanding these distances prepares us to understand the precise statement that **making $(x)$ sufficiently close to $(c)$ makes $(f(x))$ sufficiently close to $(L)$**.
+* This means $x$ is less than $\delta$ units away from $c$.
 
-### Connection to Limits
+* Using our knowledge of absolute-value inequalities, we can also write
 
-- The entire purpose of this section is to prepare us for the language of the limit:
+$$
+c-\delta<x<c+\delta.
+$$
+
+* Therefore,
+
+$$
+\boxed{|x-c|<\delta
+\iff
+c-\delta<x<c+\delta}.
+$$
+
+* Now we have a precise mathematical description of the phrase **“$x$ is close to $c$”**.
+
+* But a limit requires something slightly more specific.
+
+* When we say $x\to c$$, we are interested in values of $x$ that get close to $c$, **without requiring $x=c$**.
+
+* Therefore, we write
 
 $$
 0<|x-c|<\delta
-\quad\Longrightarrow\quad
-|f(x)-L|<\varepsilon
 $$
 
-- In words, "**If (x) is sufficiently close to (c), but not equal to (c), then (f(x)) is sufficiently close to (L).**"
+* The first part, $|x-c|<\delta$, puts $x$ within $\delta$ units of $c$.
 
-- Thus, this objective forms the **bridge between the elementary concepts of intervals, inequalities, and distance and the formal mathematical definition of a limit**.
+* The second part, $0<|x-c|$, ensures that
+
+$$
+x\neq c
+$$
+
+* Thus, $\boxed{0<|x-c|<\delta}$ means $x$ is within $\delta$ units of $c$, but $x$ is not equal to $c$.
+
+* This is the basic language we need before we can understand the precise definition of a limit.
+
+* Eventually, we will also need to describe what happens to the **output** $f(x)$.
+
+* The distance between $f(x)$ and a number $L$ is
+
+$$
+|f(x)-L|
+$$
+
+* Thus, a limit connects two distances:
+
+$$
+\underbrace{|x-c|}_{\text{input distance}}
+\qquad\longrightarrow\qquad
+\underbrace{|f(x)-L|}_{\text{output distance}}.
+$$
+
+* This leads to the central idea behind the formal definition of a limit:
+
+$$
+\boxed{
+0<|x-c|<\delta
+\quad\Longrightarrow\quad
+|f(x)-L|<\varepsilon
+}
+$$
+
+* In words, if $x$ is sufficiently close to $c$, but not equal to $c$, then $f(x)$ is sufficiently close to $L$.
+
+* So, the purpose of this objective is to combine intervals, inequalities, and distance into a precise mathematical language for describing how $x$ approaches $c$, which prepares us for the definition of a limit.
+
+## The Overall Reason for These Three Objectives
+
+* The three objectives build the required ideas step by step:
+
+$$
+\boxed{
+\text{Location}
+\;\longrightarrow\;
+\text{Distance}
+\;\longrightarrow\;
+\text{Closeness}
+\;\longrightarrow\;
+\text{Limits}
+}
+$$
+
+* **Intervals and inequalities** tell us **where $x$ is**.
+* **Absolute value** tells us **how far $x$ is from $c$**.
+* **The language of distance and inequalities** allows us to describe **$x$ approaching $c$ precisely**.
+* This prepares us to understand the mathematical definition of a **limit**.
+
+* Therefore, these are not three unrelated topics. They are three successive steps that build the mathematical language needed to understand limits.
 
 # Objective 1: Intervals and Inequalities
 
@@ -698,7 +775,7 @@ $$
 
 - This is the most important objective of the lecture.
 
-## What Does “Close to \(c\)” Mean?
+## What Does “Close to $c$” Mean?
 
 - Suppose we say, "$x$ is close to $c$".
 
