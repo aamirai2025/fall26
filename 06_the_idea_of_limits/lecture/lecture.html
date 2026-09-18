@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>lecture</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    q { quotes: "“" "”" "‘" "’"; }
+  </style>
+  <link rel="stylesheet" href="../styles/style.css" />
+  <script defer=""
+  src="/usr/share/javascript/katex/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <link rel="stylesheet"
+  href="/usr/share/javascript/katex/katex.min.css" />
+</head>
+<body>
+<h1 id="calculus-and-analytical-geometry">Calculus and Analytical
+Geometry</h1>
+<h2 id="the-idea-of-limits">The Idea of Limits</h2>
+<h3 id="dr.-aamir-alaud-din">Dr. Aamir Alaud Din</h3>
+<h3 id="september-18-2026">September 18, 2026</h3>
+<h1 id="objectives">Objectives</h1>
+<p>After studying this topic, you should be able</p>
+<ol type="1">
+<li><p>To understand how the problem of finding a tangent line to a
+curve leads naturally to the concept of a limit.</p></li>
+<li><p>To understand how the problem of determining instantaneous
+velocity leads to the same limiting process and connects the slope of a
+tangent line with instantaneous rate of change.</p></li>
+</ol>
+<h1 id="the-why-section">The Why Section</h1>
+<h2 id="objective-1-why-study-the-tangent-problem">Objective 1: Why
+Study the Tangent Problem?</h2>
+<ul>
+<li><p>In engineering, we frequently need to determine the
+<strong>direction or slope of a curve at a particular
+point</strong>.</p></li>
+<li><p>For example, consider the profile of a mechanical component
+represented by a curve. At a particular point on the component, we may
+need to determine the slope of the profile to understand its local
+geometry or to specify the direction of a tangent tool path.</p></li>
+<li><p>Finding the slope of a straight line is straightforward because
+we can select any two points on the line. However, a curve does not have
+a constant slope.</p></li>
+<li><p>At a particular point on a curve, we cannot directly use the
+usual slope formula because we need two distinct points.</p></li>
+<li><p>We therefore approach the chosen point with a second point and
+examine the slopes of the resulting <strong>secant
+lines</strong>.</p></li>
+<li><p>As the second point gets closer and closer to the chosen point,
+the secant lines approach a particular line called the <strong>tangent
+line</strong>.</p></li>
+<li><p>This limiting process provides the mathematical foundation for
+finding the slope of a curve at a point.</p></li>
+<li><p>Therefore, the tangent problem gives us our first natural reason
+for studying limits.</p></li>
+<li><p>The mechanical-engineering scenario described above can be solved
+by understanding the tangent problem and the limiting process.</p></li>
+</ul>
+<h2 id="objective-2-why-study-the-velocity-problem">Objective 2: Why
+Study the Velocity Problem?</h2>
+<ul>
+<li><p>In mechanical engineering, velocity is one of the most important
+quantities used to describe motion.</p></li>
+<li><p>The average velocity of an object over a time interval can be
+found by dividing the change in position by the elapsed time.</p></li>
+<li><p>However, engineering applications often require the
+<strong>velocity at one particular instant</strong>, such as the
+velocity of a moving component at <span class="math inline">t=5</span>
+seconds.</p></li>
+<li><p>The difficulty is that an instantaneous velocity is associated
+with a single instant, so there is no ordinary time interval over which
+we can directly calculate it.</p></li>
+<li><p>We can overcome this difficulty by calculating average velocities
+over shorter and shorter time intervals.</p></li>
+<li><p>As the length of the time interval approaches zero, the average
+velocity approaches a definite value.</p></li>
+<li><p>This limiting value is called the <strong>instantaneous
+velocity</strong>.</p></li>
+<li><p>The velocity problem therefore reveals that the same limiting
+process used to find the slope of a tangent line can also be used to
+find an instantaneous physical quantity.</p></li>
+<li><p>The mechanical-engineering scenario described above can be solved
+by understanding average velocity and its limiting value.</p></li>
+</ul>
+<h1 id="objective-1-the-tangent-problem">Objective 1: The Tangent
+Problem</h1>
+<h2 id="what-is-a-tangent-line">What Is a Tangent Line?</h2>
+<ul>
+<li><p>The word <strong>tangent</strong> comes from the Latin word
+<em>tangens</em>, meaning <q>touching.</q></p></li>
+<li><p>We can think of a tangent to a curve as a line that touches the
+curve and follows the same direction as the curve at the point of
+contact.</p></li>
+<li><p>For a circle, we can define a tangent as a line that intersects
+the circle exactly once, as shown in Figure 1(a).</p></li>
+<li><p>For more complicated curves, however, this definition is not
+sufficient because a tangent line may intersect the curve more than
+once, as shown in Figure 1(b).</p></li>
+</ul>
+<div style="text-align: center;">
+<p><img src="../images/0501.png" style="width: 666px; border-radius: 12px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 1.</strong> Tangent lines to a circle and to a
+more complicated curve.</span></p>
+</div>
+<ul>
+<li>To make the idea precise, consider finding the tangent line to the
+parabola</li>
+</ul>
+<p><span class="math display">
+y=x^2
+</span></p>
+<ul>
+<li>Suppose we want the tangent line at the point</li>
+</ul>
+<p><span class="math display">
+P(1,1)
+</span></p>
+<ul>
+<li><p>The difficulty is that we know only one point, <span
+class="math inline">P</span>, whereas the slope formula requires two
+points.</p></li>
+<li><p>We therefore choose another point <span
+class="math inline">Q</span> on the parabola and use the line through
+<span class="math inline">P</span> and <span
+class="math inline">Q</span> to approximate the tangent line.</p></li>
+</ul>
+<h2 id="the-secant-line">The Secant Line</h2>
+<ul>
+<li>Let <span class="math inline">Q(x,x^2)</span> be another point on
+the parabola, as shown in Figure 2.</li>
+</ul>
+<div style="text-align: center;">
+<p><img src="../images/0502.png" style="width: 652px; border-radius: 12px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 2.</strong> A secant line approaching the
+tangent line to the parabola <span class="math inline">y=x^2</span> at
+<span class="math inline">P(1,1)</span>.</span></p>
+</div>
+<ul>
+<li><p>The line through <span class="math inline">P</span> and <span
+class="math inline">Q</span> is called a <strong>secant line</strong>
+because it intersects the curve at two points.</p></li>
+<li><p>Since <span class="math inline">Q\neq P</span>, we have <span
+class="math inline">x\neq1</span>.</p></li>
+<li><p>The slope of the secant line <span class="math inline">PQ</span>
+is</p></li>
+</ul>
+<p><span class="math display">
+m_{PQ}=\frac{x^2-1}{x-1}
+</span></p>
+<ul>
+<li>For example, if <span class="math inline">Q=(1.5,2.25)</span>,
+then</li>
+</ul>
+<p><span class="math display">
+m_{PQ}=\frac{2.25-1}{1.5-1}=2.5
+</span></p>
+<ul>
+<li>The following values show what happens as <span
+class="math inline">Q</span> gets closer to <span
+class="math inline">P</span>.</li>
+</ul>
+<div style="text-align: center;">
+<p><span><strong>Table 1.</strong> Slope of line as <span
+class="math inline">Q</span> gets closer to <span
+class="math inline">P</span>.</span></p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;"><span class="math inline">x</span></th>
+<th style="text-align: right;"><span
+class="math inline">m_{PQ}</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;"><span class="math inline">2</span></td>
+<td style="text-align: right;"><span class="math inline">3</span></td>
+</tr>
+<tr>
+<td style="text-align: right;"><span class="math inline">1.5</span></td>
+<td style="text-align: right;"><span class="math inline">2.5</span></td>
+</tr>
+<tr>
+<td style="text-align: right;"><span class="math inline">1.1</span></td>
+<td style="text-align: right;"><span class="math inline">2.1</span></td>
+</tr>
+<tr>
+<td style="text-align: right;"><span
+class="math inline">1.01</span></td>
+<td style="text-align: right;"><span
+class="math inline">2.01</span></td>
+</tr>
+<tr>
+<td style="text-align: right;"><span
+class="math inline">1.001</span></td>
+<td style="text-align: right;"><span
+class="math inline">2.001</span></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p>As <span class="math inline">x</span> gets closer to <span
+class="math inline">1</span>, the slope of the secant line gets closer
+to <span class="math inline">2</span>.</p></li>
+<li><p>We therefore expect the slope of the tangent line to be <span
+class="math inline">2</span>.</p></li>
+<li><p>We can express this limiting process symbolically by
+writing</p></li>
+</ul>
+<p><span class="math display">
+\lim_{Q\to P}m_{PQ}=m
+</span></p>
+<ul>
+<li>For this particular parabola, the corresponding limit is</li>
+</ul>
+<p><span class="math display">
+\lim_{x\to1}\frac{x^2-1}{x-1}=2
+</span></p>
+<ul>
+<li>Thus, the slope of the tangent line is the <strong>limit of the
+slopes of the secant lines</strong> as the second point approaches the
+point of tangency.</li>
+</ul>
+<h2 class="green" id="example-1">Example 1</h2>
+<p>Find an equation of the tangent line to the parabola <span
+class="math inline">y=x^2</span> at the point <span
+class="math inline">P(1,1)</span>.</p>
+<h2 class="green" id="solution">Solution</h2>
+<p>We choose another point <span class="math inline">Q(x,x^2)</span> on
+the parabola, where <span class="math inline">x\neq1</span>.</p>
+<p>The slope of the secant line <span class="math inline">PQ</span>
+is</p>
+<p><span class="math display">
+m_{PQ}=\frac{x^2-1}{x-1}
+</span></p>
+<p>As <span class="math inline">Q</span> approaches <span
+class="math inline">P</span>, the corresponding value of <span
+class="math inline">x</span> approaches <span
+class="math inline">1</span>.</p>
+<p>From the table, the secant-line slopes approach <span
+class="math inline">2</span>.</p>
+<p>Therefore, the slope of the tangent line is</p>
+<p><span class="math display">
+m=\lim_{x\to1}\frac{x^2-1}{x-1}=2
+</span></p>
+<p>We now use the point-slope form of a line through <span
+class="math inline">(1,1)</span>.</p>
+<p><span class="math display">
+y-1=2(x-1)
+</span></p>
+<p>Simplifying gives</p>
+<p><span class="math display">
+\boxed{y=2x-1}
+</span></p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 id="the-limiting-process-geometrically">The Limiting Process
+Geometrically</h2>
+<ul>
+<li><p>Figure 3 illustrates the limiting process used in Example
+1.</p></li>
+<li><p>As <span class="math inline">Q</span> approaches <span
+class="math inline">P</span> along the parabola from the right, the
+corresponding secant lines rotate about <span
+class="math inline">P</span> and approach the tangent line.</p></li>
+<li><p>The same process occurs when <span class="math inline">Q</span>
+approaches <span class="math inline">P</span> from the left.</p></li>
+</ul>
+<div style="text-align: center;">
+<p><img src="../images/0503.png" style="width: 1800px; border-radius: 12px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 3.</strong> Secant lines approaching the tangent
+line from the right and from the left.</span></p>
+</div>
+<ul>
+<li><p>The important observation is that the secant lines do not become
+tangent lines simply because they pass through two points on the
+curve.</p></li>
+<li><p>Rather, the tangent line is obtained as the <strong>limiting
+position</strong> of the secant lines as the second point approaches the
+first.</p></li>
+<li><p>This is the first appearance of the central idea of
+limits.</p></li>
+</ul>
+<h2 id="estimating-a-tangent-from-experimental-data">Estimating a
+Tangent from Experimental Data</h2>
+<ul>
+<li><p>Many functions that occur in science and engineering are not
+given by explicit equations.</p></li>
+<li><p>Instead, the behavior of the quantity may be known from
+experimental measurements.</p></li>
+<li><p>We can still estimate the slope of a tangent line by using nearby
+data points.</p></li>
+</ul>
+<h2 class="green" id="example-2">Example 2</h2>
+<p>A pulse laser operates by storing charge on a capacitor and releasing
+it suddenly when the laser is fired. The data in the table describe the
+charge <span class="math inline">Q</span> remaining on the capacitor at
+time <span class="math inline">t</span> after the laser is fired. Use
+the data to draw the graph of this function and estimate the slope of
+the tangent line at <span class="math inline">t=0.04</span>.</p>
+<h2 class="green" id="solution-1">Solution</h2>
+<p>The given data are</p>
+<div style="text-align: center;">
+<p><span><strong>Table 2.</strong> The charge <span
+class="math inline">Q</span> remaining on the capacitor at tiem <span
+class="math inline">t</span>.</span></p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;"><span class="math inline">t</span></th>
+<th style="text-align: right;"><span class="math inline">Q</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;"><span class="math inline">0</span></td>
+<td style="text-align: right;"><span class="math inline">10</span></td>
+</tr>
+<tr>
+<td style="text-align: right;"><span
+class="math inline">0.02</span></td>
+<td style="text-align: right;"><span
+class="math inline">8.187</span></td>
+</tr>
+<tr>
+<td style="text-align: right;"><span
+class="math inline">0.04</span></td>
+<td style="text-align: right;"><span
+class="math inline">6.703</span></td>
+</tr>
+<tr>
+<td style="text-align: right;"><span
+class="math inline">0.06</span></td>
+<td style="text-align: right;"><span
+class="math inline">5.488</span></td>
+</tr>
+<tr>
+<td style="text-align: right;"><span
+class="math inline">0.08</span></td>
+<td style="text-align: right;"><span
+class="math inline">4.493</span></td>
+</tr>
+<tr>
+<td style="text-align: right;"><span
+class="math inline">0.10</span></td>
+<td style="text-align: right;"><span
+class="math inline">3.676</span></td>
+</tr>
+</tbody>
+</table>
+<p>We plot the data and draw a smooth curve that approximates the
+behavior of the charge.</p>
+<div style="text-align: center;">
+<p><img src="../images/0504.png" style="width: 1163px; border-radius: 12px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 4.</strong> Charge remaining on the capacitor as
+a function of time.</span></p>
+</div>
+<p>Let <span class="math inline">P=(0.04,6.703)</span> be the point
+where we want the tangent slope.</p>
+<p>We first choose the point</p>
+<p><span class="math display">
+R=(0,10)
+</span></p>
+<p>The slope of the secant line <span class="math inline">PR</span>
+is</p>
+<p><span class="math display">
+m_{PR}=\frac{10-6.703}{0-0.04}
+</span></p>
+<p><span class="math display">
+m_{PR}=-82.425
+</span></p>
+<p>We can calculate similar slopes using other points closer to <span
+class="math inline">P</span>.</p>
+<div style="text-align: center;">
+<p><span><strong>Table 3.</strong> The slopes as <span
+class="math inline">R</span> gets closer to <span
+class="math inline">P</span>.</span></p>
+</div>
+<table>
+<thead>
+<tr>
+<th><span class="math inline">R</span></th>
+<th style="text-align: right;"><span
+class="math inline">m_{PR}</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="math inline">(0,10)</span></td>
+<td style="text-align: right;"><span
+class="math inline">-82.425</span></td>
+</tr>
+<tr>
+<td><span class="math inline">(0.02,8.187)</span></td>
+<td style="text-align: right;"><span
+class="math inline">-74.200</span></td>
+</tr>
+<tr>
+<td><span class="math inline">(0.06,5.488)</span></td>
+<td style="text-align: right;"><span
+class="math inline">-60.750</span></td>
+</tr>
+<tr>
+<td><span class="math inline">(0.08,4.493)</span></td>
+<td style="text-align: right;"><span
+class="math inline">-55.250</span></td>
+</tr>
+<tr>
+<td><span class="math inline">(0.10,3.676)</span></td>
+<td style="text-align: right;"><span
+class="math inline">-50.450</span></td>
+</tr>
+</tbody>
+</table>
+<p>The closest secant-line slopes on either side of <span
+class="math inline">t=0.04</span> are <span
+class="math inline">-74.20</span> and <span
+class="math inline">-60.75</span>.</p>
+<p>Their average is</p>
+<p><span class="math display">
+\frac{1}{2}(-74.20-60.75)=-67.475
+</span></p>
+<p>Therefore, using this method, we estimate the slope of the tangent
+line to be approximately</p>
+<p><span class="math display">
+\boxed{-67.5}
+</span></p>
+<p>The slope represents the rate at which the electric charge is
+changing with time.</p>
+<p>Thus, the tangent problem is not limited to geometric curves. It can
+also describe the rate of change of a physical quantity.</p>
+<p>Another method is to draw an approximation to the tangent line and
+measure the sides of a suitable triangle, as shown in Figure 5.</p>
+<div style="text-align: center;">
+<p><img src="../images/0505.png" style="width: 1257px; border-radius: 12px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 5.</strong> Approximation of the tangent line at
+<span class="math inline">t=0.04</span> using a right
+triangle.</span></p>
+</div>
+<ul>
+<li>From the triangle in Figure 5, the slope can be estimated as</li>
+</ul>
+<p><span class="math display">
+-\frac{|AB|}{|BC|}
+\approx
+-\frac{8.0-5.4}{0.06-0.02}
+=-65.0
+</span></p>
+<ul>
+<li>Both methods give a value near <span class="math inline">-65</span>
+to <span class="math inline">-67.5</span> amperes per second for the
+rate represented by the slope.</li>
+</ul>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="quick-check">Quick Check</h1>
+<h2 class="red" id="question-1">Question 1</h2>
+<p>For the parabola <span class="math inline">y=x^2</span>, the
+secant-line slopes near <span class="math inline">P(1,1)</span> approach
+<span class="math inline">2</span>. What does the number <span
+class="math inline">2</span> represent?</p>
+<h2 class="red" id="question-2">Question 2</h2>
+<p>What happens to a secant line as the second point on the curve
+approaches the point of tangency?</p>
+<div class="questions-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="objective-2-the-velocity-problem">Objective 2: The Velocity
+Problem</h1>
+<h2 id="average-velocity">Average Velocity</h2>
+<ul>
+<li><p>If you watch the speedometer of a car while driving in city
+traffic, you see that the speed does not remain constant.</p></li>
+<li><p>We therefore distinguish between <strong>average
+velocity</strong> over a time interval and <strong>instantaneous
+velocity</strong> at a particular time.</p></li>
+<li><p>Suppose the position of a moving object at time <span
+class="math inline">t</span> is given by <span
+class="math inline">s(t)</span>.</p></li>
+<li><p>The average velocity over the time interval from <span
+class="math inline">t=a</span> to <span class="math inline">t=b</span>
+is</p></li>
+</ul>
+<p><span class="math display">
+\text{average velocity}
+=
+\frac{\text{change in position}}{\text{elapsed time}}
+</span></p>
+<ul>
+<li>Therefore,</li>
+</ul>
+<p><span class="math display">
+\text{average velocity}
+=
+\frac{s(b)-s(a)}{b-a}
+</span></p>
+<ul>
+<li><p>The velocity problem asks us to determine the velocity of an
+object at a <strong>specific instant</strong>.</p></li>
+<li><p>Because a single instant has no elapsed time interval, we cannot
+directly apply the average-velocity formula.</p></li>
+<li><p>Instead, we calculate average velocities over shorter and shorter
+time intervals.</p></li>
+</ul>
+<h2 id="the-falling-ball-problem">The Falling-Ball Problem</h2>
+<ul>
+<li><p>Galileo discovered through experiments that the distance traveled
+by a freely falling body is proportional to the square of the time it
+has been falling, when air resistance is neglected.</p></li>
+<li><p>If <span class="math inline">s(t)</span> denotes the distance
+fallen in meters after <span class="math inline">t</span> seconds, the
+model is</p></li>
+</ul>
+<p><span class="math display">
+s(t)=4.9t^2
+</span></p>
+<h2 class="green" id="example-3">Example 3</h2>
+<p>Suppose a ball is dropped from the upper observation deck of the CN
+Tower in Toronto, <span class="math inline">450</span> m above the
+ground. Find the velocity of the ball after <span
+class="math inline">5</span> seconds.</p>
+<h2 class="green" id="solution-2">Solution</h2>
+<p>The difficulty is that we want the velocity at one specific instant,
+namely <span class="math inline">t=5</span>.</p>
+<p>We first approximate the desired velocity by calculating the average
+velocity over the interval from <span class="math inline">t=5</span> to
+<span class="math inline">t=5.1</span>.</p>
+<p>The average velocity is</p>
+<p><span class="math display">
+\frac{s(5.1)-s(5)}{5.1-5}
+</span></p>
+<p>Since</p>
+<p><span class="math display">
+s(t)=4.9t^2
+</span></p>
+<p>We obtain</p>
+<p><span class="math display">
+\frac{4.9(5.1)^2-4.9(5)^2}{0.1}
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+\boxed{49.49\text{ m/s}}
+</span></p>
+<p>We now repeat the calculation over progressively shorter time
+intervals.</p>
+<div style="text-align: center;">
+<p><span><strong>Table 4.</strong> Velocity over progressively short
+intervals.</span></p>
+</div>
+<table>
+<thead>
+<tr>
+<th>Time interval</th>
+<th style="text-align: right;">Average velocity (m/s)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="math inline">5\leq t\leq5.1</span></td>
+<td style="text-align: right;"><span
+class="math inline">49.49</span></td>
+</tr>
+<tr>
+<td><span class="math inline">5\leq t\leq5.05</span></td>
+<td style="text-align: right;"><span
+class="math inline">49.245</span></td>
+</tr>
+<tr>
+<td><span class="math inline">5\leq t\leq5.01</span></td>
+<td style="text-align: right;"><span
+class="math inline">49.049</span></td>
+</tr>
+<tr>
+<td><span class="math inline">5\leq t\leq5.001</span></td>
+<td style="text-align: right;"><span
+class="math inline">49.0049</span></td>
+</tr>
+</tbody>
+</table>
+<p>As the time interval becomes shorter, the average velocity gets
+closer and closer to <span class="math inline">49</span> m/s.</p>
+<p>We therefore define the instantaneous velocity at <span
+class="math inline">t=5</span> as the limiting value of these average
+velocities.</p>
+<p><span class="math display">
+\boxed{\text{Instantaneous velocity at }t=5\text{ s}=49\text{ m/s}}
+</span></p>
+<div style="text-align: center;">
+<p><img src="../images/0506.png" style="width: 486px; border-radius: 12px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 6.</strong> Secant line and tangent line for the
+falling-ball position function <span
+class="math inline">s=4.9t^2</span>.</span></p>
+</div>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 id="the-connection-between-tangent-and-velocity">The Connection
+Between Tangent and Velocity</h2>
+<ul>
+<li><p>The velocity problem is closely connected to the tangent
+problem.</p></li>
+<li><p>Consider the graph of</p></li>
+</ul>
+<p><span class="math display">
+s(t)=4.9t^2
+</span></p>
+<ul>
+<li><p>Let <span class="math inline">P=(5,4.9(5)^2)</span> and choose a
+nearby point <span class="math inline">Q=(5+h,4.9(5+h)^2)</span> on the
+graph.</p></li>
+<li><p>The slope of the secant line <span class="math inline">PQ</span>
+is</p></li>
+</ul>
+<p><span class="math display">
+m_{PQ}
+=
+\frac{4.9(5+h)^2-4.9(5)^2}{(5+h)-5}
+</span></p>
+<ul>
+<li>Since <span class="math inline">(5+h)-5=h</span>, this becomes</li>
+</ul>
+<p><span class="math display">
+m_{PQ}
+=
+\frac{4.9(5+h)^2-4.9(5)^2}{h}
+</span></p>
+<ul>
+<li><p>But this slope has another interpretation.</p></li>
+<li><p>It is exactly the <strong>average velocity</strong> of the ball
+over the time interval from <span class="math inline">5</span> to <span
+class="math inline">5+h</span>.</p></li>
+<li><p>As <span class="math inline">h</span> approaches <span
+class="math inline">0</span>, the point <span
+class="math inline">Q</span> approaches <span
+class="math inline">P</span>.</p></li>
+<li><p>Therefore, the secant line approaches the tangent line.</p></li>
+<li><p>At the same time, the average velocity approaches the
+instantaneous velocity.</p></li>
+<li><p>Consequently, the instantaneous velocity is the slope of the
+tangent line to the position-time graph.</p></li>
+<li><p>Symbolically,</p></li>
+</ul>
+<p><span class="math display">
+\boxed{\text{instantaneous velocity}=\text{slope of tangent line}}
+</span></p>
+<ul>
+<li>More generally, if <span class="math inline">s(t)</span> gives the
+position of an object, then the instantaneous velocity at time <span
+class="math inline">t</span> is obtained from the limiting process</li>
+</ul>
+<p><span class="math display">
+\boxed{
+\lim_{h\to0}
+\frac{s(t+h)-s(t)}{h}
+}
+</span></p>
+<ul>
+<li>This is the same limiting process that appeared in the tangent
+problem.</li>
+</ul>
+<h1 id="quick-check-1">Quick Check</h1>
+<h2 class="red" id="question-1-1">Question 1</h2>
+<p>What is the average velocity of an object whose position changes from
+<span class="math inline">20</span> m to <span
+class="math inline">32</span> m during a time interval of <span
+class="math inline">4</span> s?</p>
+<h2 class="red" id="question-2-1">Question 2</h2>
+<p>What happens to the average velocity when the time interval used to
+calculate it becomes shorter and shorter around a fixed time?</p>
+<div class="questions-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="scenario-problem">Scenario Problem</h1>
+<h2 class="green" id="problem">Problem</h2>
+<p>A slider in a mechanical machine moves along a straight guide. Its
+position, measured in meters, is modeled by</p>
+<p><span class="math display">
+s(t)=2t^2
+</span></p>
+<p>where <span class="math inline">t</span> is measured in seconds.</p>
+<p>Determine the velocity of the slider at <span
+class="math inline">t=3</span> seconds using the limiting idea developed
+in the velocity problem.</p>
+<h2 class="green" id="solution-3">Solution</h2>
+<p>The velocity at exactly <span class="math inline">t=3</span> cannot
+be obtained directly from the average-velocity formula because we are
+considering only one instant.</p>
+<p>We therefore calculate the average velocity over the interval from
+<span class="math inline">t=3</span> to <span
+class="math inline">t=3+h</span>.</p>
+<p>The average velocity is</p>
+<p><span class="math display">
+\frac{s(3+h)-s(3)}{h}
+</span></p>
+<p>Since</p>
+<p><span class="math display">
+s(t)=2t^2
+</span></p>
+<p>we have</p>
+<p><span class="math display">
+s(3+h)=2(3+h)^2
+</span></p>
+<p>and</p>
+<p><span class="math display">
+s(3)=18
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+\frac{2(3+h)^2-18}{h}
+</span></p>
+<p>Expanding the square gives</p>
+<p><span class="math display">
+\frac{2(9+6h+h^2)-18}{h}
+</span></p>
+<p>Simplifying gives</p>
+<p><span class="math display">
+\frac{18+12h+2h^2-18}{h}
+</span></p>
+<p><span class="math display">
+=12+2h
+</span></p>
+<p>As the time interval becomes smaller, <span
+class="math inline">h</span> approaches <span
+class="math inline">0</span>.</p>
+<p>Therefore, the instantaneous velocity is</p>
+<p><span class="math display">
+\lim_{h\to0}(12+2h)=12
+</span></p>
+<p>Hence, the velocity of the slider at <span
+class="math inline">t=3</span> seconds is</p>
+<p><span class="math display">
+\boxed{12\text{ m/s}}
+</span></p>
+<p>Thus, the mechanical-engineering problem is solved by the same
+limiting process that arose naturally from the tangent problem.</p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="summary">Summary</h1>
+<ul>
+<li><p>The <strong>tangent problem</strong> arises when we want to
+determine the slope of a curve at a particular point.</p></li>
+<li><p>A secant line passes through two points on a curve, whereas a
+tangent line represents the limiting position of the secant line as the
+second point approaches the first.</p></li>
+<li><p>For the parabola <span class="math inline">y=x^2</span> at <span
+class="math inline">P(1,1)</span>, the slope of the secant line
+is</p></li>
+</ul>
+<p><span class="math display">
+m_{PQ}=\frac{x^2-1}{x-1}
+</span></p>
+<ul>
+<li>As <span class="math inline">x</span> approaches <span
+class="math inline">1</span>, the secant-line slopes approach <span
+class="math inline">2</span>.</li>
+</ul>
+<p><span class="math display">
+\lim_{x\to1}\frac{x^2-1}{x-1}=2
+</span></p>
+<ul>
+<li>Therefore, the tangent line to <span
+class="math inline">y=x^2</span> at <span
+class="math inline">(1,1)</span> has slope <span
+class="math inline">2</span> and equation</li>
+</ul>
+<p><span class="math display">
+\boxed{y=2x-1}
+</span></p>
+<ul>
+<li><p>Experimental data can also be used to estimate the slope of a
+tangent line when an explicit equation is not available.</p></li>
+<li><p>The <strong>velocity problem</strong> arises when we want to
+determine the velocity of an object at one particular instant.</p></li>
+<li><p>Average velocity over an interval is the change in position
+divided by the elapsed time.</p></li>
+</ul>
+<p><span class="math display">
+\boxed{
+\text{Average velocity}
+=
+\frac{\text{change in position}}{\text{elapsed time}}
+}
+</span></p>
+<ul>
+<li>For a position function <span class="math inline">s(t)</span>, the
+average velocity from <span class="math inline">t</span> to <span
+class="math inline">t+h</span> is</li>
+</ul>
+<p><span class="math display">
+\frac{s(t+h)-s(t)}{h}
+</span></p>
+<ul>
+<li><p>As <span class="math inline">h</span> approaches <span
+class="math inline">0</span>, the average velocity approaches the
+instantaneous velocity.</p></li>
+<li><p>The tangent and velocity problems are closely connected because
+the slope of a secant line on a position-time graph represents average
+velocity.</p></li>
+<li><p>As the second point approaches the first, the secant line
+approaches the tangent line and the average velocity approaches the
+instantaneous velocity.</p></li>
+<li><p>Therefore,</p></li>
+</ul>
+<p><span class="math display">
+\boxed{\text{Instantaneous velocity}=\text{slope of the tangent line}}
+</span></p>
+<ul>
+<li><p>The central idea emerging from both problems is that a quantity
+associated with a single point or instant can be found by examining what
+happens over smaller and smaller intervals.</p></li>
+<li><p>This limiting process is the fundamental idea that leads to the
+formal concept of a <strong>limit</strong> in calculus.</p></li>
+</ul>
+</body>
+</html>
