@@ -152,6 +152,30 @@ $$
 
 * Thus, the slope of the tangent line is the **limit of the slopes of the secant lines** as the second point approaches the point of tangency.
 
+* A Python program with little customization for the slope is shown below.
+
+```python
+import numpy as np
+
+def slope_func(x):
+    return (x**2 - 1) / (x - 1)
+
+x = float(input("Enter starting value for x (near 1): "))
+h = float(input("Enter step size h (> 0.000001): "))
+
+if x > 1:
+    vals = np.arange(x, 1.0+0.000001, -h)
+    outs = slope_func(vals)
+elif x < 1:
+    vals = np.arange(x, 1.0-0.000001, h)
+    outs = slope_func(vals)
+
+print("    x            m    ")
+print("---------    ---------")
+for counter, val in enumerate(vals):
+    print(f"{val:<9.6f}    {outs[counter]:<9.6f}")
+```
+
 ## Example 1 {.green}
 
 Find an equation of the tangent line to the parabola $y=x^2$ at the point $P(1,1)$.
@@ -443,6 +467,40 @@ $$
 <span><strong>Figure 6.</strong> Secant line and tangent line for the falling-ball position function $s=4.9t^2$.</span>
 </div>
 
+In limiting case of approaching at 5 seconds and its plot can be obtained with the following Python program.
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+def distance(t):
+    return 4.9*t**2
+
+h = float(input("Enter step size h (> 0.000001): "))
+
+t_values = np.arange(0, 10, h)
+distances = distance(t_values)
+
+slope = (distance(5+h) - distance(5))/h
+c = distance(5) - slope*5
+
+x = np.array([0, 10])
+y = slope*x + c
+
+plt.plot(t_values, distances, '-b', linewidth=2)
+plt.plot(x, y, '-r', linewidth=2)
+plt.scatter(5, distance(5), color='k', s=100)
+plt.xlabel('t', fontsize=14, fontweight='bold')
+plt.ylabel('s', fontsize=14, fontweight='bold')
+plt.xticks(fontsize=12, fontweight='bold')
+plt.yticks(fontsize=12, fontweight='bold')
+plt.title('Velocity of Falling Object', fontsize=14, fontweight='bold')
+plt.grid(True)
+plt.show()
+
+
+```
+
 <div class="example-end">$\blacksquare$</div>
 
 ## The Connection Between Tangent and Velocity
@@ -657,3 +715,43 @@ $$
 * The central idea emerging from both problems is that a quantity associated with a single point or instant can be found by examining what happens over smaller and smaller intervals.
 
 * This limiting process is the fundamental idea that leads to the formal concept of a **limit** in calculus.
+
+# Homework No. 1{.red}
+
+Solve the scenario problem on Microsoft Excel and also plot the graph of distance $s$ covered against time $t$. Also plot the tangent line to the graph of distance at $t=3$.
+
+### Important Note 1 {.red}
+
+The deadline for the submission of homework for different classes is given below.
+
+1. Mechanical Engineering Section A: 28-09-2026 before 11:00 PM
+2. Mechanical Engineering Section B: 29-09-2026 before 11:00 PM
+3. Computer Science: 28-09-2026 before 11:00 PM
+
+### Important Note 2 {.red}
+
+CR is responsible to collect the excel files from all students, place them in a folder, make a zip file of the folder and send to the instructor before the deadline. The name of the zip file should be:
+
+1. Mechanical Engineering Section A: me_a.zip
+2. Mechanical Engineering Section B: me_b.zip
+3. Computer Science: cs.zip
+
+### Important Note 3 {.red}
+
+The individual students are responsible to name the file as their NUST CMS ID. For example, if the CMS ID of a student is 0000562314, the name of excel file must be 0000562314.xlsx
+
+# Exercises
+
+## Exercises Set 1
+
+Solve the exercises from exercise 1 to 9.
+
+* Exercises help transform theoretical concepts into practical understanding.
+
+* Mathematics is learned by doing and solving exercises will train you to analyze problems, select appropriate methods, and construct logical solutions.
+
+* Attempting problems sometimes leads to mistakes which provide opportunities for learning and improvement.
+
+* Regular practice increases speed, accuracy, and confidence.
+
+* Exercises are given in the Exercises file and you are expected to solve them on your own.
