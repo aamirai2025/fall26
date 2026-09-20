@@ -78,9 +78,29 @@ After preparing this topic, you should be able
 
 * These situations can be understood by studying the different ways in which a limit can fail to exist.
 
+## Objective 4: Why Study Infinite Limits and Vertical Asymptotes?
+
+* In some engineering models, a quantity can become extremely large as an input approaches a particular value.
+
+* For example, a mathematical model of a mechanical response may contain a denominator that becomes very small near a critical parameter value.
+
+* The resulting function may increase without bound as the parameter approaches that value.
+
+* Such behavior is described using an infinite limit.
+
+* A vertical asymptote provides a geometric way to describe this behavior.
+
+* Understanding infinite limits and vertical asymptotes helps us recognize values at which a mathematical model becomes unbounded and therefore requires special interpretation.
+
+* The following type of engineering situation can be analyzed using this idea.
+
+* A simplified mechanical model contains a response function whose denominator approaches zero when an operating parameter reaches a critical value.
+
+* We want to determine what happens to the response near that value and whether a vertical asymptote occurs.
+
 # Objective 1: Finding Limits Numerically and Graphically
 
-## Investigating a Limit Numerically
+## 1.1 Investigating a Limit Numerically
 
 * We begin by considering the function
 
@@ -117,7 +137,7 @@ $$
 
 * Notice that the question concerns what happens **near** $x=1$, not necessarily what happens at $x=1$ itself.
 
-## Investigating a Limit Graphically
+## 1.2 Investigating a Limit Graphically
 
 * The same function can be investigated by examining its graph.
 
@@ -132,18 +152,20 @@ $$
 
 * Thus, numerical tables and graphs give two complementary ways of investigating a limit.
 
-## Definition: Intuitive Definition of a Limit {.blue}
+## 1.3 Intuitive Definition of a Limit
 
-Suppose $f(x)$ is defined when $x$ is near $a$, possibly except at $a$ itself. We write the following limit and say that **the limit of $f(x)$ as $x$ approaches $a$ is $L$** if the values of $f(x)$ can be made arbitrarily close to $L$ by taking $x$ sufficiently close to $a$ on either side of $a$, but not equal to $a$.
+* Suppose $f(x)$ is defined when $x$ is near $a$, possibly except at $a$ itself.
+
+* We write the following limit and say that **the limit of $f(x)$ as $x$ approaches $a$ is $L$** if the values of $f(x)$ can be made arbitrarily close to $L$ by taking $x$ sufficiently close to $a$ on either side of $a$, but not equal to $a$.
 
 $$
 \lim_{x\to a}f(x)=L
 $$
-<div class="definition-end">$\blacksquare$</div>
 
 * Roughly speaking, the values of $f(x)$ approach $L$ as $x$ approaches $a$.
 
 * The function does not even have to be defined at $x=a$ for the limit to exist.
+
 
 <div style="text-align: center;">
 <img src="../images/0602.png" style="width: 1800px; border-radius: 12px; display: block; margin: 0 auto 10px auto;">
@@ -312,6 +334,14 @@ $$
 
 <div class="example-end">$\blacksquare$</div>
 
+## 1.4 Limits and Technology
+
+* Calculators and computer algebra systems can be useful when investigating limits numerically.
+
+* However, numerical calculations can sometimes produce false impressions because of rounding and finite numerical precision.
+
+* Therefore, tables and graphs should be viewed as tools for **estimating and understanding** a limit rather than as proof that a limit has a particular value.
+
 # Quick Check
 
 ## Question 1 {.red}
@@ -334,15 +364,27 @@ Use the following information to estimate the limit.
 
 What value does $f(x)$ appear to approach as $x\to1$?
 
+## Answer {.red}
+
+$$
+\boxed{2}
+$$
+
 ## Question 2 {.red}
 
 If $f(x)$ approaches $5$ as $x$ approaches $3$, but $f(3)=10$, what is $\lim_{x\to3}f(x)$?
+
+## Answer {.red}
+
+$$
+\boxed{5}
+$$
 
 <div class="questions-end">$\blacksquare$</div>
 
 # Objective 2: One-Sided Limits
 
-## Approaching from One Side
+## 2.1 Approaching from One Side
 
 * Sometimes we are interested in what happens as $x$ approaches $a$ from only one direction.
 
@@ -358,7 +400,46 @@ $$
 x\to a^+
 $$
 
-## Intuitive Definitions of One-Sided Limits
+## 2.2 The Heaviside Function
+
+* Consider the Heaviside function $H$ defined by
+
+$$
+H(t)=
+\begin{cases}
+0 & \text{if }t<0\\
+1 & \text{if }t\geq0
+\end{cases}
+$$
+
+* This function can describe an electric current that is switched on at time $t=0$.
+
+
+<div style="text-align: center;">
+<img src="../images/0604.png" style="width: 725px; border-radius: 12px; display: block; margin: 0 auto 10px auto;">
+
+<span><strong>Figure 4.</strong> The graph of the Heaviside function.</span>
+</div>
+
+* As $t$ approaches $0$ from the left, $H(t)$ approaches $0$.
+
+* As $t$ approaches $0$ from the right, $H(t)$ approaches $1$.
+
+* Since the two values are different, there is no single two-sided limit at $t=0$.
+
+* We write
+
+$$
+\lim_{t\to0^-}H(t)=0
+\qquad
+\text{and}
+\qquad
+\lim_{t\to0^+}H(t)=1
+$$
+
+* These are called the **left-hand limit** and **right-hand limit**, respectively.
+
+## 2.3 Intuitive Definitions of One-Sided Limits
 
 * We write the following limit when the values of $f(x)$ can be made arbitrarily close to $L$ by restricting $x$ to be sufficiently close to $a$ with $x<a$.
 
@@ -383,7 +464,7 @@ $$
 
 * For example, $x\to5^-$ means that we consider only values $x<5$, while $x\to5^+$ means that we consider only values $x>5$.
 
-## Relationship Between One-Sided and Two-Sided Limits
+## 2.4 Relationship Between One-Sided and Two-Sided Limits
 
 * A two-sided limit exists only if both one-sided limits exist and are equal.
 
@@ -492,6 +573,12 @@ $$
 
 What is the two-sided limit?
 
+## Answer {.red}
+
+$$
+\boxed{\lim_{x\to3}f(x)=4}
+$$
+
 ## Question 2 {.red}
 
 Suppose
@@ -506,11 +593,19 @@ $$
 
 Does $\lim_{x\to2}f(x)$ exist?
 
+## Answer {.red}
+
+No, because the two one-sided limits are different.
+
+$$
+\boxed{\text{The two-sided limit does not exist}}
+$$
+
 <div class="questions-end">$\blacksquare$</div>
 
 # Objective 3: How Can a Limit Fail to Exist?
 
-## Different One-Sided Limits
+## 3.1 Different One-Sided Limits
 
 * The first way a limit can fail to exist is when the left-hand and right-hand limits are different.
 
@@ -536,7 +631,7 @@ $$
 \boxed{\lim_{x\to2}g(x)\text{ does not exist}}
 $$
 
-## Oscillation
+## 3.2 Oscillation
 
 * A second way a limit can fail to exist is when the function oscillates between different values and does not approach a single number.
 
@@ -610,6 +705,365 @@ $$
 This example shows why checking only a few calculator values can lead to a wrong conclusion.
 
 <div class="example-end">$\blacksquare$</div>
+
+## 3.3 Unbounded Behavior
+
+* A third situation occurs when the function values become arbitrarily large in magnitude as $x$ approaches a particular number.
+
+* Consider
+
+$$
+f(x)=\frac1{x^2}
+$$
+
+* As $x$ approaches $0$, the denominator becomes very small and positive.
+
+* Consequently, $1/x^2$ becomes larger and larger.
+
+## Example 6 {.green}
+
+Find
+
+$$
+\lim_{x\to0}\frac1{x^2}
+$$
+
+if it exists
+
+## Solution {.green}
+
+Some values of the function are
+
+<div style="text-align: center;">
+
+<span><strong>Table 7.</strong> Values of $x$ and corresponding function values.</span>
+
+</div>
+
+|        $x$ | $\dfrac1{x^2}$ |
+| ---------: | -------------: |
+|     $\pm1$ |            $1$ |
+|   $\pm0.5$ |            $4$ |
+|   $\pm0.2$ |           $25$ |
+|   $\pm0.1$ |          $100$ |
+|  $\pm0.05$ |          $400$ |
+|  $\pm0.01$ |       $10,000$ |
+| $\pm0.001$ |    $1,000,000$ |
+
+The values become larger and larger as $x$ approaches $0$.
+
+Therefore, the function does not approach a finite number.
+
+We express this behavior by writing
+
+$$
+\boxed{\lim_{x\to0}\frac1{x^2}=\infty}
+$$
+
+The symbol $\infty$ does **not** represent a number.
+
+It indicates that the function values become arbitrarily large.
+
+
+<div style="text-align: center;">
+<img src="../images/0608.png" style="width: 1627px; border-radius: 12px; display: block; margin: 0 auto 10px auto;">
+
+<span><strong>Figure 8.</strong> Graph of $y=\dfrac1{x^2}$ showing unbounded behavior near $x=0$.</span>
+</div>
+
+## 3.4 Infinite Limits
+
+* In general, the following limit means that $f(x)$ can be made arbitrarily large by taking $x$ sufficiently close to $a$, but not equal to $a$.
+
+$$
+\lim_{x\to a}f(x)=\infty
+$$
+
+* Similarly, below limit means that $f(x)$ becomes arbitrarily large in the negative direction as $x$ approaches $a$.
+
+$$
+\lim_{x\to a}f(x)=-\infty
+$$
+
+* These expressions describe behavior; they do not mean that the limit exists as an ordinary real number.
+
+## 3.5 Another Form of Unbounded Behavior
+
+* Consider
+
+$$
+f(x)=-\frac1{x^2}
+$$
+
+* As $x$ approaches $0$, the function values become arbitrarily large in the negative direction.
+
+* Therefore,
+
+$$
+\boxed{\lim_{x\to0}\left(-\frac1{x^2}\right)=-\infty}
+$$
+
+
+<div style="text-align: center;">
+<img src="../images/0609.png" style="width: 728px; border-radius: 12px; display: block; margin: 0 auto 10px auto;">
+
+<span><strong>Figure 9.</strong> Graph illustrating a function whose values decrease without bound as $x$ approaches a point.</span>
+</div>
+
+# Quick Check
+
+## Question 1 {.red}
+
+Does the following limit exist?
+
+$$
+\lim_{x\to0}\sin\frac1x
+$$
+
+## Answer {.red}
+
+No. The function oscillates between $-1$ and $1$ infinitely often near $0$.
+
+$$
+\boxed{\text{Does not exist}}
+$$
+
+## Question 2 {.red}
+
+What type of behavior is represented by
+
+$$
+\lim_{x\to2}f(x)=\infty
+$$
+
+## Answer {.red}
+
+The function values become arbitrarily large as $x$ approaches $2$.
+
+$$
+\boxed{\text{$f(x)$ increases without bound as $x\to2$}}
+$$
+
+<div class="questions-end">$\blacksquare$</div>
+
+# Objective 4: Infinite Limits; Vertical Asymptotes
+
+## 4.1 Vertical Asymptotes
+
+* The unbounded behavior of a function is closely related to the idea of a vertical asymptote.
+
+* A vertical line $x=a$ is called a **vertical asymptote** of the curve $y=f(x)$ if at least one of the following one-sided or two-sided limits is infinite:
+
+$$
+\lim_{x\to a^-}f(x)=\infty
+$$
+
+$$
+\lim_{x\to a^+}f(x)=\infty
+$$
+
+$$
+\lim_{x\to a}f(x)=\infty
+$$
+
+$$
+\lim_{x\to a^-}f(x)=-\infty
+$$
+
+$$
+\lim_{x\to a^+}f(x)=-\infty
+$$
+
+$$
+\lim_{x\to a}f(x)=-\infty
+$$
+
+* Thus, a vertical asymptote describes a value of $x$ near which the function becomes unbounded.
+
+## 4.2 Determining Vertical Asymptotes Using One-Sided Limits
+
+## Example 7 {.green}
+
+Does the curve
+
+$$
+y=\frac{2x}{x-3}
+$$
+
+have a vertical asymptote?
+
+## Solution {.green}
+
+A potential vertical asymptote occurs where the denominator is zero.
+
+We solve
+
+$$
+x-3=0
+$$
+
+giving
+
+$$
+x=3
+$$
+
+We therefore investigate the behavior from both sides.
+
+If $x$ is close to $3$ but greater than $3$, then $x-3$ is a small positive number, while $2x$ is close to $6$.
+
+Therefore, the quotient becomes very large and positive.
+
+$$
+\boxed{\lim_{x\to3^+}\frac{2x}{x-3}=\infty}
+$$
+
+If $x$ is close to $3$ but less than $3$, then $x-3$ is a small negative number, while $2x$ is still positive.
+
+Therefore, the quotient becomes very large and negative.
+
+$$
+\boxed{\lim_{x\to3^-}\frac{2x}{x-3}=-\infty}
+$$
+
+Hence, the line
+
+$$
+\boxed{x=3}
+$$
+
+is a vertical asymptote.
+
+
+<div style="text-align: center;">
+<img src="../images/0610.png" style="width: 728px; border-radius: 12px; display: block; margin: 0 auto 10px auto;">
+
+<span><strong>Figure 10.</strong> Graph of $y=\dfrac{2x}{x-3}$ showing the vertical asymptote $x=3$.</span>
+</div>
+
+### Important Note
+
+Neither of the two-sided infinite limits is an ordinary finite limit.
+
+In this example, because the function approaches $+\infty$ from one side and $-\infty$ from the other, it is more appropriate to describe the behavior using the two one-sided limits.
+
+<div class="example-end">$\blacksquare$</div>
+
+## 4.3 Vertical Asymptotes of the Tangent Function
+
+## Example 8 {.green}
+
+Find the vertical asymptotes of $f(x)=\tan x$
+
+## Solution {.green}
+
+Since
+
+$$
+\tan x=\frac{\sin x}{\cos x}
+$$
+
+potential vertical asymptotes occur where
+
+$$
+\cos x=0
+$$
+
+The solutions are
+
+$$
+x=\frac{\pi}{2}+n\pi
+$$
+
+where $n$ is any integer.
+
+For example, near $x=\pi/2$,
+
+$$
+\lim_{x\to(\pi/2)^-}\tan x=\infty
+$$
+
+and
+
+$$
+\lim_{x\to(\pi/2)^+}\tan x=-\infty
+$$
+
+Therefore,
+
+$$
+\boxed{x=\frac{\pi}{2}+n\pi,\qquad n\in\mathbb Z}
+$$
+
+are the vertical asymptotes of $y=\tan x$.
+
+
+<div style="text-align: center;">
+<img src="../images/0614.png" style="width: 711px; border-radius: 12px; display: block; margin: 0 auto 10px auto;">
+
+<span><strong>Figure 11.</strong> Graph of $y=\tan x$ showing its vertical asymptotes.</span>
+</div>
+
+## 4.4 Vertical Asymptote of the Natural Logarithm
+
+* Another example of a function with a vertical asymptote is the natural logarithm
+
+$$
+y=\ln x
+$$
+
+* As $x$ approaches $0$ from the right, the logarithm decreases without bound.
+
+$$
+\boxed{\lim_{x\to0^+}\ln x=-\infty}
+$$
+
+
+<div style="text-align: center;">
+<img src="../images/0615.png" style="width: 513px; border-radius: 12px; display: block; margin: 0 auto 10px auto;">
+
+<span><strong>Figure 12.</strong> Graph of $y=\ln x$ showing the vertical asymptote $x=0$.</span>
+</div>
+
+* Therefore, the line $x=0$ is a vertical asymptote of $y=\ln x$.
+
+* The same idea applies to $y=\log_bx$ when $b>1$.
+
+# Quick Check
+
+## Question 1 {.red}
+
+Determine the vertical asymptote of
+
+$$
+f(x)=\frac1{x-4}
+$$
+
+## Answer {.red}
+
+The denominator is zero at $x=4$.
+
+$$
+\boxed{x=4}
+$$
+
+## Question 2 {.red}
+
+Determine the vertical asymptotes of
+
+$$
+f(x)=\tan x
+$$
+
+## Answer {.red}
+
+Vertical asymptotes occur where $\cos x=0$.
+
+$$
+\boxed{x=\frac{\pi}{2}+n\pi,\qquad n\in\mathbb Z}
+$$
+
+<div class="questions-end">$\blacksquare$</div>
 
 # Scenario Problem
 
