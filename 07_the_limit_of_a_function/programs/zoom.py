@@ -1,0 +1,55 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+def f(t):
+    return (np.sqrt(t**2 + 9) - 3) / t**2
+
+t_values = np.linspace(-5, 5, 1000)
+plt.plot(t_values, f(t_values), linewidth=2, color='k')
+plt.xticks(fontsize=12, fontweight='bold')
+plt.yticks(fontsize=12, fontweight='bold')
+plt.xlabel('t', fontsize=14, fontweight='bold')
+plt.ylabel('f(t)', fontsize=14, fontweight='bold')
+plt.title("Big Jumps", fontsize=16, fontweight='bold')
+plt.grid(True)
+plt.show()
+
+t_values = np.linspace(-0.01, 0.01, 1000)
+plt.plot(t_values, f(t_values), linewidth=2, color='k')
+plt.xticks(fontsize=12, fontweight='bold')
+plt.yticks(fontsize=12, fontweight='bold')
+plt.xlabel('t', fontsize=14, fontweight='bold')
+plt.ylabel('f(t)', fontsize=14, fontweight='bold')
+plt.title("Very Small Jumps", fontsize=16, fontweight='bold')
+plt.grid(True)
+plt.show()
+
+t_values = np.linspace(-0.000001, 0.000001, 1000)
+plt.plot(t_values, f(t_values), linewidth=2, color='k')
+plt.xticks(fontsize=12, fontweight='bold')
+plt.yticks(fontsize=12, fontweight='bold')
+plt.xlabel('t', fontsize=14, fontweight='bold')
+plt.ylabel('f(t)', fontsize=14, fontweight='bold')
+plt.title("Microscopic Jumps", fontsize=16, fontweight='bold')
+plt.grid(True)
+plt.show()
+
+t_values = np.linspace(-0.0000001, 0.0000001, 1000)
+plt.plot(t_values, f(t_values), linewidth=2, color='k')
+plt.xticks(fontsize=12, fontweight='bold')
+plt.yticks(fontsize=12, fontweight='bold')
+plt.xlabel('t', fontsize=14, fontweight='bold')
+plt.ylabel('f(t)', fontsize=14, fontweight='bold')
+plt.title("Ten Times Smaller Microscopic Jumps", fontsize=16, fontweight='bold')
+plt.grid(True)
+plt.show()
+
+t_values = np.linspace(-0.00000001, 0.00000001, 1000)
+plt.plot(t_values, f(t_values), linewidth=2, color='k')
+plt.xticks(fontsize=12, fontweight='bold')
+plt.yticks(fontsize=12, fontweight='bold')
+plt.xlabel('t', fontsize=14, fontweight='bold')
+plt.ylabel('f(t)', fontsize=14, fontweight='bold')
+plt.title("100 Times Stronger Microscopic Jumps", fontsize=16, fontweight='bold')
+plt.grid(True)
+plt.show()

@@ -100,7 +100,7 @@ After preparing this topic, you should be able
 
 # Objective 1: Finding Limits Numerically and Graphically
 
-## 1.1 Investigating a Limit Numerically
+## Investigating a Limit Numerically
 
 * We begin by considering the function
 
@@ -137,7 +137,7 @@ $$
 
 * Notice that the question concerns what happens **near** $x=1$, not necessarily what happens at $x=1$ itself.
 
-## 1.2 Investigating a Limit Graphically
+## Investigating a Limit Graphically
 
 * The same function can be investigated by examining its graph.
 
@@ -152,7 +152,7 @@ $$
 
 * Thus, numerical tables and graphs give two complementary ways of investigating a limit.
 
-## 1.3 Intuitive Definition of a Limit
+## Intuitive Definition of a Limit
 
 * Suppose $f(x)$ is defined when $x$ is near $a$, possibly except at $a$ itself.
 
@@ -231,6 +231,73 @@ $$
 
 This example shows that numerical calculations are useful for estimating limits, but they must be used carefully.
 
+<div style="text-align: center;">
+<img src="../images/0603.png" style="width: 1600px; border-radius: 12px; display: block; margin: 0 auto 10px auto;">
+
+<span><strong>Figure 3.</strong> The graph of $y=\dfrac{\sin x}{x}$ near $x=0$.</span>
+</div>
+
+The following Python programs shows that the behaviour of the function is captured with small step increments (in the order of $1 \times 10^{-6}$)in the independent variable near the limiting points.
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+def f(t):
+    return (np.sqrt(t**2 + 9) - 3) / t**2
+
+t_values = np.linspace(-5, 5, 1000)
+plt.plot(t_values, f(t_values), linewidth=2, color='k')
+plt.xticks(fontsize=12, fontweight='bold')
+plt.yticks(fontsize=12, fontweight='bold')
+plt.xlabel('t', fontsize=14, fontweight='bold')
+plt.ylabel('f(t)', fontsize=14, fontweight='bold')
+plt.title("Big Jumps", fontsize=16, fontweight='bold')
+plt.grid(True)
+plt.show()
+
+t_values = np.linspace(-0.01, 0.01, 1000)
+plt.plot(t_values, f(t_values), linewidth=2, color='k')
+plt.xticks(fontsize=12, fontweight='bold')
+plt.yticks(fontsize=12, fontweight='bold')
+plt.xlabel('t', fontsize=14, fontweight='bold')
+plt.ylabel('f(t)', fontsize=14, fontweight='bold')
+plt.title("Very Small Jumps", fontsize=16, fontweight='bold')
+plt.grid(True)
+plt.show()
+
+t_values = np.linspace(-0.000001, 0.000001, 1000)
+plt.plot(t_values, f(t_values), linewidth=2, color='k')
+plt.xticks(fontsize=12, fontweight='bold')
+plt.yticks(fontsize=12, fontweight='bold')
+plt.xlabel('t', fontsize=14, fontweight='bold')
+plt.ylabel('f(t)', fontsize=14, fontweight='bold')
+plt.title("Microscopic Jumps", fontsize=16, fontweight='bold')
+plt.grid(True)
+plt.show()
+
+t_values = np.linspace(-0.0000001, 0.0000001, 1000)
+plt.plot(t_values, f(t_values), linewidth=2, color='k')
+plt.xticks(fontsize=12, fontweight='bold')
+plt.yticks(fontsize=12, fontweight='bold')
+plt.xlabel('t', fontsize=14, fontweight='bold')
+plt.ylabel('f(t)', fontsize=14, fontweight='bold')
+plt.title("Ten Times Smaller Microscopic Jumps", fontsize=16, fontweight='bold')
+plt.grid(True)
+plt.show()
+
+t_values = np.linspace(-0.00000001, 0.00000001, 1000)
+plt.plot(t_values, f(t_values), linewidth=2, color='k')
+plt.xticks(fontsize=12, fontweight='bold')
+plt.yticks(fontsize=12, fontweight='bold')
+plt.xlabel('t', fontsize=14, fontweight='bold')
+plt.ylabel('f(t)', fontsize=14, fontweight='bold')
+plt.title("100 Times Stronger Microscopic Jumps", fontsize=16, fontweight='bold')
+plt.grid(True)
+plt.show()
+
+```
+
 <div class="example-end">$\blacksquare$</div>
 
 ## Example 2 {.green}
@@ -276,11 +343,10 @@ $$
 
 This result is correct and will later be established using a geometric argument.
 
-
 <div style="text-align: center;">
-<img src="../images/0603.png" style="width: 1600px; border-radius: 12px; display: block; margin: 0 auto 10px auto;">
+<img src="../images/0604.png" style="width: 725px; border-radius: 12px; display: block; margin: 0 auto 10px auto;">
 
-<span><strong>Figure 3.</strong> The graph of $y=\dfrac{\sin x}{x}$ near $x=0$.</span>
+<span><strong>Figure 4.</strong> The graph of the Heaviside function.</span>
 </div>
 
 <div class="example-end">$\blacksquare$</div>
@@ -334,7 +400,7 @@ $$
 
 <div class="example-end">$\blacksquare$</div>
 
-## 1.4 Limits and Technology
+## Limits and Technology
 
 * Calculators and computer algebra systems can be useful when investigating limits numerically.
 
@@ -364,27 +430,15 @@ Use the following information to estimate the limit.
 
 What value does $f(x)$ appear to approach as $x\to1$?
 
-## Answer {.red}
-
-$$
-\boxed{2}
-$$
-
 ## Question 2 {.red}
 
 If $f(x)$ approaches $5$ as $x$ approaches $3$, but $f(3)=10$, what is $\lim_{x\to3}f(x)$?
-
-## Answer {.red}
-
-$$
-\boxed{5}
-$$
 
 <div class="questions-end">$\blacksquare$</div>
 
 # Objective 2: One-Sided Limits
 
-## 2.1 Approaching from One Side
+## Approaching from One Side
 
 * Sometimes we are interested in what happens as $x$ approaches $a$ from only one direction.
 
@@ -400,7 +454,7 @@ $$
 x\to a^+
 $$
 
-## 2.2 The Heaviside Function
+## The Heaviside Function
 
 * Consider the Heaviside function $H$ defined by
 
@@ -413,13 +467,6 @@ H(t)=
 $$
 
 * This function can describe an electric current that is switched on at time $t=0$.
-
-
-<div style="text-align: center;">
-<img src="../images/0604.png" style="width: 725px; border-radius: 12px; display: block; margin: 0 auto 10px auto;">
-
-<span><strong>Figure 4.</strong> The graph of the Heaviside function.</span>
-</div>
 
 * As $t$ approaches $0$ from the left, $H(t)$ approaches $0$.
 
@@ -439,19 +486,21 @@ $$
 
 * These are called the **left-hand limit** and **right-hand limit**, respectively.
 
-## 2.3 Intuitive Definitions of One-Sided Limits
+## Definition: Intuitive Definitions of One-Sided Limits {.blue}
 
-* We write the following limit when the values of $f(x)$ can be made arbitrarily close to $L$ by restricting $x$ to be sufficiently close to $a$ with $x<a$.
+We write the following limit when the values of $f(x)$ can be made arbitrarily close to $L$ by restricting $x$ to be sufficiently close to $a$ with $x<a$.
 
 $$
 \lim_{x\to a^-}f(x)=L
 $$
 
-* Similarly, the following limit means means that the values of $f(x)$ can be made arbitrarily close to $L$ by restricting $x$ to be sufficiently close to $a$ with $x>a$.
+Similarly, the following limit means means that the values of $f(x)$ can be made arbitrarily close to $L$ by restricting $x$ to be sufficiently close to $a$ with $x>a$.
 
 $$
 \lim_{x\to a^+}f(x)=L
 $$
+
+<div class="definition-end">$\blacksquare$</div>
 
 * Thus, the only difference between one-sided and ordinary limits is the direction from which $x$ approaches $a$.
 
@@ -464,7 +513,7 @@ $$
 
 * For example, $x\to5^-$ means that we consider only values $x<5$, while $x\to5^+$ means that we consider only values $x>5$.
 
-## 2.4 Relationship Between One-Sided and Two-Sided Limits
+## Relationship Between One-Sided and Two-Sided Limits
 
 * A two-sided limit exists only if both one-sided limits exist and are equal.
 
@@ -479,6 +528,12 @@ $$
 \lim_{x\to a^+}f(x)=L
 }
 $$
+
+<div style="text-align: center;">
+<img src="../images/0606.png" style="width: 1642px; border-radius: 12px; display: block; margin: 0 auto 10px auto;">
+
+<span><strong>Figure 6.</strong> Graph of the function $g$ used to determine its one-sided and two-sided limits.</span>
+</div>
 
 ## Example 4 {.green}
 
@@ -508,11 +563,10 @@ $$
 \text{(f)}\quad\lim_{x\to5}g(x)
 $$
 
-
 <div style="text-align: center;">
-<img src="../images/0606.png" style="width: 1642px; border-radius: 12px; display: block; margin: 0 auto 10px auto;">
+<img src="../images/0607.png" style="width: 719px; display: block; margin: 0 auto 10px auto;">
 
-<span><strong>Figure 6.</strong> Graph of the function $g$ used to determine its one-sided and two-sided limits.</span>
+<span><strong>Figure 7.</strong> The graph of a function $g$.</span>
 </div>
 
 ## Solution {.green}
@@ -573,12 +627,6 @@ $$
 
 What is the two-sided limit?
 
-## Answer {.red}
-
-$$
-\boxed{\lim_{x\to3}f(x)=4}
-$$
-
 ## Question 2 {.red}
 
 Suppose
@@ -591,21 +639,13 @@ $$
 \lim_{x\to2^+}f(x)=7
 $$
 
-Does $\lim_{x\to2}f(x)$ exist?
-
-## Answer {.red}
-
-No, because the two one-sided limits are different.
-
-$$
-\boxed{\text{The two-sided limit does not exist}}
-$$
+Does $\lim_{x\to2} f(x)$ exist?
 
 <div class="questions-end">$\blacksquare$</div>
 
 # Objective 3: How Can a Limit Fail to Exist?
 
-## 3.1 Different One-Sided Limits
+## Different One-Sided Limits
 
 * The first way a limit can fail to exist is when the left-hand and right-hand limits are different.
 
@@ -631,9 +671,11 @@ $$
 \boxed{\lim_{x\to2}g(x)\text{ does not exist}}
 $$
 
-## 3.2 Oscillation
+## Oscillation
 
 * A second way a limit can fail to exist is when the function oscillates between different values and does not approach a single number.
+
+* The similar behaviour was observed in Example 1.
 
 ## Example 5 {.green}
 
@@ -691,9 +733,9 @@ Thus, as $x$ approaches $0$, the function continues to oscillate between $-1$ an
 
 
 <div style="text-align: center;">
-<img src="../images/0607.png" style="width: 719px; border-radius: 12px; display: block; margin: 0 auto 10px auto;">
+<img src="../images/0608.png" style="width: 1600px; display: block; margin: 0 auto 10px auto;">
 
-<span><strong>Figure 7.</strong> Graph of $y=\sin(\pi/x)$ showing increasingly rapid oscillation near $x=0$.</span>
+<span><strong>Figure 8.1.</strong> Graph of $y=\sin(\pi/x)$ showing increasingly rapid oscillation near $x=0$.</span>
 </div>
 
 Because the function does not approach a single fixed number,
@@ -704,9 +746,43 @@ $$
 
 This example shows why checking only a few calculator values can lead to a wrong conclusion.
 
+The following Python program shows this behaviour in depth.
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+def f(x):
+    return np.sin(np.pi / x)
+
+
+x_left = np.linspace(-1, -0.0003, 10000)
+x_right = np.linspace(0.0003, 1, 10000)
+
+y_left = f(x_left)
+y_right = f(x_right)
+
+plt.plot(x_left, y_left, linewidth=2)
+plt.plot(x_right, y_right, linewidth=2)
+plt.xticks(fontsize=12, fontweight='bold')
+plt.yticks(fontsize=12, fontweight='bold')
+plt.xlabel('x', fontsize=14, fontweight='bold')
+plt.ylabel('f(x)', fontsize=14, fontweight='bold')
+plt.grid(True)
+plt.show()
+```
+
+The output of this program is shown below.
+
+<div style="text-align: center;">
+<img src="../images/06my02.png" style="width: 1600px; display: block; margin: 0 auto 10px auto;">
+
+<span><strong>Figure 8.2.</strong> The graph of $\sin \frac{\pi}{x}$ for $-1 \leq x \leq 1$.</span>
+</div>
+
 <div class="example-end">$\blacksquare$</div>
 
-## 3.3 Unbounded Behavior
+## Unbounded Behavior
 
 * A third situation occurs when the function values become arbitrarily large in magnitude as $x$ approaches a particular number.
 
@@ -766,12 +842,12 @@ It indicates that the function values become arbitrarily large.
 
 
 <div style="text-align: center;">
-<img src="../images/0608.png" style="width: 1627px; border-radius: 12px; display: block; margin: 0 auto 10px auto;">
+<img src="../images/0609.png" style="width: 728px; display: block; margin: 0 auto 10px auto;">
 
-<span><strong>Figure 8.</strong> Graph of $y=\dfrac1{x^2}$ showing unbounded behavior near $x=0$.</span>
+<span><strong>Figure 9.</strong> Graph of $y=\dfrac1{x^2}$ showing unbounded behavior near $x=0$.</span>
 </div>
 
-## 3.4 Infinite Limits
+## Infinite Limits
 
 * In general, the following limit means that $f(x)$ can be made arbitrarily large by taking $x$ sufficiently close to $a$, but not equal to $a$.
 
@@ -787,7 +863,7 @@ $$
 
 * These expressions describe behavior; they do not mean that the limit exists as an ordinary real number.
 
-## 3.5 Another Form of Unbounded Behavior
+## Another Form of Unbounded Behavior
 
 * Consider
 
@@ -803,13 +879,6 @@ $$
 \boxed{\lim_{x\to0}\left(-\frac1{x^2}\right)=-\infty}
 $$
 
-
-<div style="text-align: center;">
-<img src="../images/0609.png" style="width: 728px; border-radius: 12px; display: block; margin: 0 auto 10px auto;">
-
-<span><strong>Figure 9.</strong> Graph illustrating a function whose values decrease without bound as $x$ approaches a point.</span>
-</div>
-
 # Quick Check
 
 ## Question 1 {.red}
@@ -820,35 +889,19 @@ $$
 \lim_{x\to0}\sin\frac1x
 $$
 
-## Answer {.red}
-
-No. The function oscillates between $-1$ and $1$ infinitely often near $0$.
-
-$$
-\boxed{\text{Does not exist}}
-$$
-
 ## Question 2 {.red}
 
 What type of behavior is represented by
 
 $$
-\lim_{x\to2}f(x)=\infty
-$$
-
-## Answer {.red}
-
-The function values become arbitrarily large as $x$ approaches $2$.
-
-$$
-\boxed{\text{$f(x)$ increases without bound as $x\to2$}}
+\lim_{x\to2} f(x)=\infty
 $$
 
 <div class="questions-end">$\blacksquare$</div>
 
 # Objective 4: Infinite Limits; Vertical Asymptotes
 
-## 4.1 Vertical Asymptotes
+## Vertical Asymptotes
 
 * The unbounded behavior of a function is closely related to the idea of a vertical asymptote.
 
@@ -880,7 +933,7 @@ $$
 
 * Thus, a vertical asymptote describes a value of $x$ near which the function becomes unbounded.
 
-## 4.2 Determining Vertical Asymptotes Using One-Sided Limits
+## Determining Vertical Asymptotes Using One-Sided Limits
 
 ## Example 7 {.green}
 
@@ -949,7 +1002,7 @@ In this example, because the function approaches $+\infty$ from one side and $-\
 
 <div class="example-end">$\blacksquare$</div>
 
-## 4.3 Vertical Asymptotes of the Tangent Function
+## Vertical Asymptotes of the Tangent Function
 
 ## Example 8 {.green}
 
@@ -1004,7 +1057,7 @@ are the vertical asymptotes of $y=\tan x$.
 <span><strong>Figure 11.</strong> Graph of $y=\tan x$ showing its vertical asymptotes.</span>
 </div>
 
-## 4.4 Vertical Asymptote of the Natural Logarithm
+## Vertical Asymptote of the Natural Logarithm
 
 * Another example of a function with a vertical asymptote is the natural logarithm
 
@@ -1039,28 +1092,12 @@ $$
 f(x)=\frac1{x-4}
 $$
 
-## Answer {.red}
-
-The denominator is zero at $x=4$.
-
-$$
-\boxed{x=4}
-$$
-
 ## Question 2 {.red}
 
 Determine the vertical asymptotes of
 
 $$
 f(x)=\tan x
-$$
-
-## Answer {.red}
-
-Vertical asymptotes occur where $\cos x=0$.
-
-$$
-\boxed{x=\frac{\pi}{2}+n\pi,\qquad n\in\mathbb Z}
 $$
 
 <div class="questions-end">$\blacksquare$</div>
@@ -1218,3 +1255,23 @@ $$
 $$
 
 * The central idea of this topic is therefore that **limits describe local behavior**: they tell us what a function approaches, how it approaches from each side, and whether its behavior remains finite, oscillates, or becomes unbounded.
+
+# Exercises
+
+## Exercises Set 1
+
+Solve the odd number exercises from exercise 1 to 51.
+
+## Exercise Set 2 (Reading Material)
+
+Self study objective 4 (Infinite Limits; Vertical Asymptotes)
+
+* Exercises help transform theoretical concepts into practical understanding.
+
+* Mathematics is learned by doing and solving exercises will train you to analyze problems, select appropriate methods, and construct logical solutions.
+
+* Attempting problems sometimes leads to mistakes which provide opportunities for learning and improvement.
+
+* Regular practice increases speed, accuracy, and confidence.
+
+* Exercises are given in the Exercises file and you are expected to solve them on your own.

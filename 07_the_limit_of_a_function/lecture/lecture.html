@@ -1,0 +1,1660 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>lecture</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    q { quotes: "“" "”" "‘" "’"; }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../styles/style.css" />
+  <script defer=""
+  src="/usr/share/javascript/katex/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <link rel="stylesheet"
+  href="/usr/share/javascript/katex/katex.min.css" />
+</head>
+<body>
+<h1 id="calculus-and-analytical-geometry">Calculus and Analytical
+Geometry</h1>
+<h2 id="the-limit-of-a-function">The Limit of a Function</h2>
+<h3 id="dr.-aamir-alaud-din">Dr. Aamir Alaud Din</h3>
+<h3 id="august-29-2026">August 29, 2026</h3>
+<h1 id="objectives">Objectives</h1>
+<p>After preparing this topic, you should be able</p>
+<ol type="1">
+<li><p>To estimate and interpret the limit of a function numerically and
+graphically as the independent variable approaches a particular
+value.</p></li>
+<li><p>To understand left-hand and right-hand limits and use them to
+determine whether a two-sided limit exists.</p></li>
+<li><p>To identify the different ways in which a limit can fail to exist
+and recognize why numerical calculations and graphs can sometimes give
+misleading conclusions.</p></li>
+<li><p>To understand infinite limits and use one-sided behavior to
+identify vertical asymptotes of functions.</p></li>
+</ol>
+<h1 id="the-why-section">The Why Section</h1>
+<h2
+id="objective-1-why-study-limits-numerically-and-graphically">Objective
+1: Why Study Limits Numerically and Graphically?</h2>
+<ul>
+<li><p>In engineering, we frequently need to understand what happens to
+a physical quantity when another quantity gets very close to a
+particular value.</p></li>
+<li><p>For example, suppose the displacement of a vibrating mechanical
+component is described by a function <span
+class="math inline">s(t)</span>, and we want to know what happens to its
+velocity as the time <span class="math inline">t</span> approaches a
+particular instant.</p></li>
+<li><p>At first, we may not have an algebraic method for calculating the
+required value directly.</p></li>
+<li><p>We can instead investigate values of the function for numbers
+increasingly close to the point of interest and observe the
+corresponding behavior.</p></li>
+<li><p>Tables provide numerical evidence, while graphs allow us to see
+the overall behavior visually.</p></li>
+<li><p>Therefore, numerical and graphical methods provide an intuitive
+first approach to the concept of a limit.</p></li>
+<li><p>The following type of mechanical-engineering problem can be
+handled by studying the first objective.</p></li>
+<li><p>A sensor records the response of a mechanical system by a
+function <span class="math inline">R(t)</span>. The system behaves
+differently at an exact operating time, but we want to determine what
+value the response approaches as <span class="math inline">t</span> gets
+closer and closer to that time.</p></li>
+<li><p>We will be able to estimate the required value from a table and
+graph.</p></li>
+</ul>
+<h2 id="objective-2-why-study-one-sided-limits">Objective 2: Why Study
+One-Sided Limits?</h2>
+<ul>
+<li><p>In many physical systems, behavior may be different immediately
+before and immediately after a particular point.</p></li>
+<li><p>For example, a mechanical mechanism may change its operating mode
+when a control parameter reaches a critical value.</p></li>
+<li><p>The response approaching the critical value from below may
+therefore be different from the response approaching it from
+above.</p></li>
+<li><p>A two-sided limit can exist only when the function approaches the
+same value from both directions.</p></li>
+<li><p>Therefore, left-hand and right-hand limits allow us to examine
+the behavior on each side separately.</p></li>
+<li><p>This idea is especially useful for piecewise-defined functions,
+switching mechanisms, and engineering models involving sudden
+changes.</p></li>
+<li><p>The following type of problem can be handled by studying
+one-sided limits.</p></li>
+<li><p>A mechanical control system changes its operating rule when the
+input reaches a critical setting <span
+class="math inline">c</span>.</p></li>
+<li><p>We want to determine whether the system response approaches the
+same value as the setting approaches <span class="math inline">c</span>
+from below and from above.</p></li>
+</ul>
+<h2 id="objective-3-why-study-how-a-limit-can-fail-to-exist">Objective
+3: Why Study How a Limit Can Fail to Exist?</h2>
+<ul>
+<li><p>It is not always true that a function approaches a single number
+as <span class="math inline">x</span> approaches a particular
+value.</p></li>
+<li><p>A limit can fail to exist because the left-hand and right-hand
+limits are different.</p></li>
+<li><p>A limit can also fail to exist because the function oscillates
+indefinitely or because its values become arbitrarily large.</p></li>
+<li><p>Recognizing these possibilities prevents us from making an
+incorrect conclusion simply by examining a few numerical
+values.</p></li>
+<li><p>This is important in engineering because oscillatory behavior and
+rapidly increasing responses can indicate important characteristics of a
+physical system.</p></li>
+<li><p>For example, a mathematical model may oscillate increasingly
+rapidly near a particular operating condition.</p></li>
+<li><p>A few calculator values might suggest a particular limit even
+though the function does not actually approach a single number.</p></li>
+<li><p>These situations can be understood by studying the different ways
+in which a limit can fail to exist.</p></li>
+</ul>
+<h2
+id="objective-4-why-study-infinite-limits-and-vertical-asymptotes">Objective
+4: Why Study Infinite Limits and Vertical Asymptotes?</h2>
+<ul>
+<li><p>In some engineering models, a quantity can become extremely large
+as an input approaches a particular value.</p></li>
+<li><p>For example, a mathematical model of a mechanical response may
+contain a denominator that becomes very small near a critical parameter
+value.</p></li>
+<li><p>The resulting function may increase without bound as the
+parameter approaches that value.</p></li>
+<li><p>Such behavior is described using an infinite limit.</p></li>
+<li><p>A vertical asymptote provides a geometric way to describe this
+behavior.</p></li>
+<li><p>Understanding infinite limits and vertical asymptotes helps us
+recognize values at which a mathematical model becomes unbounded and
+therefore requires special interpretation.</p></li>
+<li><p>The following type of engineering situation can be analyzed using
+this idea.</p></li>
+<li><p>A simplified mechanical model contains a response function whose
+denominator approaches zero when an operating parameter reaches a
+critical value.</p></li>
+<li><p>We want to determine what happens to the response near that value
+and whether a vertical asymptote occurs.</p></li>
+</ul>
+<h1
+id="objective-1-finding-limits-numerically-and-graphically">Objective 1:
+Finding Limits Numerically and Graphically</h1>
+<h2 id="investigating-a-limit-numerically">Investigating a Limit
+Numerically</h2>
+<ul>
+<li>We begin by considering the function</li>
+</ul>
+<p><span class="math display">
+f(x)=\frac{x-1}{x^2-1}
+</span></p>
+<ul>
+<li><p>We want to investigate the behavior of <span
+class="math inline">f(x)</span> for values of <span
+class="math inline">x</span> close to <span class="math inline">1</span>
+but not equal to <span class="math inline">1</span>.</p></li>
+<li><p>A table of values from both sides of <span
+class="math inline">1</span> gives</p></li>
+</ul>
+<div style="text-align: center;">
+<p><span><strong>Table 1.</strong> Values of <span
+class="math inline">x</span> and corresponding <span
+class="math inline">f(x)</span> values.</span></p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;"><span
+class="math inline">x&lt;1</span></th>
+<th style="text-align: right;"><span
+class="math inline">f(x)</span></th>
+<th style="text-align: right;"><span
+class="math inline">x&gt;1</span></th>
+<th style="text-align: right;"><span
+class="math inline">f(x)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;"><span class="math inline">0.5</span></td>
+<td style="text-align: right;"><span
+class="math inline">0.666667</span></td>
+<td style="text-align: right;"><span class="math inline">1.5</span></td>
+<td style="text-align: right;"><span
+class="math inline">0.400000</span></td>
+</tr>
+<tr>
+<td style="text-align: right;"><span class="math inline">0.9</span></td>
+<td style="text-align: right;"><span
+class="math inline">0.526316</span></td>
+<td style="text-align: right;"><span class="math inline">1.1</span></td>
+<td style="text-align: right;"><span
+class="math inline">0.476190</span></td>
+</tr>
+<tr>
+<td style="text-align: right;"><span
+class="math inline">0.99</span></td>
+<td style="text-align: right;"><span
+class="math inline">0.502513</span></td>
+<td style="text-align: right;"><span
+class="math inline">1.01</span></td>
+<td style="text-align: right;"><span
+class="math inline">0.497512</span></td>
+</tr>
+<tr>
+<td style="text-align: right;"><span
+class="math inline">0.999</span></td>
+<td style="text-align: right;"><span
+class="math inline">0.500250</span></td>
+<td style="text-align: right;"><span
+class="math inline">1.001</span></td>
+<td style="text-align: right;"><span
+class="math inline">0.499750</span></td>
+</tr>
+<tr>
+<td style="text-align: right;"><span
+class="math inline">0.9999</span></td>
+<td style="text-align: right;"><span
+class="math inline">0.500025</span></td>
+<td style="text-align: right;"><span
+class="math inline">1.0001</span></td>
+<td style="text-align: right;"><span
+class="math inline">0.499975</span></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p>As <span class="math inline">x</span> approaches <span
+class="math inline">1</span> from either side, the values of <span
+class="math inline">f(x)</span> approach <span
+class="math inline">0.5</span>.</p></li>
+<li><p>Therefore, we estimate that</p></li>
+</ul>
+<p><span class="math display">
+\lim_{x\to1}\frac{x-1}{x^2-1}=0.5
+</span></p>
+<ul>
+<li>Notice that the question concerns what happens <strong>near</strong>
+<span class="math inline">x=1</span>, not necessarily what happens at
+<span class="math inline">x=1</span> itself.</li>
+</ul>
+<h2 id="investigating-a-limit-graphically">Investigating a Limit
+Graphically</h2>
+<ul>
+<li>The same function can be investigated by examining its graph.</li>
+</ul>
+<div style="text-align: center;">
+<p><img src="../images/0601.png" style="width: 743px; border-radius: 12px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 1.</strong> The graph of <span
+class="math inline">f(x)=\dfrac{x-1}{x^2-1}</span> showing <span
+class="math inline">f(x)</span> approaching <span
+class="math inline">0.5</span> as <span class="math inline">x</span>
+approaches <span class="math inline">1</span>.</span></p>
+</div>
+<ul>
+<li><p>The graph also suggests that the values of <span
+class="math inline">f(x)</span> approach <span
+class="math inline">0.5</span> as <span class="math inline">x</span>
+approaches <span class="math inline">1</span>.</p></li>
+<li><p>Thus, numerical tables and graphs give two complementary ways of
+investigating a limit.</p></li>
+</ul>
+<h2 id="intuitive-definition-of-a-limit">Intuitive Definition of a
+Limit</h2>
+<ul>
+<li><p>Suppose <span class="math inline">f(x)</span> is defined when
+<span class="math inline">x</span> is near <span
+class="math inline">a</span>, possibly except at <span
+class="math inline">a</span> itself.</p></li>
+<li><p>We write the following limit and say that <strong>the limit of
+<span class="math inline">f(x)</span> as <span
+class="math inline">x</span> approaches <span
+class="math inline">a</span> is <span
+class="math inline">L</span></strong> if the values of <span
+class="math inline">f(x)</span> can be made arbitrarily close to <span
+class="math inline">L</span> by taking <span
+class="math inline">x</span> sufficiently close to <span
+class="math inline">a</span> on either side of <span
+class="math inline">a</span>, but not equal to <span
+class="math inline">a</span>.</p></li>
+</ul>
+<p><span class="math display">
+\lim_{x\to a}f(x)=L
+</span></p>
+<ul>
+<li><p>Roughly speaking, the values of <span
+class="math inline">f(x)</span> approach <span
+class="math inline">L</span> as <span class="math inline">x</span>
+approaches <span class="math inline">a</span>.</p></li>
+<li><p>The function does not even have to be defined at <span
+class="math inline">x=a</span> for the limit to exist.</p></li>
+</ul>
+<div style="text-align: center;">
+<p><img src="../images/0602.png" style="width: 1800px; border-radius: 12px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 2.</strong> Graphs illustrating that <span
+class="math inline">\lim_{x\to a}f(x)=L</span> can exist even when the
+value of <span class="math inline">f(a)</span> is different or
+undefined.</span></p>
+</div>
+<ul>
+<li><p>The three graphs illustrate an important point: the behavior of
+<span class="math inline">f(x)</span> near <span
+class="math inline">a</span> determines the limit, not necessarily the
+value of <span class="math inline">f(a)</span>.</p></li>
+<li><p>An alternative notation is</p></li>
+</ul>
+<p><span class="math display">
+f(x)\to L\qquad\text{as}\qquad x\to a
+</span></p>
+<ul>
+<li>This is usually read as <q><span class="math inline">f(x)</span>
+approaches <span class="math inline">L</span> as <span
+class="math inline">x</span> approaches <span
+class="math inline">a</span>.</q></li>
+</ul>
+<h2 class="green" id="example-1">Example 1</h2>
+<p>Estimate the value of</p>
+<p><span class="math display">
+\lim_{t\to0}\frac{\sqrt{t^2+9}-3}{t^2}
+</span></p>
+<h2 class="green" id="solution">Solution</h2>
+<p>We construct a table of values for <span class="math inline">t</span>
+near <span class="math inline">0</span>.</p>
+<div style="text-align: center;">
+<p><span><strong>Table 2.</strong> The values of <span
+class="math inline">t</span> and corresponding function.</span></p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;"><span class="math inline">t</span></th>
+<th style="text-align: right;"><span
+class="math inline">\dfrac{\sqrt{t^2+9}-3}{t^2}</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;"><span
+class="math inline">\pm1.0</span></td>
+<td style="text-align: right;"><span
+class="math inline">0.162277\ldots</span></td>
+</tr>
+<tr>
+<td style="text-align: right;"><span
+class="math inline">\pm0.5</span></td>
+<td style="text-align: right;"><span
+class="math inline">0.165525\ldots</span></td>
+</tr>
+<tr>
+<td style="text-align: right;"><span
+class="math inline">\pm0.1</span></td>
+<td style="text-align: right;"><span
+class="math inline">0.166620\ldots</span></td>
+</tr>
+<tr>
+<td style="text-align: right;"><span
+class="math inline">\pm0.05</span></td>
+<td style="text-align: right;"><span
+class="math inline">0.166655\ldots</span></td>
+</tr>
+<tr>
+<td style="text-align: right;"><span
+class="math inline">\pm0.01</span></td>
+<td style="text-align: right;"><span
+class="math inline">0.166666\ldots</span></td>
+</tr>
+</tbody>
+</table>
+<p>The values appear to approach <span
+class="math inline">0.166666\ldots</span>.</p>
+<p>Therefore, our initial estimate is</p>
+<p><span class="math display">
+\boxed{\lim_{t\to0}\frac{\sqrt{t^2+9}-3}{t^2}=\frac16}
+</span></p>
+<p>If we use extremely small values of <span
+class="math inline">t</span>, however, a calculator may give misleading
+results.</p>
+<p>For example, direct calculation can eventually produce values such as
+<span class="math inline">0.000000</span> because of rounding
+errors.</p>
+<p>This does not mean that the limit is <span
+class="math inline">0</span>.</p>
+<p>The actual limit is</p>
+<p><span class="math display">
+\boxed{\frac16}
+</span></p>
+<p>This example shows that numerical calculations are useful for
+estimating limits, but they must be used carefully.</p>
+<div style="text-align: center;">
+<p><img src="../images/0603.png" style="width: 1600px; border-radius: 12px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 3.</strong> The graph of <span
+class="math inline">y=\dfrac{\sin x}{x}</span> near <span
+class="math inline">x=0</span>.</span></p>
+</div>
+<p>The following Python programs shows that the behaviour of the
+function is captured with small step increments (in the order of <span
+class="math inline">1 \times 10^{-6}</span>)in the independent variable
+near the limiting points.</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(t):</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (np.sqrt(t<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">9</span>) <span class="op">-</span> <span class="dv">3</span>) <span class="op">/</span> t<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>t_values <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">1000</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>plt.plot(t_values, f(t_values), linewidth<span class="op">=</span><span class="dv">2</span>, color<span class="op">=</span><span class="st">&#39;k&#39;</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>plt.xticks(fontsize<span class="op">=</span><span class="dv">12</span>, fontweight<span class="op">=</span><span class="st">&#39;bold&#39;</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>plt.yticks(fontsize<span class="op">=</span><span class="dv">12</span>, fontweight<span class="op">=</span><span class="st">&#39;bold&#39;</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">&#39;t&#39;</span>, fontsize<span class="op">=</span><span class="dv">14</span>, fontweight<span class="op">=</span><span class="st">&#39;bold&#39;</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">&#39;f(t)&#39;</span>, fontsize<span class="op">=</span><span class="dv">14</span>, fontweight<span class="op">=</span><span class="st">&#39;bold&#39;</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Big Jumps&quot;</span>, fontsize<span class="op">=</span><span class="dv">16</span>, fontweight<span class="op">=</span><span class="st">&#39;bold&#39;</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>t_values <span class="op">=</span> np.linspace(<span class="op">-</span><span class="fl">0.01</span>, <span class="fl">0.01</span>, <span class="dv">1000</span>)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>plt.plot(t_values, f(t_values), linewidth<span class="op">=</span><span class="dv">2</span>, color<span class="op">=</span><span class="st">&#39;k&#39;</span>)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>plt.xticks(fontsize<span class="op">=</span><span class="dv">12</span>, fontweight<span class="op">=</span><span class="st">&#39;bold&#39;</span>)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>plt.yticks(fontsize<span class="op">=</span><span class="dv">12</span>, fontweight<span class="op">=</span><span class="st">&#39;bold&#39;</span>)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">&#39;t&#39;</span>, fontsize<span class="op">=</span><span class="dv">14</span>, fontweight<span class="op">=</span><span class="st">&#39;bold&#39;</span>)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">&#39;f(t)&#39;</span>, fontsize<span class="op">=</span><span class="dv">14</span>, fontweight<span class="op">=</span><span class="st">&#39;bold&#39;</span>)</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Very Small Jumps&quot;</span>, fontsize<span class="op">=</span><span class="dv">16</span>, fontweight<span class="op">=</span><span class="st">&#39;bold&#39;</span>)</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>t_values <span class="op">=</span> np.linspace(<span class="op">-</span><span class="fl">0.000001</span>, <span class="fl">0.000001</span>, <span class="dv">1000</span>)</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>plt.plot(t_values, f(t_values), linewidth<span class="op">=</span><span class="dv">2</span>, color<span class="op">=</span><span class="st">&#39;k&#39;</span>)</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>plt.xticks(fontsize<span class="op">=</span><span class="dv">12</span>, fontweight<span class="op">=</span><span class="st">&#39;bold&#39;</span>)</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>plt.yticks(fontsize<span class="op">=</span><span class="dv">12</span>, fontweight<span class="op">=</span><span class="st">&#39;bold&#39;</span>)</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">&#39;t&#39;</span>, fontsize<span class="op">=</span><span class="dv">14</span>, fontweight<span class="op">=</span><span class="st">&#39;bold&#39;</span>)</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">&#39;f(t)&#39;</span>, fontsize<span class="op">=</span><span class="dv">14</span>, fontweight<span class="op">=</span><span class="st">&#39;bold&#39;</span>)</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Microscopic Jumps&quot;</span>, fontsize<span class="op">=</span><span class="dv">16</span>, fontweight<span class="op">=</span><span class="st">&#39;bold&#39;</span>)</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>t_values <span class="op">=</span> np.linspace(<span class="op">-</span><span class="fl">0.0000001</span>, <span class="fl">0.0000001</span>, <span class="dv">1000</span>)</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>plt.plot(t_values, f(t_values), linewidth<span class="op">=</span><span class="dv">2</span>, color<span class="op">=</span><span class="st">&#39;k&#39;</span>)</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>plt.xticks(fontsize<span class="op">=</span><span class="dv">12</span>, fontweight<span class="op">=</span><span class="st">&#39;bold&#39;</span>)</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>plt.yticks(fontsize<span class="op">=</span><span class="dv">12</span>, fontweight<span class="op">=</span><span class="st">&#39;bold&#39;</span>)</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">&#39;t&#39;</span>, fontsize<span class="op">=</span><span class="dv">14</span>, fontweight<span class="op">=</span><span class="st">&#39;bold&#39;</span>)</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">&#39;f(t)&#39;</span>, fontsize<span class="op">=</span><span class="dv">14</span>, fontweight<span class="op">=</span><span class="st">&#39;bold&#39;</span>)</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Ten Times Smaller Microscopic Jumps&quot;</span>, fontsize<span class="op">=</span><span class="dv">16</span>, fontweight<span class="op">=</span><span class="st">&#39;bold&#39;</span>)</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>t_values <span class="op">=</span> np.linspace(<span class="op">-</span><span class="fl">0.00000001</span>, <span class="fl">0.00000001</span>, <span class="dv">1000</span>)</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>plt.plot(t_values, f(t_values), linewidth<span class="op">=</span><span class="dv">2</span>, color<span class="op">=</span><span class="st">&#39;k&#39;</span>)</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>plt.xticks(fontsize<span class="op">=</span><span class="dv">12</span>, fontweight<span class="op">=</span><span class="st">&#39;bold&#39;</span>)</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>plt.yticks(fontsize<span class="op">=</span><span class="dv">12</span>, fontweight<span class="op">=</span><span class="st">&#39;bold&#39;</span>)</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">&#39;t&#39;</span>, fontsize<span class="op">=</span><span class="dv">14</span>, fontweight<span class="op">=</span><span class="st">&#39;bold&#39;</span>)</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">&#39;f(t)&#39;</span>, fontsize<span class="op">=</span><span class="dv">14</span>, fontweight<span class="op">=</span><span class="st">&#39;bold&#39;</span>)</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;100 Times Stronger Microscopic Jumps&quot;</span>, fontsize<span class="op">=</span><span class="dv">16</span>, fontweight<span class="op">=</span><span class="st">&#39;bold&#39;</span>)</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="green" id="example-2">Example 2</h2>
+<p>Guess the value of</p>
+<p><span class="math display">
+\lim_{x\to0}\frac{\sin x}{x}
+</span></p>
+<h2 class="green" id="solution-1">Solution</h2>
+<p>The function <span class="math inline">f(x)=\dfrac{\sin x}{x}</span>
+is not defined at <span class="math inline">x=0</span>.</p>
+<p>We calculate values for <span class="math inline">x</span> close to
+<span class="math inline">0</span>.</p>
+<div style="text-align: center;">
+<p><span><strong>Table 3.</strong> Values of <span
+class="math inline">x</span> and corresponding function
+values.</span></p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;"><span class="math inline">x</span></th>
+<th style="text-align: right;"><span class="math inline">\dfrac{\sin
+x}{x}</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;"><span
+class="math inline">\pm1.0</span></td>
+<td style="text-align: right;"><span
+class="math inline">0.84147098</span></td>
+</tr>
+<tr>
+<td style="text-align: right;"><span
+class="math inline">\pm0.5</span></td>
+<td style="text-align: right;"><span
+class="math inline">0.95885108</span></td>
+</tr>
+<tr>
+<td style="text-align: right;"><span
+class="math inline">\pm0.4</span></td>
+<td style="text-align: right;"><span
+class="math inline">0.97354586</span></td>
+</tr>
+<tr>
+<td style="text-align: right;"><span
+class="math inline">\pm0.3</span></td>
+<td style="text-align: right;"><span
+class="math inline">0.98506736</span></td>
+</tr>
+<tr>
+<td style="text-align: right;"><span
+class="math inline">\pm0.2</span></td>
+<td style="text-align: right;"><span
+class="math inline">0.99334665</span></td>
+</tr>
+<tr>
+<td style="text-align: right;"><span
+class="math inline">\pm0.1</span></td>
+<td style="text-align: right;"><span
+class="math inline">0.99833417</span></td>
+</tr>
+<tr>
+<td style="text-align: right;"><span
+class="math inline">\pm0.05</span></td>
+<td style="text-align: right;"><span
+class="math inline">0.99958339</span></td>
+</tr>
+<tr>
+<td style="text-align: right;"><span
+class="math inline">\pm0.01</span></td>
+<td style="text-align: right;"><span
+class="math inline">0.99998333</span></td>
+</tr>
+<tr>
+<td style="text-align: right;"><span
+class="math inline">\pm0.005</span></td>
+<td style="text-align: right;"><span
+class="math inline">0.99999583</span></td>
+</tr>
+<tr>
+<td style="text-align: right;"><span
+class="math inline">\pm0.001</span></td>
+<td style="text-align: right;"><span
+class="math inline">0.99999983</span></td>
+</tr>
+</tbody>
+</table>
+<p>The values approach <span class="math inline">1</span> as <span
+class="math inline">x</span> approaches <span
+class="math inline">0</span>.</p>
+<p>Therefore, we guess that</p>
+<p><span class="math display">
+\boxed{\lim_{x\to0}\frac{\sin x}{x}=1}
+</span></p>
+<p>This result is correct and will later be established using a
+geometric argument.</p>
+<div style="text-align: center;">
+<p><img src="../images/0604.png" style="width: 725px; border-radius: 12px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 4.</strong> The graph of the Heaviside
+function.</span></p>
+</div>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="green" id="example-3">Example 3</h2>
+<p>Find</p>
+<p><span class="math display">
+\lim_{x\to0}\left(x^3+\frac{\cos5x}{10,000}\right)
+</span></p>
+<h2 class="green" id="solution-2">Solution</h2>
+<p>We first calculate values of the function for several values of <span
+class="math inline">x</span> near <span
+class="math inline">0</span>.</p>
+<div style="text-align: center;">
+<p><span><strong>Table 4.</strong> Values of <span
+class="math inline">x</span> with bigger increments and corresponding
+function values.</span></p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;"><span class="math inline">x</span></th>
+<th style="text-align: right;"><span
+class="math inline">x^3+\dfrac{\cos5x}{10,000}</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;"><span class="math inline">1</span></td>
+<td style="text-align: right;"><span
+class="math inline">1.000028</span></td>
+</tr>
+<tr>
+<td style="text-align: right;"><span class="math inline">0.5</span></td>
+<td style="text-align: right;"><span
+class="math inline">0.124920</span></td>
+</tr>
+<tr>
+<td style="text-align: right;"><span class="math inline">0.1</span></td>
+<td style="text-align: right;"><span
+class="math inline">0.001088</span></td>
+</tr>
+<tr>
+<td style="text-align: right;"><span
+class="math inline">0.05</span></td>
+<td style="text-align: right;"><span
+class="math inline">0.000222</span></td>
+</tr>
+<tr>
+<td style="text-align: right;"><span
+class="math inline">0.01</span></td>
+<td style="text-align: right;"><span
+class="math inline">0.000101</span></td>
+</tr>
+</tbody>
+</table>
+<p>For values even closer to zero we obtain</p>
+<div style="text-align: center;">
+<p><span><strong>Table 5.</strong> Values of <span
+class="math inline">x</span> with shorter increments and corresponding
+function values.</span></p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;"><span class="math inline">x</span></th>
+<th style="text-align: right;"><span
+class="math inline">x^3+\dfrac{\cos5x}{10,000}</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;"><span
+class="math inline">0.005</span></td>
+<td style="text-align: right;"><span
+class="math inline">0.00010009</span></td>
+</tr>
+<tr>
+<td style="text-align: right;"><span
+class="math inline">0.001</span></td>
+<td style="text-align: right;"><span
+class="math inline">0.00010000</span></td>
+</tr>
+</tbody>
+</table>
+<p>The values approach <span class="math inline">0.0001</span>.</p>
+<p>Therefore,</p>
+<p><span class="math display">
+\boxed{\lim_{x\to0}\left(x^3+\frac{\cos5x}{10,000}\right)=0.0001}
+</span></p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 id="limits-and-technology">Limits and Technology</h2>
+<ul>
+<li><p>Calculators and computer algebra systems can be useful when
+investigating limits numerically.</p></li>
+<li><p>However, numerical calculations can sometimes produce false
+impressions because of rounding and finite numerical precision.</p></li>
+<li><p>Therefore, tables and graphs should be viewed as tools for
+<strong>estimating and understanding</strong> a limit rather than as
+proof that a limit has a particular value.</p></li>
+</ul>
+<h1 id="quick-check">Quick Check</h1>
+<h2 class="red" id="question-1">Question 1</h2>
+<p>Use the following information to estimate the limit.</p>
+<div style="text-align: center;">
+<p><span><strong>Table 6.</strong> Value of <span
+class="math inline">x</span> and corresponding values of <span
+class="math inline">f(x)</span>.</span></p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;"><span class="math inline">x</span></th>
+<th style="text-align: right;"><span
+class="math inline">f(x)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;"><span class="math inline">0.9</span></td>
+<td style="text-align: right;"><span class="math inline">2.1</span></td>
+</tr>
+<tr>
+<td style="text-align: right;"><span
+class="math inline">0.99</span></td>
+<td style="text-align: right;"><span
+class="math inline">2.01</span></td>
+</tr>
+<tr>
+<td style="text-align: right;"><span
+class="math inline">0.999</span></td>
+<td style="text-align: right;"><span
+class="math inline">2.001</span></td>
+</tr>
+<tr>
+<td style="text-align: right;"><span
+class="math inline">1.001</span></td>
+<td style="text-align: right;"><span
+class="math inline">1.999</span></td>
+</tr>
+<tr>
+<td style="text-align: right;"><span
+class="math inline">1.01</span></td>
+<td style="text-align: right;"><span
+class="math inline">1.99</span></td>
+</tr>
+</tbody>
+</table>
+<p>What value does <span class="math inline">f(x)</span> appear to
+approach as <span class="math inline">x\to1</span>?</p>
+<h2 class="red" id="question-2">Question 2</h2>
+<p>If <span class="math inline">f(x)</span> approaches <span
+class="math inline">5</span> as <span class="math inline">x</span>
+approaches <span class="math inline">3</span>, but <span
+class="math inline">f(3)=10</span>, what is <span
+class="math inline">\lim_{x\to3}f(x)</span>?</p>
+<div class="questions-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="objective-2-one-sided-limits">Objective 2: One-Sided Limits</h1>
+<h2 id="approaching-from-one-side">Approaching from One Side</h2>
+<ul>
+<li><p>Sometimes we are interested in what happens as <span
+class="math inline">x</span> approaches <span
+class="math inline">a</span> from only one direction.</p></li>
+<li><p>The following notation means that we consider values of <span
+class="math inline">x</span> less than <span
+class="math inline">a</span> and approach <span
+class="math inline">a</span> from the left.</p></li>
+</ul>
+<p><span class="math display">
+x\to a^-
+</span></p>
+<ul>
+<li>Similarly, the following notation means means that we consider
+values of <span class="math inline">x</span> greater than <span
+class="math inline">a</span> and approach <span
+class="math inline">a</span> from the right.</li>
+</ul>
+<p><span class="math display">
+x\to a^+
+</span></p>
+<h2 id="the-heaviside-function">The Heaviside Function</h2>
+<ul>
+<li>Consider the Heaviside function <span class="math inline">H</span>
+defined by</li>
+</ul>
+<p><span class="math display">
+H(t)=
+\begin{cases}
+0 &amp; \text{if }t&lt;0\\
+1 &amp; \text{if }t\geq0
+\end{cases}
+</span></p>
+<ul>
+<li><p>This function can describe an electric current that is switched
+on at time <span class="math inline">t=0</span>.</p></li>
+<li><p>As <span class="math inline">t</span> approaches <span
+class="math inline">0</span> from the left, <span
+class="math inline">H(t)</span> approaches <span
+class="math inline">0</span>.</p></li>
+<li><p>As <span class="math inline">t</span> approaches <span
+class="math inline">0</span> from the right, <span
+class="math inline">H(t)</span> approaches <span
+class="math inline">1</span>.</p></li>
+<li><p>Since the two values are different, there is no single two-sided
+limit at <span class="math inline">t=0</span>.</p></li>
+<li><p>We write</p></li>
+</ul>
+<p><span class="math display">
+\lim_{t\to0^-}H(t)=0
+\qquad
+\text{and}
+\qquad
+\lim_{t\to0^+}H(t)=1
+</span></p>
+<ul>
+<li>These are called the <strong>left-hand limit</strong> and
+<strong>right-hand limit</strong>, respectively.</li>
+</ul>
+<h2 class="blue"
+id="definition-intuitive-definitions-of-one-sided-limits">Definition:
+Intuitive Definitions of One-Sided Limits</h2>
+<p>We write the following limit when the values of <span
+class="math inline">f(x)</span> can be made arbitrarily close to <span
+class="math inline">L</span> by restricting <span
+class="math inline">x</span> to be sufficiently close to <span
+class="math inline">a</span> with <span
+class="math inline">x&lt;a</span>.</p>
+<p><span class="math display">
+\lim_{x\to a^-}f(x)=L
+</span></p>
+<p>Similarly, the following limit means means that the values of <span
+class="math inline">f(x)</span> can be made arbitrarily close to <span
+class="math inline">L</span> by restricting <span
+class="math inline">x</span> to be sufficiently close to <span
+class="math inline">a</span> with <span
+class="math inline">x&gt;a</span>.</p>
+<p><span class="math display">
+\lim_{x\to a^+}f(x)=L
+</span></p>
+<div class="definition-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<ul>
+<li>Thus, the only difference between one-sided and ordinary limits is
+the direction from which <span class="math inline">x</span> approaches
+<span class="math inline">a</span>.</li>
+</ul>
+<div style="text-align: center;">
+<p><img src="../images/0605.png" style="width: 706px; border-radius: 12px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 5.</strong> One-sided approaches to <span
+class="math inline">a</span> from the left and from the
+right.</span></p>
+</div>
+<ul>
+<li>For example, <span class="math inline">x\to5^-</span> means that we
+consider only values <span class="math inline">x&lt;5</span>, while
+<span class="math inline">x\to5^+</span> means that we consider only
+values <span class="math inline">x&gt;5</span>.</li>
+</ul>
+<h2
+id="relationship-between-one-sided-and-two-sided-limits">Relationship
+Between One-Sided and Two-Sided Limits</h2>
+<ul>
+<li><p>A two-sided limit exists only if both one-sided limits exist and
+are equal.</p></li>
+<li><p>Therefore,</p></li>
+</ul>
+<p><span class="math display">
+\boxed{
+\lim_{x\to a}f(x)=L
+\iff
+\lim_{x\to a^-}f(x)=L
+\quad\text{and}\quad
+\lim_{x\to a^+}f(x)=L
+}
+</span></p>
+<div style="text-align: center;">
+<p><img src="../images/0606.png" style="width: 1642px; border-radius: 12px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 6.</strong> Graph of the function <span
+class="math inline">g</span> used to determine its one-sided and
+two-sided limits.</span></p>
+</div>
+<h2 class="green" id="example-4">Example 4</h2>
+<p>The graph of a function <span class="math inline">g</span> is shown
+in Figure 7. Use the graph to state the values, if they exist, of the
+following</p>
+<p><span class="math display">
+\text{(a)}\quad\lim_{x\to2^-}g(x)
+</span></p>
+<p><span class="math display">
+\text{(b)}\quad\lim_{x\to2^+}g(x)
+</span></p>
+<p><span class="math display">
+\text{(c)}\quad\lim_{x\to2}g(x)
+</span></p>
+<p><span class="math display">
+\text{(d)}\quad\lim_{x\to5^-}g(x)
+</span></p>
+<p><span class="math display">
+\text{(e)}\quad\lim_{x\to5^+}g(x)
+</span></p>
+<p><span class="math display">
+\text{(f)}\quad\lim_{x\to5}g(x)
+</span></p>
+<div style="text-align: center;">
+<p><img src="../images/0607.png" style="width: 719px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 7.</strong> The graph of a function <span
+class="math inline">g</span>.</span></p>
+</div>
+<h2 class="green" id="solution-3">Solution</h2>
+<p>From the graph, the values of <span class="math inline">g(x)</span>
+approach <span class="math inline">3</span> as <span
+class="math inline">x</span> approaches <span
+class="math inline">2</span> from the left.</p>
+<p><span class="math display">
+\boxed{\lim_{x\to2^-}g(x)=3}
+</span></p>
+<p>As <span class="math inline">x</span> approaches <span
+class="math inline">2</span> from the right, the values approach <span
+class="math inline">1</span>.</p>
+<p><span class="math display">
+\boxed{\lim_{x\to2^+}g(x)=1}
+</span></p>
+<p>Because the left-hand and right-hand limits are different, the
+two-sided limit does not exist.</p>
+<p><span class="math display">
+\boxed{\lim_{x\to2}g(x)\text{ does not exist}}
+</span></p>
+<p>At <span class="math inline">x=5</span>, both one-sided limits
+approach <span class="math inline">2</span>.</p>
+<p><span class="math display">
+\boxed{\lim_{x\to5^-}g(x)=2}
+</span></p>
+<p><span class="math display">
+\boxed{\lim_{x\to5^+}g(x)=2}
+</span></p>
+<p>Since these one-sided limits are equal,</p>
+<p><span class="math display">
+\boxed{\lim_{x\to5}g(x)=2}
+</span></p>
+<p>Notice that the graph has <span
+class="math inline">g(5)\neq2</span>.</p>
+<p>Again, this demonstrates that the value of the function at <span
+class="math inline">x=a</span> does not by itself determine the
+limit.</p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="quick-check-1">Quick Check</h1>
+<h2 class="red" id="question-1-1">Question 1</h2>
+<p>Suppose</p>
+<p><span class="math display">
+\lim_{x\to3^-}f(x)=4
+\qquad
+\text{and}
+\qquad
+\lim_{x\to3^+}f(x)=4
+</span></p>
+<p>What is the two-sided limit?</p>
+<h2 class="red" id="question-2-1">Question 2</h2>
+<p>Suppose</p>
+<p><span class="math display">
+\lim_{x\to2^-}f(x)=5
+\qquad
+\text{and}
+\qquad
+\lim_{x\to2^+}f(x)=7
+</span></p>
+<p>Does <span class="math inline">\lim_{x\to2} f(x)</span> exist?</p>
+<div class="questions-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="objective-3-how-can-a-limit-fail-to-exist">Objective 3: How Can
+a Limit Fail to Exist?</h1>
+<h2 id="different-one-sided-limits">Different One-Sided Limits</h2>
+<ul>
+<li><p>The first way a limit can fail to exist is when the left-hand and
+right-hand limits are different.</p></li>
+<li><p>Example 4 demonstrated this situation at <span
+class="math inline">x=2</span>.</p></li>
+<li><p>Since</p></li>
+</ul>
+<p><span class="math display">
+\lim_{x\to2^-}g(x)=3
+</span></p>
+<ul>
+<li>While</li>
+</ul>
+<p><span class="math display">
+\lim_{x\to2^+}g(x)=1
+</span></p>
+<ul>
+<li><p>There is no single number approached by <span
+class="math inline">g(x)</span> from both sides.</p></li>
+<li><p>Therefore,</p></li>
+</ul>
+<p><span class="math display">
+\boxed{\lim_{x\to2}g(x)\text{ does not exist}}
+</span></p>
+<h2 id="oscillation">Oscillation</h2>
+<ul>
+<li><p>A second way a limit can fail to exist is when the function
+oscillates between different values and does not approach a single
+number.</p></li>
+<li><p>The similar behaviour was observed in Example 1.</p></li>
+</ul>
+<h2 class="green" id="example-5">Example 5</h2>
+<p>Investigate</p>
+<p><span class="math display">
+\lim_{x\to0}\sin\frac{\pi}{x}
+</span></p>
+<h2 class="gree" id="solution-4">Solution</h2>
+<p>The function <span class="math inline">f(x)=\sin(\pi/x)</span> is
+undefined at <span class="math inline">x=0</span>.</p>
+<p>If we choose values such as</p>
+<p><span class="math display">
+x=1,\quad \frac12,\quad\frac13,\quad\frac1{10},\quad\frac1{100}
+</span></p>
+<p>then</p>
+<p><span class="math display">
+\sin\frac{\pi}{x}
+</span></p>
+<p>gives values such as <span class="math inline">0</span>.</p>
+<p>However, this information is misleading.</p>
+<p>For every positive integer <span class="math inline">n</span>,</p>
+<p><span class="math display">
+f\left(\frac1n\right)=\sin(n\pi)=0
+</span></p>
+<p>But there are also sequences of values approaching zero for which the
+function equals <span class="math inline">1</span> or <span
+class="math inline">-1</span>.</p>
+<p>For example, if</p>
+<p><span class="math display">
+x=\frac{2}{4n+1}
+</span></p>
+<p>then</p>
+<p><span class="math display">
+\frac{\pi}{x}=\frac{(4n+1)\pi}{2}
+</span></p>
+<p>and the sine is <span class="math inline">1</span>.</p>
+<p>Similarly, other values approaching zero produce <span
+class="math inline">-1</span>.</p>
+<p>Thus, as <span class="math inline">x</span> approaches <span
+class="math inline">0</span>, the function continues to oscillate
+between <span class="math inline">-1</span> and <span
+class="math inline">1</span>.</p>
+<div style="text-align: center;">
+<p><img src="../images/0608.png" style="width: 1600px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 8.1.</strong> Graph of <span
+class="math inline">y=\sin(\pi/x)</span> showing increasingly rapid
+oscillation near <span class="math inline">x=0</span>.</span></p>
+</div>
+<p>Because the function does not approach a single fixed number,</p>
+<p><span class="math display">
+\boxed{\lim_{x\to0}\sin\frac{\pi}{x}\text{ does not exist}}
+</span></p>
+<p>This example shows why checking only a few calculator values can lead
+to a wrong conclusion.</p>
+<p>The following Python program shows this behaviour in depth.</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(x):</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.sin(np.pi <span class="op">/</span> x)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>x_left <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="fl">0.0003</span>, <span class="dv">10000</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>x_right <span class="op">=</span> np.linspace(<span class="fl">0.0003</span>, <span class="dv">1</span>, <span class="dv">10000</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>y_left <span class="op">=</span> f(x_left)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>y_right <span class="op">=</span> f(x_right)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>plt.plot(x_left, y_left, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>plt.plot(x_right, y_right, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>plt.xticks(fontsize<span class="op">=</span><span class="dv">12</span>, fontweight<span class="op">=</span><span class="st">&#39;bold&#39;</span>)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>plt.yticks(fontsize<span class="op">=</span><span class="dv">12</span>, fontweight<span class="op">=</span><span class="st">&#39;bold&#39;</span>)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">&#39;x&#39;</span>, fontsize<span class="op">=</span><span class="dv">14</span>, fontweight<span class="op">=</span><span class="st">&#39;bold&#39;</span>)</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">&#39;f(x)&#39;</span>, fontsize<span class="op">=</span><span class="dv">14</span>, fontweight<span class="op">=</span><span class="st">&#39;bold&#39;</span>)</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<p>The output of this program is shown below.</p>
+<div style="text-align: center;">
+<p><img src="../images/06my02.png" style="width: 1600px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 8.2.</strong> The graph of <span
+class="math inline">\sin \frac{\pi}{x}</span> for <span
+class="math inline">-1 \leq x \leq 1</span>.</span></p>
+</div>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 id="unbounded-behavior">Unbounded Behavior</h2>
+<ul>
+<li><p>A third situation occurs when the function values become
+arbitrarily large in magnitude as <span class="math inline">x</span>
+approaches a particular number.</p></li>
+<li><p>Consider</p></li>
+</ul>
+<p><span class="math display">
+f(x)=\frac1{x^2}
+</span></p>
+<ul>
+<li><p>As <span class="math inline">x</span> approaches <span
+class="math inline">0</span>, the denominator becomes very small and
+positive.</p></li>
+<li><p>Consequently, <span class="math inline">1/x^2</span> becomes
+larger and larger.</p></li>
+</ul>
+<h2 class="green" id="example-6">Example 6</h2>
+<p>Find</p>
+<p><span class="math display">
+\lim_{x\to0}\frac1{x^2}
+</span></p>
+<p>if it exists</p>
+<h2 class="green" id="solution-5">Solution</h2>
+<p>Some values of the function are</p>
+<div style="text-align: center;">
+<p><span><strong>Table 7.</strong> Values of <span
+class="math inline">x</span> and corresponding function
+values.</span></p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;"><span class="math inline">x</span></th>
+<th style="text-align: right;"><span
+class="math inline">\dfrac1{x^2}</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;"><span
+class="math inline">\pm1</span></td>
+<td style="text-align: right;"><span class="math inline">1</span></td>
+</tr>
+<tr>
+<td style="text-align: right;"><span
+class="math inline">\pm0.5</span></td>
+<td style="text-align: right;"><span class="math inline">4</span></td>
+</tr>
+<tr>
+<td style="text-align: right;"><span
+class="math inline">\pm0.2</span></td>
+<td style="text-align: right;"><span class="math inline">25</span></td>
+</tr>
+<tr>
+<td style="text-align: right;"><span
+class="math inline">\pm0.1</span></td>
+<td style="text-align: right;"><span class="math inline">100</span></td>
+</tr>
+<tr>
+<td style="text-align: right;"><span
+class="math inline">\pm0.05</span></td>
+<td style="text-align: right;"><span class="math inline">400</span></td>
+</tr>
+<tr>
+<td style="text-align: right;"><span
+class="math inline">\pm0.01</span></td>
+<td style="text-align: right;"><span
+class="math inline">10,000</span></td>
+</tr>
+<tr>
+<td style="text-align: right;"><span
+class="math inline">\pm0.001</span></td>
+<td style="text-align: right;"><span
+class="math inline">1,000,000</span></td>
+</tr>
+</tbody>
+</table>
+<p>The values become larger and larger as <span
+class="math inline">x</span> approaches <span
+class="math inline">0</span>.</p>
+<p>Therefore, the function does not approach a finite number.</p>
+<p>We express this behavior by writing</p>
+<p><span class="math display">
+\boxed{\lim_{x\to0}\frac1{x^2}=\infty}
+</span></p>
+<p>The symbol <span class="math inline">\infty</span> does
+<strong>not</strong> represent a number.</p>
+<p>It indicates that the function values become arbitrarily large.</p>
+<div style="text-align: center;">
+<p><img src="../images/0609.png" style="width: 728px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 9.</strong> Graph of <span
+class="math inline">y=\dfrac1{x^2}</span> showing unbounded behavior
+near <span class="math inline">x=0</span>.</span></p>
+</div>
+<h2 id="infinite-limits">Infinite Limits</h2>
+<ul>
+<li>In general, the following limit means that <span
+class="math inline">f(x)</span> can be made arbitrarily large by taking
+<span class="math inline">x</span> sufficiently close to <span
+class="math inline">a</span>, but not equal to <span
+class="math inline">a</span>.</li>
+</ul>
+<p><span class="math display">
+\lim_{x\to a}f(x)=\infty
+</span></p>
+<ul>
+<li>Similarly, below limit means that <span
+class="math inline">f(x)</span> becomes arbitrarily large in the
+negative direction as <span class="math inline">x</span> approaches
+<span class="math inline">a</span>.</li>
+</ul>
+<p><span class="math display">
+\lim_{x\to a}f(x)=-\infty
+</span></p>
+<ul>
+<li>These expressions describe behavior; they do not mean that the limit
+exists as an ordinary real number.</li>
+</ul>
+<h2 id="another-form-of-unbounded-behavior">Another Form of Unbounded
+Behavior</h2>
+<ul>
+<li>Consider</li>
+</ul>
+<p><span class="math display">
+f(x)=-\frac1{x^2}
+</span></p>
+<ul>
+<li><p>As <span class="math inline">x</span> approaches <span
+class="math inline">0</span>, the function values become arbitrarily
+large in the negative direction.</p></li>
+<li><p>Therefore,</p></li>
+</ul>
+<p><span class="math display">
+\boxed{\lim_{x\to0}\left(-\frac1{x^2}\right)=-\infty}
+</span></p>
+<h1 id="quick-check-2">Quick Check</h1>
+<h2 class="red" id="question-1-2">Question 1</h2>
+<p>Does the following limit exist?</p>
+<p><span class="math display">
+\lim_{x\to0}\sin\frac1x
+</span></p>
+<h2 class="red" id="question-2-2">Question 2</h2>
+<p>What type of behavior is represented by</p>
+<p><span class="math display">
+\lim_{x\to2} f(x)=\infty
+</span></p>
+<div class="questions-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="objective-4-infinite-limits-vertical-asymptotes">Objective 4:
+Infinite Limits; Vertical Asymptotes</h1>
+<h2 id="vertical-asymptotes">Vertical Asymptotes</h2>
+<ul>
+<li><p>The unbounded behavior of a function is closely related to the
+idea of a vertical asymptote.</p></li>
+<li><p>A vertical line <span class="math inline">x=a</span> is called a
+<strong>vertical asymptote</strong> of the curve <span
+class="math inline">y=f(x)</span> if at least one of the following
+one-sided or two-sided limits is infinite:</p></li>
+</ul>
+<p><span class="math display">
+\lim_{x\to a^-}f(x)=\infty
+</span></p>
+<p><span class="math display">
+\lim_{x\to a^+}f(x)=\infty
+</span></p>
+<p><span class="math display">
+\lim_{x\to a}f(x)=\infty
+</span></p>
+<p><span class="math display">
+\lim_{x\to a^-}f(x)=-\infty
+</span></p>
+<p><span class="math display">
+\lim_{x\to a^+}f(x)=-\infty
+</span></p>
+<p><span class="math display">
+\lim_{x\to a}f(x)=-\infty
+</span></p>
+<ul>
+<li>Thus, a vertical asymptote describes a value of <span
+class="math inline">x</span> near which the function becomes
+unbounded.</li>
+</ul>
+<h2
+id="determining-vertical-asymptotes-using-one-sided-limits">Determining
+Vertical Asymptotes Using One-Sided Limits</h2>
+<h2 class="green" id="example-7">Example 7</h2>
+<p>Does the curve</p>
+<p><span class="math display">
+y=\frac{2x}{x-3}
+</span></p>
+<p>have a vertical asymptote?</p>
+<h2 class="green" id="solution-6">Solution</h2>
+<p>A potential vertical asymptote occurs where the denominator is
+zero.</p>
+<p>We solve</p>
+<p><span class="math display">
+x-3=0
+</span></p>
+<p>giving</p>
+<p><span class="math display">
+x=3
+</span></p>
+<p>We therefore investigate the behavior from both sides.</p>
+<p>If <span class="math inline">x</span> is close to <span
+class="math inline">3</span> but greater than <span
+class="math inline">3</span>, then <span class="math inline">x-3</span>
+is a small positive number, while <span class="math inline">2x</span> is
+close to <span class="math inline">6</span>.</p>
+<p>Therefore, the quotient becomes very large and positive.</p>
+<p><span class="math display">
+\boxed{\lim_{x\to3^+}\frac{2x}{x-3}=\infty}
+</span></p>
+<p>If <span class="math inline">x</span> is close to <span
+class="math inline">3</span> but less than <span
+class="math inline">3</span>, then <span class="math inline">x-3</span>
+is a small negative number, while <span class="math inline">2x</span> is
+still positive.</p>
+<p>Therefore, the quotient becomes very large and negative.</p>
+<p><span class="math display">
+\boxed{\lim_{x\to3^-}\frac{2x}{x-3}=-\infty}
+</span></p>
+<p>Hence, the line</p>
+<p><span class="math display">
+\boxed{x=3}
+</span></p>
+<p>is a vertical asymptote.</p>
+<div style="text-align: center;">
+<p><img src="../images/0610.png" style="width: 728px; border-radius: 12px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 10.</strong> Graph of <span
+class="math inline">y=\dfrac{2x}{x-3}</span> showing the vertical
+asymptote <span class="math inline">x=3</span>.</span></p>
+</div>
+<h3 id="important-note">Important Note</h3>
+<p>Neither of the two-sided infinite limits is an ordinary finite
+limit.</p>
+<p>In this example, because the function approaches <span
+class="math inline">+\infty</span> from one side and <span
+class="math inline">-\infty</span> from the other, it is more
+appropriate to describe the behavior using the two one-sided limits.</p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 id="vertical-asymptotes-of-the-tangent-function">Vertical Asymptotes
+of the Tangent Function</h2>
+<h2 class="green" id="example-8">Example 8</h2>
+<p>Find the vertical asymptotes of <span class="math inline">f(x)=\tan
+x</span></p>
+<h2 class="green" id="solution-7">Solution</h2>
+<p>Since</p>
+<p><span class="math display">
+\tan x=\frac{\sin x}{\cos x}
+</span></p>
+<p>potential vertical asymptotes occur where</p>
+<p><span class="math display">
+\cos x=0
+</span></p>
+<p>The solutions are</p>
+<p><span class="math display">
+x=\frac{\pi}{2}+n\pi
+</span></p>
+<p>where <span class="math inline">n</span> is any integer.</p>
+<p>For example, near <span class="math inline">x=\pi/2</span>,</p>
+<p><span class="math display">
+\lim_{x\to(\pi/2)^-}\tan x=\infty
+</span></p>
+<p>and</p>
+<p><span class="math display">
+\lim_{x\to(\pi/2)^+}\tan x=-\infty
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+\boxed{x=\frac{\pi}{2}+n\pi,\qquad n\in\mathbb Z}
+</span></p>
+<p>are the vertical asymptotes of <span class="math inline">y=\tan
+x</span>.</p>
+<div style="text-align: center;">
+<p><img src="../images/0614.png" style="width: 711px; border-radius: 12px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 11.</strong> Graph of <span
+class="math inline">y=\tan x</span> showing its vertical
+asymptotes.</span></p>
+</div>
+<h2 id="vertical-asymptote-of-the-natural-logarithm">Vertical Asymptote
+of the Natural Logarithm</h2>
+<ul>
+<li>Another example of a function with a vertical asymptote is the
+natural logarithm</li>
+</ul>
+<p><span class="math display">
+y=\ln x
+</span></p>
+<ul>
+<li>As <span class="math inline">x</span> approaches <span
+class="math inline">0</span> from the right, the logarithm decreases
+without bound.</li>
+</ul>
+<p><span class="math display">
+\boxed{\lim_{x\to0^+}\ln x=-\infty}
+</span></p>
+<div style="text-align: center;">
+<p><img src="../images/0615.png" style="width: 513px; border-radius: 12px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 12.</strong> Graph of <span
+class="math inline">y=\ln x</span> showing the vertical asymptote <span
+class="math inline">x=0</span>.</span></p>
+</div>
+<ul>
+<li><p>Therefore, the line <span class="math inline">x=0</span> is a
+vertical asymptote of <span class="math inline">y=\ln x</span>.</p></li>
+<li><p>The same idea applies to <span
+class="math inline">y=\log_bx</span> when <span
+class="math inline">b&gt;1</span>.</p></li>
+</ul>
+<h1 id="quick-check-3">Quick Check</h1>
+<h2 class="red" id="question-1-3">Question 1</h2>
+<p>Determine the vertical asymptote of</p>
+<p><span class="math display">
+f(x)=\frac1{x-4}
+</span></p>
+<h2 class="red" id="question-2-3">Question 2</h2>
+<p>Determine the vertical asymptotes of</p>
+<p><span class="math display">
+f(x)=\tan x
+</span></p>
+<div class="questions-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="scenario-problem">Scenario Problem</h1>
+<h2 class="green" id="problem">Problem</h2>
+<p>A simplified mechanical model describes the response of a component
+near a critical operating parameter <span class="math inline">x=3</span>
+by</p>
+<p><span class="math display">
+R(x)=\frac{2x}{x-3}
+</span></p>
+<p>The parameter <span class="math inline">x</span> represents a
+normalized operating condition, and <span
+class="math inline">R(x)</span> represents the corresponding response of
+the component.</p>
+<p>Determine what happens to the response as the operating condition
+approaches the critical value <span class="math inline">x=3</span> from
+the left and from the right, and determine whether <span
+class="math inline">x=3</span> is a vertical asymptote.</p>
+<h2 class="green" id="solution-8">Solution</h2>
+<p>We first consider values of <span class="math inline">x</span>
+slightly less than <span class="math inline">3</span>.</p>
+<p>For example, if <span class="math inline">x=2.9</span>, then</p>
+<p><span class="math display">
+R(2.9)=\frac{2(2.9)}{2.9-3}
+</span></p>
+<p><span class="math display">
+R(2.9)=\frac{5.8}{-0.1}=-58
+</span></p>
+<p>If <span class="math inline">x=2.99</span>, then</p>
+<p><span class="math display">
+R(2.99)=\frac{5.98}{-0.01}=-598
+</span></p>
+<p>The response becomes increasingly negative as <span
+class="math inline">x</span> approaches <span
+class="math inline">3</span> from the left.</p>
+<p>Therefore,</p>
+<p><span class="math display">
+\boxed{\lim_{x\to3^-}R(x)=-\infty}
+</span></p>
+<p>Now consider values slightly greater than <span
+class="math inline">3</span>.</p>
+<p>If <span class="math inline">x=3.1</span>, then</p>
+<p><span class="math display">
+R(3.1)=\frac{6.2}{0.1}=62
+</span></p>
+<p>If <span class="math inline">x=3.01</span>, then</p>
+<p><span class="math display">
+R(3.01)=\frac{6.02}{0.01}=602
+</span></p>
+<p>The response becomes increasingly positive as <span
+class="math inline">x</span> approaches <span
+class="math inline">3</span> from the right.</p>
+<p>Therefore,</p>
+<p><span class="math display">
+\boxed{\lim_{x\to3^+}R(x)=\infty}
+</span></p>
+<p>Since the response becomes unbounded near <span
+class="math inline">x=3</span>, the line</p>
+<p><span class="math display">
+\boxed{x=3}
+</span></p>
+<p>is a vertical asymptote.</p>
+<p>Thus, the mathematical model predicts extremely large positive or
+negative responses as the operating condition approaches the critical
+value from the corresponding side.</p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="summary">Summary</h1>
+<ul>
+<li><p>A <strong>limit</strong> describes the value that <span
+class="math inline">f(x)</span> approaches as <span
+class="math inline">x</span> gets closer and closer to a particular
+number.</p></li>
+<li><p>Numerical tables can be used to estimate a limit by evaluating
+the function at values increasingly close to the point of
+interest.</p></li>
+<li><p>Graphs provide a visual way to observe the behavior of a function
+near the point being approached.</p></li>
+<li><p>The intuitive meaning of a limit is expressed by</p></li>
+</ul>
+<p><span class="math display">
+\boxed{\lim_{x\to a}f(x)=L}
+</span></p>
+<ul>
+<li><p>The value of <span class="math inline">f(a)</span> does not
+necessarily determine the value of the limit, and the function does not
+even have to be defined at <span class="math inline">a</span>.</p></li>
+<li><p>A <strong>left-hand limit</strong> considers values of <span
+class="math inline">x</span> approaching <span
+class="math inline">a</span> from values less than <span
+class="math inline">a</span>.</p></li>
+</ul>
+<p><span class="math display">
+\boxed{\lim_{x\to a^-}f(x)}
+</span></p>
+<ul>
+<li>A <strong>right-hand limit</strong> considers values of <span
+class="math inline">x</span> approaching <span
+class="math inline">a</span> from values greater than <span
+class="math inline">a</span>.</li>
+</ul>
+<p><span class="math display">
+\boxed{\lim_{x\to a^+}f(x)}
+</span></p>
+<ul>
+<li>A two-sided limit exists only when the two one-sided limits exist
+and are equal.</li>
+</ul>
+<p><span class="math display">
+\boxed{
+\lim_{x\to a}f(x)=L
+\iff
+\lim_{x\to a^-}f(x)=L
+\quad\text{and}\quad
+\lim_{x\to a^+}f(x)=L
+}
+</span></p>
+<ul>
+<li><p>A limit can fail to exist when the left-hand and right-hand
+limits are different.</p></li>
+<li><p>A limit can also fail to exist when the function oscillates
+indefinitely, as in</p></li>
+</ul>
+<p><span class="math display">
+\boxed{\lim_{x\to0}\sin\frac{\pi}{x}\text{ does not exist}}
+</span></p>
+<ul>
+<li><p>A function can also become arbitrarily large or negative as <span
+class="math inline">x</span> approaches a point.</p></li>
+<li><p>The following notation describes values of <span
+class="math inline">f(x)</span> that increase without bound and does not
+mean that <span class="math inline">\infty</span> is an ordinary real
+number.</p></li>
+</ul>
+<p><span class="math display">
+\lim_{x\to a}f(x)=\infty
+</span></p>
+<ul>
+<li><p>A vertical line <span class="math inline">x=a</span> is a
+<strong>vertical asymptote</strong> when the function becomes unbounded
+as <span class="math inline">x</span> approaches <span
+class="math inline">a</span> from at least one appropriate
+direction.</p></li>
+<li><p>For the following function the vertical asymptote is <span
+class="math inline">x=3</span>.</p></li>
+</ul>
+<p><span class="math display">
+f(x)=\frac{2x}{x-3}
+</span></p>
+<ul>
+<li>For the tangent function, the vertical asymptotes are</li>
+</ul>
+<p><span class="math display">
+\boxed{x=\frac{\pi}{2}+n\pi,\qquad n\in\mathbb Z}
+</span></p>
+<ul>
+<li>For the natural logarithm, the vertical asymptote is</li>
+</ul>
+<p><span class="math display">
+\boxed{x=0}
+</span></p>
+<ul>
+<li>The central idea of this topic is therefore that <strong>limits
+describe local behavior</strong>: they tell us what a function
+approaches, how it approaches from each side, and whether its behavior
+remains finite, oscillates, or becomes unbounded.</li>
+</ul>
+<h1 id="exercises">Exercises</h1>
+<h2 id="exercises-set-1">Exercises Set 1</h2>
+<p>Solve the odd number exercises from exercise 1 to 51.</p>
+<h2 id="exercise-set-2-reading-material">Exercise Set 2 (Reading
+Material)</h2>
+<p>Self study objective 4 (Infinite Limits; Vertical Asymptotes)</p>
+<ul>
+<li><p>Exercises help transform theoretical concepts into practical
+understanding.</p></li>
+<li><p>Mathematics is learned by doing and solving exercises will train
+you to analyze problems, select appropriate methods, and construct
+logical solutions.</p></li>
+<li><p>Attempting problems sometimes leads to mistakes which provide
+opportunities for learning and improvement.</p></li>
+<li><p>Regular practice increases speed, accuracy, and
+confidence.</p></li>
+<li><p>Exercises are given in the Exercises file and you are expected to
+solve them on your own.</p></li>
+</ul>
+</body>
+</html>
