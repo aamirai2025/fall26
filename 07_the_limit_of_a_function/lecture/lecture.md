@@ -346,7 +346,7 @@ This result is correct and will later be established using a geometric argument.
 <div style="text-align: center;">
 <img src="../images/0604.png" style="width: 725px; border-radius: 12px; display: block; margin: 0 auto 10px auto;">
 
-<span><strong>Figure 4.</strong> The graph of the Heaviside function.</span>
+<span><strong>Figure 4.</strong> The graph of $\frac{\sin x}{x}$ function.</span>
 </div>
 
 <div class="example-end">$\blacksquare$</div>
