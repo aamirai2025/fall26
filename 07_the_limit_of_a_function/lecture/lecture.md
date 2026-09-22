@@ -152,19 +152,21 @@ $$
 
 * Thus, numerical tables and graphs give two complementary ways of investigating a limit.
 
-## Intuitive Definition of a Limit
+## Definition: Intuitive Definition of a Limit {.blue}
 
-* Suppose $f(x)$ is defined when $x$ is near $a$, possibly except at $a$ itself.
+Suppose $f(x)$ is defined when $x$ is near $a$, possibly except at $a$ itself.
 
-* We write the following limit and say that **the limit of $f(x)$ as $x$ approaches $a$ is $L$** if the values of $f(x)$ can be made arbitrarily close to $L$ by taking $x$ sufficiently close to $a$ on either side of $a$, but not equal to $a$.
+We write the following limit and say that **the limit of $f(x)$ as $x$ approaches $a$ is $L$** if the values of $f(x)$ can be made arbitrarily close to $L$ by taking $x$ sufficiently close to $a$ on either side of $a$, but not equal to $a$.
 
 $$
 \lim_{x\to a}f(x)=L
 $$
 
-* Roughly speaking, the values of $f(x)$ approach $L$ as $x$ approaches $a$.
+Roughly speaking, the values of $f(x)$ approach $L$ as $x$ approaches $a$.
 
-* The function does not even have to be defined at $x=a$ for the limit to exist.
+The function does not even have to be defined at $x=a$ for the limit to exist.
+
+<div class="definition-end">$\blacksquare$</div>
 
 
 <div style="text-align: center;">
@@ -486,6 +488,12 @@ $$
 
 * These are called the **left-hand limit** and **right-hand limit**, respectively.
 
+<div style="text-align: center;">
+<img src="../images/0605.png" style="width: 706px; border-radius: 12px; display: block; margin: 0 auto 10px auto;">
+
+<span><strong>Figure 5.</strong> One-sided approaches to $a$ from the left and from the right.</span>
+</div>
+
 ## Definition: Intuitive Definitions of One-Sided Limits {.blue}
 
 We write the following limit when the values of $f(x)$ can be made arbitrarily close to $L$ by restricting $x$ to be sufficiently close to $a$ with $x<a$.
@@ -503,13 +511,6 @@ $$
 <div class="definition-end">$\blacksquare$</div>
 
 * Thus, the only difference between one-sided and ordinary limits is the direction from which $x$ approaches $a$.
-
-
-<div style="text-align: center;">
-<img src="../images/0605.png" style="width: 706px; border-radius: 12px; display: block; margin: 0 auto 10px auto;">
-
-<span><strong>Figure 5.</strong> One-sided approaches to $a$ from the left and from the right.</span>
-</div>
 
 * For example, $x\to5^-$ means that we consider only values $x<5$, while $x\to5^+$ means that we consider only values $x>5$.
 
