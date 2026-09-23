@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>lecture</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="../styles/style.css" />
+  <script defer=""
+  src="/usr/share/javascript/katex/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <link rel="stylesheet"
+  href="/usr/share/javascript/katex/katex.min.css" />
+</head>
+<body>
+<h1 id="calculus-and-analytical-geometry">Calculus and Analytical
+Geometry</h1>
+<h2 id="continuity">Continuity</h2>
+<h3 id="dr.-aamir-alaud-din">Dr. Aamir Alaud Din</h3>
+<h3 id="september-23-2026">September 23, 2026</h3>
+<h1 id="objectives">Objectives</h1>
+<p>After preparing this topic, you should be able to:</p>
+<ol type="1">
+<li><p>Define continuity at a point and determine whether a function is
+continuous at a point, from one side, or on an interval.</p></li>
+<li><p>Apply the properties of continuous functions to construct new
+continuous functions and determine the intervals on which familiar
+functions are continuous.</p></li>
+<li><p>Apply the Intermediate Value Theorem to continuous functions and
+use it to establish the existence of solutions of equations on closed
+intervals.</p></li>
+</ol>
+<h1 id="the-why-section">The Why Section</h1>
+<h2 id="objective-1-why-study-continuity-of-a-function">Objective 1: Why
+Study Continuity of a Function?</h2>
+<ul>
+<li><p>In engineering and computer science, mathematical models often
+describe quantities that change as an input changes.</p></li>
+<li><p>For example, the position of a robotic arm may be represented by
+a function of time.</p></li>
+<li><p>If a small change in time produces a sudden and unexplained jump
+in the predicted position, the mathematical model may not represent a
+physically smooth motion.</p></li>
+<li><p>Continuity provides a mathematical way to describe this idea of
+smooth behavior.</p></li>
+<li><p>A function is continuous at a point when its limiting value at
+that point agrees with its actual value there.</p></li>
+<li><p>Consider a mechatronic system in which a controller determines
+the position of a robotic component from a sensor measurement.</p></li>
+<li><p>If the sensor measurement changes slightly, we may want the
+calculated position to change only slightly rather than suddenly jumping
+to another value.</p></li>
+<li><p>The concept of continuity allows us to analyze whether such
+behavior occurs.</p></li>
+<li><p>Therefore, continuity provides a mathematical framework for
+determining whether a function behaves without a break at a particular
+point or throughout an interval.</p></li>
+</ul>
+<h2
+id="objective-2-why-study-properties-of-continuous-functions">Objective
+2: Why Study Properties of Continuous Functions?</h2>
+<ul>
+<li><p>In practical applications, complicated mathematical models are
+often constructed from simpler functions.</p></li>
+<li><p>For example, a mechanical model may contain polynomial
+expressions, ratios of polynomials, trigonometric functions, logarithms,
+exponentials, and compositions of several functions.</p></li>
+<li><p>It would be inefficient to verify the definition of continuity
+from the beginning every time a new function is constructed.</p></li>
+<li><p>The properties of continuous functions provide rules that allow
+us to build new continuous functions from functions that are already
+known to be continuous.</p></li>
+<li><p>For example, if two functions are continuous, their sum,
+difference, product, and suitable quotient are also continuous.</p></li>
+<li><p>This allows engineers and computer scientists to determine the
+continuity of complicated mathematical models systematically.</p></li>
+<li><p>Therefore, studying these properties provides a practical way to
+identify where a function is continuous without repeatedly returning to
+the basic definition.</p></li>
+</ul>
+<h2 id="objective-3-why-study-the-intermediate-value-theorem">Objective
+3: Why Study the Intermediate Value Theorem?</h2>
+<ul>
+<li><p>In engineering and computer science, we frequently need to know
+whether an equation has a solution within a particular
+interval.</p></li>
+<li><p>For example, a controller may require a parameter value at which
+a modeled temperature, position, pressure, or error reaches a specified
+target.</p></li>
+<li><p>Solving the equation explicitly may be difficult or even
+impossible.</p></li>
+<li><p>If the mathematical model is continuous and its values at the two
+endpoints lie on opposite sides of the desired value, the Intermediate
+Value Theorem guarantees that the desired value is attained somewhere
+between the endpoints.</p></li>
+<li><p>Consider a robotic actuator whose position error is represented
+by a continuous function of the actuator setting.</p></li>
+<li><p>If the error is negative at one setting and positive at another,
+the Intermediate Value Theorem allows us to establish that there is an
+intermediate setting at which the error is exactly zero.</p></li>
+<li><p>Thus, the theorem provides a mathematical foundation for
+establishing the existence of solutions even when an explicit formula
+for the solution is unavailable.</p></li>
+</ul>
+<h1 id="objective-1-continuity-of-a-function">Objective 1: Continuity of
+a Function</h1>
+<h2 id="continuity-at-a-point">Continuity at a Point</h2>
+<ul>
+<li><p>We have already seen that a limit of a function can exist even
+when the function is not defined at the point being approached.</p></li>
+<li><p>Continuity connects the limiting behavior of a function with its
+actual value at the point.</p></li>
+</ul>
+<h2 class="blue" id="definition-continuity-at-a-point">Definition:
+Continuity at a Point</h2>
+<p>A function <span class="math inline">f</span> is continuous at a
+number <span class="math inline">a</span> if</p>
+<p><span class="math display">
+\lim_{x\to a}f(x)=f(a)
+</span></p>
+<div class="definition-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<ul>
+<li><p>This definition implicitly requires three conditions.</p></li>
+<li><p>First, <span class="math inline">f(a)</span> must be
+defined.</p></li>
+<li><p>Second, <span class="math inline">\lim_{x\to a}f(x)</span> must
+exist.</p></li>
+<li><p>Third, the limit must equal the actual function value.</p></li>
+</ul>
+<p><span class="math display">
+\boxed{
+\lim_{x\to a}f(x)=f(a)
+}
+</span></p>
+<ul>
+<li><p>Thus, continuity means that the function approaches exactly the
+value that it actually has at the point.</p></li>
+<li><p>Geometrically, when a function is continuous at <span
+class="math inline">a</span>, its graph has no break at the point <span
+class="math inline">(a,f(a))</span>.</p></li>
+</ul>
+<div style="text-align: center;">
+<p><img src="../images/0901.png" style="width: 708 px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 1.</strong> A graph illustrating that <span
+class="math inline">\lim_{x\to a}f(x)=f(a)</span> for a function
+continuous at <span class="math inline">a</span>.</span></p>
+</div>
+<ul>
+<li>A function is discontinuous at <span class="math inline">a</span> if
+any of the conditions required for continuity fails.</li>
+</ul>
+<h2 class="green" id="example-1">Example 1</h2>
+<p>Figure 2 shows the graph of a function <span
+class="math inline">f</span>. At which numbers is <span
+class="math inline">f</span> discontinuous?</p>
+<div style="text-align: center;">
+<p><img src="../images/0902.png" style="width: 686 px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 2.</strong> Graph illustrating discontinuities
+of a function at <span class="math inline">x=1</span>, <span
+class="math inline">x=3</span>, and <span
+class="math inline">x=5</span>.</span></p>
+</div>
+<h2 class="green" id="solution">Solution</h2>
+<p>At <span class="math inline">x=1</span>, the graph has a break and
+<span class="math inline">f(1)</span> is not defined.</p>
+<p>Therefore, <span class="math inline">f</span> is discontinuous at
+<span class="math inline">x=1</span>.</p>
+<p>At <span class="math inline">x=3</span>, the function is defined, but
+the left-hand and right-hand limits are different.</p>
+<p><span class="math display">
+\lim_{x\to3^-}f(x)\neq\lim_{x\to3^+}f(x)
+</span></p>
+<p>Therefore, <span class="math inline">\lim_{x\to3}f(x)</span> does not
+exist, so <span class="math inline">f</span> is discontinuous at <span
+class="math inline">x=3</span>.</p>
+<p>At <span class="math inline">x=5</span>, the limit exists, but the
+limiting value is different from the actual function value.</p>
+<p><span class="math display">
+\lim_{x\to5}f(x)\neq f(5)
+</span></p>
+<p>Therefore, <span class="math inline">f</span> is discontinuous at
+<span class="math inline">x=5</span>.</p>
+<p>Hence, the function is discontinuous at</p>
+<p><span class="math display">
+\boxed{x=1,\;3,\;5}
+</span></p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 id="types-of-discontinuities">Types of Discontinuities</h2>
+<ul>
+<li><p>The preceding example illustrates three ways in which continuity
+can fail.</p></li>
+<li><p>A <strong>removable discontinuity</strong> occurs when the limit
+exists but either the function is not defined at the point or its value
+is different from the limit.</p></li>
+<li><p>A <strong>jump discontinuity</strong> occurs when the left-hand
+and right-hand limits exist but are different.</p></li>
+<li><p>An <strong>infinite discontinuity</strong> occurs when the
+function becomes unbounded near a point.</p></li>
+<li><p>These types can be recognized from the behavior of the
+graph.</p></li>
+</ul>
+<h2 class="green" id="example-2">Example 2</h2>
+<p>Where are each of the following functions discontinuous?</p>
+<p><strong>(a)</strong></p>
+<p><span class="math display">
+f(x)=\frac{x^2-x-2}{x-2}
+</span></p>
+<p><strong>(b)</strong></p>
+<p><span class="math display">
+f(x)=
+\begin{cases}
+\dfrac{x^2-x-2}{x-2} &amp; x\neq2\\
+1 &amp; x=2
+\end{cases}
+</span></p>
+<p><strong>(c)</strong></p>
+<p><span class="math display">
+f(x)=
+\begin{cases}
+\dfrac{1}{x^2} &amp; x\neq0\\
+1 &amp; x=0
+\end{cases}
+</span></p>
+<p><strong>(d)</strong></p>
+<p><span class="math display">
+f(x)=[x]
+</span></p>
+<h2 class="green" id="solution-1">Solution</h2>
+<p><strong>(a)</strong></p>
+<p>The denominator is zero when <span
+class="math inline">x=2</span>.</p>
+<p><span class="math display">
+x-2=0
+</span></p>
+<p>Therefore, <span class="math inline">f(2)</span> is not defined.</p>
+<p>Hence, the function is discontinuous at</p>
+<p><span class="math display">
+\boxed{x=2}
+</span></p>
+<p><strong>(b)</strong></p>
+<p>Here <span class="math inline">f(2)=1</span> is defined.</p>
+<p>For <span class="math inline">x\neq2</span>,</p>
+<p><span class="math display">
+\frac{x^2-x-2}{x-2}
+=
+\frac{(x-2)(x+1)}{x-2}
+=
+x+1
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+\lim_{x\to2}f(x)
+=
+\lim_{x\to2}(x+1)
+=
+3
+</span></p>
+<p>Since</p>
+<p><span class="math display">
+\lim_{x\to2}f(x)\neq f(2)
+</span></p>
+<p>the function is discontinuous at</p>
+<p><span class="math display">
+\boxed{x=2}
+</span></p>
+<p>This is a removable discontinuity.</p>
+<p><strong>(c)</strong></p>
+<p>Although <span class="math inline">f(0)=1</span> is defined,</p>
+<p><span class="math display">
+\lim_{x\to0}\frac1{x^2}=\infty
+</span></p>
+<p>Therefore, the limit is not a finite number and the function is
+discontinuous at</p>
+<p><span class="math display">
+\boxed{x=0}
+</span></p>
+<p>This is an infinite discontinuity.</p>
+<p><strong>(d)</strong></p>
+<p>The greatest integer function has a jump at every integer.</p>
+<p>Therefore, it is discontinuous at every integer.</p>
+<p><span class="math display">
+\boxed{x\in\mathbb Z}
+</span></p>
+<p>The corresponding graphs illustrate removable, infinite, and jump
+discontinuities.</p>
+<div style="text-align: center;">
+<p><img src="../images/0903a.png" style="width: 567 px; display: block; margin: 0 auto 10px auto;"></p>
+</div>
+<div style="text-align: center;">
+<p><img src="../images/0903b.png" style="width: 567 px; display: block; margin: 0 auto 10px auto;"></p>
+</div>
+<div style="text-align: center;">
+<p><img src="../images/0903c.png" style="width: 567 px; display: block; margin: 0 auto 10px auto;"></p>
+</div>
+<div style="text-align: center;">
+<p><img src="../images/0903d.png" style="width: 567 px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 3.</strong> Graphs illustrating a removable
+discontinuity, an infinite discontinuity, and jump
+discontinuities.</span></p>
+</div>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 id="continuity-from-one-side">Continuity from One Side</h2>
+<ul>
+<li><p>At an endpoint of an interval, a function may be defined only on
+one side.</p></li>
+<li><p>This leads naturally to one-sided continuity.</p></li>
+</ul>
+<h2 class="blue"
+id="definition-continuity-from-the-right-and-left">Definition:
+Continuity from the Right and Left</h2>
+<p>A function <span class="math inline">f</span> is continuous from the
+right at <span class="math inline">a</span> if</p>
+<p><span class="math display">
+\lim_{x\to a^+}f(x)=f(a)
+</span></p>
+<p>A function <span class="math inline">f</span> is continuous from the
+left at <span class="math inline">a</span> if</p>
+<p><span class="math display">
+\lim_{x\to a^-}f(x)=f(a)
+</span></p>
+<div class="definition-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="green" id="example-3">Example 3</h2>
+<p>At each integer <span class="math inline">n</span>, the function
+<span class="math inline">f(x)=[x]</span> is continuous from the right
+but not from the left.</p>
+<h2 class="green" id="solution-2">Solution</h2>
+<p>At an integer <span class="math inline">n</span>, the greatest
+integer function satisfies</p>
+<p><span class="math display">
+\lim_{x\to n^+}[x]=n=f(n)
+</span></p>
+<p>Therefore, <span class="math inline">f</span> is continuous from the
+right at every integer.</p>
+<p>From the left,</p>
+<p><span class="math display">
+\lim_{x\to n^-}[x]=n-1
+</span></p>
+<p>Since</p>
+<p><span class="math display">
+n-1\neq n=f(n)
+</span></p>
+<p>the function is not continuous from the left at an integer.</p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 id="continuity-on-an-interval">Continuity on an Interval</h2>
+<h2 class="blue" id="definition-continuity-on-an-interval">Definition:
+Continuity on an Interval</h2>
+<p>A function <span class="math inline">f</span> is continuous on an
+interval if it is continuous at every number in the interval.</p>
+<p>If the interval contains an endpoint where the function is defined on
+only one side, continuity at that endpoint means continuity from the
+appropriate side.</p>
+<div class="definition-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="green" id="example-4">Example 4</h2>
+<p>Show that the function</p>
+<p><span class="math display">
+f(x)=1-\sqrt{1-x^2}
+</span></p>
+<p>is continuous on the interval <span
+class="math inline">[-1,1]</span>.</p>
+<h2 class="green" id="solution-3">Solution</h2>
+<p>Let <span class="math inline">-1&lt;a&lt;1</span>.</p>
+<p>Using the Limit Laws,</p>
+<p><span class="math display">
+\begin{aligned}
+\lim_{x\to a}f(x)
+&amp;=\lim_{x\to a}\left(1-\sqrt{1-x^2}\right)\\
+&amp;=1-\lim_{x\to a}\sqrt{1-x^2}\\
+&amp;=1-\sqrt{\lim_{x\to a}(1-x^2)}\\
+&amp;=1-\sqrt{1-a^2}\\
+&amp;=f(a)
+\end{aligned}
+</span></p>
+<p>Therefore, <span class="math inline">f</span> is continuous at every
+<span class="math inline">a</span> with <span
+class="math inline">-1&lt;a&lt;1</span>.</p>
+<p>At the left endpoint,</p>
+<p><span class="math display">
+\lim_{x\to-1^+}f(x)=f(-1)
+</span></p>
+<p>At the right endpoint,</p>
+<p><span class="math display">
+\lim_{x\to1^-}f(x)=f(1)
+</span></p>
+<p>Therefore, <span class="math inline">f</span> is continuous on</p>
+<p><span class="math display">
+\boxed{[-1,1]}
+</span></p>
+<div style="text-align: center;">
+<p><img src="../images/0904.png" style="width: 671 px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 4.</strong> Graph of <span
+class="math inline">y=1-\sqrt{1-x^2}</span> showing continuity on <span
+class="math inline">[-1,1]</span>.</span></p>
+</div>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="quick-check">Quick Check</h1>
+<h2 class="red" id="question-1">Question 1</h2>
+<p>For a function to be continuous at <span
+class="math inline">x=a</span>, must <span
+class="math inline">f(a)</span> be defined?</p>
+<h2 class="red" id="question-2">Question 2</h2>
+<p>Suppose</p>
+<p><span class="math display">
+\lim_{x\to2}f(x)=5
+</span></p>
+<p>but</p>
+<p><span class="math display">
+f(2)=7
+</span></p>
+<p>Is <span class="math inline">f</span> continuous at <span
+class="math inline">x=2</span>?</p>
+<div class="question-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="objective-2-properties-of-continuous-functions">Objective 2:
+Properties of Continuous Functions</h1>
+<h2 id="algebraic-properties-of-continuous-functions">Algebraic
+Properties of Continuous Functions</h2>
+<ul>
+<li><p>It is often unnecessary to use the definition of continuity every
+time we want to determine whether a function is continuous.</p></li>
+<li><p>Instead, we can use properties that allow us to construct new
+continuous functions from functions that are already known to be
+continuous.</p></li>
+</ul>
+<h2 class="orange" id="theorem">Theorem</h2>
+<p>If <span class="math inline">f</span> and <span
+class="math inline">g</span> are continuous at <span
+class="math inline">a</span> and <span class="math inline">c</span> is a
+constant, then the following functions are also continuous at <span
+class="math inline">a</span>:</p>
+<ol type="1">
+<li><p><span class="math inline">f+g</span></p></li>
+<li><p><span class="math inline">f-g</span></p></li>
+<li><p><span class="math inline">cf</span></p></li>
+<li><p><span class="math inline">fg</span></p></li>
+<li><p><span class="math inline">\dfrac{f}{g}</span> if <span
+class="math inline">g(a)\neq0</span></p></li>
+</ol>
+<h2 class="orange" id="proof">Proof</h2>
+<p>Since <span class="math inline">f</span> and <span
+class="math inline">g</span> are continuous at <span
+class="math inline">a</span>,</p>
+<p><span class="math display">
+\lim_{x\to a}f(x)=f(a)
+</span></p>
+<p>and</p>
+<p><span class="math display">
+\lim_{x\to a}g(x)=g(a)
+</span></p>
+<p>For the sum,</p>
+<p><span class="math display">
+\begin{aligned}
+\lim_{x\to a}(f+g)(x)
+&amp;=\lim_{x\to a}[f(x)+g(x)]\\
+&amp;=\lim_{x\to a}f(x)+\lim_{x\to a}g(x)\\
+&amp;=f(a)+g(a)\\
+&amp;=(f+g)(a)
+\end{aligned}
+</span></p>
+<p>Therefore, <span class="math inline">f+g</span> is continuous at
+<span class="math inline">a</span>.</p>
+<p>The other four results follow from the corresponding Limit Laws.</p>
+<div class="theorem-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 id="polynomial-and-rational-functions">Polynomial and Rational
+Functions</h2>
+<h2 class="orange" id="theorem-1">Theorem</h2>
+<p>Every polynomial function is continuous everywhere.</p>
+<p>Therefore, if</p>
+<p><span class="math display">
+P(x)=a_nx^n+\cdots+a_1x+a_0
+</span></p>
+<p>then <span class="math inline">P</span> is continuous on</p>
+<p><span class="math display">
+\boxed{\mathbb R}
+</span></p>
+<p>A rational function is continuous wherever it is defined.</p>
+<p>If</p>
+<p><span class="math display">
+f(x)=\frac{P(x)}{Q(x)}
+</span></p>
+<p>where <span class="math inline">P</span> and <span
+class="math inline">Q</span> are polynomials, then <span
+class="math inline">f</span> is continuous at every point where</p>
+<p><span class="math display">
+Q(x)\neq0
+</span></p>
+<div class="theorem-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="green" id="example-5">Example 5</h2>
+<p>Find</p>
+<p><span class="math display">
+\lim_{x\to-2}\frac{x^3+2x^2-1}{5-3x}
+</span></p>
+<h2 class="green" id="solution-4">Solution</h2>
+<p>The function</p>
+<p><span class="math display">
+f(x)=\frac{x^3+2x^2-1}{5-3x}
+</span></p>
+<p>is rational and therefore continuous wherever its denominator is
+nonzero.</p>
+<p>At <span class="math inline">x=-2</span>,</p>
+<p><span class="math display">
+5-3(-2)=11\neq0
+</span></p>
+<p>Hence, we can use continuity and direct substitution.</p>
+<p><span class="math display">
+\begin{aligned}
+\lim_{x\to-2}\frac{x^3+2x^2-1}{5-3x}
+&amp;=
+\frac{(-2)^3+2(-2)^2-1}{5-3(-2)}\\
+&amp;=\frac{-8+8-1}{11}\\
+&amp;=-\frac1{11}
+\end{aligned}
+</span></p>
+<p><span class="math display">
+\boxed{-\frac1{11}}
+</span></p>
+<div style="text-align: center;">
+<p><img src="../images/0905.png" style="width: 566 px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 5.</strong> Geometric illustration used in
+Stewart to discuss continuity of the square-root expression.</span></p>
+</div>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 id="continuity-of-familiar-functions">Continuity of Familiar
+Functions</h2>
+<ul>
+<li><p>Many familiar functions are continuous at every number in their
+domains.</p></li>
+<li><p>These include polynomial functions, rational functions, root
+functions, trigonometric functions, inverse trigonometric functions,
+exponential functions, and logarithmic functions.</p></li>
+<li><p>The following types of functions are continuous at every number
+in their domains:</p>
+<ul>
+<li><p>polynomial functions</p></li>
+<li><p>rational functions</p></li>
+<li><p>root functions</p></li>
+<li><p>trigonometric functions</p></li>
+<li><p>inverse trigonometric functions</p></li>
+<li><p>exponential functions</p></li>
+<li><p>logarithmic functions</p></li>
+</ul></li>
+<li><p>For example, <span class="math inline">\tan x</span> is
+continuous wherever it is defined.</p></li>
+<li><p>Since</p></li>
+</ul>
+<p><span class="math display">
+\tan x=\frac{\sin x}{\cos x}
+</span></p>
+<ul>
+<li>In this function, possible discontinuities occur where</li>
+</ul>
+<p><span class="math display">
+\cos x=0
+</span></p>
+<ul>
+<li>Thus, the vertical asymptotes occur at</li>
+</ul>
+<p><span class="math display">
+x=\frac{\pi}{2}+n\pi
+</span></p>
+<ul>
+<li>In the above relation, <span class="math inline">n\in\mathbb
+Z</span>.</li>
+</ul>
+<h2 class="green" id="example-6">Example 6</h2>
+<p>Where is the function</p>
+<p><span class="math display">
+f(x)=\frac{\ln x+\tan^{-1}x}{x^2-1}
+</span></p>
+<p>continuous?</p>
+<h2 class="green" id="solution-5">Solution</h2>
+<p>The functions <span class="math inline">\ln x</span> and <span
+class="math inline">\tan^{-1}x</span> are continuous on their
+domains.</p>
+<p>Since <span class="math inline">\ln x</span> requires</p>
+<p><span class="math display">
+x&gt;0
+</span></p>
+<p>the numerator is continuous for <span
+class="math inline">x&gt;0</span>.</p>
+<p>The denominator <span class="math inline">x^2-1</span> is zero
+when</p>
+<p><span class="math display">
+x^2-1=0
+</span></p>
+<p>which gives</p>
+<p><span class="math display">
+x=\pm1
+</span></p>
+<p>Because the domain already requires <span
+class="math inline">x&gt;0</span>, only <span
+class="math inline">x=1</span> must be excluded.</p>
+<p>Therefore, <span class="math inline">f</span> is continuous on</p>
+<p><span class="math display">
+\boxed{(0,1)\cup(1,\infty)}
+</span></p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 id="continuity-and-limits">Continuity and Limits</h2>
+<ul>
+<li><p>Continuity can make the evaluation of limits much
+easier.</p></li>
+<li><p>If <span class="math inline">f</span> is continuous at <span
+class="math inline">a</span>, then by definition,</p></li>
+</ul>
+<p><span class="math display">
+\lim_{x\to a}f(x)=f(a)
+</span></p>
+<ul>
+<li>Thus, once continuity is established, the limit can often be found
+simply by evaluating the function.</li>
+</ul>
+<h2 class="green" id="example-7">Example 7</h2>
+<p>Evaluate</p>
+<p><span class="math display">
+\lim_{x\to\pi}\frac{\sin x}{2+\cos x}
+</span></p>
+<h2 class="green" id="solution-6">Solution</h2>
+<p>The function <span class="math inline">\sin x</span> is continuous
+everywhere.</p>
+<p>The function <span class="math inline">2+\cos x</span> is also
+continuous everywhere.</p>
+<p>Moreover,</p>
+<p><span class="math display">
+2+\cos x\geq1
+</span></p>
+<p>Therefore, the denominator is never zero.</p>
+<p>Hence,</p>
+<p><span class="math display">
+f(x)=\frac{\sin x}{2+\cos x}
+</span></p>
+<p>is continuous everywhere.</p>
+<p>Therefore,</p>
+<p><span class="math display">
+\begin{aligned}
+\lim_{x\to\pi}\frac{\sin x}{2+\cos x}
+&amp;=
+\frac{\sin\pi}{2+\cos\pi}\\
+&amp;=\frac{0}{1}\\
+&amp;=0
+\end{aligned}
+</span></p>
+<p><span class="math display">
+\boxed{0}
+</span></p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 id="continuity-of-composite-functions">Continuity of Composite
+Functions</h2>
+<ul>
+<li><p>Another important way of constructing functions is by
+composition.</p></li>
+<li><p>Suppose</p></li>
+</ul>
+<p><span class="math display">
+h(x)=f(g(x))
+</span></p>
+<ul>
+<li>If <span class="math inline">g</span> is continuous at <span
+class="math inline">a</span> and <span class="math inline">f</span> is
+continuous at <span class="math inline">g(a)</span>, then the
+composition <span class="math inline">f\circ g</span> is continuous at
+<span class="math inline">a</span>.</li>
+</ul>
+<h2 class="orange" id="theorem-2">Theorem</h2>
+<p>If <span class="math inline">g</span> is continuous at <span
+class="math inline">a</span> and <span class="math inline">f</span> is
+continuous at <span class="math inline">g(a)</span>, then the composite
+function</p>
+<p><span class="math display">
+(f\circ g)(x)=f(g(x))
+</span></p>
+<p>is continuous at <span class="math inline">a</span>.</p>
+<div class="theorem-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<ul>
+<li>This result is often summarized by saying that a continuous function
+of a continuous function is continuous.</li>
+</ul>
+<h2 class="green" id="example-8">Example 8</h2>
+<p>Evaluate</p>
+<p><span class="math display">
+\lim_{x\to1}\arcsin\left(\frac{1-\sqrt{x}}{1-x}\right)
+</span></p>
+<h2 class="green" id="solution-7">Solution</h2>
+<p>Since <span class="math inline">\arcsin x</span> is continuous on its
+domain, we first determine the limit of the expression inside it.</p>
+<p>Factor the denominator:</p>
+<p><span class="math display">
+1-x=(1-\sqrt{x})(1+\sqrt{x})
+</span></p>
+<p>Therefore, for <span class="math inline">x\neq1</span>,</p>
+<p><span class="math display">
+\frac{1-\sqrt{x}}{1-x}
+=
+\frac{1}{1+\sqrt{x}}
+</span></p>
+<p>Hence,</p>
+<p><span class="math display">
+\begin{aligned}
+\lim_{x\to1}\arcsin\left(\frac{1-\sqrt{x}}{1-x}\right)
+&amp;=
+\arcsin\left(
+\lim_{x\to1}\frac{1}{1+\sqrt{x}}
+\right)\\
+&amp;=\arcsin\left(\frac12\right)\\
+&amp;=\frac{\pi}{6}
+\end{aligned}
+</span></p>
+<p><span class="math display">
+\boxed{\frac{\pi}{6}}
+</span></p>
+<div style="text-align: center;">
+<p><img src="../images/0906.png" style="width: 758 px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 6.</strong> Graph of <span
+class="math inline">y=\tan x</span> showing its vertical
+asymptotes.</span></p>
+</div>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="quick-check-1">Quick Check</h1>
+<h2 class="red" id="question-1-1">Question 1</h2>
+<p>Is the function</p>
+<p><span class="math display">
+f(x)=\frac{x^2+1}{x-3}
+</span></p>
+<p>continuous at <span class="math inline">x=2</span>?</p>
+<h2 class="red" id="question-2-1">Question 2</h2>
+<p>On which intervals is</p>
+<p><span class="math display">
+f(x)=\frac1{x^2-4}
+</span></p>
+<p>continuous?</p>
+<div class="question-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="objective-3-the-intermediate-value-theorem">Objective 3: The
+Intermediate Value Theorem</h1>
+<h2 id="the-idea-behind-the-intermediate-value-theorem">The Idea Behind
+the Intermediate Value Theorem</h2>
+<ul>
+<li><p>A continuous function cannot jump from one value to another
+without passing through every intermediate value.</p></li>
+<li><p>For example, suppose a continuous function has values <span
+class="math inline">f(a)</span> and <span
+class="math inline">f(b)</span> at the endpoints of an
+interval.</p></li>
+<li><p>If a number <span class="math inline">N</span> lies between these
+two values, continuity guarantees that the function takes the value
+<span class="math inline">N</span> somewhere between <span
+class="math inline">a</span> and <span
+class="math inline">b</span>.</p></li>
+</ul>
+<h2 class="orange" id="theorem-intermediate-value-theorem">Theorem:
+Intermediate Value Theorem</h2>
+<p>Suppose that <span class="math inline">f</span> is continuous on the
+closed interval <span class="math inline">[a,b]</span> and let <span
+class="math inline">N</span> be any number between <span
+class="math inline">f(a)</span> and <span
+class="math inline">f(b)</span>.</p>
+<p>Then there exists a number <span class="math inline">c</span> in
+<span class="math inline">(a,b)</span> such that</p>
+<p><span class="math display">
+\boxed{f(c)=N}
+</span></p>
+<div class="theorem-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<ul>
+<li>The theorem therefore guarantees the existence of at least one point
+at which the function takes the intermediate value.</li>
+</ul>
+<div style="text-align: center;">
+<p><img src="../images/0907.png" style="width: 731 px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 7.</strong> Graph of a continuous function
+illustrating the Intermediate Value Theorem.</span></p>
+</div>
+<div style="text-align: center;">
+<p><img src="../images/0908a.png" style="width: 776 px; display: block; margin: 0 auto 10px auto;"></p>
+</div>
+<div style="text-align: center;">
+<p><img src="../images/0908b.png" style="width: 776 px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 8.</strong> Graphical illustrations showing a
+continuous function taking an intermediate value once or more than
+once.</span></p>
+</div>
+<div style="text-align: center;">
+<p><img src="../images/0909.png" style="width: 717 px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 9.</strong> Illustration showing that a
+continuous function cannot jump over the horizontal line <span
+class="math inline">y=N</span>.</span></p>
+</div>
+<h2 id="using-the-intermediate-value-theorem-to-locate-a-root">Using the
+Intermediate Value Theorem to Locate a Root</h2>
+<ul>
+<li><p>A particularly useful application occurs when we want to
+determine whether an equation <span class="math inline">f(x)=0</span>
+has a solution.</p></li>
+<li><p>If <span class="math inline">f</span> is continuous on <span
+class="math inline">[a,b]</span> and <span
+class="math inline">f(a)&lt;0</span> while <span
+class="math inline">f(b)&gt;0</span> then <span
+class="math inline">0</span> lies between <span
+class="math inline">f(a)</span> and <span
+class="math inline">f(b)</span>.</p></li>
+<li><p>Therefore, the Intermediate Value Theorem guarantees a number
+<span class="math inline">c\in(a,b)</span> such that</p></li>
+</ul>
+<p><span class="math display">
+f(c)=0
+</span></p>
+<ul>
+<li>This means that the equation has at least one solution in the
+interval.</li>
+</ul>
+<h2 class="green" id="example-9">Example 9</h2>
+<p>Where are the following functions continuous?</p>
+<p><strong>(a)</strong></p>
+<p><span class="math display">
+h(x)=\sin(x^2)
+</span></p>
+<p><strong>(b)</strong></p>
+<p><span class="math display">
+F(x)=\ln(1+\cos x)
+</span></p>
+<h2 class="green" id="solution-8">Solution</h2>
+<p><strong>(a)</strong></p>
+<p>Let</p>
+<p><span class="math display">
+g(x)=x^2
+</span></p>
+<p>and</p>
+<p><span class="math display">
+f(x)=\sin x
+</span></p>
+<p>The polynomial <span class="math inline">g(x)=x^2</span> is
+continuous everywhere.</p>
+<p>The sine function is also continuous everywhere.</p>
+<p>Therefore, by the theorem on composite functions,</p>
+<p><span class="math display">
+h(x)=\sin(x^2)
+</span></p>
+<p>is continuous for all real numbers.</p>
+<p><span class="math display">
+\boxed{(-\infty,\infty)}
+</span></p>
+<p><strong>(b)</strong></p>
+<p>The function <span class="math inline">\cos x</span> is continuous
+everywhere.</p>
+<p>Therefore,</p>
+<p><span class="math display">
+1+\cos x
+</span></p>
+<p>is continuous everywhere.</p>
+<p>The logarithm is continuous for positive arguments.</p>
+<p>Thus, we require</p>
+<p><span class="math display">
+1+\cos x&gt;0
+</span></p>
+<p>Since</p>
+<p><span class="math display">
+1+\cos x=0
+</span></p>
+<p>when</p>
+<p><span class="math display">
+\cos x=-1
+</span></p>
+<p>this occurs at</p>
+<p><span class="math display">
+x=\pm\pi,\pm3\pi,\pm5\pi,\ldots
+</span></p>
+<p>Therefore, <span class="math inline">F</span> is continuous
+everywhere in its domain and discontinuous at the odd multiples of <span
+class="math inline">\pi</span>.</p>
+<p><span class="math display">
+\boxed{x=(2n+1)\pi,\qquad n\in\mathbb Z}
+</span></p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="green" id="example-10">Example 10</h2>
+<p>Show that there is a solution of the equation</p>
+<p><span class="math display">
+4x^3-6x^2+3x-2=0
+</span></p>
+<p>between <span class="math inline">1</span> and <span
+class="math inline">2</span>.</p>
+<h2 class="green" id="solution-9">Solution</h2>
+<p>Define</p>
+<p><span class="math display">
+f(x)=4x^3-6x^2+3x-2
+</span></p>
+<p>Since <span class="math inline">f</span> is a polynomial, it is
+continuous everywhere.</p>
+<p>In particular, <span class="math inline">f</span> is continuous on
+<span class="math inline">[1,2]</span>.</p>
+<p>Evaluate the function at the endpoints.</p>
+<p><span class="math display">
+f(1)=4-6+3-2=-1&lt;0
+</span></p>
+<p>and</p>
+<p><span class="math display">
+f(2)=32-24+6-2=12&gt;0
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+f(1)&lt;0&lt;f(2)
+</span></p>
+<p>Hence, <span class="math inline">0</span> lies between <span
+class="math inline">f(1)</span> and <span
+class="math inline">f(2)</span>.</p>
+<p>By the Intermediate Value Theorem, there exists some <span
+class="math inline">c\in(1,2)</span> such that</p>
+<p><span class="math display">
+f(c)=0
+</span></p>
+<p>Therefore, the equation has at least one solution between <span
+class="math inline">1</span> and <span class="math inline">2</span>.</p>
+<p><span class="math display">
+\boxed{\text{At least one solution exists in }(1,2)}
+</span></p>
+<p>The same reasoning can then be used with smaller intervals to locate
+the solution more precisely.</p>
+<p>For example,</p>
+<p><span class="math display">
+f(1.2)=-0.128&lt;0
+</span></p>
+<p>and</p>
+<p><span class="math display">
+f(1.3)=0.548&gt;0
+</span></p>
+<p>Therefore, a solution lies between <span
+class="math inline">1.2</span> and <span
+class="math inline">1.3</span>.</p>
+<p>Further refinement gives</p>
+<p><span class="math display">
+f(1.22)=-0.007008&lt;0
+</span></p>
+<p>and</p>
+<p><span class="math display">
+f(1.23)=0.056068&gt;0
+</span></p>
+<p>Hence, a solution lies between <span class="math inline">1.22</span>
+and <span class="math inline">1.23</span>.</p>
+<div style="text-align: center;">
+<p><img src="../images/0910.png" style="width: 692 px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 10.</strong> Graph of <span
+class="math inline">f(x)=4x^3-6x^2+3x-2</span> showing a zero between
+<span class="math inline">1</span> and <span
+class="math inline">2</span>.</span></p>
+</div>
+<div style="text-align: center;">
+<p><img src="../images/0911.png" style="width: 724 px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 11.</strong> Enlarged graph showing the zero
+between <span class="math inline">1.2</span> and <span
+class="math inline">1.3</span>.</span></p>
+</div>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="quick-check-2">Quick Check</h1>
+<h2 class="red" id="question-1-2">Question 1</h2>
+<p>Suppose <span class="math inline">f</span> is continuous on <span
+class="math inline">[1,4]</span> and</p>
+<p><span class="math display">
+f(1)=2
+</span></p>
+<p>and</p>
+<p><span class="math display">
+f(4)=8
+</span></p>
+<p>Can we conclude that there is some <span
+class="math inline">c\in(1,4)</span> such that</p>
+<p><span class="math display">
+f(c)=5
+</span></p>
+<h2 class="red" id="question-2-2">Question 2</h2>
+<p>Suppose <span class="math inline">f</span> is continuous on <span
+class="math inline">[0,2]</span> and</p>
+<p><span class="math display">
+f(0)=3
+</span></p>
+<p>and</p>
+<p><span class="math display">
+f(2)=7
+</span></p>
+<p>Can the Intermediate Value Theorem guarantee a value <span
+class="math inline">c\in(0,2)</span> such that <span
+class="math inline">f(c)=10</span>?</p>
+<div class="question-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="scenario-problem">Scenario Problem</h1>
+<h2 class="green" id="problem">Problem</h2>
+<p>A mechatronic positioning system uses a continuous error model</p>
+<p><span class="math display">
+E(x)=4x^3-6x^2+3x-2
+</span></p>
+<p>where <span class="math inline">x</span> represents a normalized
+controller setting and <span class="math inline">E(x)</span> represents
+the positioning error.</p>
+<p>The controller must operate at a setting where the positioning error
+is exactly zero.</p>
+<p>Show that such a controller setting exists between <span
+class="math inline">x=1</span> and <span
+class="math inline">x=2</span>.</p>
+<h2 class="green" id="solution-10">Solution</h2>
+<p>The error function is a polynomial.</p>
+<p>Therefore, it is continuous on the entire real line and, in
+particular, on <span class="math inline">[1,2]</span>.</p>
+<p>At <span class="math inline">x=1</span>,</p>
+<p><span class="math display">
+E(1)=4-6+3-2=-1
+</span></p>
+<p>At <span class="math inline">x=2</span>,</p>
+<p><span class="math display">
+E(2)=32-24+6-2=12
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+E(1)&lt;0&lt;E(2)
+</span></p>
+<p>Since <span class="math inline">E</span> is continuous on <span
+class="math inline">[1,2]</span>, the Intermediate Value Theorem
+guarantees that there exists some <span
+class="math inline">c\in(1,2)</span> such that</p>
+<p><span class="math display">
+E(c)=0
+</span></p>
+<p>Thus, the mathematical model guarantees that a controller setting
+producing zero positioning error exists between <span
+class="math inline">1</span> and <span class="math inline">2</span>.</p>
+<p><span class="math display">
+\boxed{\text{A zero-error controller setting exists in }(1,2)}
+</span></p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="summary">Summary</h1>
+<ul>
+<li><p>A function is continuous at <span class="math inline">a</span>
+when its limit as <span class="math inline">x</span> approaches <span
+class="math inline">a</span> exists and equals its actual value <span
+class="math inline">f(a)</span>.</p></li>
+<li><p>Continuity requires that <span class="math inline">f(a)</span> be
+defined, <span class="math inline">\lim_{x\to a}f(x)</span> exist, and
+<span class="math inline">\lim_{x\to a}f(x)=f(a)</span>.</p></li>
+<li><p>A function may have a removable, jump, or infinite discontinuity
+when one or more requirements for continuity fails.</p></li>
+<li><p>Continuity from the right and left is determined using the
+corresponding one-sided limits.</p></li>
+<li><p>A function is continuous on an interval when it is continuous at
+every point of the interval, with appropriate one-sided continuity at
+endpoints.</p></li>
+<li><p>Sums, differences, constant multiples, products, and suitable
+quotients of continuous functions are continuous.</p></li>
+<li><p>Polynomial functions are continuous everywhere, while rational
+functions are continuous wherever their denominators are
+nonzero.</p></li>
+<li><p>Many familiar functions, including root, trigonometric, inverse
+trigonometric, exponential, and logarithmic functions, are continuous at
+every point in their domains.</p></li>
+<li><p>The composition of continuous functions is continuous when the
+required domains are satisfied.</p></li>
+<li><p>The Intermediate Value Theorem guarantees that a continuous
+function takes every value between its endpoint values and can therefore
+be used to establish the existence of solutions of equations.</p></li>
+</ul>
+<h1 id="exercises">Exercises</h1>
+<h2 id="exercises-set-1">Exercises Set 1</h2>
+<p>Sove the odd number exercises from exercise 1 to 76.</p>
+<ul>
+<li><p>Exercises help transform theoretical concepts into practical
+understanding.</p></li>
+<li><p>Mathematics is learned by doing and solving exercises will train
+you to analyze problems, select appropriate methods, and construct
+logical solutions.</p></li>
+<li><p>Attempting problems sometimes leads to mistakes which provide
+opportunities for learning and improvement.</p></li>
+<li><p>Regular practice increases speed, accuracy, and
+confidence.</p></li>
+<li><p>Exercises are given in the Exercises file and you are expected to
+solve them on your own.</p></li>
+</ul>
+</body>
+</html>
