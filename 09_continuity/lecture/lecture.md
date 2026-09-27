@@ -982,7 +982,7 @@ $$
 <div style="text-align: center;">
 <img src="../images/0907.png" style="width: 731 px; display: block; margin: 0 auto 10px auto;">
 
-<span><strong>Figure 7.</strong> Graph of a continuous function illustrating the Intermediate Value Theorem.</span>
+<span><strong>Figure 7.</strong> Graph of function in Example 9 (b).</span>
 </div>
 
 <div class="example-end">$\blacksquare$</div>
