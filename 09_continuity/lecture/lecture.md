@@ -579,13 +579,6 @@ $$
 \boxed{-\frac1{11}}
 $$
 
-
-<div style="text-align: center;">
-<img src="../images/0905.png" style="width: 566 px; display: block; margin: 0 auto 10px auto;">
-
-<span><strong>Figure 5.</strong> Geometric illustration used in Stewart to discuss continuity of the square-root expression.</span>
-</div>
-
 <div class="example-end">$\blacksquare$</div>
 
 ## Continuity of Familiar Functions
@@ -631,6 +624,12 @@ x=\frac{\pi}{2}+n\pi
 $$
 
 * In the above relation, $n\in\mathbb Z$.
+
+<div style="text-align: center;">
+<img src="../images/0906.png" style="width: 758 px; display: block; margin: 0 auto 10px auto;">
+
+<span><strong>Figure 5.</strong> Graph of $y=\tan x$ showing its vertical asymptotes.</span>
+</div>
 
 ## Example 6 {.green}
 
@@ -806,13 +805,6 @@ $$
 \boxed{\frac{\pi}{6}}
 $$
 
-
-<div style="text-align: center;">
-<img src="../images/0906.png" style="width: 758 px; display: block; margin: 0 auto 10px auto;">
-
-<span><strong>Figure 6.</strong> Graph of $y=\tan x$ showing its vertical asymptotes.</span>
-</div>
-
 <div class="example-end">$\blacksquare$</div>
 
 # Quick Check
@@ -862,13 +854,6 @@ $$
 <div class="theorem-end">$\blacksquare$</div>
 
 * The theorem therefore guarantees the existence of at least one point at which the function takes the intermediate value.
-
-
-<div style="text-align: center;">
-<img src="../images/0907.png" style="width: 731 px; display: block; margin: 0 auto 10px auto;">
-
-<span><strong>Figure 7.</strong> Graph of a continuous function illustrating the Intermediate Value Theorem.</span>
-</div>
 
 
 <div style="text-align: center;">
@@ -993,6 +978,12 @@ Therefore, $F$ is continuous everywhere in its domain and discontinuous at the o
 $$
 \boxed{x=(2n+1)\pi,\qquad n\in\mathbb Z}
 $$
+
+<div style="text-align: center;">
+<img src="../images/0907.png" style="width: 731 px; display: block; margin: 0 auto 10px auto;">
+
+<span><strong>Figure 7.</strong> Graph of a continuous function illustrating the Intermediate Value Theorem.</span>
+</div>
 
 <div class="example-end">$\blacksquare$</div>
 
