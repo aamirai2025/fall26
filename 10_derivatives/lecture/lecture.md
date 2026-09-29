@@ -193,3 +193,83 @@ $$
 - Therefore, we have two points $(x_1, y_1) = (0, 0.1513)$ and $(x_2, y_2) = (\pi/2, 1.262)$.
 
 - Joining these two points will automatically draw the tangent to the graph of $y=\sin x$ at $x=\pi/4$.
+
+- We see that the slope of the tangent line at $x=\pi/4$ is $m=0.707$.
+
+- We want to confirm this slope using $\tan \theta$.
+
+- We can find $\theta$ using dot product.
+
+- Let's first find out the vectors.
+
+- One point on the tangent line is the $y$-intercept and the coordinates of this point are $(0.0, 0.1513)$.
+
+- The second point on the tangent line is $(x_2 = \pi/2, y_2 = 0.707*\pi/2 + 0.1513) = (1.5708, 1.2619)$.
+
+- The vector, say $\mathbf a$ formed by these two points is $\mathbf a = \langle 1.5708-0.0, 1.2619-0.1513 \rangle = \langle 1.5708, 1.1106 \rangle$.
+
+- The vector $\mathbf b$ can be drawn with $(0, 0)$ and any point on $x$-axis _e.g.,_ $(\pi/2, 0.0) = (1.5708, 0.0)$.
+
+- The vector formed by these two points is $\mathbf b = \langle 1.5708-0, 0.0-0.0 \rangle = \langle 1.5708, 0.0 \rangle$.
+
+- Using the two vectors $\mathbf a = 1.5708 \mathbf i + 1.1106 \mathbf j$ and $\mathbf b = 1.5708 \mathbf i + 0 \mathbf j$, we can find the angle between these two vectors (tangent line and $x$-axis) using dot product.
+
+- So,
+
+$$
+\theta = \cos ^{-1} \frac{\mathbf a \cdot \mathbf b}{|\mathbf a| |\mathbf b|}
+$$
+
+- So, we get
+
+$$
+\theta = \cos ^{-1} \frac{(1.5708 \mathbf i + 1.1106 \mathbf j)\cdot(1.5708 \mathbf i + 0 \mathbf j)}{\sqrt{1.5708^2 + 1.1106^2} \sqrt{1.5708^2 + 0^2}} = 0.615427 \text{ radian}
+$$
+
+- Finally, we get the slope using $\tan$ function as below.
+
+$$
+m = \tan(0.615427) = 0.707
+$$
+
+- We see that slope obtained from derivative and trigonometry are the same.
+
+- We can draw the tangent line as already discussed.
+
+## Case-II: $\mathbf{x = \frac{\pi}{2}}$
+
+- For $x=\pi/2$, $y=\sin \pi/2 = 1$.
+
+- The slope at $x=\pi/2$ is
+
+$$
+m = \cos \pi/2 = 0
+$$
+
+- The $y$-intercept is
+
+$$
+y = mx + c \implies y = c = 1
+$$
+
+- Therefore the equation of tangent line at $x=\pi/2$ is
+
+$$
+y = 1
+$$
+
+- Rest of the cases can be completed in the same way.
+
+- The slopes for all cases are shown below.
+
+![](../images/slope_1.png)
+
+![](../images/slope_2.png)
+
+![](../images/slope_3.png)
+
+![](../images/slope_4.png)
+
+![](../images/slope_5.png)
+
+![](../images/slope_6.png)

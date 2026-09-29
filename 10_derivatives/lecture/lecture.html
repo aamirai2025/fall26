@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>lecture</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="../styles/style.css" />
+  <script defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex.min.css">
+</head>
+<body>
+<h1 id="calculus-and-analytical-geometry">Calculus and Analytical
+Geometry</h1>
+<h2 id="derivatives">Derivatives</h2>
+<h3 id="dr.-aamir-alaud-din">Dr. Aamir Alaud Din</h3>
+<h1 id="derivatives-in-general">Derivatives in General</h1>
+<ul>
+<li>Consider the general function</li>
+</ul>
+<p><span class="math display">
+y = f(x)  \qquad (1)
+</span></p>
+<ul>
+<li><p>We are interested in finding the instantaneous change in <span
+class="math inline">y</span> with respect to <span
+class="math inline">x</span>.</p></li>
+<li><p>Before looking into the instantaneous change, we look into the
+change in <span class="math inline">y</span> as <span
+class="math inline">x</span> changes.</p></li>
+<li><p>This change can be computed as shown below.</p></li>
+</ul>
+<p><span class="math display">
+y + \Delta y = f(x + \Delta x) \qquad (2)
+</span></p>
+<ul>
+<li><p>We are interested in finding the change in <span
+class="math inline">y</span> <span class="math inline">\left( \Delta y
+\right)</span> per unit change in <span class="math inline">x</span>
+<span class="math inline">\left( \Delta x \right)</span> <em>i.e.,</em>
+how much <span class="math inline">y</span> changes per unit change in
+<span class="math inline">x</span> <span class="math inline">\left(
+\frac{\Delta y}{\Delta x} \right)</span>.</p></li>
+<li><p>Therefore, we modify <span class="math inline">(2)</span> as
+shown below.</p></li>
+</ul>
+<p><span class="math display">
+\begin{align}
+\Delta y &amp;= f(x  + \Delta x) - y \\
+&amp;= f(x  + \Delta x) - f(x) \qquad \qquad \qquad (\text{Using
+equation }(1))
+\end{align}
+</span></p>
+<ul>
+<li>In order to arrive at <span class="math inline">\frac{\Delta
+y}{\Delta x}</span>, we divide both sides of above equation.</li>
+</ul>
+<p><span class="math display">
+\frac{\Delta y}{\Delta x} = \frac{f(x + \Delta x) - f(x)}{\Delta x}
+</span></p>
+<ul>
+<li>We can modify the denominator of the above equations as shown
+below.</li>
+</ul>
+<p><span class="math display">
+\frac{\Delta y}{\Delta x} = \frac{f(x + \Delta x) - f(x)}{(x  +
+\Delta  x) - \Delta x} \qquad (3)
+</span></p>
+<ul>
+<li>Let</li>
+</ul>
+<p><span class="math display">
+\begin{align}
+y_1  &amp;=  f(x) \\
+y_2 &amp;= f(x +  \Delta  x)  \\
+x_1  &amp;= \Delta x \\
+x_2  &amp;= x + \Delta x
+\end{align}
+</span></p>
+<ul>
+<li>Using the above four relations, we can write equation <span
+class="math inline">(3)</span> as follows.</li>
+</ul>
+<p><span class="math display">
+\frac{\Delta y}{\Delta x} = \frac{f(x + \Delta x) - f(x)}{(x  +
+\Delta  x) - \Delta x} = \frac{y_2 - y_1}{x_2 - x_1} \qquad (4)
+</span></p>
+<ul>
+<li><p>It means, equation <span class="math inline">(3)</span>
+represents the slope of the line.</p></li>
+<li><p>Note that the points on the right hand side of equation <span
+class="math inline">(3)</span> are the coordinates of points <span
+class="math inline">P</span> and <span class="math inline">Q</span> in
+figure 2.</p></li>
+<li><p>These points intersect at two different points on the graph,
+therefore the line passing through these points is the secant line and
+the slope of the line in equation <span class="math inline">(3)</span>
+or <span class="math inline">(4)</span> is the slope of the secant
+line.</p></li>
+<li><p>In real physical world, we deal with problems involving
+continuously varying quantities and in these problems we need
+instantaneous changes in the dependent variable with respect to (per
+unit change) the independent variable.</p></li>
+<li><p>Let’s represent the small change with <span
+class="math inline">\delta</span> and this change is so small that <span
+class="math inline">\delta \rightarrow 0</span>.</p></li>
+<li><p>Therefore, we modify equation <span
+class="math inline">(3)</span> as shown below.</p></li>
+</ul>
+<p><span class="math display">
+\lim_{\delta x \rightarrow 0} \frac{\delta y}{\delta x} = \lim_{\delta x
+\rightarrow 0} \frac{f(x + \delta x) -  f(x)}{\delta x} \qquad (5)
+</span></p>
+<ul>
+<li>Since <span class="math inline">\delta x \rightarrow 0</span>, it
+means the points <span class="math inline">x</span> and <span
+class="math inline">x + \delta x</span> are very close such that</li>
+</ul>
+<p><span class="math display">
+(x + \delta x) - x \approx 0
+</span></p>
+<ul>
+<li><p>It confirms that point <span class="math inline">P</span>
+approaches point <span class="math inline">Q</span> and therefore secant
+line becomes the tangent line as shown in figure.</p></li>
+<li><p>This gives the instantaneous change.</p></li>
+<li><p>In short form we write</p></li>
+</ul>
+<p><span class="math display">
+\lim_{\delta x \rightarrow 0} \frac{\delta y}{\delta x} = \frac{dy}{dx}
+</span></p>
+<ul>
+<li>So, finally we can write the slope of tangent line (equation <span
+class="math inline">(5)</span>) as given below.</li>
+</ul>
+<p><span class="math display">
+\frac{dy}{dx} = \lim_{\delta x \rightarrow 0} \frac{f(x + \delta x)
+-  f(x)}{\delta x} \qquad (6)
+</span></p>
+<ul>
+<li><p>Suppose the angle between the tangent line with the horizontal is
+<span class="math inline">\theta</span>, then the angle between the
+tangent line and the line <span class="math inline">\delta x</span> is
+also <span class="math inline">\theta</span>, however the triangle is a
+micro triangle.</p></li>
+<li><p>In the micro triangle, we have the following trigonometric
+identity.</p></li>
+</ul>
+<p><span class="math display">
+\tan \theta = \frac{f(x + \delta x) - f(x)}{\delta x}
+</span></p>
+<ul>
+<li>Since <span class="math inline">\delta x \rightarrow 0</span>, we
+can rewrite the above equation as shown below.</li>
+</ul>
+<p><span class="math display">
+\tan \theta = \lim_{\delta x \rightarrow 0} \frac{f(x + \delta x) -
+f(x)}{\delta x} \qquad (7)
+</span></p>
+<ul>
+<li>Equations (6) and (7) confirm the following identity.</li>
+</ul>
+<p><span class="math display">
+\tan \theta = \frac{dy}{dx}
+</span></p>
+<ul>
+<li><p>This is because, <span class="math inline">\tan \theta</span> is
+also the slope of line (hypotenuse).</p></li>
+<li><p>Finally, equation <span class="math inline">(6)</span> says that
+we can find derivative along the curve, but in real world problems we
+need derivatives at fixed points <em>e.g.,</em> at <span
+class="math inline">t = 5</span> or <span class="math inline">x=3</span>
+etc.</p></li>
+</ul>
+<h1 id="derivatives-in-real-world">Derivatives in Real World</h1>
+<ul>
+<li>Consider the following simple trigonometric function.</li>
+</ul>
+<p><span class="math display">
+y = \sin x
+</span></p>
+<ul>
+<li>The first derivative of this function is</li>
+</ul>
+<p><span class="math display">
+\frac{dy}{dx} = \cos x
+</span></p>
+<ul>
+<li><p>Instead of using the first principle, we are interested in
+derivatives at fixed points.</p></li>
+<li><p>For a complete understanding, we consider the following
+points.</p></li>
+</ul>
+<p><span class="math display">
+x = \frac{\pi}{4}, \frac{\pi}{2}, \frac{3\pi}{4}, \frac{5\pi}{4},
+\frac{3\pi}{2}, \frac{7\pi}{4}
+</span></p>
+<h2 id="case-i-mathbfx-fracpi4">Case-I: <span
+class="math inline">\mathbf{x = \frac{\pi}{4}}</span></h2>
+<ul>
+<li>For <span class="math inline">x = \pi/4</span>,</li>
+</ul>
+<p><span class="math display">
+y = \sin (\pi/4) = 0.707
+</span></p>
+<ul>
+<li><p>So, the point is <span class="math inline">(x, y) = (\pi/4,
+0.707)</span>.</p></li>
+<li><p>Now,</p></li>
+</ul>
+<p><span class="math display">
+m = \frac{dy}{dx} = \cos x = \cos (\pi/4) = 0.707
+</span></p>
+<ul>
+<li>Using the point <span class="math inline">(\pi/4, 0.707)</span>
+slope <span class="math inline">(0.707)</span> form, we can find the
+<span class="math inline">y</span>-intercept as given below.</li>
+</ul>
+<p><span class="math display">
+y - y_1 = m(x - x_1)
+</span></p>
+<p><span class="math display">
+y - 0.707 = 0.707 (x - \pi/4)
+</span></p>
+<ul>
+<li>On <span class="math inline">y</span>-axis, <span
+class="math inline">x=0</span>, therefore</li>
+</ul>
+<p><span class="math display">
+y - 0.707 = -0.707(\pi/4)
+</span></p>
+<p><span class="math display">
+y = 0.707 -0.707(\pi/4) = 0.1513 = c
+</span></p>
+<ul>
+<li>Now, we can write the equation of line.</li>
+</ul>
+<p><span class="math display">
+y = 0.707x + 0.1513
+</span></p>
+<ul>
+<li><p>At <span class="math inline">x=0</span>, <span
+class="math inline">y = 0.1513</span> and at <span
+class="math inline">x=\pi/2</span>, <span
+class="math inline">y=1.262</span>.</p></li>
+<li><p>Therefore, we have two points <span class="math inline">(x_1,
+y_1) = (0, 0.1513)</span> and <span class="math inline">(x_2, y_2) =
+(\pi/2, 1.262)</span>.</p></li>
+<li><p>Joining these two points will automatically draw the tangent to
+the graph of <span class="math inline">y=\sin x</span> at <span
+class="math inline">x=\pi/4</span>.</p></li>
+<li><p>We see that the slope of the tangent line at <span
+class="math inline">x=\pi/4</span> is <span
+class="math inline">m=0.707</span>.</p></li>
+<li><p>We want to confirm this slope using <span
+class="math inline">\tan \theta</span>.</p></li>
+<li><p>We can find <span class="math inline">\theta</span> using dot
+product.</p></li>
+<li><p>Let’s first find out the vectors.</p></li>
+<li><p>One point on the tangent line is the <span
+class="math inline">y</span>-intercept and the coordinates of this point
+are <span class="math inline">(0.0, 0.1513)</span>.</p></li>
+<li><p>The second point on the tangent line is <span
+class="math inline">(x_2 = \pi/2, y_2 = 0.707*\pi/2 + 0.1513) = (1.5708,
+1.2619)</span>.</p></li>
+<li><p>The vector, say <span class="math inline">\mathbf a</span> formed
+by these two points is <span class="math inline">\mathbf a = \langle
+1.5708-0.0, 1.2619-0.1513 \rangle = \langle 1.5708, 1.1106
+\rangle</span>.</p></li>
+<li><p>The vector <span class="math inline">\mathbf b</span> can be
+drawn with <span class="math inline">(0, 0)</span> and any point on
+<span class="math inline">x</span>-axis <em>e.g.,</em> <span
+class="math inline">(\pi/2, 0.0) = (1.5708, 0.0)</span>.</p></li>
+<li><p>The vector formed by these two points is <span
+class="math inline">\mathbf b = \langle 1.5708-0, 0.0-0.0 \rangle =
+\langle 1.5708, 0.0 \rangle</span>.</p></li>
+<li><p>Using the two vectors <span class="math inline">\mathbf a =
+1.5708 \mathbf i + 1.1106 \mathbf j</span> and <span
+class="math inline">\mathbf b = 1.5708 \mathbf i + 0 \mathbf j</span>,
+we can find the angle between these two vectors (tangent line and <span
+class="math inline">x</span>-axis) using dot product.</p></li>
+<li><p>So,</p></li>
+</ul>
+<p><span class="math display">
+\theta = \cos ^{-1} \frac{\mathbf a \cdot \mathbf b}{|\mathbf a|
+|\mathbf b|}
+</span></p>
+<ul>
+<li>So, we get</li>
+</ul>
+<p><span class="math display">
+\theta = \cos ^{-1} \frac{(1.5708 \mathbf i + 1.1106 \mathbf
+j)\cdot(1.5708 \mathbf i + 0 \mathbf j)}{\sqrt{1.5708^2 + 1.1106^2}
+\sqrt{1.5708^2 + 0^2}} = 0.615427 \text{ radian}
+</span></p>
+<ul>
+<li>Finally, we get the slope using <span
+class="math inline">\tan</span> function as below.</li>
+</ul>
+<p><span class="math display">
+m = \tan(0.615427) = 0.707
+</span></p>
+<ul>
+<li><p>We see that slope obtained from derivative and trigonometry are
+the same.</p></li>
+<li><p>We can draw the tangent line as already discussed.</p></li>
+</ul>
+<h2 id="case-ii-mathbfx-fracpi2">Case-II: <span
+class="math inline">\mathbf{x = \frac{\pi}{2}}</span></h2>
+<ul>
+<li><p>For <span class="math inline">x=\pi/2</span>, <span
+class="math inline">y=\sin \pi/2 = 1</span>.</p></li>
+<li><p>The slope at <span class="math inline">x=\pi/2</span> is</p></li>
+</ul>
+<p><span class="math display">
+m = \cos \pi/2 = 0
+</span></p>
+<ul>
+<li>The <span class="math inline">y</span>-intercept is</li>
+</ul>
+<p><span class="math display">
+y = mx + c \implies y = c = 1
+</span></p>
+<ul>
+<li>Therefore the equation of tangent line at <span
+class="math inline">x=\pi/2</span> is</li>
+</ul>
+<p><span class="math display">
+y = 1
+</span></p>
+<ul>
+<li><p>Rest of the cases can be completed in the same way.</p></li>
+<li><p>The slopes for all cases are shown below.</p></li>
+</ul>
+<p><img src="../images/slope_1.png" /></p>
+<p><img src="../images/slope_2.png" /></p>
+<p><img src="../images/slope_3.png" /></p>
+<p><img src="../images/slope_4.png" /></p>
+<p><img src="../images/slope_5.png" /></p>
+<p><img src="../images/slope_6.png" /></p>
+</body>
+</html>
