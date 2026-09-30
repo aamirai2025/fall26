@@ -194,6 +194,12 @@ $$
 
 - Joining these two points will automatically draw the tangent to the graph of $y=\sin x$ at $x=\pi/4$.
 
+<div style="text-align: center;">
+<img src="../images/10b01.png" style="width: 800 px; display: block; margin: 0 auto 10px auto;">
+
+<span><strong>Figure 1.</strong> Tangent to $y=\sin x$ at $x=\pi/4$.</span>
+</div>
+
 - We see that the slope of the tangent line at $x=\pi/4$ is $m=0.707$.
 
 - We want to confirm this slope using $\tan \theta$.
@@ -258,18 +264,50 @@ $$
 y = 1
 $$
 
-- Rest of the cases can be completed in the same way.
+- The slope at $x=\pi/2$ is shown below.
 
-- The slopes for all cases are shown below.
+<div style="text-align: center;">
+<img src="../images/10b02.png" style="width: 800 px; display: block; margin: 0 auto 10px auto;">
 
-![](../images/slope_1.png)
+<span><strong>Figure 2.</strong> Tangent to $y=\sin x$ at $x=\pi/2$.</span>
+</div>
 
-![](../images/slope_2.png)
+## Case-III: $\mathbf{x=\frac{3\pi}{2}}$
 
-![](../images/slope_3.png)
+- Calculate yourself.
 
-![](../images/slope_4.png)
+<div style="text-align: center;">
+<img src="../images/10b03.png" style="width: 800 px; display: block; margin: 0 auto 10px auto;">
 
-![](../images/slope_5.png)
+<span><strong>Figure 3.</strong> Tangent to $y=\sin x$ at $x=3\pi/4$.</span>
+</div>
 
-![](../images/slope_6.png)
+## Case-IV: $\mathbf{x=\frac{5\pi}{4}}$
+
+- Calculate yourself.
+
+<div style="text-align: center;">
+<img src="../images/10b04.png" style="width: 800 px; display: block; margin: 0 auto 10px auto;">
+
+<span><strong>Figure 4.</strong> Tangent to $y=\sin x$ at $x=5\pi/4$.</span>
+</div>
+
+## Case-V: $\mathbf{x=\frac{3\pi}{2}}$
+
+- Calculate yourself.
+
+<div style="text-align: center;">
+<img src="../images/10b05.png" style="width: 800 px; display: block; margin: 0 auto 10px auto;">
+
+<span><strong>Figure 5.</strong> Tangent to $y=\sin x$ at $x=3\pi/2$.</span>
+</div>
+
+## Case-VI: $\mathbf{x=\frac{7\pi}{4}}$
+
+- Calculate yourself.
+
+<div style="text-align: center;">
+<img src="../images/10b06.png" style="width: 800 px; display: block; margin: 0 auto 10px auto;">
+
+<span><strong>Figure 6.</strong> Tangent to $y=\sin x$ at $x=7\pi/4$.</span>
+</div>
