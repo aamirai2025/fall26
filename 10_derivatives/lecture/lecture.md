@@ -235,6 +235,54 @@ $$
 <span><strong>Figure 5.</strong> Tangent to $y=\sin x$ at $x=\pi/4$.</span>
 </div>
 
+- A Python program to draw tangent line at any point on the graph of $y=\sin x$ is shown below.
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+def func(x):
+    return np.sin(x)
+
+def dydx(x):
+    return np.cos(x)
+
+def newy(x, m, c):
+    return m*x + c
+
+x = np.linspace(0, 2*np.pi, 1000)
+y = func(x)
+
+x1 = np.deg2rad(float(input("Enter the angle (in degrees): ")))
+y1 = func(x1)
+
+m = dydx(x1)
+
+c = y1 - m*x1
+
+xl = x1 - np.pi/4
+xh = x1 + np.pi/4
+
+yl = newy(xl, m, c)
+yh = newy(xh, m, c)
+
+plt.figure(figsize=(8, 6))
+plt.plot(x, y, '-k')
+plt.plot([xl, xh], [yl, yh], '--r')
+plt.plot([-0.10, 2*np.pi],[0, 0], '-b')
+plt.plot([0, 0], [-1.1, 1.1], '-b')
+plt.scatter(x1, y1, s=50, c='r')
+plt.xlim([-0.10, 2*np.pi])
+plt.ylim([-1.1, 1.1])
+plt.xlabel(r'$\theta$', size=14, weight='bold')
+plt.ylabel('Functions', size=14, weight='bold')
+plt.xticks(size=14, weight='bold')
+plt.yticks(size=14, weight='bold')
+plt.grid(axis='both')
+plt.tight_layout()
+plt.show()
+```
+
 - We see that the slope of the tangent line at $x=\pi/4$ is $m=0.707$.
 
 - We want to confirm this slope using $\tan \theta$.
@@ -276,6 +324,41 @@ $$
 - We see that slope obtained from derivative and trigonometry are the same.
 
 - We can draw the tangent line as already discussed.
+
+- The Python program to compute angle between the given vectors and then computing slope using $\tan \theta$ is given below.
+
+```python
+import numpy as np
+
+
+m = np.cos(np.pi/4)
+c = 0.1513
+
+x1 = 0.0
+y1 = m*x1 + c
+
+x2 = np.pi/2
+y2 = m*x2 + c
+
+pi = np.array([x1, y1])
+pf = np.array([x2, y2])
+
+a = pf - pi
+
+b = np.array([np.pi/2, 0.0])
+
+adotb = np.dot(a, b)
+
+am = np.linalg.norm(a)
+
+bm = np.linalg.norm(b)
+
+term = adotb/(am*bm)
+
+theta = np.arccos(term)
+
+print(np.tan(theta))
+```
 
 ### Case-II: $\mathbf{x = \frac{\pi}{2}}$
 
@@ -454,6 +537,54 @@ $$
 
 <span><strong>Figure 16.</strong> Slope and concavity at $x=2$.</span>
 </div>
+
+- The Python program used to draw figures 13 through 16 is as below.
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+def snd(x):
+    return 1/(np.sqrt(2*np.pi))*np.exp(-x**2/2)
+
+def sndd(x):
+    return -x/(np.sqrt(2*np.pi))*np.exp(-x**2/2)
+
+def snddd(x):
+    return (x**2 - 1)/(np.sqrt(2*np.pi))*np.exp(-x**2/2)
+
+x = np.linspace(-4, 4, 1000)
+y = snd(x)
+
+xps = np.array([-2.0, -0.4, 0.4, 2.0])
+yps = snd(xps)
+mps = sndd(xps)
+cops = snddd(xps)
+cps = yps - mps*xps
+print(mps)
+print(cops)
+
+for i in range(len(xps)):
+    plt.figure(figsize=(9, 5))
+    plt.plot(x, y, '-k', linewidth=2)
+    plt.plot(
+        [xps[i]-1, xps[i]+1],
+        [mps[i]*(xps[i]-1)+cps[i], mps[i]*(xps[i]+1)+cps[i]],
+        '--r',
+        linewidth=2
+    )
+    plt.xlabel("x-axis", size=18, weight='bold')
+    plt.ylabel("y-axis", size=18, weight='bold')
+    plt.xticks(size=18, weight='bold')
+    plt.yticks(size=18, weight='bold')
+    plt.xlim([-4.1, 4.1])
+    plt.ylim([0, 0.5])
+    plt.text(-3.8, 0.45, f"m={mps[i]:<7.4f}, con={cops[i]:.4f}",
+    size=18, weight='bold')
+    plt.tight_layout()
+    plt.savefig(f"slope_{i:d}.png")
+
+```
 
 ## Finalized Shape of Curve
 
