@@ -159,6 +159,8 @@ $$
 
 # Derivatives in Real World
 
+## The First Derivative
+
 - Consider the following simple trigonometric function.
 
 $$
@@ -179,7 +181,7 @@ $$
 x = \frac{\pi}{4}, \frac{\pi}{2}, \frac{3\pi}{4}, \frac{5\pi}{4}, \frac{3\pi}{2}, \frac{7\pi}{4}
 $$
 
-## Case-I: $\mathbf{x = \frac{\pi}{4}}$
+### Case-I: $\mathbf{x = \frac{\pi}{4}}$
 
 - For $x = \pi/4$,
 
@@ -275,7 +277,7 @@ $$
 
 - We can draw the tangent line as already discussed.
 
-## Case-II: $\mathbf{x = \frac{\pi}{2}}$
+### Case-II: $\mathbf{x = \frac{\pi}{2}}$
 
 - For $x=\pi/2$, $y=\sin \pi/2 = 1$.
 
@@ -305,7 +307,7 @@ $$
 <span><strong>Figure 6.</strong> Tangent to $y=\sin x$ at $x=\pi/2$.</span>
 </div>
 
-## Case-III: $\mathbf{x=\frac{3\pi}{2}}$
+### Case-III: $\mathbf{x=\frac{3\pi}{2}}$
 
 - Calculate yourself.
 
@@ -315,7 +317,7 @@ $$
 <span><strong>Figure 7.</strong> Tangent to $y=\sin x$ at $x=3\pi/4$.</span>
 </div>
 
-## Case-IV: $\mathbf{x=\frac{5\pi}{4}}$
+### Case-IV: $\mathbf{x=\frac{5\pi}{4}}$
 
 - Calculate yourself.
 
@@ -325,7 +327,7 @@ $$
 <span><strong>Figure 8.</strong> Tangent to $y=\sin x$ at $x=5\pi/4$.</span>
 </div>
 
-## Case-V: $\mathbf{x=\frac{3\pi}{2}}$
+### Case-V: $\mathbf{x=\frac{3\pi}{2}}$
 
 - Calculate yourself.
 
@@ -335,7 +337,7 @@ $$
 <span><strong>Figure 9.</strong> Tangent to $y=\sin x$ at $x=3\pi/2$.</span>
 </div>
 
-## Case-VI: $\mathbf{x=\frac{7\pi}{4}}$
+### Case-VI: $\mathbf{x=\frac{7\pi}{4}}$
 
 - Calculate yourself.
 
@@ -343,4 +345,160 @@ $$
 <img src="../images/10b06.png" style="width: 800px; display: block; margin: 0 auto 10px auto;">
 
 <span><strong>Figure 10.</strong> Tangent to $y=\sin x$ at $x=7\pi/4$.</span>
+</div>
+
+## Shape of Curve with First Derivative
+
+- The slope of tangent line gives the idea of the shape of curve at a point.
+
+### Case-A: Positive Slope
+
+- If the slope of tangent line is positive, the curve may have one of the following two shapes.
+
+<div style="text-align: center;">
+<img src="../images/p.png" style="width: 1000px; display: block; margin: 0 auto 10px auto;">
+
+<span><strong>Figure 11.</strong> Shape of curve having positive slope.</span>
+</div>
+
+### Case-B: Negative Slope
+
+- If the slope of tangent line is negative, the curve may have one of the following two shapes.
+
+
+<div style="text-align: center;">
+<img src="../images/n.png" style="width: 1000px; display: block; margin: 0 auto 10px auto;">
+
+<span><strong>Figure 12.</strong> Shape of curve having negative slope.</span>
+</div>
+
+- Consider the standard normal distribution function
+
+$$
+f(x) = \frac{1}{\sqrt{2\pi}}e^{\frac{-x^2}{2}} \qquad (8)
+$$
+
+- What is the slope of tangent line at $x = -2.0$?
+
+- In order to find the slope of tangent line to the curve of equation $(8)$, we find the derivative of $f(x)$ at $x=-2.0$.
+
+$$
+f^{\prime}(x) = -\frac{x}{\sqrt{2\pi}}e^{\frac{-x^2}{2}} \qquad (9)
+$$
+
+$$
+f^{\prime}(x) \big|_{x=-2.0} = -\frac{(-2.0)}{\sqrt{2\pi}}e^{\frac{-(-2.0^2)}{2}} = 0.1080
+$$
+
+- The slope of tangent line to the curve of normal distribution function at $x=-2.5$ is positive $(0.1080)$.
+
+- What will be the shape of curve at $x=-2.5$?
+
+## The Second Derivative
+
+- The second derivative of the standard normal distribution function is
+
+$$
+f^{\prime\prime}(x) = \frac{x^2-1}{\sqrt{2\pi}}e^{\frac{-x^2}{2}} \qquad (10)
+$$
+
+- This time, we calculate the second derivative at the following four points.
+
+    1. $x=-2$
+    2. $x=-0.4$
+    3. $x=0.4$
+    4. $x=2$
+
+$$
+f^{\prime\prime}(-2.0) = \frac{(-2.0)^2-1}{\sqrt{2\pi}}e^{\frac{-(-2.0)^2}{2}} = 0.1620
+$$
+
+$$
+f^{\prime\prime}(-0.4) = \frac{(-0.4)^2-1}{\sqrt{2\pi}}e^{\frac{-(-0.4)^2}{2}} = -0.3093
+$$
+
+$$
+f^{\prime\prime}(0.4) = \frac{(0.4)^2-1}{\sqrt{2\pi}}e^{\frac{-(0.4)^2}{2}} = -0.3093
+$$
+
+$$
+f^{\prime\prime}(2.0) = \frac{(2.0)^2-1}{\sqrt{2\pi}}e^{\frac{-(2.0)^2}{2}} = 0.1620
+$$
+
+- Looking at the tangents at the above four points, we conclude the following points.
+
+    - If the second derivative is positive at some point $x=a$, the curve will lie above the tangent line or in other words, the tangent line will be below the curve.
+
+    - If the second derivative is negative at some point $x=a$, the curve will lie below the tangent line or in other words, the tangent line will be above the curve.
+
+<div style="text-align: center;">
+<img src="../images/slope_0.png" style="width: 900px; display: block; margin: 0 auto 10px auto;">
+
+<span><strong>Figure 13.</strong> Slope and concavity at $x=-2$.</span>
+</div>
+
+<div style="text-align: center;">
+<img src="../images/slope_1.png" style="width: 900px; display: block; margin: 0 auto 10px auto;">
+
+<span><strong>Figure 14.</strong> Slope and concavity at $x=-0.4$.</span>
+</div>
+
+<div style="text-align: center;">
+<img src="../images/slope_2.png" style="width: 900px; display: block; margin: 0 auto 10px auto;">
+
+<span><strong>Figure 15.</strong> Slope and concavity at $x=0.4$.</span>
+</div>
+
+<div style="text-align: center;">
+<img src="../images/slope_3.png" style="width: 900px; display: block; margin: 0 auto 10px auto;">
+
+<span><strong>Figure 16.</strong> Slope and concavity at $x=2$.</span>
+</div>
+
+## Finalized Shape of Curve
+
+- Now, using first and second derivatives, we can understand the shape of the curve at any point.
+
+### Case-I: $\mathbf{m>0, con>0}$
+
+- If $m>0$ and Concavity$>0$, the shape of the curve will be as shown below and the graph is said concave up (drawn up on the tangent).
+
+
+<div style="text-align: center;">
+<img src="../images/mpcp.png" style="width: 394px; display: block; margin: 0 auto 10px auto;">
+
+<span><strong>Figure 17.</strong> Shape of curve with $m>0$ and Concavity$>0$.</span>
+</div>
+
+### Case-II: $\mathbf{m>0, con<0}$
+
+- If $m>0$ and Concavity$<0$, the shape of the curve will be as shown below and the graph is said concave down (drawn down the tangent).
+
+
+<div style="text-align: center;">
+<img src="../images/mpcn.png" style="width: 394px; display: block; margin: 0 auto 10px auto;">
+
+<span><strong>Figure 18.</strong> Shape of curve with $m>0$ and Concavity$< 0$.</span>
+</div>
+
+### Case-III: $\mathbf{m<0, con>0}$
+
+- If $m<0$ and Concavity$>0$, the shape of the curve will be as shown below and the graph is said concave up (drawn up on the tangent).
+
+
+<div style="text-align: center;">
+<img src="../images/mncp.png" style="width: 394px; display: block; margin: 0 auto 10px auto;">
+
+<span><strong>Figure 19.</strong> Shape of curve with $m< 0$ and Concavity$>0$.</span>
+</div>
+
+### Case-IV: $\mathbf{m<0, con<0}$
+
+- If $m<0$ and Concavity$<0$, the shape of the curve will be as shown below and the graph is said concave down (drawn down the tangent).
+
+
+<div style="text-align: center;">
+<img src="../images/mncn.png" style="width: 394px; display: block; margin: 0 auto 10px auto;">
+
+<span><strong>Figure 20.</strong> Shape of curve with $m< 0$ and Concavity$< 0$.</span>
 </div>
