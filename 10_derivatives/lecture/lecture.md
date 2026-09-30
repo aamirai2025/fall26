@@ -12,6 +12,16 @@ $$
 y = f(x)  \qquad (1)
 $$
 
+- A point $(x, y)$ is shown on the graph.
+
+
+<div style="text-align: center;">
+<img src="../images/10a01.png" style="width: 800px; display: block; margin: 0 auto 10px auto;">
+
+<span><strong>Figure 1.</strong> Graph of $y=\sin x$ and the point $(x,y)$ on the graph.</span>
+</div>
+
+
 - We are interested in finding the instantaneous change in $y$ with respect to $x$.
 
 - Before looking into the instantaneous change, we look into the change in $y$ as $x$ changes.
@@ -21,6 +31,14 @@ $$
 $$
 y + \Delta y = f(x + \Delta x) \qquad (2)
 $$
+
+
+<div style="text-align: center;">
+<img src="../images/10a02.png" style="width: 800px; display: block; margin: 0 auto 10px auto;">
+
+<span><strong>Figure 2.</strong> Graph of $y=\sin x$ with two points shown on the graph.</span>
+</div>
+
 
 - We are interested in finding the change in $y$ $\left( \Delta y \right)$ per unit change in $x$ $\left( \Delta x \right)$ _i.e.,_ how much $y$ changes per unit change in $x$ $\left( \frac{\Delta y}{\Delta x} \right)$.
 
@@ -45,6 +63,14 @@ $$
 \frac{\Delta y}{\Delta x} = \frac{f(x + \Delta x) - f(x)}{(x  + \Delta  x) - \Delta x} \qquad (3) 
 $$
 
+
+<div style="text-align: center;">
+<img src="../images/10a03.png" style="width: 800px; display: block; margin: 0 auto 10px auto;">
+
+<span><strong>Figure 3.</strong> Graph of $y=\sin x$ with changes $\Delta x$ and $\Delta y$.</span>
+</div>
+
+
 - Let
 
 $$
@@ -67,6 +93,13 @@ $$
 - Note that the  points on the right  hand side  of equation $(3)$ are the coordinates of points $P$ and $Q$ in figure 2.
 
 - These points intersect at two different points on the graph, therefore the line passing through these points is the secant line and the slope of the line in equation $(3)$ or $(4)$ is the slope of the secant line.
+
+
+<div style="text-align: center;">
+<img src="../images/10a04.png" style="width: 800px; display: block; margin: 0 auto 10px auto;">
+
+<span><strong>Figure 4.</strong> Graph of $y=\sin x$ and the secant line through two points.</span>
+</div>
 
 - In real physical world, we deal  with problems involving continuously varying quantities and in these problems  we need  instantaneous changes in the dependent variable with respect to  (per unit change) the independent  variable.
 
@@ -195,9 +228,9 @@ $$
 - Joining these two points will automatically draw the tangent to the graph of $y=\sin x$ at $x=\pi/4$.
 
 <div style="text-align: center;">
-<img src="../images/10b01.png" style="width: 800 px; display: block; margin: 0 auto 10px auto;">
+<img src="../images/10b01.png" style="width: 800px; display: block; margin: 0 auto 10px auto;">
 
-<span><strong>Figure 1.</strong> Tangent to $y=\sin x$ at $x=\pi/4$.</span>
+<span><strong>Figure 5.</strong> Tangent to $y=\sin x$ at $x=\pi/4$.</span>
 </div>
 
 - We see that the slope of the tangent line at $x=\pi/4$ is $m=0.707$.
@@ -267,9 +300,9 @@ $$
 - The slope at $x=\pi/2$ is shown below.
 
 <div style="text-align: center;">
-<img src="../images/10b02.png" style="width: 800 px; display: block; margin: 0 auto 10px auto;">
+<img src="../images/10b02.png" style="width: 800px; display: block; margin: 0 auto 10px auto;">
 
-<span><strong>Figure 2.</strong> Tangent to $y=\sin x$ at $x=\pi/2$.</span>
+<span><strong>Figure 6.</strong> Tangent to $y=\sin x$ at $x=\pi/2$.</span>
 </div>
 
 ## Case-III: $\mathbf{x=\frac{3\pi}{2}}$
@@ -277,9 +310,9 @@ $$
 - Calculate yourself.
 
 <div style="text-align: center;">
-<img src="../images/10b03.png" style="width: 800 px; display: block; margin: 0 auto 10px auto;">
+<img src="../images/10b03.png" style="width: 800px; display: block; margin: 0 auto 10px auto;">
 
-<span><strong>Figure 3.</strong> Tangent to $y=\sin x$ at $x=3\pi/4$.</span>
+<span><strong>Figure 7.</strong> Tangent to $y=\sin x$ at $x=3\pi/4$.</span>
 </div>
 
 ## Case-IV: $\mathbf{x=\frac{5\pi}{4}}$
@@ -287,9 +320,9 @@ $$
 - Calculate yourself.
 
 <div style="text-align: center;">
-<img src="../images/10b04.png" style="width: 800 px; display: block; margin: 0 auto 10px auto;">
+<img src="../images/10b04.png" style="width: 800px; display: block; margin: 0 auto 10px auto;">
 
-<span><strong>Figure 4.</strong> Tangent to $y=\sin x$ at $x=5\pi/4$.</span>
+<span><strong>Figure 8.</strong> Tangent to $y=\sin x$ at $x=5\pi/4$.</span>
 </div>
 
 ## Case-V: $\mathbf{x=\frac{3\pi}{2}}$
@@ -297,9 +330,9 @@ $$
 - Calculate yourself.
 
 <div style="text-align: center;">
-<img src="../images/10b05.png" style="width: 800 px; display: block; margin: 0 auto 10px auto;">
+<img src="../images/10b05.png" style="width: 800px; display: block; margin: 0 auto 10px auto;">
 
-<span><strong>Figure 5.</strong> Tangent to $y=\sin x$ at $x=3\pi/2$.</span>
+<span><strong>Figure 9.</strong> Tangent to $y=\sin x$ at $x=3\pi/2$.</span>
 </div>
 
 ## Case-VI: $\mathbf{x=\frac{7\pi}{4}}$
@@ -307,7 +340,7 @@ $$
 - Calculate yourself.
 
 <div style="text-align: center;">
-<img src="../images/10b06.png" style="width: 800 px; display: block; margin: 0 auto 10px auto;">
+<img src="../images/10b06.png" style="width: 800px; display: block; margin: 0 auto 10px auto;">
 
-<span><strong>Figure 6.</strong> Tangent to $y=\sin x$ at $x=7\pi/4$.</span>
+<span><strong>Figure 10.</strong> Tangent to $y=\sin x$ at $x=7\pi/4$.</span>
 </div>
