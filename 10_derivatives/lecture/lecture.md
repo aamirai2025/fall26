@@ -4,6 +4,33 @@
 
 ### Dr. Aamir Alaud Din
 
+# Objectives
+
+After preparing this topic, you should be able to
+
+1. Understand first derivative physically and explain it.
+2. Understand second derivative physically and explain it.
+
+# The Why Section
+
+- Suppose a machine pushes a component through a nonlinear spring, and the force required is modeled by
+
+$$
+F(x)=20x+5x^2-0.5x^3
+$$
+
+- In the above model, $x$ is the displacement of the machine's actuator in meters and $F(x)$ is the force applied by the machine in newtons.
+
+- At $x=2$, what will be the rate of change of force i.e., near $x=2\;m$, if the displacement changes by a small amount $\delta x$, how much force changes?
+
+- Will the force be increasing or decreasing at $x=2$?
+
+- If the force is increasing, is it increasing at increasing rate or decreasing rate?
+
+- Similarly, if the force is decreasing, is it decreasing at increasing rate or decreasing rate?
+
+- In order to understand it, we understand the derivatives physically in the foregoing discussion.
+
 # Derivatives in General
 
 - Consider the general function
@@ -583,7 +610,6 @@ for i in range(len(xps)):
     size=18, weight='bold')
     plt.tight_layout()
     plt.savefig(f"slope_{i:d}.png")
-
 ```
 
 ## Finalized Shape of Curve
@@ -633,3 +659,111 @@ for i in range(len(xps)):
 
 <span><strong>Figure 20.</strong> Shape of curve with $m< 0$ and Concavity$< 0$.</span>
 </div>
+
+- Looking at the slopes and concavity of the standard normal distribution function, we conclude the following points.
+
+    - At $x=-2$:
+    
+        - $f^{\prime}(x) > 0 \implies$ height of $f(x)$ is increasing.
+    
+        - $f^{\prime\prime}(x) > 0 \implies$ the height is increasing rapidly.
+
+    - At $x=-0.4$:
+
+        - $f^{\prime}(x) > 0 \implies$ height of $f(x)$ is increasing.
+    
+        - $f^{\prime\prime}(x) < 0 \implies$ the height is increasing slowly.
+    
+    - At $x=0.4$:
+
+        - $f^{\prime}(x) < 0 \implies$ height of $f(x)$ is decreasing.
+    
+        - $f^{\prime\prime}(x) < 0 \implies$ the height is decreasing slowly.
+    
+    - At $x=2$:
+
+        - $f^{\prime}(x) < 0 \implies$ height of $f(x)$ is decreasing.
+    
+        - $f^{\prime\prime}(x) > 0 \implies$ the height is increasing rapidly.
+
+# Summary
+
+* The first derivative represents the **instantaneous rate of change** of a dependent variable with respect to an independent variable and geometrically represents the **slope of the tangent line** to a curve. 
+* The derivative is obtained by considering the limit of the average rate of change as the change in the independent variable approaches zero, causing the secant line to approach the tangent line. 
+* The relationship between the derivative and the tangent angle is \(\tan\theta=\frac{dy}{dx}\), confirming that the derivative gives the slope of the tangent line. 
+* The first derivative can be evaluated at a fixed point to determine the slope and direction of a curve at that point; a positive derivative indicates an increasing function, while a negative derivative indicates a decreasing function. 
+* The sign of the first derivative alone does not completely determine the shape of a curve, because curves with the same positive or negative slope can have different shapes. 
+* The second derivative describes how the **slope of the curve changes** and determines its concavity: a positive second derivative corresponds to a curve lying above its tangent line, while a negative second derivative corresponds to a curve lying below its tangent line. 
+* Combining the signs of the first and second derivatives gives four possible local shapes: increasing and concave up, increasing and concave down, decreasing and concave up, and decreasing and concave down. 
+* For the standard normal distribution, the first derivative determines whether the function's height is increasing or decreasing, while the second derivative indicates whether that increase or decrease is occurring rapidly or slowly. 
+* The overall discussion uses physical and graphical interpretations of the first and second derivatives to understand **slope, rate of change, and concavity at a specific point** rather than treating derivatives only as algebraic formulas. 
+
+# Exercises
+
+## Exercise 1
+
+Suppose a machine pushes a component through a nonlinear spring, and the force required is modeled by
+
+$$
+F(x)=20x+5x^2-0.5x^3
+$$
+
+where $x$ is the displacement of the machine's actuator, in meters and $F(x)$ is the force applied by the machine, in newtons.
+
+What is the behavior of force at $x=-5, 3, 6, 11$? In particular, determine whether the force is increasing or decreasing and whether its rate of change is increasing or decreasing at each point.
+
+## Exercise 2
+
+The temperature of a cooling component is modeled by
+
+$$ T(t)=25+75e^{-0.2t} $$
+
+where $t$ is time in minutes and $T(t)$ is temperature in °C.
+
+Determine the behavior of the temperature at
+
+$t=1,\;3,\;6,\;10$.
+
+In particular, determine whether the temperature is increasing or decreasing and whether its rate of change is increasing or decreasing at each time.
+
+## Exercise 3
+
+The position of a vehicle moving along a test track is modeled by
+
+$$ s(t)=20+10\sin\left(\frac{\pi t}{6}\right) $$
+
+where $t$ is time in seconds and $s(t)$ is position in meters.
+
+Determine the behavior of the vehicle's position at
+
+$t=1,\;3,\;5,\;7$.
+
+In particular, determine whether the position is increasing or decreasing and whether its rate of change is increasing or decreasing at each time.
+
+## Exercise 4
+
+The charge stored in a device during a charging process is modeled by
+
+$$ Q(t)=5\ln(t+1)+2 $$
+
+where $t$ is time in seconds and $Q(t)$ is charge in coulombs.
+
+Determine the behavior of the charge at
+
+$t=1,\;3,\;8,\;15$.
+
+In particular, determine whether the charge is increasing or decreasing and whether its rate of change is increasing or decreasing at each time.
+
+## Exercise 5
+
+The water level in a tank is modeled by
+
+$$ h(t)=10+\frac{20t}{t+4} $$
+
+where $t$ is time in hours and $h(t)$ is the water level in meters.
+
+Determine the behavior of the water level at
+
+$t=1,\;4,\;8,\;12$.
+
+In particular, determine whether the water level is increasing or decreasing and whether its rate of change is increasing or decreasing at each time.
