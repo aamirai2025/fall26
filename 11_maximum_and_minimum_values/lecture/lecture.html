@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>lecture</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="../styles/style.css" />
+  <script defer="" src="../katex/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <link rel="stylesheet" href="../katex/dist/katex.min.css" />
+</head>
+<body>
+<h1 id="calculus-and-analytical-geometry">Calculus and Analytical
+Geometry</h1>
+<h2 id="maximum-and-minimum-values">Maximum and Minimum Values</h2>
+<h3 id="dr.-aamir-alaud-din">Dr. Aamir Alaud Din</h3>
+<h1 id="objectives">Objectives</h1>
+<p>After preparing this topic, you should be able to:</p>
+<ol type="1">
+<li><p>Identify and distinguish absolute and local maximum and minimum
+values of a function and interpret these extreme values
+geometrically.</p></li>
+<li><p>Use critical numbers and the Closed Interval Method to determine
+the absolute maximum and minimum values of a continuous function on a
+closed interval.</p></li>
+</ol>
+<h1 id="the-why-section">The Why Section</h1>
+<h2
+id="objective-1-why-study-absolute-and-local-extreme-values">Objective
+1: Why Study Absolute and Local Extreme Values?</h2>
+<ul>
+<li><p>Many engineering and computing problems require us to determine
+the largest or smallest value attained by a quantity.</p></li>
+<li><p>In mechanical engineering, for example, an engineer may need to
+determine the maximum acceleration experienced by a spacecraft or the
+operating condition at which a mechanical system reaches its smallest
+response.</p></li>
+<li><p>In computer science and machine learning, a model may also have a
+performance measure that becomes locally or globally high or low as a
+parameter changes.</p></li>
+<li><p>An <strong>absolute maximum</strong> identifies the largest value
+attained over the entire domain or specified interval, whereas a
+<strong>local maximum</strong> describes a value that is larger than
+nearby values.</p></li>
+<li><p>Similarly, an absolute minimum is the smallest value over the
+complete domain or interval, while a local minimum is smaller than
+nearby values.</p></li>
+<li><p>Distinguishing these types of extreme values is therefore
+important because a value that appears to be optimal locally may not be
+optimal over the entire range.</p></li>
+<li><p>For example, the motion controller of a robotic arm may have a
+performance function depending on the arm angle. We may want to
+determine whether a particular operating angle gives the best
+performance only compared with nearby angles or whether it gives the
+best performance over the entire allowable range.</p></li>
+<li><p>This type of engineering problem can be analyzed by studying
+absolute and local extreme values.</p></li>
+</ul>
+<p>The textbook introduces maximum and minimum values through
+optimization problems such as minimizing manufacturing cost and finding
+maximum spacecraft acceleration.</p>
+<h2
+id="objective-2-why-study-critical-numbers-and-the-closed-interval-method">Objective
+2: Why Study Critical Numbers and the Closed Interval Method?</h2>
+<ul>
+<li><p>Knowing that a function has an extreme value is not enough; in
+applications, we usually need to determine <strong>where</strong> the
+extreme value occurs and <strong>what its value is</strong>.</p></li>
+<li><p>A graph can suggest the location of a maximum or minimum, but a
+graph alone may not give an exact answer.</p></li>
+<li><p>Differential calculus provides a systematic way to locate
+possible extreme values.</p></li>
+<li><p>If a differentiable function has a local maximum or minimum at an
+interior point, its derivative is zero there.</p></li>
+<li><p>However, an extreme value can also occur where the derivative
+does not exist, and an absolute extreme value on a closed interval can
+occur at an endpoint.</p></li>
+<li><p>Therefore, we need to examine both <strong>critical
+numbers</strong> and <strong>endpoints</strong>.</p></li>
+<li><p>The Closed Interval Method provides a systematic procedure for
+finding the absolute maximum and minimum of a continuous function on a
+closed interval.</p></li>
+<li><p>For example, a control system in a mechatronic device may have a
+performance function defined over a fixed operating range. We may need
+to determine the operating setting that gives the highest performance
+and the setting that gives the lowest performance.</p></li>
+<li><p>This type of engineering problem can be solved by finding the
+critical numbers and applying the Closed Interval Method.</p></li>
+</ul>
+<h1 id="objective-1-absolute-and-local-extreme-values">Objective 1:
+Absolute and Local Extreme Values</h1>
+<h2 id="absolute-maximum-and-absolute-minimum">Absolute Maximum and
+Absolute Minimum</h2>
+<ul>
+<li><p>Let <span class="math inline">f</span> be a function whose domain
+is <span class="math inline">D</span>.</p></li>
+<li><p>If <span class="math inline">f(c)</span> is greater than or equal
+to every other value of the function on <span
+class="math inline">D</span>, then <span class="math inline">f(c)</span>
+is called the <strong>absolute maximum value</strong> of <span
+class="math inline">f</span> on <span
+class="math inline">D</span>.</p></li>
+</ul>
+<h2 class="blue"
+id="definition-absolute-maximum-and-minimum">Definition: Absolute
+Maximum and Minimum</h2>
+<p>Let <span class="math inline">c</span> be a number in the domain
+<span class="math inline">D</span> of a function <span
+class="math inline">f</span>.</p>
+<p><span class="math inline">f(c)</span> is the <strong>absolute maximum
+value</strong> of <span class="math inline">f</span> on <span
+class="math inline">D</span> if</p>
+<p><span class="math display">
+f(c)\geq f(x)
+</span></p>
+<p>for all <span class="math inline">x</span> in <span
+class="math inline">D</span>.</p>
+<p><span class="math inline">f(c)</span> is the <strong>absolute minimum
+value</strong> of <span class="math inline">f</span> on <span
+class="math inline">D</span> if</p>
+<p><span class="math display">
+f(c)\leq f(x)
+</span></p>
+<p>for all <span class="math inline">x</span> in <span
+class="math inline">D</span>.</p>
+<div class="definition-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<ul>
+<li><p>An absolute maximum or minimum is also called a <strong>global
+maximum or global minimum</strong>.</p></li>
+<li><p>The maximum and minimum values of a function are called its
+<strong>extreme values</strong>.</p></li>
+</ul>
+<div style="text-align: center;">
+<p><img src="../images/1101.png" style="width: 606px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 1.</strong> Graph illustrating an absolute
+maximum and an absolute minimum.</span></p>
+</div>
+<ul>
+<li><p>In Figure 1, the highest point of the graph occurs at <span
+class="math inline">(3,5)</span> and the lowest point occurs at <span
+class="math inline">(6,2)</span>.</p></li>
+<li><p>Therefore, the absolute maximum value is <span
+class="math inline">f(3)=5</span> and the absolute minimum value is
+<span class="math inline">f(6)=2</span>.</p></li>
+</ul>
+<h2 id="local-maximum-and-local-minimum">Local Maximum and Local
+Minimum</h2>
+<ul>
+<li><p>Sometimes we are interested only in what happens near a
+particular point rather than over the entire domain.</p></li>
+<li><p>A function can have a value that is greater than all nearby
+values even though it is not the greatest value on the entire
+domain.</p></li>
+<li><p>Such a value is called a <strong>local maximum</strong>.</p></li>
+<li><p>Similarly, a value that is smaller than all nearby values is
+called a <strong>local minimum</strong>.</p></li>
+</ul>
+<h2 class="blue" id="definition-local-maximum-and-minimum">Definition:
+Local Maximum and Minimum</h2>
+<p>The number <span class="math inline">f(c)</span> is a</p>
+<ul>
+<li><strong>local maximum value</strong> of <span
+class="math inline">f</span> if</li>
+</ul>
+<p><span class="math display">
+f(c)\geq f(x)
+</span></p>
+<p>when <span class="math inline">x</span> is near <span
+class="math inline">c</span></p>
+<ul>
+<li><strong>local minimum value</strong> of <span
+class="math inline">f</span> if</li>
+</ul>
+<p><span class="math display">
+f(c)\leq f(x)
+</span></p>
+<p>when <span class="math inline">x</span> is near <span
+class="math inline">c</span></p>
+<div class="definition-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<ul>
+<li><p>The word <strong>near</strong> means that the comparison is made
+on some open interval containing <span
+class="math inline">c</span>.</p></li>
+<li><p>Thus, a local maximum or minimum occurs at an interior point
+rather than at an endpoint.</p></li>
+</ul>
+<div style="text-align: center;">
+<p><img src="../images/1102.png" style="width: 761px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 2.</strong> Graph showing absolute maximum,
+absolute minimum, local maximum, and local minimum values.</span></p>
+</div>
+<ul>
+<li><p>Figure 2 illustrates that a function may have several local
+extreme values while having only one absolute maximum and one absolute
+minimum.</p></li>
+<li><p>A local extreme value does not necessarily have to be an absolute
+extreme value.</p></li>
+</ul>
+<div style="text-align: center;">
+<p><img src="../images/1103.png" style="width: 739px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 3.</strong> Graph illustrating a local minimum,
+local maximum, and an absolute minimum.</span></p>
+</div>
+<ul>
+<li><p>Figure 3 shows an example in which a local minimum is not the
+absolute minimum.</p></li>
+<li><p>It also shows that a point can simultaneously be a local and
+absolute extreme value.</p></li>
+</ul>
+<h2 class="green" id="example-1">Example 1</h2>
+<p>The graph of the function</p>
+<p><span class="math display">
+f(x)=3x^4-16x^3+18x^2
+</span></p>
+<p>is shown in Figure 4. You can see that <span
+class="math inline">f(1)=5</span> is a local maximum, whereas the
+absolute maximum is <span class="math inline">f(-1)=37</span>. Also,
+<span class="math inline">f(0)=0</span> is a local minimum and <span
+class="math inline">f(3)=-27</span> is both a local and an absolute
+minimum. Note that <span class="math inline">f</span> has neither a
+local nor an absolute maximum at <span
+class="math inline">x=4</span></p>
+<h3 class="green" id="solution">Solution</h3>
+<p>From the graph we identify the important values.</p>
+<p>At <span class="math inline">x=1</span></p>
+<p><span class="math display">
+f(1)=5
+</span></p>
+<p>This value is larger than the values immediately around <span
+class="math inline">x=1</span></p>
+<p>Therefore, <span class="math inline">f(1)=5</span> is a local
+maximum</p>
+<p>At <span class="math inline">x=0</span></p>
+<p><span class="math display">
+f(0)=0
+</span></p>
+<p>The function decreases toward <span class="math inline">x=0</span>
+and increases after <span class="math inline">x=0</span></p>
+<p>Therefore, <span class="math inline">f(0)=0</span> is a local
+minimum</p>
+<p>At <span class="math inline">x=3</span></p>
+<p><span class="math display">
+f(3)=-27
+</span></p>
+<p>This is the lowest value attained by the function on the given
+interval</p>
+<p>Therefore, <span class="math inline">f(3)=-27</span> is both a local
+minimum and an absolute minimum</p>
+<p>At <span class="math inline">x=-1</span></p>
+<p><span class="math display">
+f(-1)=37
+</span></p>
+<p>This is the largest value attained by the function on the given
+interval</p>
+<p>Therefore, <span class="math inline">f(-1)=37</span> is the absolute
+maximum</p>
+<p>Thus</p>
+<p><span class="math display">
+\text{Absolute maximum}=37
+</span></p>
+<p>and</p>
+<p><span class="math display">
+\text{Absolute minimum}=-27
+</span></p>
+<p>The graph also shows that the endpoint <span
+class="math inline">x=4</span> is neither a local nor an absolute
+maximum. The example and its values are given in the textbook.</p>
+<div style="text-align: center;">
+<p><img src="../images/1104.png" style="width: 720px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 4.</strong> Graph of <span
+class="math inline">f(x)=3x^4-16x^3+18x^2</span> showing its local and
+absolute extreme values.</span></p>
+</div>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="green" id="example-2">Example 2</h2>
+<p>The function <span class="math inline">f(x)=\cos x</span> takes on
+its local and absolute maximum value of <span
+class="math inline">1</span> infinitely many times. Likewise, its
+minimum value is <span class="math inline">-1</span></p>
+<h2 class="green" id="solution-1">Solution</h2>
+<p>For every integer <span class="math inline">n</span></p>
+<p><span class="math display">
+\cos(2n\pi)=1
+</span></p>
+<p>Therefore, the function reaches its maximum value <span
+class="math inline">1</span> at infinitely many points.</p>
+<p>Thus</p>
+<p><span class="math display">
+\text{Maximum value}=1
+</span></p>
+<p>The minimum occurs when</p>
+<p><span class="math display">
+x=(2n+1)\pi
+</span></p>
+<p>because</p>
+<p><span class="math display">
+\cos((2n+1)\pi)=-1
+</span></p>
+<p>Therefore</p>
+<p><span class="math display">
+\text{Minimum value}=-1
+</span></p>
+<p>Since these values occur repeatedly, both the maximum and minimum are
+also local extreme values.</p>
+<div style="text-align: center;">
+<p><img src="../images/1105.png" style="width: 1136px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 5.</strong> Graph of <span
+class="math inline">y=\cos x</span> showing repeated local and absolute
+maximum and minimum values.</span></p>
+</div>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="green" id="example-3">Example 3</h2>
+<p>If <span class="math inline">f(x)=x^2</span>, find the absolute and
+local minimum value of <span class="math inline">f</span></p>
+<h2 class="green" id="solution-2">Solution</h2>
+<p>For every <span class="math inline">x\neq0</span></p>
+<p><span class="math display">
+x^2&gt;0
+</span></p>
+<p>At <span class="math inline">x=0</span></p>
+<p><span class="math display">
+f(0)=0
+</span></p>
+<p>Therefore</p>
+<p><span class="math display">
+f(x)\geq0
+</span></p>
+<p>for every real number <span class="math inline">x</span></p>
+<p>Hence</p>
+<p><span class="math display">
+f(0)=0
+</span></p>
+<p>is the absolute minimum value</p>
+<p>Since values of <span class="math inline">x^2</span> near <span
+class="math inline">x=0</span> are also greater than or equal to <span
+class="math inline">0</span>, it is also a local minimum</p>
+<p>The function has no maximum value because <span
+class="math inline">x^2</span> can become arbitrarily large as <span
+class="math inline">|x|</span> increases.</p>
+<div style="text-align: center;">
+<p><img src="../images/1106.png" style="width: 475px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 6.</strong> Graph of <span
+class="math inline">y=x^2</span> showing its minimum value and absence
+of a maximum.</span></p>
+</div>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="green" id="example-4">Example 4</h2>
+<p>From the graph of the function <span
+class="math inline">f(x)=x^3</span>, determine whether the function has
+absolute or local extreme values.</p>
+<h2 class="green" id="solution-3">Solution</h2>
+<p>The function is</p>
+<p><span class="math display">
+f(x)=x^3
+</span></p>
+<p>As <span class="math inline">x</span> increases, <span
+class="math inline">x^3</span> continues to increase</p>
+<p>As <span class="math inline">x</span> decreases, <span
+class="math inline">x^3</span> continues to decrease</p>
+<p>Therefore, there is no highest value and no lowest value</p>
+<p>Although the tangent at <span class="math inline">x=0</span> is
+horizontal, the function does not have a maximum or minimum there</p>
+<p>Hence</p>
+<p><span class="math display">
+\text{The function has neither an absolute nor a local extreme value}
+</span></p>
+<div style="text-align: center;">
+<p><img src="../images/1107.png" style="width: 475px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 7.</strong> Graph of <span
+class="math inline">y=x^3</span> showing that the function has no
+maximum or minimum.</span></p>
+</div>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="quick-check">Quick Check</h1>
+<h2 class="red" id="question-1">Question 1</h2>
+<p>Can a function have a local maximum that is not an absolute
+maximum?</p>
+<h2 class="red" id="question-2">Question 2</h2>
+<p>The function <span class="math inline">f(x)=x^2</span> has a minimum
+at <span class="math inline">x=0</span>. Is this minimum local,
+absolute, or both?</p>
+<div class="question-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1
+id="objective-2-critical-numbers-and-the-closed-interval-method">Objective
+2: Critical Numbers and the Closed Interval Method</h1>
+<h2 id="the-extreme-value-theorem">The Extreme Value Theorem</h2>
+<ul>
+<li><p>The previous examples show that some functions possess extreme
+values while others do not.</p></li>
+<li><p>The Extreme Value Theorem gives a condition that guarantees the
+existence of absolute maximum and minimum values.</p></li>
+</ul>
+<h2 class="orange" id="theorem">Theorem</h2>
+<p>If <span class="math inline">f</span> is continuous on a closed
+interval <span class="math inline">[a,b]</span>, then <span
+class="math inline">f</span> attains an absolute maximum value and an
+absolute minimum value at some numbers in <span
+class="math inline">[a,b]</span></p>
+<div class="theorem-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<ul>
+<li><p>Both conditions are important.</p></li>
+<li><p>The function must be <strong>continuous</strong>.</p></li>
+<li><p>The interval must be <strong>closed and bounded</strong>, such as
+<span class="math inline">[a,b]</span>.</p></li>
+</ul>
+<div style="text-align: center;">
+<p><img src="../images/1108a.png" style="width: 518px; display: block; margin: 0 auto 10px auto;">
+<img src="../images/1108b.png" style="width: 515px; display: block; margin: 0 auto 10px auto;">
+<img src="../images/1108c.png" style="width: 515px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 8.</strong> Illustration showing that a
+continuous function on a closed interval attains both an absolute
+maximum and an absolute minimum.</span></p>
+</div>
+<ul>
+<li><p>If continuity is removed, a function defined on a closed interval
+may fail to attain a maximum.</p></li>
+<li><p>If the interval is not closed, a continuous function may also
+fail to have an absolute maximum or minimum.</p></li>
+</ul>
+<h2 id="fermats-theorem">Fermat’s Theorem</h2>
+<ul>
+<li><p>The Extreme Value Theorem guarantees the existence of extreme
+values but does not tell us where they occur.</p></li>
+<li><p>At an interior local maximum or minimum, the tangent line is
+horizontal when the derivative exists.</p></li>
+<li><p>A horizontal tangent has slope zero.</p></li>
+</ul>
+<h2 class="orange" id="theorem-fermats-theorem">Theorem: Fermat’s
+Theorem</h2>
+<p>If <span class="math inline">f</span> has a local maximum or minimum
+at <span class="math inline">c</span>, and if <span
+class="math inline">f&#39;(c)</span> exists, then</p>
+<p><span class="math display">
+f&#39;(c)=0
+</span></p>
+<div class="theorem-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<ul>
+<li><p>This theorem gives us an important way to locate possible extreme
+values.</p></li>
+<li><p>However, the converse is not necessarily true.</p></li>
+<li><p>If <span class="math inline">f&#39;(c)=0</span> we cannot
+conclude automatically that <span class="math inline">f</span> has a
+maximum or minimum at <span class="math inline">c</span>.</p></li>
+</ul>
+<h2 class="green" id="example-5">Example 5</h2>
+<p>If <span class="math inline">f(x)=x^3</span>, show that <span
+class="math inline">f&#39;(0)=0</span> but <span
+class="math inline">f</span> has no maximum or minimum at <span
+class="math inline">x=0</span>.</p>
+<h2 class="green" id="solution-4">Solution</h2>
+<p>Differentiate</p>
+<p><span class="math display">
+f(x)=x^3
+</span></p>
+<p>to obtain</p>
+<p><span class="math display">
+f&#39;(x)=3x^2
+</span></p>
+<p>At <span class="math inline">x=0</span></p>
+<p><span class="math display">
+f&#39;(0)=3(0)^2=0
+</span></p>
+<p>Thus, <span class="math inline">x=0</span> is a point where the
+derivative is zero</p>
+<p>However, for <span class="math inline">x&gt;0</span></p>
+<p><span class="math display">
+x^3&gt;0
+</span></p>
+<p>and for <span class="math inline">x&lt;0</span></p>
+<p><span class="math display">
+x^3&lt;0
+</span></p>
+<p>Therefore, the function passes through <span
+class="math inline">(0,0)</span> rather than changing from increasing to
+decreasing or from decreasing to increasing</p>
+<p>Hence</p>
+<p><span class="math display">
+x=0\text{ is not a maximum or minimum}
+</span></p>
+<p>This demonstrates that <span class="math inline">f&#39;(c)=0</span>
+gives a <strong>possible</strong> location of an extreme value, not a
+guarantee.</p>
+<div style="text-align: center;">
+<p><img src="../images/1112.png" style="width: 475px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 9.</strong> Graph of <span
+class="math inline">y=x^3</span> showing a horizontal tangent at the
+origin without an extreme value.</span></p>
+</div>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="green" id="example-6">Example 6</h2>
+<p>The function <span class="math inline">f(x)=|x|</span> has its local
+and absolute minimum value at <span class="math inline">0</span>.
+Explain why this value cannot be found by setting <span
+class="math inline">f&#39;(x)=0</span>.</p>
+<h2 class="green" id="solution-5">Solution</h2>
+<p>The function is</p>
+<p><span class="math display">
+f(x)=|x|
+</span></p>
+<p>Its minimum occurs at</p>
+<p><span class="math display">
+x=0
+</span></p>
+<p>because</p>
+<p><span class="math display">
+|x|\geq0
+</span></p>
+<p>for every real <span class="math inline">x</span></p>
+<p>Therefore</p>
+<p><span class="math display">
+f(0)=0
+</span></p>
+<p>is both a local and absolute minimum</p>
+<p>However, <span class="math inline">f&#39;(0)</span> does not exist
+because the graph has a sharp corner at the origin</p>
+<p>Therefore, the minimum cannot be found by solving only</p>
+<p><span class="math display">
+f&#39;(x)=0
+</span></p>
+<p>This shows that an extreme value can occur even when the derivative
+does not exist.</p>
+<div style="text-align: center;">
+<p><img src="../images/1113.png" style="width: 486px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 10.</strong> Graph of <span
+class="math inline">y=|x|</span> showing a minimum where the derivative
+does not exist.</span></p>
+</div>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 id="critical-numbers">Critical Numbers</h2>
+<ul>
+<li><p>Fermat’s Theorem suggests that we should examine points where the
+derivative is zero.</p></li>
+<li><p>Example 6 shows that we must also examine points where the
+derivative does not exist.</p></li>
+</ul>
+<h2 class="blue" id="definition-critical-number">Definition: Critical
+Number</h2>
+<p>A <strong>critical number</strong> of a function <span
+class="math inline">f</span> is a number <span
+class="math inline">c</span> in the domain of <span
+class="math inline">f</span> such that either</p>
+<p><span class="math display">
+f&#39;(c)=0
+</span></p>
+<p>or</p>
+<p><span class="math display">
+f&#39;(c)\text{ does not exist}
+</span></p>
+<div class="definition-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<ul>
+<li><p>A critical number must belong to the <strong>domain of the
+function</strong>.</p></li>
+<li><p>Therefore, a point where the function itself is not defined is
+not a critical number.</p></li>
+</ul>
+<p>The definition and its application are given in Stewart Section
+4.1.</p>
+<h2 class="green" id="example-7">Example 7</h2>
+<p>Find the critical numbers of</p>
+<p><strong>(a)</strong></p>
+<p><span class="math display">
+f(x)=x^3-3x^2+1
+</span></p>
+<p><strong>(b)</strong></p>
+<p><span class="math display">
+f(x)=x^{3/5}(4-x)
+</span></p>
+<h2 class="green" id="solution-6">Solution</h2>
+<p><strong>(a)</strong></p>
+<p>Differentiate</p>
+<p><span class="math display">
+f&#39;(x)=3x^2-6x
+</span></p>
+<p>Factor</p>
+<p><span class="math display">
+f&#39;(x)=3x(x-2)
+</span></p>
+<p>Set the derivative equal to zero</p>
+<p><span class="math display">
+3x(x-2)=0
+</span></p>
+<p>Therefore</p>
+<p><span class="math display">
+x=0
+</span></p>
+<p>or</p>
+<p><span class="math display">
+x=2
+</span></p>
+<p>The derivative exists for every real number <span
+class="math inline">x</span></p>
+<p>Hence the critical numbers are</p>
+<p><span class="math display">
+x=0,\;2
+</span></p>
+<p><strong>(b)</strong></p>
+<p>The function is</p>
+<p><span class="math display">
+f(x)=x^{3/5}(4-x)
+</span></p>
+<p>Using the Product Rule</p>
+<p><span class="math display">
+f&#39;(x)=\frac35x^{-2/5}(4-x)-x^{3/5}
+</span></p>
+<p>Writing over a common denominator gives</p>
+<p><span class="math display">
+f&#39;(x)=\frac{12-8x}{5x^{2/5}}
+</span></p>
+<p>For <span class="math inline">f&#39;(x)=0</span>, the numerator must
+be zero</p>
+<p><span class="math display">
+12-8x=0
+</span></p>
+<p>Therefore</p>
+<p><span class="math display">
+x=\frac32
+</span></p>
+<p>The derivative does not exist at</p>
+<p><span class="math display">
+x=0
+</span></p>
+<p>and <span class="math inline">x=0</span> belongs to the domain of
+<span class="math inline">f</span></p>
+<p>Therefore the critical numbers are</p>
+<p><span class="math display">
+x=0,\;\frac32
+</span></p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 id="the-closed-interval-method">The Closed Interval Method</h2>
+<ul>
+<li><p>Suppose <span class="math inline">f</span> is continuous on a
+closed interval <span class="math inline">[a,b]</span>.</p></li>
+<li><p>By the Extreme Value Theorem, <span class="math inline">f</span>
+must have an absolute maximum and an absolute minimum on that
+interval.</p></li>
+<li><p>An absolute extreme value can occur at an interior critical
+number or at an endpoint.</p></li>
+<li><p>Therefore, we evaluate the function at all critical numbers in
+the interval and at both endpoints.</p></li>
+</ul>
+<h2 class="orange" id="the-closed-interval-method-1">The Closed Interval
+Method</h2>
+<p>To find the absolute maximum and minimum values of a continuous
+function <span class="math inline">f</span> on a closed interval <span
+class="math inline">[a,b]</span>:</p>
+<ol type="1">
+<li><p>Find the critical numbers of <span class="math inline">f</span>
+in <span class="math inline">(a,b)</span></p></li>
+<li><p>Find the values of <span class="math inline">f</span> at all
+critical numbers</p></li>
+<li><p>Find the values of <span class="math inline">f</span> at the
+endpoints <span class="math inline">a</span> and <span
+class="math inline">b</span></p></li>
+<li><p>The largest value obtained is the absolute maximum and the
+smallest value obtained is the absolute minimum</p></li>
+</ol>
+<div class="theorem-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="green" id="example-8">Example 8</h2>
+<p>Find the absolute maximum and minimum values of the function</p>
+<p><span class="math display">
+f(x)=x^3-3x^2+1
+</span></p>
+<p>on the interval</p>
+<p><span class="math display">
+[-1,4]
+</span></p>
+<h2 class="green" id="solution-7">Solution</h2>
+<p>The function is a polynomial and is therefore continuous on <span
+class="math inline">[-1,4]</span></p>
+<p>We can use the Closed Interval Method</p>
+<h3 class="green" id="step-1-find-the-critical-numbers">Step 1: Find the
+critical numbers</h3>
+<p>From Example 7</p>
+<p><span class="math display">
+f&#39;(x)=3x(x-2)
+</span></p>
+<p>Thus</p>
+<p><span class="math display">
+x=0,\;2
+</span></p>
+<p>are the critical numbers</p>
+<p>Both lie inside <span class="math inline">[-1,4]</span></p>
+<h3 class="green"
+id="step-2-evaluate-the-function-at-the-critical-numbers">Step 2:
+Evaluate the function at the critical numbers</h3>
+<p>At <span class="math inline">x=0</span></p>
+<p><span class="math display">
+f(0)=1
+</span></p>
+<p>At <span class="math inline">x=2</span></p>
+<p><span class="math display">
+f(2)=8-12+1=-3
+</span></p>
+<h3 class="green"
+id="step-3-evaluate-the-function-at-the-endpoints">Step 3: Evaluate the
+function at the endpoints</h3>
+<p>At <span class="math inline">x=-1</span></p>
+<p><span class="math display">
+f(-1)=(-1)^3-3(-1)^2+1=-3
+</span></p>
+<p>At <span class="math inline">x=4</span></p>
+<p><span class="math display">
+f(4)=4^3-3(4)^2+1=17
+</span></p>
+<p>We therefore have</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;"><span class="math inline">x</span></th>
+<th style="text-align: right;"><span
+class="math inline">f(x)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;"><span class="math inline">-1</span></td>
+<td style="text-align: right;"><span class="math inline">-3</span></td>
+</tr>
+<tr>
+<td style="text-align: right;"><span class="math inline">0</span></td>
+<td style="text-align: right;"><span class="math inline">1</span></td>
+</tr>
+<tr>
+<td style="text-align: right;"><span class="math inline">2</span></td>
+<td style="text-align: right;"><span class="math inline">-3</span></td>
+</tr>
+<tr>
+<td style="text-align: right;"><span class="math inline">4</span></td>
+<td style="text-align: right;"><span class="math inline">17</span></td>
+</tr>
+</tbody>
+</table>
+<h3 class="green" id="step-4-compare-the-values">Step 4: Compare the
+values</h3>
+<p>The largest value is</p>
+<p><span class="math display">
+17
+</span></p>
+<p>The smallest value is</p>
+<p><span class="math display">
+-3
+</span></p>
+<p>Therefore</p>
+<p><span class="math display">
+\text{Absolute maximum}=17\text{ at }x=4
+</span></p>
+<p>and</p>
+<p><span class="math display">
+\text{Absolute minimum}=-3\text{ at }x=2
+</span></p>
+<div style="text-align: center;">
+<p><img src="../images/1115.png" style="width: 729px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 11.</strong> Graph of <span
+class="math inline">y=x^3-3x^2+1</span> showing the absolute maximum at
+<span class="math inline">(4,17)</span> and absolute minimum at <span
+class="math inline">(2,-3)</span>.</span></p>
+</div>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="green" id="example-9">Example 9</h2>
+<p><strong>(a)</strong> Use a calculator or computer to estimate the
+absolute minimum and maximum of</p>
+<p><span class="math display">
+f(x)=x-2\sin x,\qquad 0\leq x\leq2\pi
+</span></p>
+<p><strong>(b)</strong> Use calculus to find the exact minimum and
+maximum values</p>
+<h2 class="green" id="solution-8">Solution</h2>
+<h3 class="green" id="part-a-numerical-estimate">Part (a): Numerical
+estimate</h3>
+<p>A graph or calculator gives approximately</p>
+<p><span class="math display">
+\text{Absolute minimum}\approx-0.68
+</span></p>
+<p>at approximately</p>
+<p><span class="math display">
+x\approx1.05
+</span></p>
+<p>The approximate absolute maximum is</p>
+<p><span class="math display">
+\text{Absolute maximum}\approx6.97
+</span></p>
+<p>at approximately</p>
+<p><span class="math display">
+x\approx5.24
+</span></p>
+<p>Numerical methods give useful estimates, but calculus is required for
+the exact values.</p>
+<h3 class="green" id="part-b-exact-values">Part (b): Exact values</h3>
+<p>The function is continuous on <span
+class="math inline">[0,2\pi]</span></p>
+<p>Differentiate</p>
+<p><span class="math display">
+f&#39;(x)=1-2\cos x
+</span></p>
+<p>Find the critical numbers by setting the derivative equal to zero</p>
+<p><span class="math display">
+1-2\cos x=0
+</span></p>
+<p>Therefore</p>
+<p><span class="math display">
+\cos x=\frac12
+</span></p>
+<p>On <span class="math inline">[0,2\pi]</span>, this occurs at</p>
+<p><span class="math display">
+x=\frac{\pi}{3}
+\qquad\text{and}\qquad
+x=\frac{5\pi}{3}
+</span></p>
+<p>Evaluate the function at the critical numbers</p>
+<p>At</p>
+<p><span class="math display">
+x=\frac{\pi}{3}
+</span></p>
+<p>we obtain</p>
+<p><span class="math display">
+f\left(\frac{\pi}{3}\right)
+=
+\frac{\pi}{3}
+-
+2\sin\left(\frac{\pi}{3}\right)
+</span></p>
+<p>Since</p>
+<p><span class="math display">
+\sin\left(\frac{\pi}{3}\right)=\frac{\sqrt3}{2}
+</span></p>
+<p>we get</p>
+<p><span class="math display">
+f\left(\frac{\pi}{3}\right)
+=
+\frac{\pi}{3}-\sqrt3
+\approx-0.684853
+</span></p>
+<p>At</p>
+<p><span class="math display">
+x=\frac{5\pi}{3}
+</span></p>
+<p>we obtain</p>
+<p><span class="math display">
+f\left(\frac{5\pi}{3}\right)
+=
+\frac{5\pi}{3}
+-
+2\sin\left(\frac{5\pi}{3}\right)
+</span></p>
+<p>Since</p>
+<p><span class="math display">
+\sin\left(\frac{5\pi}{3}\right)=-\frac{\sqrt3}{2}
+</span></p>
+<p>we obtain</p>
+<p><span class="math display">
+f\left(\frac{5\pi}{3}\right)
+=
+\frac{5\pi}{3}+\sqrt3
+\approx6.968039
+</span></p>
+<p>Now evaluate the endpoints</p>
+<p>At <span class="math inline">x=0</span></p>
+<p><span class="math display">
+f(0)=0
+</span></p>
+<p>At <span class="math inline">x=2\pi</span></p>
+<p><span class="math display">
+f(2\pi)=2\pi
+</span></p>
+<p>We compare all four values</p>
+<p><span class="math display">
+0
+</span></p>
+<p><span class="math display">
+\frac{\pi}{3}-\sqrt3
+</span></p>
+<p><span class="math display">
+\frac{5\pi}{3}+\sqrt3
+</span></p>
+<p><span class="math display">
+2\pi
+</span></p>
+<p>The smallest value is</p>
+<p><span class="math display">
+\frac{\pi}{3}-\sqrt3
+</span></p>
+<p>and the largest value is</p>
+<p><span class="math display">
+\frac{5\pi}{3}+\sqrt3
+</span></p>
+<p>Therefore</p>
+<p><span class="math display">
+\text{Absolute minimum}=
+\frac{\pi}{3}-\sqrt3
+</span></p>
+<p>at</p>
+<p><span class="math display">
+x=\frac{\pi}{3}
+</span></p>
+<p>and</p>
+<p><span class="math display">
+\text{Absolute maximum}=
+\frac{5\pi}{3}+\sqrt3
+</span></p>
+<p>at</p>
+<p><span class="math display">
+x=\frac{5\pi}{3}
+</span></p>
+<div style="text-align: center;">
+<p><img src="../images/1116.png" style="width: 702px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 12.</strong> Graph of <span
+class="math inline">f(x)=x-2\sin x</span> on <span
+class="math inline">[0,2\pi]</span> showing its absolute minimum and
+maximum.</span></p>
+</div>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="green" id="example-10">Example 10</h2>
+<p>The Hubble Space Telescope was deployed on April 24, 1990, by the
+space shuttle <em>Discovery</em>. A model for the velocity of the
+shuttle during this mission, from liftoff at <span
+class="math inline">t=0</span> until the solid rocket boosters were
+jettisoned at <span class="math inline">t=126</span> seconds, is given
+by</p>
+<p><span class="math display">
+v(t)=0.000397t^3-0.02752t^2+7.196t-0.9397
+</span></p>
+<p>where velocity is measured in meters per second</p>
+<p>Using this model, estimate the absolute maximum and minimum values of
+the acceleration of the shuttle between liftoff and the jettisoning of
+the boosters</p>
+<h2 class="green" id="solution-9">Solution</h2>
+<p>We are interested in the extreme values of the
+<strong>acceleration</strong>, not directly the velocity</p>
+<p>Acceleration is the derivative of velocity</p>
+<p><span class="math display">
+a(t)=v&#39;(t)
+</span></p>
+<p>Differentiate the velocity function</p>
+<p><span class="math display">
+a(t)
+=
+0.001191t^2-0.05504t+7.196
+</span></p>
+<p>The acceleration is considered on the closed interval</p>
+<p><span class="math display">
+[0,126]
+</span></p>
+<p>Differentiate again</p>
+<p><span class="math display">
+a&#39;(t)=0.0023808t-0.05504
+</span></p>
+<p>Find the critical number</p>
+<p><span class="math display">
+0.0023808t-0.05504=0
+</span></p>
+<p>Therefore</p>
+<p><span class="math display">
+t\approx23.12
+</span></p>
+<p>Now evaluate the acceleration at the critical number and at the
+endpoints</p>
+<p>At <span class="math inline">t=0</span></p>
+<p><span class="math display">
+a(0)=7.196
+</span></p>
+<p>At <span class="math inline">t\approx23.12</span></p>
+<p><span class="math display">
+a(23.12)\approx6.56
+</span></p>
+<p>At <span class="math inline">t=126</span></p>
+<p><span class="math display">
+a(126)\approx19.16
+</span></p>
+<p>Comparing the three values</p>
+<p><span class="math display">
+7.196,\qquad6.56,\qquad19.16
+</span></p>
+<p>the largest value is approximately</p>
+<p><span class="math display">
+19.16\;m/s^2
+</span></p>
+<p>and the smallest value is approximately</p>
+<p><span class="math display">
+6.56\;m/s^2
+</span></p>
+<p>Therefore, the shuttle’s maximum acceleration is approximately <span
+class="math inline">19.16;m/s^2</span> and its minimum acceleration is
+approximately <span class="math inline">6.56;m/s^2</span></p>
+<div style="text-align: center;">
+<p><img src="../images/hs.png" style="width: 731px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 13.</strong> NASA illustration associated with
+the Hubble Space Telescope acceleration application.</span></p>
+</div>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="quick-check-1">Quick Check</h1>
+<h2 class="red" id="question-1-1">Question 1</h2>
+<p>Find the critical numbers of</p>
+<p><span class="math display">
+f(x)=x^3-3x^2+1
+</span></p>
+<h2 class="red" id="question-2-1">Question 2</h2>
+<p>For a continuous function on <span class="math inline">[a,b]</span>,
+why must the endpoints be checked when finding the absolute maximum and
+minimum?</p>
+<div class="question-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="scenario-problem">Scenario Problem</h1>
+<h2 class="green" id="problem">Problem</h2>
+<p>A mechatronic robotic arm operates during a four-second motion cycle.
+A controller uses the following performance index to evaluate the
+quality of the motion</p>
+<p><span class="math display">
+P(t)=t^3-6t^2+9t+2
+</span></p>
+<p>where <span class="math inline">t</span> is the time in seconds
+and</p>
+<p><span class="math display">
+0\leq t\leq4
+</span></p>
+<p>Determine the absolute maximum and absolute minimum values of the
+performance index during the complete motion cycle</p>
+<p>Also determine any local extreme values occurring inside the
+interval</p>
+<h2 class="green" id="solution-10">Solution</h2>
+<p>The function is a polynomial, so it is continuous on the closed
+interval <span class="math inline">[0,4]</span></p>
+<p>Therefore, the Closed Interval Method can be used</p>
+<h3 class="green" id="step-1-find-the-critical-numbers-1">Step 1: Find
+the critical numbers</h3>
+<p>Differentiate</p>
+<p><span class="math display">
+P&#39;(t)=3t^2-12t+9
+</span></p>
+<p>Factor</p>
+<p><span class="math display">
+P&#39;(t)=3(t^2-4t+3)
+</span></p>
+<p><span class="math display">
+P&#39;(t)=3(t-1)(t-3)
+</span></p>
+<p>Set the derivative equal to zero</p>
+<p><span class="math display">
+3(t-1)(t-3)=0
+</span></p>
+<p>Therefore</p>
+<p><span class="math display">
+t=1
+\qquad\text{or}\qquad
+t=3
+</span></p>
+<p>Both are inside the interval <span
+class="math inline">(0,4)</span></p>
+<h3 class="green" id="step-2-evaluate-the-critical-numbers">Step 2:
+Evaluate the critical numbers</h3>
+<p>At <span class="math inline">t=1</span></p>
+<p><span class="math display">
+P(1)=1-6+9+2
+</span></p>
+<p><span class="math display">
+P(1)=6
+</span></p>
+<p>At <span class="math inline">t=3</span></p>
+<p><span class="math display">
+P(3)=27-54+27+2
+</span></p>
+<p><span class="math display">
+P(3)=2
+</span></p>
+<h3 class="green" id="step-3-evaluate-the-endpoints">Step 3: Evaluate
+the endpoints</h3>
+<p>At <span class="math inline">t=0</span></p>
+<p><span class="math display">
+P(0)=2
+</span></p>
+<p>At <span class="math inline">t=4</span></p>
+<p><span class="math display">
+P(4)=64-96+36+2
+</span></p>
+<p><span class="math display">
+P(4)=6
+</span></p>
+<p>The values to compare are therefore</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;"><span class="math inline">t</span></th>
+<th style="text-align: right;"><span
+class="math inline">P(t)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;"><span class="math inline">0</span></td>
+<td style="text-align: right;"><span class="math inline">2</span></td>
+</tr>
+<tr>
+<td style="text-align: right;"><span class="math inline">1</span></td>
+<td style="text-align: right;"><span class="math inline">6</span></td>
+</tr>
+<tr>
+<td style="text-align: right;"><span class="math inline">3</span></td>
+<td style="text-align: right;"><span class="math inline">2</span></td>
+</tr>
+<tr>
+<td style="text-align: right;"><span class="math inline">4</span></td>
+<td style="text-align: right;"><span class="math inline">6</span></td>
+</tr>
+</tbody>
+</table>
+<p>The largest value is</p>
+<p><span class="math display">
+6
+</span></p>
+<p>and it occurs at</p>
+<p><span class="math display">
+t=1\text{ and }t=4
+</span></p>
+<p>Therefore, the absolute maximum is</p>
+<p><span class="math display">
+P_{\max}=6
+</span></p>
+<p>The smallest value is</p>
+<p><span class="math display">
+2
+</span></p>
+<p>and it occurs at</p>
+<p><span class="math display">
+t=0\text{ and }t=3
+</span></p>
+<p>Therefore, the absolute minimum is</p>
+<p><span class="math display">
+P_{\min}=2
+</span></p>
+<p>Inside the interval, <span class="math inline">t=1</span> is a local
+maximum because the derivative changes from positive to negative</p>
+<p>Similarly, <span class="math inline">t=3</span> is a local minimum
+because the derivative changes from negative to positive</p>
+<p>Thus</p>
+<p><span class="math display">
+\text{Local maximum}=6\text{ at }t=1
+</span></p>
+<p>and</p>
+<p><span class="math display">
+\text{Local minimum}=2\text{ at }t=3
+</span></p>
+<p>This problem illustrates why we need both ideas: <strong>critical
+numbers identify possible interior extreme values, while the Closed
+Interval Method ensures that the endpoints are also
+examined</strong>.</p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="summary">Summary</h1>
+<ul>
+<li><p>An <strong>absolute maximum</strong> is the largest value of a
+function over its entire domain or specified interval, while an
+<strong>absolute minimum</strong> is the smallest value.</p></li>
+<li><p>A <strong>local maximum</strong> is a value that is greater than
+or equal to nearby function values, while a <strong>local
+minimum</strong> is smaller than or equal to nearby values.</p></li>
+<li><p>A function may have several local extreme values but only one
+absolute maximum or minimum value, although an absolute extreme value
+may occur at more than one point.</p></li>
+<li><p>The <strong>Extreme Value Theorem</strong> guarantees that a
+continuous function on a closed interval <span
+class="math inline">[a,b]</span> attains both an absolute maximum and an
+absolute minimum.</p></li>
+<li><p><strong>Fermat’s Theorem</strong> states that if a differentiable
+function has a local maximum or minimum at an interior point <span
+class="math inline">c</span>, then <span
+class="math inline">f&#39;(c)=0</span>.</p></li>
+<li><p>A <strong>critical number</strong> is a number in the domain of
+<span class="math inline">f</span> where <span
+class="math inline">f&#39;(c)=0</span> or <span
+class="math inline">f&#39;(c)</span> does not exist.</p></li>
+<li><p>A critical number does not necessarily correspond to a maximum or
+minimum, as demonstrated by <span
+class="math inline">f(x)=x^3</span>.</p></li>
+<li><p>To find absolute extreme values on a closed interval, evaluate
+the function at all critical numbers in the interval and at both
+endpoints.</p></li>
+<li><p>The <strong>Closed Interval Method</strong> compares these
+values, with the largest being the absolute maximum and the smallest
+being the absolute minimum.</p></li>
+<li><p>These ideas allow calculus to determine optimal operating
+conditions in engineering systems such as robotic mechanisms,
+spacecraft, and other physical or computational models.</p></li>
+</ul>
+</body>
+</html>
