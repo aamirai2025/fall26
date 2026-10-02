@@ -66,21 +66,9 @@ The textbook introduces maximum and minimum values through optimization problems
 
 Let $c$ be a number in the domain $D$ of a function $f$.
 
-$f(c)$ is the **absolute maximum value** of $f$ on $D$ if
+- $f(c)$ is the **absolute maximum value** of $f$ on $D$ if $f(c)\geq f(x)$ for all $x$ in $D$.
 
-$$
-f(c)\geq f(x)
-$$
-
-for all $x$ in $D$.
-
-$f(c)$ is the **absolute minimum value** of $f$ on $D$ if
-
-$$
-f(c)\leq f(x)
-$$
-
-for all $x$ in $D$.
+- $f(c)$ is the **absolute minimum value** of $f$ on $D$ if $f(c)\leq f(x)$ for all $x$ in $D$.
 
 <div class="definition-end">$\blacksquare$</div>
 
@@ -112,21 +100,9 @@ for all $x$ in $D$.
 
 The number $f(c)$ is a
 
-* **local maximum value** of $f$ if
+* **local maximum value** of $f$ if $f(c)\geq f(x)$ when $x$ is near $c$
 
-$$
-f(c)\geq f(x)
-$$
-
-when $x$ is near $c$
-
-* **local minimum value** of $f$ if
-
-$$
-f(c)\leq f(x)
-$$
-
-when $x$ is near $c$
+* **local minimum value** of $f$ if $f(c)\leq f(x)$ when $x$ is near $c$
 
 <div class="definition-end">$\blacksquare$</div>
 
