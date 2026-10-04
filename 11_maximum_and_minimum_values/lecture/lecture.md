@@ -521,13 +521,7 @@ This shows that an extreme value can occur even when the derivative does not exi
 A **critical number** of a function $f$ is a number $c$ in the domain of $f$ such that either
 
 $$
-f'(c)=0
-$$
-
-or
-
-$$
-f'(c)\text{ does not exist}
+f'(c)=0 \qquad \qquad \text{or} \qquad \qquad f'(c)\text{ does not exist}
 $$
 
 <div class="definition-end">$\blacksquare$</div>
@@ -535,8 +529,6 @@ $$
 * A critical number must belong to the **domain of the function**.
 
 * Therefore, a point where the function itself is not defined is not a critical number.
-
-The definition and its application are given in Stewart Section 4.1. 
 
 ## Example 7 {.green}
 
@@ -785,7 +777,7 @@ $$
 f(x)=x-2\sin x,\qquad 0\leq x\leq2\pi
 $$
 
-**(b)** Use calculus to find the exact minimum and maximum values
+**(b)** Use calculus to find the exact minimum and maximum values.
 
 ## Solution {.green}
 
@@ -997,9 +989,9 @@ $$
 v(t)=0.000397t^3-0.02752t^2+7.196t-0.9397
 $$
 
-where velocity is measured in meters per second
+where velocity is measured in meters per second.
 
-Using this model, estimate the absolute maximum and minimum values of the acceleration of the shuttle between liftoff and the jettisoning of the boosters
+Using this model, estimate the absolute maximum and minimum values of the acceleration of the shuttle between liftoff and the jettisoning of the boosters.
 
 ## Solution {.green}
 
@@ -1081,7 +1073,7 @@ $$
 6.56\;m/s^2
 $$
 
-Therefore, the shuttle's maximum acceleration is approximately $19.16;m/s^2$ and its minimum acceleration is approximately $6.56;m/s^2$
+Therefore, the shuttle's maximum acceleration is approximately $19.16\;m/s^2$ and its minimum acceleration is approximately $6.56\;m/s^2$
 
 <div style="text-align: center;">
 <img src="../images/hs.png" style="width: 731px; display: block; margin: 0 auto 10px auto;">
@@ -1123,9 +1115,9 @@ $$
 0\leq t\leq4
 $$
 
-Determine the absolute maximum and absolute minimum values of the performance index during the complete motion cycle
+Determine the absolute maximum and absolute minimum values of the performance index during the complete motion cycle.
 
-Also determine any local extreme values occurring inside the interval
+Also determine any local extreme values occurring inside the interval.
 
 ## Solution {.green}
 
@@ -1293,3 +1285,19 @@ This problem illustrates why we need both ideas: **critical numbers identify pos
 * The **Closed Interval Method** compares these values, with the largest being the absolute maximum and the smallest being the absolute minimum.
 
 * These ideas allow calculus to determine optimal operating conditions in engineering systems such as robotic mechanisms, spacecraft, and other physical or computational models. 
+
+# Exercises
+
+## Exercises Set
+
+Solve the odd number exercises from exercise 1 to 82.
+
+* Exercises help transform theoretical concepts into practical understanding.
+
+* Mathematics is learned by doing and solving exercises will train you to analyze problems, select appropriate methods, and construct logical solutions.
+
+* Attempting problems sometimes leads to mistakes which provide opportunities for learning and improvement.
+
+* Regular practice increases speed, accuracy, and confidence.
+
+* Exercises are given in the Exercises file and you are expected to solve them on your own.

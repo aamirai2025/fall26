@@ -1207,7 +1207,7 @@ $$
 
 ## Exercises Set 1
 
-Sove the odd number exercises from exercise 1 to 76.
+Solve the odd number exercises from exercise 1 to 76.
 
 * Exercises help transform theoretical concepts into practical understanding.
 
