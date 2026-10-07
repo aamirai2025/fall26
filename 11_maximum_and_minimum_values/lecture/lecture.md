@@ -671,12 +671,12 @@ $$
 on the interval
 
 $$
-[-1,4]
+\left[ \frac{-1}{2},4 \right]
 $$
 
 ## Solution {.green}
 
-The function is a polynomial and is therefore continuous on $[-1,4]$
+The function is a polynomial and is therefore continuous on $\left[ \frac{-1}{2},4 \right]$
 
 We can use the Closed Interval Method
 
@@ -696,7 +696,7 @@ $$
 
 are the critical numbers
 
-Both lie inside $[-1,4]$
+Both lie inside $\left[ \frac{-1}{2},4 \right]$
 
 ### Step 2: Evaluate the function at the critical numbers {.green}
 
@@ -714,10 +714,10 @@ $$
 
 ### Step 3: Evaluate the function at the endpoints {.green}
 
-At $x=-1$
+At $x=\frac{-1}{2}$
 
 $$
-f(-1)=(-1)^3-3(-1)^2+1=-3
+f\left(\frac{-1}{2}\right)=\frac{1}{8}
 $$
 
 At $x=4$
@@ -730,7 +730,7 @@ We therefore have
 
 |  $x$ | $f(x)$ |
 | ---: | -----: |
-| $-1$ |   $-3$ |
+| $\frac{-1}{2}$ |   $\frac{1}{8}$ |
 |  $0$ |    $1$ |
 |  $2$ |   $-3$ |
 |  $4$ |   $17$ |
