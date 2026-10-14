@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>lecture</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="../styles/style.css" />
+  <script defer="" src="../katex/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <link rel="stylesheet" href="../katex/dist/katex.min.css" />
+</head>
+<body>
+<h1 id="calculus-and-analytical-geometry">Calculus and Analytical
+Geometry</h1>
+<h2 id="the-mean-value-theorem">The Mean Value Theorem</h2>
+<h3 id="dr.-aamir-alaud-din">Dr. Aamir Alaud Din</h3>
+<h3 id="october-14-2026">October 14, 2026</h3>
+<h1 id="objectives">Objectives</h1>
+<p>After preparing this topic, you should be able to:</p>
+<ol type="1">
+<li>State and apply Rolle’s Theorem by checking continuity,
+differentiability, and equality of endpoint values, and determine the
+points at which the derivative is zero.</li>
+<li>State and apply the Mean Value Theorem to identify a point where the
+instantaneous rate of change equals the average rate of change over a
+closed interval.</li>
+</ol>
+<h1 id="the-why-section">The Why Section</h1>
+<ul>
+<li><p>In engineering and computer science, we often know how a quantity
+changes over an interval, but we also want to understand what happens at
+a particular instant or input value.</p></li>
+<li><p>For example, a vehicle may travel a known distance during a
+measured time interval. Its average velocity can be calculated from the
+displacement and elapsed time, but this average alone does not tell us
+the vehicle’s velocity at every instant.</p></li>
+<li><p>Rolle’s Theorem gives a useful special case. If a differentiable
+position function has the same value at the beginning and end of an
+interval, then at some instant between them the instantaneous velocity
+must be zero. This is consistent with a ball thrown vertically upward:
+before returning to its initial height, the ball momentarily has zero
+vertical velocity at its highest point.</p></li>
+<li><p>The Mean Value Theorem generalizes this idea. When a function is
+continuous on a closed interval and differentiable inside it, there is
+at least one interior point where the instantaneous rate of change
+equals the average rate of change across the entire interval.</p></li>
+<li><p>This result is useful when interpreting motion, checking whether
+a measured rate is plausible, and reasoning about algorithms or models
+whose outputs change with an input. It connects the overall change
+across an interval with the derivative at a particular point.</p></li>
+<li><p>Consider a mechatronic vehicle whose position is recorded at two
+times. If we know its displacement and elapsed time, the Mean Value
+Theorem lets us conclude that, under its hypotheses, the vehicle’s
+instantaneous velocity equalled its average velocity at least once
+during that interval. This type of problem can be solved by studying
+Rolle’s Theorem and the Mean Value Theorem.</p></li>
+</ul>
+<h1 id="objective-1-rolles-theorem">Objective 1: Rolle’s Theorem</h1>
+<h2 id="statement-of-rolles-theorem">Statement of Rolle’s Theorem</h2>
+<ul>
+<li>Rolle’s Theorem is a special result that guarantees the existence of
+a point where the derivative of a function is zero.</li>
+</ul>
+<h2 class="blue" id="definition-rolles-theorem">Definition: Rolle’s
+Theorem</h2>
+<p>Let <span class="math inline">f</span> satisfy the following
+conditions:</p>
+<ol type="1">
+<li><span class="math inline">f</span> is continuous on the closed
+interval <span class="math inline">[a,b]</span>.</li>
+<li><span class="math inline">f</span> is differentiable on the open
+interval <span class="math inline">(a,b)</span>.</li>
+<li><span class="math inline">f(a)=f(b)</span>.</li>
+</ol>
+<p>Then there is at least one number <span class="math inline">c</span>
+in <span class="math inline">(a,b)</span> such that</p>
+<p><span class="math display">
+f&#39;(c)=0
+</span></p>
+<div class="definition-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 id="explanation">Explanation</h2>
+<ul>
+<li>The first condition ensures that the function has no break or jump
+on the closed interval.</li>
+<li>The second condition ensures that the derivative exists at every
+interior point.</li>
+<li>The third condition states that the function has equal values at the
+two endpoints.</li>
+<li>Geometrically, the theorem guarantees at least one interior point
+where the tangent line is horizontal.</li>
+</ul>
+<div style="text-align: center;">
+<p><img src="../images/1201a.png" style="width: 1200 px; display: block; margin: 0 auto 10px auto;"></p>
+<p><img src="../images/1201b.png" style="width: 1200 px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 1.</strong> Typical graphs illustrating Rolle’s
+Theorem, including constant functions and functions with interior maxima
+or minima.</span></p>
+</div>
+<h2 id="proof-of-rolles-theorem">Proof of Rolle’s Theorem</h2>
+<h2 class="orange" id="proof">Proof</h2>
+<p>There are three cases.</p>
+<p><strong>Case I: <span class="math inline">f</span> is
+constant.</strong></p>
+<ul>
+<li>If <span class="math inline">f</span> is constant on <span
+class="math inline">[a,b]</span>, then its derivative is zero at every
+point of <span class="math inline">(a,b)</span>. Therefore, any number
+<span class="math inline">c</span> in <span
+class="math inline">(a,b)</span> satisfies the conclusion.</li>
+</ul>
+<p><strong>Case II: <span class="math inline">f(x)&gt;f(a)</span> for at
+least one interior point.</strong></p>
+<ul>
+<li>Because <span class="math inline">f</span> is continuous on <span
+class="math inline">[a,b]</span>, the Extreme Value Theorem guarantees
+that <span class="math inline">f</span> attains a maximum on this
+interval.</li>
+<li>Since <span class="math inline">f(a)=f(b)</span> but an interior
+value is greater than this common endpoint value, the maximum must occur
+at some interior point <span class="math inline">c</span>.</li>
+<li>Thus, <span class="math inline">f</span> has a local maximum at
+<span class="math inline">c</span>. Since <span
+class="math inline">f</span> is differentiable at <span
+class="math inline">c</span>, Fermat’s Theorem gives <span
+class="math inline">f&#39;(c)=0</span>.</li>
+</ul>
+<p><strong>Case III: <span class="math inline">f(x)&lt;f(a)</span> for
+at least one interior point.</strong></p>
+<ul>
+<li><p>By the Extreme Value Theorem, <span class="math inline">f</span>
+attains a minimum on <span class="math inline">[a,b]</span>.</p></li>
+<li><p>Since the endpoint values are equal and an interior value is
+smaller, the minimum occurs at some interior point <span
+class="math inline">c</span>.</p></li>
+<li><p>Since <span class="math inline">f</span> is differentiable at
+<span class="math inline">c</span>, Fermat’s Theorem gives <span
+class="math inline">f&#39;(c)=0</span>.</p></li>
+<li><p>In every case, there is a number <span
+class="math inline">c</span> in <span class="math inline">(a,b)</span>
+for which <span class="math inline">f&#39;(c)=0</span>. This proves
+Rolle’s Theorem.</p></li>
+</ul>
+<div class="theorem-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="green" id="example-1">Example 1</h2>
+<p>Apply Rolle’s Theorem to the position function <span
+class="math inline">s=f(t)</span> of a moving object. If the object is
+in the same place at two different instants <span
+class="math inline">t=a</span> and <span class="math inline">t=b</span>,
+explain what the theorem tells us about its velocity.</p>
+<h2 class="green" id="solution">Solution</h2>
+<p>The object has the same position at the two endpoints, so</p>
+<p><span class="math display">
+f(a)=f(b)
+</span></p>
+<p>Suppose the position function is continuous on <span
+class="math inline">[a,b]</span> and differentiable on <span
+class="math inline">(a,b)</span>. Rolle’s Theorem then guarantees a time
+<span class="math inline">c</span> with <span
+class="math inline">a&lt;c&lt;b</span> such that</p>
+<p><span class="math display">
+f&#39;(c)=0
+</span></p>
+<p>Since the derivative of position is velocity, <span
+class="math inline">f&#39;(c)</span> is the instantaneous velocity at
+time <span class="math inline">c</span>. Therefore,</p>
+<p><span class="math display">
+v(c)=0
+</span></p>
+<p>Thus, the object must have zero instantaneous velocity at least once
+between the two instants, provided the hypotheses of Rolle’s Theorem are
+satisfied. A ball thrown straight upward and returning to its starting
+height is a familiar example.</p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="green" id="example-2">Example 2</h2>
+<p>Prove that the equation</p>
+<p><span class="math display">
+x^3+x-1=0
+</span></p>
+<p>has exactly one real solution.</p>
+<h2 class="green" id="solution-1">Solution</h2>
+<p><strong>Step 1: Show that a solution exists.</strong></p>
+<p>Let</p>
+<p><span class="math display">
+f(x)=x^3+x-1
+</span></p>
+<p>Since <span class="math inline">f</span> is a polynomial, it is
+continuous everywhere. Also,</p>
+<p><span class="math display">
+f(0)=-1&lt;0
+\qquad\text{and}\qquad
+f(1)=1&gt;0
+</span></p>
+<p>By the Intermediate Value Theorem, there is at least one number <span
+class="math inline">r</span> in <span class="math inline">(0,1)</span>
+such that <span class="math inline">f(r)=0</span>. Hence, the equation
+has a real solution.</p>
+<p><strong>Step 2: Show that there cannot be two distinct real
+solutions.</strong></p>
+<p>Suppose, for a contradiction, that the equation has two distinct real
+solutions <span class="math inline">a</span> and <span
+class="math inline">b</span>, with <span
+class="math inline">a&lt;b</span>. Then</p>
+<p><span class="math display">
+f(a)=0=f(b)
+</span></p>
+<p>Since <span class="math inline">f</span> is a polynomial, it is
+continuous on <span class="math inline">[a,b]</span> and differentiable
+on <span class="math inline">(a,b)</span>. Rolle’s Theorem would
+therefore guarantee a number <span class="math inline">c</span> in <span
+class="math inline">(a,b)</span> such that <span
+class="math inline">f&#39;(c)=0</span>.</p>
+<p>But</p>
+<p><span class="math display">
+f&#39;(x)=3x^2+1
+</span></p>
+<p>Since <span class="math inline">3x^2\geq0</span> for every real <span
+class="math inline">x</span>,</p>
+<p><span class="math display">
+f&#39;(x)=3x^2+1&gt;0
+</span></p>
+<p>Thus, <span class="math inline">f&#39;(c)</span> cannot equal zero.
+This is a contradiction. Therefore, the equation cannot have two
+distinct real solutions.</p>
+<p>Since a real solution exists and there cannot be more than one, the
+equation has exactly one real solution.</p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="quick-check">Quick Check</h1>
+<h2 class="red" id="question-1">Question 1</h2>
+<p>Does Rolle’s Theorem apply to <span
+class="math inline">f(x)=x^2-4</span> on <span
+class="math inline">[-2,2]</span>? If it does, find the value of <span
+class="math inline">c</span> satisfying the conclusion.</p>
+<h2 class="red" id="answer">Answer</h2>
+<p>The function is a polynomial, so it is continuous on <span
+class="math inline">[-2,2]</span> and differentiable on <span
+class="math inline">(-2,2)</span>. Its endpoint values are equal:</p>
+<p><span class="math display">
+f(-2)=0=f(2)
+</span></p>
+<p>Therefore, Rolle’s Theorem applies. Since</p>
+<p><span class="math display">
+f&#39;(x)=2x
+</span></p>
+<p>the condition <span class="math inline">f&#39;(c)=0</span> gives
+<span class="math inline">2c=0</span>, so</p>
+<p><span class="math display">
+c=0
+</span></p>
+<h2 class="red" id="question-2">Question 2</h2>
+<p>Can Rolle’s Theorem be applied to <span
+class="math inline">f(x)=|x|</span> on <span
+class="math inline">[-1,1]</span>? Explain your answer.</p>
+<h2 class="red" id="answer-1">Answer</h2>
+<p>The endpoint values are equal because <span
+class="math inline">f(-1)=f(1)=1</span>, and the function is continuous
+on <span class="math inline">[-1,1]</span>. However, <span
+class="math inline">f(x)=|x|</span> is not differentiable at <span
+class="math inline">x=0</span>, which lies inside <span
+class="math inline">(-1,1)</span>. Therefore, one of the required
+hypotheses fails, and Rolle’s Theorem cannot be applied.</p>
+<div class="question-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="objective-2-the-mean-value-theorem">Objective 2: The Mean Value
+Theorem</h1>
+<h2 id="statement-of-the-mean-value-theorem">Statement of the Mean Value
+Theorem</h2>
+<ul>
+<li>Rolle’s Theorem requires the endpoint values to be equal. The Mean
+Value Theorem removes that requirement and relates the derivative at an
+interior point to the average rate of change over the whole
+interval.</li>
+</ul>
+<h2 class="blue" id="definition-the-mean-value-theorem">Definition: The
+Mean Value Theorem</h2>
+<p>Let <span class="math inline">f</span> satisfy the following
+conditions:</p>
+<ol type="1">
+<li><span class="math inline">f</span> is continuous on the closed
+interval <span class="math inline">[a,b]</span>.</li>
+<li><span class="math inline">f</span> is differentiable on the open
+interval <span class="math inline">(a,b)</span>.</li>
+</ol>
+<p>Then there is at least one number <span class="math inline">c</span>
+in <span class="math inline">(a,b)</span> such that</p>
+<p><span class="math display">
+f&#39;(c)=\frac{f(b)-f(a)}{b-a}
+</span></p>
+<p>Equivalently,</p>
+<p><span class="math display">
+f(b)-f(a)=f&#39;(c)(b-a)
+</span></p>
+<div class="definition-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 id="geometric-interpretation">Geometric Interpretation</h2>
+<ul>
+<li>The quantity shown below is the slope of the secant line joining
+<span class="math inline">A(a,f(a))</span> and <span
+class="math inline">B(b,f(b))</span>.</li>
+</ul>
+<p><span class="math display">
+\frac{f(b)-f(a)}{b-a}
+</span></p>
+<ul>
+<li><p>The derivative <span class="math inline">f&#39;(c)</span> is the
+slope of the tangent line at <span
+class="math inline">P(c,f(c))</span>.</p></li>
+<li><p>The Mean Value Theorem states that at least one point <span
+class="math inline">P</span> on the curve has a tangent line parallel to
+the secant line through <span class="math inline">A</span> and <span
+class="math inline">B</span>.</p></li>
+</ul>
+<div style="text-align: center;">
+<p><img src="../images/1203.png" style="width: 799 px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 2.</strong> A tangent line at an interior point
+parallel to the secant line joining the endpoints of the
+interval.</span></p>
+</div>
+<div style="text-align: center;">
+<p><img src="../images/1204.png" style="width: 779 px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 3.</strong> A graph illustrating that more than
+one interior point may have a tangent parallel to the endpoint secant
+line.</span></p>
+</div>
+<ul>
+<li>The theorem guarantees the existence of at least one such point, but
+it does not necessarily tell us its exact location.</li>
+</ul>
+<h2 id="proof-of-the-mean-value-theorem">Proof of the Mean Value
+Theorem</h2>
+<h2 class="orange" id="proof-1">Proof</h2>
+<p>We prove the theorem by applying Rolle’s Theorem to a new function
+formed by subtracting the secant-line equation from <span
+class="math inline">f(x)</span>.</p>
+<p>The secant line through <span class="math inline">A(a,f(a))</span>
+and <span class="math inline">B(b,f(b))</span> has equation</p>
+<p><span class="math display">
+y=f(a)+\frac{f(b)-f(a)}{b-a}(x-a)
+</span></p>
+<p>Define</p>
+<p><span class="math display">
+h(x)=f(x)-f(a)-\frac{f(b)-f(a)}{b-a}(x-a)
+</span></p>
+<p>Because <span class="math inline">f</span> is continuous on <span
+class="math inline">[a,b]</span> and the other terms form a linear
+function, <span class="math inline">h</span> is continuous on <span
+class="math inline">[a,b]</span>. Similarly, because <span
+class="math inline">f</span> is differentiable on <span
+class="math inline">(a,b)</span>, <span class="math inline">h</span> is
+differentiable on <span class="math inline">(a,b)</span>.</p>
+<p>At <span class="math inline">x=a</span>,</p>
+<p><span class="math display">
+h(a)=f(a)-f(a)-0=0
+</span></p>
+<p>At <span class="math inline">x=b</span>,</p>
+<p><span class="math display">
+\begin{aligned}
+h(b)&amp;=f(b)-f(a)-\frac{f(b)-f(a)}{b-a}(b-a)\\
+&amp;=f(b)-f(a)-[f(b)-f(a)]\\
+&amp;=0
+\end{aligned}
+</span></p>
+<p>Thus, <span class="math inline">h(a)=h(b)</span>. All the hypotheses
+of Rolle’s Theorem are satisfied, so there is a number <span
+class="math inline">c</span> in <span class="math inline">(a,b)</span>
+such that <span class="math inline">h&#39;(c)=0</span>.</p>
+<p>Differentiating <span class="math inline">h(x)</span> gives</p>
+<p><span class="math display">
+h&#39;(x)=f&#39;(x)-\frac{f(b)-f(a)}{b-a}
+</span></p>
+<p>Therefore, at <span class="math inline">x=c</span>,</p>
+<p><span class="math display">
+0=h&#39;(c)=f&#39;(c)-\frac{f(b)-f(a)}{b-a}
+</span></p>
+<p>Rearranging yields</p>
+<p><span class="math display">
+f&#39;(c)=\frac{f(b)-f(a)}{b-a}
+</span></p>
+<p>This is the required result, so the Mean Value Theorem is proved.</p>
+<div class="theorem-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="green" id="example-3">Example 3</h2>
+<p>Illustrate the Mean Value Theorem for <span
+class="math inline">f(x)=x^3-x</span> on the interval <span
+class="math inline">[0,2]</span>.</p>
+<h2 class="green" id="solution-2">Solution</h2>
+<p><strong>Step 1: Verify the hypotheses.</strong></p>
+<p>The function <span class="math inline">f(x)=x^3-x</span> is a
+polynomial. Therefore, it is continuous on <span
+class="math inline">[0,2]</span> and differentiable on <span
+class="math inline">(0,2)</span>.</p>
+<p><strong>Step 2: Calculate the average rate of change.</strong></p>
+<p>We have</p>
+<p><span class="math display">
+f(0)=0
+\qquad\text{and}\qquad
+f(2)=8-2=6
+</span></p>
+<p>The slope of the secant line is</p>
+<p><span class="math display">
+\frac{f(2)-f(0)}{2-0}=\frac{6-0}{2}=3
+</span></p>
+<p><strong>Step 3: Find the point guaranteed by the
+theorem.</strong></p>
+<p>The derivative is</p>
+<p><span class="math display">
+f&#39;(x)=3x^2-1
+</span></p>
+<p>By the Mean Value Theorem, we need a value <span
+class="math inline">c</span> in <span class="math inline">(0,2)</span>
+satisfying</p>
+<p><span class="math display">
+f&#39;(c)=3
+</span></p>
+<p>Substituting the derivative gives</p>
+<p><span class="math display">
+\begin{aligned}
+3c^2-1&amp;=3\\
+3c^2&amp;=4\\
+c^2&amp;=\frac43\\
+c&amp;=\pm\frac{2}{\sqrt3}
+\end{aligned}
+</span></p>
+<p>Since <span class="math inline">c</span> must lie in <span
+class="math inline">(0,2)</span>, only the positive value is acceptable.
+Thus,</p>
+<p><span class="math display">
+\boxed{c=\frac{2}{\sqrt3}}
+</span></p>
+<p>At this point, the tangent to the curve has the same slope as the
+secant line joining the endpoints.</p>
+<div style="text-align: center;">
+<p><img src="../images/1206.png" style="width: 628 px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 4.</strong> The curve <span
+class="math inline">y=x^3-x</span> on <span
+class="math inline">[0,2]</span>, showing a tangent parallel to the
+secant line from <span class="math inline">(0,0)</span> to <span
+class="math inline">(2,6)</span>.</span></p>
+</div>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="green" id="example-4">Example 4</h2>
+<p>If an object moves along a straight line with position function <span
+class="math inline">s=f(t)</span>, explain the Mean Value Theorem in
+terms of average and instantaneous velocity. If a car travels <span
+class="math inline">180</span> km in <span class="math inline">2</span>
+hours, what does the theorem tell us about its speed?</p>
+<h2 class="green" id="solution-3">Solution</h2>
+<p>The average velocity between times <span
+class="math inline">t=a</span> and <span class="math inline">t=b</span>
+is</p>
+<p><span class="math display">
+\frac{f(b)-f(a)}{b-a}
+</span></p>
+<p>The instantaneous velocity at time <span
+class="math inline">t=c</span> is <span
+class="math inline">f&#39;(c)</span>. If the position function is
+continuous on <span class="math inline">[a,b]</span> and differentiable
+on <span class="math inline">(a,b)</span>, the Mean Value Theorem
+guarantees at least one time <span class="math inline">c</span> when</p>
+<p><span class="math display">
+f&#39;(c)=\frac{f(b)-f(a)}{b-a}
+</span></p>
+<p>In the given example, the car travels <span
+class="math inline">180</span> km in <span class="math inline">2</span>
+hours, so its average speed over the journey is</p>
+<p><span class="math display">
+\frac{180\text{ km}}{2\text{ h}}=90\text{ km/h}
+</span></p>
+<p>Under the assumptions of the theorem, the car’s instantaneous
+velocity must equal its average velocity at least once. If the car moves
+in the same direction throughout the journey, this means its speedometer
+must read <span class="math inline">90</span> km/h at least once.</p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="green" id="example-5">Example 5</h2>
+<p>Suppose that <span class="math inline">f(0)=-3</span> and <span
+class="math inline">f&#39;(x)&lt;5</span> for all <span
+class="math inline">x</span>. How large can <span
+class="math inline">f(2)</span> possibly be?</p>
+<h2 class="green" id="solution-4">Solution</h2>
+<p>Since <span class="math inline">f</span> is differentiable, it is
+continuous. We can therefore apply the Mean Value Theorem on <span
+class="math inline">[0,2]</span>.</p>
+<p>There is a number <span class="math inline">c</span> in <span
+class="math inline">(0,2)</span> such that</p>
+<p><span class="math display">
+f(2)-f(0)=f&#39;(c)(2-0)
+</span></p>
+<p>Since <span class="math inline">f(0)=-3</span>,</p>
+<p><span class="math display">
+f(2)=-3+2f&#39;(c)
+</span></p>
+<p>We are given that <span class="math inline">f&#39;(x)&lt;5</span> for
+all <span class="math inline">x</span>, so in particular <span
+class="math inline">f&#39;(c)&lt;5</span>. Hence,</p>
+<p><span class="math display">
+f(2)=-3+2f&#39;(c)&lt;-3+10=7
+</span></p>
+<p>Therefore, <span class="math inline">f(2)</span> must be less than
+<span class="math inline">7</span>. The value <span
+class="math inline">7</span> is an upper bound; under the strict
+condition <span class="math inline">f&#39;(x)&lt;5</span>, it is not
+attained. Values can approach <span class="math inline">7</span>
+arbitrarily closely if the derivative is close to <span
+class="math inline">5</span> throughout the interval.</p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 id="consequences-of-the-mean-value-theorem">Consequences of the Mean
+Value Theorem</h2>
+<h2 class="orange" id="theorem">Theorem</h2>
+<p>If <span class="math inline">f&#39;(x)=0</span> for every <span
+class="math inline">x</span> in an interval <span
+class="math inline">I</span>, then <span class="math inline">f</span> is
+constant on <span class="math inline">I</span>.</p>
+<h2 class="orange" id="proof-2">Proof</h2>
+<p>Choose any two points <span class="math inline">x_1</span> and <span
+class="math inline">x_2</span> in <span class="math inline">I</span>,
+with <span class="math inline">x_1&lt;x_2</span>. Since <span
+class="math inline">f</span> is differentiable on the interval, it is
+continuous on <span class="math inline">[x_1,x_2]</span> and
+differentiable on <span class="math inline">(x_1,x_2)</span>.</p>
+<p>By the Mean Value Theorem, there is a number <span
+class="math inline">c</span> in <span
+class="math inline">(x_1,x_2)</span> such that</p>
+<p><span class="math display">
+f(x_2)-f(x_1)=f&#39;(c)(x_2-x_1)
+</span></p>
+<p>Since <span class="math inline">f&#39;(c)=0</span>,</p>
+<p><span class="math display">
+f(x_2)-f(x_1)=0
+</span></p>
+<p>Therefore, <span class="math inline">f(x_2)=f(x_1)</span>. Because
+the two points were chosen arbitrarily, <span
+class="math inline">f</span> has the same value at every point in <span
+class="math inline">I</span> and is constant on that interval.</p>
+<div class="theorem-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="orange" id="corollary">Corollary</h2>
+<p>If <span class="math inline">f&#39;(x)=g&#39;(x)</span> for every
+<span class="math inline">x</span> in an interval <span
+class="math inline">I</span>, then <span
+class="math inline">f(x)-g(x)</span> is constant on <span
+class="math inline">I</span>. Equivalently,</p>
+<p><span class="math display">
+f(x)=g(x)+C
+</span></p>
+<p>where <span class="math inline">C</span> is a constant.</p>
+<h2 class="orange" id="proof-3">Proof</h2>
+<p>Define <span class="math inline">F(x)=f(x)-g(x)</span>. Then</p>
+<p><span class="math display">
+F&#39;(x)=f&#39;(x)-g&#39;(x)=0
+</span></p>
+<p>By the preceding theorem, <span class="math inline">F</span> is
+constant on <span class="math inline">I</span>. Hence, <span
+class="math inline">f(x)-g(x)=C</span>, or <span
+class="math inline">f(x)=g(x)+C</span>.</p>
+<div class="theorem-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="red" id="important-note">Important Note</h2>
+<p>The conclusion that a function with zero derivative is constant
+applies when its domain is an interval. A domain with a gap need not
+satisfy this conclusion across the gap. For example, a function can be
+constant on each of the two separate intervals <span
+class="math inline">(-\infty,0)</span> and <span
+class="math inline">(0,\infty)</span> but take different constants on
+those intervals.</p>
+<h2 class="green" id="example-6">Example 6</h2>
+<p>Prove the identity</p>
+<p><span class="math display">
+\tan^{-1}x+\cot^{-1}x=\frac{\pi}{2}
+</span></p>
+<p>for real <span class="math inline">x</span>, using the
+derivative-based argument in which the inverse cotangent is taken with
+values in <span class="math inline">(0,\pi)</span>.</p>
+<h2 class="green" id="solution-5">Solution</h2>
+<p>Define</p>
+<p><span class="math display">
+f(x)=\tan^{-1}x+\cot^{-1}x
+</span></p>
+<p>Using the derivative formulas,</p>
+<p><span class="math display">
+\begin{aligned}
+f&#39;(x)&amp;=\frac{1}{1+x^2}-\frac{1}{1+x^2}\\
+&amp;=0
+\end{aligned}
+</span></p>
+<p>Therefore, <span class="math inline">f</span> is constant on the real
+line. To determine the constant, set <span
+class="math inline">x=1</span>:</p>
+<p><span class="math display">
+\begin{aligned}
+f(1)&amp;=\tan^{-1}1+\cot^{-1}1\\
+&amp;=\frac{\pi}{4}+\frac{\pi}{4}\\
+&amp;=\frac{\pi}{2}
+\end{aligned}
+</span></p>
+<p>Thus, the constant value is <span class="math inline">\pi/2</span>,
+and</p>
+<p><span class="math display">
+\boxed{\tan^{-1}x+\cot^{-1}x=\frac{\pi}{2}}
+</span></p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="quick-check-1">Quick Check</h1>
+<h2 class="red" id="question-1-1">Question 1</h2>
+<p>For <span class="math inline">f(x)=x^2</span> on <span
+class="math inline">[1,3]</span>, find a value <span
+class="math inline">c</span> satisfying the conclusion of the Mean Value
+Theorem.</p>
+<h2 class="red" id="answer-2">Answer</h2>
+<p>The function is a polynomial, so it is continuous on <span
+class="math inline">[1,3]</span> and differentiable on <span
+class="math inline">(1,3)</span>. The average rate of change is</p>
+<p><span class="math display">
+\frac{f(3)-f(1)}{3-1}=\frac{9-1}{2}=4
+</span></p>
+<p>Since <span class="math inline">f&#39;(x)=2x</span>, we solve <span
+class="math inline">2c=4</span>, obtaining</p>
+<p><span class="math display">
+\boxed{c=2}
+</span></p>
+<h2 class="red" id="question-2-1">Question 2</h2>
+<p>If <span class="math inline">f&#39;(x)=0</span> for every <span
+class="math inline">x</span> in an interval, what can be concluded about
+<span class="math inline">f</span> on that interval?</p>
+<h2 class="red" id="answer-3">Answer</h2>
+<p>By the consequence of the Mean Value Theorem proved above, the
+function has the same value at every pair of points in the interval.
+Therefore,</p>
+<p><span class="math display">
+\boxed{f\text{ is constant on the interval}}
+</span></p>
+<div class="question-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="scenario-problem">Scenario Problem</h1>
+<h2 class="green" id="problem">Problem</h2>
+<p>A mechatronic test vehicle moves along a straight track. Its
+position, in metres, after <span class="math inline">t</span> seconds is
+modelled by</p>
+<p><span class="math display">
+s(t)=t^2
+</span></p>
+<p>for <span class="math inline">0\leq t\leq4</span>. Assume the model
+describes a continuous position function on <span
+class="math inline">[0,4]</span> that is differentiable on <span
+class="math inline">(0,4)</span>.</p>
+<ol type="1">
+<li>Calculate the vehicle’s average velocity over the four-second
+interval.</li>
+<li>Use the Mean Value Theorem to find a time when the instantaneous
+velocity equals this average velocity.</li>
+</ol>
+<h2 class="green" id="solution-6">Solution</h2>
+<p><strong>Step 1: Calculate the average velocity.</strong></p>
+<p>The positions at the endpoints are</p>
+<p><span class="math display">
+s(0)=0
+\qquad\text{and}\qquad
+s(4)=16
+</span></p>
+<p>Thus, the average velocity is</p>
+<p><span class="math display">
+\frac{s(4)-s(0)}{4-0}
+=\frac{16-0}{4}
+=4\text{ m/s}
+</span></p>
+<p><strong>Step 2: Apply the Mean Value Theorem.</strong></p>
+<p>Since <span class="math inline">s(t)=t^2</span> is continuous on
+<span class="math inline">[0,4]</span> and differentiable on <span
+class="math inline">(0,4)</span>, the theorem guarantees a time <span
+class="math inline">c</span> in <span class="math inline">(0,4)</span>
+such that</p>
+<p><span class="math display">
+s&#39;(c)=\frac{s(4)-s(0)}{4-0}=4
+</span></p>
+<p>Differentiating the position function gives</p>
+<p><span class="math display">
+s&#39;(t)=2t
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+\begin{aligned}
+2c&amp;=4\\
+c&amp;=2
+\end{aligned}
+</span></p>
+<p>Hence, at <span class="math inline">t=2</span> seconds, the
+instantaneous velocity is <span class="math inline">4</span> m/s, equal
+to the average velocity over the full interval.</p>
+<p><span class="math display">
+\boxed{c=2\text{ s}}
+</span></p>
+<p>The Mean Value Theorem guarantees the existence of such a time; in
+this example, solving the derivative equation identifies it exactly.</p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="summary">Summary</h1>
+<ul>
+<li>Rolle’s Theorem states that if a function is continuous on <span
+class="math inline">[a,b]</span>, differentiable on <span
+class="math inline">(a,b)</span>, and satisfies <span
+class="math inline">f(a)=f(b)</span>, then <span
+class="math inline">f&#39;(c)=0</span> for at least one <span
+class="math inline">c</span> in <span
+class="math inline">(a,b)</span>.</li>
+<li>Geometrically, Rolle’s Theorem guarantees at least one horizontal
+tangent between equal endpoint heights.</li>
+<li>The Mean Value Theorem requires continuity on the closed interval
+and differentiability on the open interval.</li>
+<li>The Mean Value Theorem guarantees a point <span
+class="math inline">c</span> where the instantaneous rate of change
+equals the average rate of change over the interval.</li>
+<li>Geometrically, the tangent at such a point is parallel to the secant
+line through the endpoints.</li>
+<li>For a position function, the Mean Value Theorem connects average
+velocity over an interval with instantaneous velocity at some time
+inside it.</li>
+<li>If a derivative is zero everywhere on an interval, the function is
+constant there.</li>
+<li>If two differentiable functions have equal derivatives on an
+interval, they differ by a constant on that interval.</li>
+<li>The theorem guarantees that a suitable point exists, but finding its
+exact value may require solving an equation.</li>
+</ul>
+<h1 class="red" id="note">Note</h1>
+<ul>
+<li>The hypotheses of each theorem must be checked before applying its
+conclusion.</li>
+<li>The point <span class="math inline">c</span> is guaranteed to lie in
+the open interval <span class="math inline">(a,b)</span>, not at either
+endpoint.</li>
+<li>In the Mean Value Theorem, <span
+class="math inline">\frac{f(b)-f(a)}{b-a}</span> is the signed average
+rate of change; for motion, it represents average velocity, not
+necessarily average speed.</li>
+</ul>
+<h1 id="exercises">Exercises</h1>
+<h2 id="exercises-set">Exercises Set</h2>
+<p>Solve the odd number exercises from exercise 1 to 42.</p>
+<ul>
+<li><p>Exercises help transform theoretical concepts into practical
+understanding.</p></li>
+<li><p>Mathematics is learned by doing and solving exercises will train
+you to analyze problems, select appropriate methods, and construct
+logical solutions.</p></li>
+<li><p>Attempting problems sometimes leads to mistakes which provide
+opportunities for learning and improvement.</p></li>
+<li><p>Regular practice increases speed, accuracy, and
+confidence.</p></li>
+<li><p>Exercises are given in the Exercises file and you are expected to
+solve them on your own.</p></li>
+</ul>
+</body>
+</html>
