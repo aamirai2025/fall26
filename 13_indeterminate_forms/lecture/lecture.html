@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>lecture</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="../styles/style.css" />
+  <script defer="" src="../katex/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <link rel="stylesheet" href="../katex/dist/katex.min.css" />
+</head>
+<body>
+<h1 id="calculus-and-analytical-geometry">Calculus and Analytical
+Geometry</h1>
+<h2 id="indeterminate-forms-and-lhospitals-rule">Indeterminate Forms and
+L’Hospital’s Rule</h2>
+<h3 id="dr.-aamir-alaud-din">Dr. Aamir Alaud Din</h3>
+<h1 id="objectives">Objectives</h1>
+<p>After preparing this topic, you should be able to:</p>
+<ol type="1">
+<li>Identify indeterminate forms of types <span
+class="math inline">\frac{0}{0}</span> and <span
+class="math inline">\frac{\infty}{\infty}</span> and explain why these
+forms do not determine a limit by themselves.</li>
+<li>State and apply L’Hospital’s Rule to evaluate limits that produce
+the indeterminate forms <span class="math inline">\frac{0}{0}</span> or
+<span class="math inline">\frac{\infty}{\infty}</span>, while checking
+its conditions.</li>
+<li>Rewrite indeterminate products of type <span
+class="math inline">0\cdot\infty</span> as quotients and evaluate them
+using suitable limit methods.</li>
+<li>Transform indeterminate differences of type <span
+class="math inline">\infty-\infty</span> into more manageable
+expressions and evaluate their limits.</li>
+<li>Evaluate indeterminate powers of types <span
+class="math inline">0^0</span>, <span
+class="math inline">\infty^0</span>, and <span
+class="math inline">1^\infty</span> by taking logarithms and applying
+limit methods.</li>
+</ol>
+<h1 id="the-why-section">The Why Section</h1>
+<ul>
+<li>In mechanical engineering and mechatronics, mathematical models
+describe quantities such as displacement, force, vibration, and system
+response. Near a critical operating condition, a model may produce a
+quotient in which both numerator and denominator approach zero or both
+grow without bound. Substitution alone then does not reveal the limiting
+value.</li>
+<li>In computer science and data science, limits are used to study the
+behavior of algorithms, continuous models, and functions near boundary
+values. A formula may contain two terms that become very large while
+their difference remains finite, or a small factor multiplied by a
+factor that grows without bound.</li>
+<li>These expressions are called <em>indeterminate forms</em> because
+the visible form alone does not tell us the value of the limit.
+Different functions with the same indeterminate form can have different
+limits, so we need systematic methods rather than assumptions based only
+on substitution.</li>
+<li>L’Hospital’s Rule provides one such method for quotients of
+differentiable functions of types <span
+class="math inline">\frac{0}{0}</span> and <span
+class="math inline">\frac{\infty}{\infty}</span>. Rewriting products and
+differences as quotients can extend its usefulness, while logarithms
+help us handle indeterminate powers.</li>
+<li>For example, a mechatronic controller may estimate a response from a
+formula involving a difference of two large terms or a ratio that
+becomes <span class="math inline">0/0</span> at a target setting. This
+topic provides methods for determining the response approached near that
+setting. The scenario problem at the end illustrates how this can be
+done numerically.</li>
+</ul>
+<h1 id="objective-1-indeterminate-forms">Objective 1: Indeterminate
+Forms</h1>
+<h2 id="forms-frac00-and-fracinftyinfty">Forms <span
+class="math inline">\frac{0}{0}</span> and <span
+class="math inline">\frac{\infty}{\infty}</span></h2>
+<ul>
+<li>Suppose that <span class="math inline">f(x)\to0</span> and <span
+class="math inline">g(x)\to0</span> as <span class="math inline">x\to
+a</span>. The quotient <span
+class="math inline">\frac{f(x)}{g(x)}</span> has the indeterminate form
+<span class="math inline">\frac{0}{0}</span>. This form does not imply
+that the limit is zero or that the limit fails to exist.</li>
+<li>For example, common factors may be cancelled in a rational
+expression to reveal a finite limit.</li>
+</ul>
+<h2 class="green" id="example-1">Example 1</h2>
+<p>Find</p>
+<p><span class="math display">
+\lim_{x\to1}\frac{\ln x}{x-1}
+</span></p>
+<h2 class="green" id="solution">Solution</h2>
+<p>As <span class="math inline">x\to1</span>, <span
+class="math inline">\ln x\to0</span> and <span
+class="math inline">x-1\to0</span>. The quotient therefore has the
+indeterminate form <span class="math inline">\frac{0}{0}</span>. We will
+evaluate this limit using L’Hospital’s Rule in Objective 2.</p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<ul>
+<li>Another indeterminate form occurs when <span
+class="math inline">f(x)\to\infty</span> (or <span
+class="math inline">-\infty</span>) and <span
+class="math inline">g(x)\to\infty</span> (or <span
+class="math inline">-\infty</span>). The quotient has the form <span
+class="math inline">\frac{\infty}{\infty}</span>, and its limit depends
+on the relative rates at which the numerator and denominator grow.</li>
+<li>For example, a quotient of two functions that both grow without
+bound can approach zero, a nonzero finite number, or infinity.</li>
+</ul>
+<h2 class="green" id="example-2">Example 2</h2>
+<p>Calculate</p>
+<p><span class="math display">
+\lim_{x\to\infty}\frac{e^x}{x^2}
+</span></p>
+<h2 class="green" id="solution-1">Solution</h2>
+<p>As <span class="math inline">x\to\infty</span>, both <span
+class="math inline">e^x</span> and <span class="math inline">x^2</span>
+approach infinity, so the expression has the form <span
+class="math inline">\frac{\infty}{\infty}</span>. We will evaluate this
+limit by applying L’Hospital’s Rule in Objective 2.</p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="quick-check">Quick Check</h1>
+<h2 class="red" id="question-1">Question 1</h2>
+<p>What indeterminate form is obtained when <span
+class="math inline">f(x)\to0</span> and <span
+class="math inline">g(x)\to0</span> in <span
+class="math inline">\frac{f(x)}{g(x)}</span>?</p>
+<h2 class="red" id="answer">Answer</h2>
+<p>The form is <span class="math inline">\frac{0}{0}</span>. It does not
+determine the limit by itself.</p>
+<h2 class="red" id="question-2">Question 2</h2>
+<p>If both the numerator and denominator approach infinity, must their
+quotient approach <span class="math inline">1</span>?</p>
+<h2 class="red" id="answer-1">Answer</h2>
+<p>No. The quotient depends on their relative rates of growth.</p>
+<div class="question-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="objective-2-lhospitals-rule">Objective 2: L’Hospital’s Rule</h1>
+<h2 id="statement-of-lhospitals-rule">Statement of L’Hospital’s
+Rule</h2>
+<ul>
+<li>L’Hospital’s Rule is a method for evaluating certain limits of
+quotients that have the indeterminate form <span
+class="math inline">\frac{0}{0}</span> or <span
+class="math inline">\frac{\infty}{\infty}</span>.</li>
+<li>Suppose <span class="math inline">f</span> and <span
+class="math inline">g</span> are differentiable on an open interval
+containing <span class="math inline">a</span>, except possibly at <span
+class="math inline">a</span>, and <span
+class="math inline">g&#39;(x)\ne0</span> on that interval. If both
+functions approach zero or both approach positive or negative infinity
+as <span class="math inline">x\to a</span>, then, provided the limit on
+the right exists (finite or infinite), we have the following rule.</li>
+</ul>
+<h2 class="orange" id="theorem-lhospitals-rule">Theorem: L’Hospital’s
+Rule</h2>
+<p><span class="math display">
+\lim_{x\to a}\frac{f(x)}{g(x)}
+=
+\lim_{x\to a}\frac{f&#39;(x)}{g&#39;(x)}
+</span></p>
+<p>The rule applies when the original quotient has the indeterminate
+form <span class="math inline">\frac{0}{0}</span> or <span
+class="math inline">\frac{\infty}{\infty}</span> and the limit of the
+quotient of derivatives exists in the required sense.</p>
+<div class="theorem-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<ul>
+<li>Differentiate the numerator and denominator separately. Do not apply
+the quotient rule to the original quotient.</li>
+<li>The form must first be checked. L’Hospital’s Rule cannot be applied
+just because a limit contains a quotient.</li>
+<li>The rule may be applied again if the quotient of derivatives is
+still indeterminate and the conditions remain satisfied.</li>
+<li>It is also valid for suitable one-sided limits and limits as <span
+class="math inline">x\to\infty</span> or <span
+class="math inline">x\to-\infty</span>.</li>
+</ul>
+<h2 class="green" id="example-3">Example 3</h2>
+<p>Find</p>
+<p><span class="math display">
+\lim_{x\to1}\frac{\ln x}{x-1}
+</span></p>
+<h2 class="green" id="solution-2">Solution</h2>
+<p>Direct substitution gives <span
+class="math inline">\frac{0}{0}</span>, so L’Hospital’s Rule
+applies.</p>
+<p><span class="math display">
+\begin{aligned}
+\lim_{x\to1}\frac{\ln x}{x-1}
+&amp;=\lim_{x\to1}\frac{\frac{d}{dx}(\ln x)}{\frac{d}{dx}(x-1)}\\
+&amp;=\lim_{x\to1}\frac{1/x}{1}\\
+&amp;=1
+\end{aligned}
+</span></p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="green" id="example-4">Example 4</h2>
+<p>Calculate</p>
+<p><span class="math display">
+\lim_{x\to\infty}\frac{e^x}{x^2}
+</span></p>
+<h2 class="green" id="solution-3">Solution</h2>
+<p>Both the numerator and denominator approach infinity. Applying
+L’Hospital’s Rule once gives another indeterminate quotient.</p>
+<p><span class="math display">
+\begin{aligned}
+\lim_{x\to\infty}\frac{e^x}{x^2}
+&amp;=\lim_{x\to\infty}\frac{e^x}{2x}
+\end{aligned}
+</span></p>
+<p>The new quotient is still of type <span
+class="math inline">\frac{\infty}{\infty}</span>. Applying the rule
+again gives</p>
+<p><span class="math display">
+\begin{aligned}
+\lim_{x\to\infty}\frac{e^x}{2x}
+&amp;=\lim_{x\to\infty}\frac{e^x}{2}\\
+&amp;=\infty
+\end{aligned}
+</span></p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="green" id="example-5">Example 5</h2>
+<p>Find</p>
+<p><span class="math display">
+\lim_{x\to\infty}\frac{\ln x}{\sqrt{x}}
+</span></p>
+<h2 class="green" id="solution-4">Solution</h2>
+<p>Both <span class="math inline">\ln x</span> and <span
+class="math inline">\sqrt{x}</span> approach infinity, so L’Hospital’s
+Rule applies.</p>
+<p><span class="math display">
+\begin{aligned}
+\lim_{x\to\infty}\frac{\ln x}{\sqrt{x}}
+&amp;=\lim_{x\to\infty}\frac{1/x}{1/(2\sqrt{x})}\\
+&amp;=\lim_{x\to\infty}\frac{2\sqrt{x}}{x}\\
+&amp;=\lim_{x\to\infty}\frac{2}{\sqrt{x}}\\
+&amp;=0
+\end{aligned}
+</span></p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="green" id="example-6">Example 6</h2>
+<p>Find</p>
+<p><span class="math display">
+\lim_{x\to0}\frac{\tan x-x}{x^3}
+</span></p>
+<h2 class="green" id="solution-5">Solution</h2>
+<p>As <span class="math inline">x\to0</span>, both numerator and
+denominator approach zero. Apply L’Hospital’s Rule.</p>
+<p><span class="math display">
+\begin{aligned}
+\lim_{x\to0}\frac{\tan x-x}{x^3}
+&amp;=\lim_{x\to0}\frac{\sec^2x-1}{3x^2}
+\end{aligned}
+</span></p>
+<p>The new quotient is still of type <span
+class="math inline">\frac{0}{0}</span>. Apply the rule again.</p>
+<p><span class="math display">
+\begin{aligned}
+\lim_{x\to0}\frac{\sec^2x-1}{3x^2}
+&amp;=\lim_{x\to0}\frac{2\sec^2x\tan x}{6x}\\
+&amp;=\frac13\lim_{x\to0}\frac{\sec^2x\tan x}{x}\\
+&amp;=\frac13
+\end{aligned}
+</span></p>
+<p>In the last step, <span class="math inline">\sec^2x\to1</span> and
+<span class="math inline">\lim_{x\to0}\frac{\tan x}{x}=1</span>.</p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 id="important-caution">Important Caution</h2>
+<ul>
+<li>L’Hospital’s Rule must not be used when the original expression is
+not of type <span class="math inline">\frac{0}{0}</span> or <span
+class="math inline">\frac{\infty}{\infty}</span>.</li>
+<li>For example, the limit below is evaluated directly because its
+denominator does not approach zero.</li>
+</ul>
+<p><span class="math display">
+\lim_{x\to\pi}\frac{\sin x}{1-\cos x}
+=
+\frac{\sin\pi}{1-\cos\pi}
+=
+0
+</span></p>
+<h1 id="quick-check-1">Quick Check</h1>
+<h2 class="red" id="question-1-1">Question 1</h2>
+<p>Evaluate <span
+class="math inline">\displaystyle\lim_{x\to1}\frac{x^2-1}{x-1}</span>
+using L’Hospital’s Rule.</p>
+<h2 class="red" id="answer-2">Answer</h2>
+<p><span class="math display">
+\begin{aligned}
+\lim_{x\to1}\frac{x^2-1}{x-1}
+&amp;=\lim_{x\to1}\frac{2x}{1}\\
+&amp;=2
+\end{aligned}
+</span></p>
+<h2 class="red" id="question-2-1">Question 2</h2>
+<p>Can L’Hospital’s Rule be applied immediately to <span
+class="math inline">\displaystyle\lim_{x\to0}\frac{1+\cos
+x}{x+1}</span>?</p>
+<h2 class="red" id="answer-3">Answer</h2>
+<p>No. Direct substitution gives <span
+class="math inline">\frac{2}{1}=2</span>, not an indeterminate form.</p>
+<div class="question-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="objective-3-indeterminate-products-type-0cdotinfty">Objective 3:
+Indeterminate Products (Type <span
+class="math inline">0\cdot\infty</span>)</h1>
+<ul>
+<li>If <span class="math inline">f(x)\to0</span> and <span
+class="math inline">g(x)\to\infty</span> (or <span
+class="math inline">-\infty</span>), the product <span
+class="math inline">f(x)g(x)</span> has the indeterminate form <span
+class="math inline">0\cdot\infty</span>.</li>
+<li>The result depends on how quickly the factor approaching zero
+decreases compared with how quickly the other factor grows.</li>
+<li>To use L’Hospital’s Rule, rewrite the product as a quotient so that
+it has the form <span class="math inline">\frac{0}{0}</span> or <span
+class="math inline">\frac{\infty}{\infty}</span>. Choose the rewrite
+that produces the simpler expression.</li>
+</ul>
+<h2 class="green" id="example-7">Example 7</h2>
+<p>Evaluate</p>
+<p><span class="math display">
+\lim_{x\to0^+}x\ln x
+</span></p>
+<h2 class="green" id="solution-6">Solution</h2>
+<p>As <span class="math inline">x\to0^+</span>, <span
+class="math inline">x\to0</span> and <span class="math inline">\ln
+x\to-\infty</span>. The product has the indeterminate form <span
+class="math inline">0\cdot(-\infty)</span>. Write the product as a
+quotient.</p>
+<p><span class="math display">
+\begin{aligned}
+\lim_{x\to0^+}x\ln x
+&amp;=\lim_{x\to0^+}\frac{\ln x}{1/x}
+\end{aligned}
+</span></p>
+<p>Both numerator and denominator approach negative infinity and
+positive infinity respectively, giving a quotient of type <span
+class="math inline">\frac{-\infty}{\infty}</span>. L’Hospital’s Rule
+gives</p>
+<p><span class="math display">
+\begin{aligned}
+\lim_{x\to0^+}\frac{\ln x}{1/x}
+&amp;=\lim_{x\to0^+}\frac{1/x}{-1/x^2}\\
+&amp;=\lim_{x\to0^+}(-x)\\
+&amp;=0
+\end{aligned}
+</span></p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="quick-check-2">Quick Check</h1>
+<h2 class="red" id="question-1-2">Question 1</h2>
+<p>What is the indeterminate form of <span class="math inline">x\ln
+x</span> as <span class="math inline">x\to0^+</span>?</p>
+<h2 class="red" id="answer-4">Answer</h2>
+<p>It is <span class="math inline">0\cdot(-\infty)</span>.</p>
+<h2 class="red" id="question-2-2">Question 2</h2>
+<p>Rewrite <span class="math inline">x\ln x</span> as a quotient
+suitable for L’Hospital’s Rule as <span
+class="math inline">x\to0^+</span>.</p>
+<h2 class="red" id="answer-5">Answer</h2>
+<p>One useful form is <span class="math inline">\displaystyle\frac{\ln
+x}{1/x}</span>.</p>
+<div class="question-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1
+id="objective-4-indeterminate-differences-type-infty-infty">Objective 4:
+Indeterminate Differences (Type <span
+class="math inline">\infty-\infty</span>)</h1>
+<ul>
+<li>If <span class="math inline">f(x)\to\infty</span> and <span
+class="math inline">g(x)\to\infty</span>, the difference <span
+class="math inline">f(x)-g(x)</span> has the indeterminate form <span
+class="math inline">\infty-\infty</span>.</li>
+<li>We cannot determine the limit by comparing the two infinite
+quantities informally. One term may grow faster than the other, or their
+difference may approach a finite value.</li>
+<li>A useful strategy is to combine the terms using a common
+denominator, factor, rationalize, or otherwise rewrite the difference as
+a quotient with an indeterminate form <span
+class="math inline">\frac{0}{0}</span> or <span
+class="math inline">\frac{\infty}{\infty}</span>.</li>
+</ul>
+<h2 class="green" id="example-8">Example 8</h2>
+<p>Compute</p>
+<p><span class="math display">
+\lim_{x\to1^+}\left(\frac{1}{\ln x}-\frac{1}{x-1}\right)
+</span></p>
+<h2 class="green" id="solution-7">Solution</h2>
+<p>As <span class="math inline">x\to1^+</span>, both <span
+class="math inline">\frac{1}{\ln x}</span> and <span
+class="math inline">\frac{1}{x-1}</span> approach infinity. The
+difference is of type <span class="math inline">\infty-\infty</span>.
+Combine the terms using a common denominator.</p>
+<p><span class="math display">
+\begin{aligned}
+&amp;\lim_{x\to1^+}\left(\frac{1}{\ln x}-\frac{1}{x-1}\right)\\
+&amp;=\lim_{x\to1^+}\frac{x-1-\ln x}{(x-1)\ln x}
+\end{aligned}
+</span></p>
+<p>Both numerator and denominator approach zero, so L’Hospital’s Rule
+applies.</p>
+<p><span class="math display">
+\begin{aligned}
+&amp;\lim_{x\to1^+}\frac{x-1-\ln x}{(x-1)\ln x}\\
+&amp;=\lim_{x\to1^+}\frac{1-\frac1x}{\ln x+\frac{x-1}{x}}\\
+&amp;=\lim_{x\to1^+}\frac{x-1}{x\ln x+x-1}
+\end{aligned}
+</span></p>
+<p>The last quotient is still of type <span
+class="math inline">\frac{0}{0}</span>. Applying L’Hospital’s Rule again
+gives</p>
+<p><span class="math display">
+\begin{aligned}
+\lim_{x\to1^+}\frac{x-1}{x\ln x+x-1}
+&amp;=\lim_{x\to1^+}\frac{1}{\ln x+2}\\
+&amp;=\frac12
+\end{aligned}
+</span></p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="green" id="example-9">Example 9</h2>
+<p>Calculate</p>
+<p><span class="math display">
+\lim_{x\to\infty}(e^x-x)
+</span></p>
+<h2 class="green" id="solution-8">Solution</h2>
+<p>Both <span class="math inline">e^x</span> and <span
+class="math inline">x</span> approach infinity, so the difference has
+the form <span class="math inline">\infty-\infty</span>. Factor out
+<span class="math inline">x</span> to obtain</p>
+<p><span class="math display">
+e^x-x=x\left(\frac{e^x}{x}-1\right)
+</span></p>
+<p>By L’Hospital’s Rule, <span
+class="math inline">\frac{e^x}{x}\to\infty</span> as <span
+class="math inline">x\to\infty</span>. Therefore, the factor in
+parentheses grows without bound, and so does its product with <span
+class="math inline">x</span>.</p>
+<p><span class="math display">
+\lim_{x\to\infty}(e^x-x)=\infty
+</span></p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="quick-check-3">Quick Check</h1>
+<h2 class="red" id="question-1-3">Question 1</h2>
+<p>Why is <span class="math inline">\infty-\infty</span> called an
+indeterminate form?</p>
+<h2 class="red" id="answer-6">Answer</h2>
+<p>Because the form alone does not tell us whether the difference
+approaches a finite value, infinity, or another outcome.</p>
+<h2 class="red" id="question-2-3">Question 2</h2>
+<p>What algebraic step is useful for simplifying <span
+class="math inline">\displaystyle\frac{1}{\ln
+x}-\frac{1}{x-1}</span>?</p>
+<h2 class="red" id="answer-7">Answer</h2>
+<p>Combine the fractions using a common denominator.</p>
+<div class="question-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="objective-5-indeterminate-powers">Objective 5: Indeterminate
+Powers</h1>
+<h2 id="forms-00-infty0-and-1infty">Forms <span
+class="math inline">0^0</span>, <span
+class="math inline">\infty^0</span>, and <span
+class="math inline">1^\infty</span></h2>
+<ul>
+<li>Limits of the form <span class="math inline">[f(x)]^{g(x)}</span>
+can be indeterminate when the base and exponent approach particular
+values.</li>
+<li>The three forms considered here are <span
+class="math inline">0^0</span>, <span
+class="math inline">\infty^0</span>, and <span
+class="math inline">1^\infty</span>. The notation describes the behavior
+of the base and exponent separately; it does not determine the limit of
+the whole power.</li>
+<li>A standard method is to let <span
+class="math inline">y=[f(x)]^{g(x)}</span> and take the natural
+logarithm.</li>
+</ul>
+<p><span class="math display">
+\ln y=g(x)\ln f(x)
+</span></p>
+<ul>
+<li>This transforms the power into a product. After evaluating <span
+class="math inline">\lim \ln y</span>, use the continuity of the
+exponential function to recover the limit of <span
+class="math inline">y</span>.</li>
+</ul>
+<p><span class="math display">
+\lim y=e^{\lim\ln y}
+</span></p>
+<h2 class="green" id="example-10">Example 10</h2>
+<p>Calculate</p>
+<p><span class="math display">
+\lim_{x\to0^+}(1+\sin4x)^{\cot x}
+</span></p>
+<h2 class="green" id="solution-9">Solution</h2>
+<p>As <span class="math inline">x\to0^+</span>, the base <span
+class="math inline">1+\sin4x\to1</span> and the exponent <span
+class="math inline">\cot x\to\infty</span>. The expression has the
+indeterminate form <span class="math inline">1^\infty</span>. Let</p>
+<p><span class="math display">
+y=(1+\sin4x)^{\cot x}
+</span></p>
+<p>Taking natural logarithms gives</p>
+<p><span class="math display">
+\ln y=\cot x\ln(1+\sin4x)
+=\frac{\ln(1+\sin4x)}{\tan x}
+</span></p>
+<p>As <span class="math inline">x\to0^+</span>, the last quotient is of
+type <span class="math inline">\frac{0}{0}</span>. Apply L’Hospital’s
+Rule.</p>
+<p><span class="math display">
+\begin{aligned}
+\lim_{x\to0^+}\ln y
+&amp;=\lim_{x\to0^+}\frac{4\cos4x/(1+\sin4x)}{\sec^2x}\\
+&amp;=4
+\end{aligned}
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+\lim_{x\to0^+}y=e^4
+</span></p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="green" id="example-11">Example 11</h2>
+<p>Find</p>
+<p><span class="math display">
+\lim_{x\to0^+}x^x
+</span></p>
+<h2 class="green" id="solution-10">Solution</h2>
+<p>As <span class="math inline">x\to0^+</span>, the base <span
+class="math inline">x\to0</span> and the exponent <span
+class="math inline">x\to0</span>. The expression has the indeterminate
+form <span class="math inline">0^0</span>. Let <span
+class="math inline">y=x^x</span>. Taking natural logarithms gives</p>
+<p><span class="math display">
+\ln y=x\ln x
+</span></p>
+<p>From Objective 3, <span class="math inline">\lim_{x\to0^+}x\ln
+x=0</span>. Therefore,</p>
+<p><span class="math display">
+\begin{aligned}
+\lim_{x\to0^+}y
+&amp;=e^{\lim_{x\to0^+}\ln y}\\
+&amp;=e^0\\
+&amp;=1
+\end{aligned}
+</span></p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="quick-check-4">Quick Check</h1>
+<h2 class="red" id="question-1-4">Question 1</h2>
+<p>What transformation is useful when evaluating a limit of the form
+<span class="math inline">[f(x)]^{g(x)}</span>?</p>
+<h2 class="red" id="answer-8">Answer</h2>
+<p>Take the natural logarithm: <span class="math inline">\ln y=g(x)\ln
+f(x)</span>.</p>
+<h2 class="red" id="question-2-4">Question 2</h2>
+<p>Evaluate <span
+class="math inline">\displaystyle\lim_{x\to0^+}x^x</span>.</p>
+<h2 class="red" id="answer-9">Answer</h2>
+<p>Since <span class="math inline">\lim_{x\to0^+}x\ln x=0</span>, the
+limit is <span class="math inline">e^0=1</span>.</p>
+<div class="question-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="green" id="scenario-problem">Scenario Problem</h2>
+<p>A mechatronic actuator is tested near a reference setting <span
+class="math inline">x=1</span>. Its normalized response is described
+by</p>
+<p><span class="math display">
+R(x)=\frac{\ln x}{x-1}
+</span></p>
+<p>The response formula is undefined at <span
+class="math inline">x=1</span>, but the controller needs the response
+value approached as the setting gets closer to <span
+class="math inline">1</span>. Determine this limiting response.</p>
+<h2 class="green" id="solution-11">Solution</h2>
+<p>Direct substitution produces the indeterminate form <span
+class="math inline">\frac{0}{0}</span> because <span
+class="math inline">\ln1=0</span> and <span
+class="math inline">1-1=0</span>. Apply L’Hospital’s Rule by
+differentiating the numerator and denominator separately.</p>
+<p><span class="math display">
+\begin{aligned}
+\lim_{x\to1}R(x)
+&amp;=\lim_{x\to1}\frac{\ln x}{x-1}\\
+&amp;=\lim_{x\to1}\frac{1/x}{1}\\
+&amp;=1
+\end{aligned}
+</span></p>
+<p>The normalized response approaches <span class="math inline">1</span>
+as the input approaches the reference setting. This gives the controller
+a well-defined limiting value even though the original formula is
+undefined at the exact setting.</p>
+<h1 id="summary">Summary</h1>
+<ul>
+<li>The forms <span class="math inline">\frac{0}{0}</span> and <span
+class="math inline">\frac{\infty}{\infty}</span> are indeterminate
+because they do not determine a limit by themselves.</li>
+<li>L’Hospital’s Rule evaluates suitable quotient limits by
+differentiating the numerator and denominator separately.</li>
+<li>The original quotient must have type <span
+class="math inline">\frac{0}{0}</span> or <span
+class="math inline">\frac{\infty}{\infty}</span> before L’Hospital’s
+Rule is applied.</li>
+<li>If the quotient of derivatives remains indeterminate, the rule may
+be applied again when its conditions continue to hold.</li>
+<li>A product of type <span class="math inline">0\cdot\infty</span> can
+often be rewritten as a quotient.</li>
+<li>A difference of type <span class="math inline">\infty-\infty</span>
+can often be simplified using a common denominator, factoring, or
+rationalization.</li>
+<li>For indeterminate powers <span class="math inline">0^0</span>, <span
+class="math inline">\infty^0</span>, and <span
+class="math inline">1^\infty</span>, take logarithms to transform the
+power into a product.</li>
+<li>After finding the limit of <span class="math inline">\ln y</span>,
+recover the limit of <span class="math inline">y</span> by
+exponentiating.</li>
+<li>Always check the form and the conditions before using L’Hospital’s
+Rule, and prefer a simpler algebraic method when one is available.</li>
+</ul>
+<h1 id="exercises">Exercises</h1>
+<h2 id="exercises-set">Exercises Set</h2>
+<p>Solve the odd number exercises from exercise 1 to 90.</p>
+<ul>
+<li><p>Exercises help transform theoretical concepts into practical
+understanding.</p></li>
+<li><p>Mathematics is learned by doing and solving exercises will train
+you to analyze problems, select appropriate methods, and construct
+logical solutions.</p></li>
+<li><p>Attempting problems sometimes leads to mistakes which provide
+opportunities for learning and improvement.</p></li>
+<li><p>Regular practice increases speed, accuracy, and
+confidence.</p></li>
+<li><p>Exercises are given in the Exercises file and you are expected to
+solve them on your own.</p></li>
+</ul>
+</body>
+</html>
