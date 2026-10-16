@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>lecture</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="../styles/style.css" />
+  <script defer="" src="../katex/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <link rel="stylesheet" href="../katex/dist/katex.min.css" />
+</head>
+<body>
+<h1 id="calculus-and-analytical-geometry">Calculus and Analytical
+Geometry</h1>
+<h2 id="optimization-problems">Optimization Problems</h2>
+<h3 id="dr.-aamir-alaud-din">Dr. Aamir Alaud Din</h3>
+<h1 id="objectives">Objectives</h1>
+<p>After preparing this topic, you should be able to:</p>
+<ol type="1">
+<li>Formulate an optimization problem by identifying the quantity to be
+maximized or minimized, introducing suitable variables, and translating
+the given conditions into mathematical equations.</li>
+<li>Construct and optimize a revenue or profit function in a business
+situation, interpreting the mathematical result in the context of the
+problem.</li>
+</ol>
+<h1 id="the-why-section">The Why Section</h1>
+<ul>
+<li>In engineering and computing, a design or decision often has to be
+selected from many feasible alternatives. A mechanical engineer may want
+to minimize material use while preserving a required capacity, while a
+mechatronics system may need to reach a destination in the least
+time.</li>
+<li>Optimization provides a systematic way to select the best feasible
+alternative. The word <em>best</em> must be translated into a measurable
+quantity, such as maximum area, minimum surface area, shortest distance,
+least travel time, minimum cost, or maximum revenue.</li>
+<li>The central challenge is usually not differentiation itself but
+constructing the correct function from the information in a word
+problem. A diagram, carefully chosen variables, and relationships
+between those variables help convert a real situation into a
+mathematical model.</li>
+<li>When the quantity to be optimized depends on several variables, a
+constraint can often be used to express it as a function of one
+variable. Calculus then helps identify candidate extrema, and the domain
+and endpoint values help determine whether a candidate gives an absolute
+maximum or minimum.</li>
+<li>Optimization is also important in business and economics. A company
+needs to understand how price affects demand, how sales affect revenue,
+and how production affects cost and profit. Derivatives describe
+marginal changes, while optimization identifies a production or sales
+level that gives the best outcome under the model.</li>
+<li>For example, a mechatronics team designing a small autonomous
+delivery robot may need to choose a route and a landing or transfer
+point that minimize total travel time, given different movement speeds.
+This type of decision can be modeled and solved by studying optimization
+problems.</li>
+</ul>
+<h1 id="optimizing-a-function">Optimizing a Function</h1>
+<h2 id="steps-in-solving-optimization-problems">Steps in Solving
+Optimization Problems</h2>
+<ul>
+<li><strong>Understand the problem.</strong> Read the statement
+carefully and identify the unknown quantity, the given information, and
+the conditions that must be satisfied.</li>
+<li><strong>Draw a diagram.</strong> When geometry is involved, draw a
+diagram and label the known and unknown quantities.</li>
+<li><strong>Introduce notation.</strong> Assign a symbol to the quantity
+to be maximized or minimized and introduce symbols for the other unknown
+quantities.</li>
+<li><strong>Write the objective function.</strong> Express the required
+quantity in terms of the variables.</li>
+<li><strong>Use the constraints.</strong> If the objective function
+contains more than one variable, use the given relationships to
+eliminate variables until the objective is a function of one variable.
+State the domain in the context of the problem.</li>
+<li><strong>Find the absolute extreme value.</strong> Use critical
+numbers and, when the domain is a closed interval, compare the function
+values at all critical numbers and endpoints. On an open or unbounded
+domain, justify the absolute extremum using the function’s behavior or
+the sign of its derivative.</li>
+</ul>
+<h2 class="green" id="example-1">Example 1</h2>
+<p>A farmer has 1200 m of fencing and wants to fence off a rectangular
+field that borders a straight river. He needs no fence along the river.
+What are the dimensions of the field that has the largest area?</p>
+<div style="text-align: center;">
+<p><img src="../images/1401a.png" style="width: 739 px; display: block; margin: 0 auto 10px auto;">
+<img src="../images/1401b.png" style="width: 739 px; display: block; margin: 0 auto 10px auto;">
+<img src="../images/1401c.png" style="width: 739 px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 1.</strong> Three possible rectangular fields
+beside a river, illustrating how different dimensions produce different
+areas.</span></p>
+</div>
+<div style="text-align: center;">
+<p><img src="../images/1402.png" style="width: 739 px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 2.</strong> A general rectangular field beside a
+river, with depth <span class="math inline">x</span> and width <span
+class="math inline">y</span>.</span></p>
+</div>
+<h2 class="green" id="solution">Solution</h2>
+<p>Let <span class="math inline">x</span> be the depth and <span
+class="math inline">y</span> be the width of the field. The area to be
+maximized is <span class="math inline">A=xy</span>. Since the river
+forms one side of the rectangle, fencing is needed for only two depths
+and one width. Therefore, the constraint is</p>
+<p><span class="math display">
+2x+y=1200
+</span></p>
+<p>Solving for <span class="math inline">y</span> gives <span
+class="math inline">y=1200-2x</span>. Substituting this into the area
+formula gives the objective function</p>
+<p><span class="math display">
+A(x)=x(1200-2x)=1200x-2x^2
+</span></p>
+<p>The depth cannot be negative, and it cannot exceed <span
+class="math inline">600</span> m. Thus, the domain is <span
+class="math inline">0\leq x\leq600</span>. Differentiating and setting
+the derivative equal to zero gives</p>
+<p><span class="math display">
+A&#39;(x)=1200-4x=0
+</span></p>
+<p>Hence, the only critical number is <span
+class="math inline">x=300</span>. We compare the area at the critical
+number and at the endpoints.</p>
+<p><span class="math display">
+A(0)=0 \qquad A(300)=180000 \qquad A(600)=0
+</span></p>
+<p>The maximum area is <span class="math inline">180000\text{
+m}^2</span>, attained when <span class="math inline">x=300</span> m. The
+corresponding width is <span
+class="math inline">y=1200-2(300)=600</span> m.</p>
+<p>Therefore, the field should be <strong>300 m deep and 600 m
+wide</strong>.</p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="green" id="example-2">Example 2</h2>
+<p>A cylindrical can is to be made to hold 1 L of oil. Find the
+dimensions that will minimize the cost of the metal to manufacture the
+can.</p>
+<div style="text-align: center;">
+<p><img src="../images/1403.png" style="width: 387 px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 3.</strong> A cylinder with radius <span
+class="math inline">r</span> and height <span
+class="math inline">h</span>.</span></p>
+</div>
+<div style="text-align: center;">
+<p><img src="../images/1404.png" style="width: 704 px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 4.</strong> The cylindrical can’s surface
+separated into two circular ends and a rectangular side.</span></p>
+</div>
+<div style="text-align: center;">
+<p><img src="../images/1405.png" style="width: 546 px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 5.</strong> The graph of the surface-area
+function, showing its minimum.</span></p>
+</div>
+<h2 class="green" id="solution-1">Solution</h2>
+<p>We assume that the cost of the metal is proportional to the total
+surface area. Let <span class="math inline">r</span> and <span
+class="math inline">h</span> be the radius and height in centimeters.
+The surface area is</p>
+<p><span class="math display">
+A=2\pi r^2+2\pi rh
+</span></p>
+<p>Since <span class="math inline">1</span> L equals <span
+class="math inline">1000\text{ cm}^3</span>, the volume constraint
+is</p>
+<p><span class="math display">
+\pi r^2h=1000
+</span></p>
+<p>Solving for <span class="math inline">h</span> gives <span
+class="math inline">h=1000/(\pi r^2)</span>. Substituting into the
+surface-area formula gives</p>
+<p><span class="math display">
+A(r)=2\pi r^2+\frac{2000}{r}
+</span></p>
+<p>The domain is <span class="math inline">r&gt;0</span>.
+Differentiating gives</p>
+<p><span class="math display">
+A&#39;(r)=4\pi r-\frac{2000}{r^2}
+</span></p>
+<p>Setting <span class="math inline">A&#39;(r)=0</span> gives <span
+class="math inline">4\pi r^3=2000</span>, so <span
+class="math inline">r^3=500/\pi</span> and</p>
+<p><span class="math display">
+r=\sqrt[3]{\frac{500}{\pi}}
+</span></p>
+<p>For values of <span class="math inline">r</span> below this critical
+number, <span class="math inline">A&#39;(r)&lt;0</span>; for values
+above it, <span class="math inline">A&#39;(r)&gt;0</span>. Therefore,
+the surface area decreases before the critical number and increases
+afterward, giving an absolute minimum. Substituting the critical radius
+into the volume constraint gives</p>
+<p><span class="math display">
+h=\frac{1000}{\pi r^2}=2r
+</span></p>
+<p>Thus, the can uses the least metal when its <strong>height equals its
+diameter</strong>, with <span
+class="math inline">r=\sqrt[3]{500/\pi}</span> cm and <span
+class="math inline">h=2\sqrt[3]{500/\pi}</span> cm.</p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="blue"
+id="definition-first-derivative-test-for-absolute-extreme-values">Definition:
+First Derivative Test for Absolute Extreme Values</h2>
+<p>Suppose <span class="math inline">c</span> is a critical number of a
+continuous function <span class="math inline">f</span> defined on an
+interval.</p>
+<ul>
+<li>If <span class="math inline">f&#39;(x)&gt;0</span> for all <span
+class="math inline">x&lt;c</span> and <span
+class="math inline">f&#39;(x)&lt;0</span> for all <span
+class="math inline">x&gt;c</span>, then <span
+class="math inline">f(c)</span> is the absolute maximum value of <span
+class="math inline">f</span>.</li>
+<li>If <span class="math inline">f&#39;(x)&lt;0</span> for all <span
+class="math inline">x&lt;c</span> and <span
+class="math inline">f&#39;(x)&gt;0</span> for all <span
+class="math inline">x&gt;c</span>, then <span
+class="math inline">f(c)</span> is the absolute minimum value of <span
+class="math inline">f</span>.</li>
+</ul>
+<div class="definition-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="green" id="example-3">Example 3</h2>
+<p>Find the point on the parabola <span
+class="math inline">y^2=2x</span> that is closest to the point <span
+class="math inline">(1,4)</span>.</p>
+<div style="text-align: center;">
+<p><img src="../images/1406.png" style="width: 573 px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 6.</strong> The parabola <span
+class="math inline">y^2=2x</span>, the fixed point <span
+class="math inline">(1,4)</span>, and a general point <span
+class="math inline">(x,y)</span> on the parabola.</span></p>
+</div>
+<h2 class="green" id="solution-2">Solution</h2>
+<p>Let <span class="math inline">(x,y)</span> be a point on the
+parabola. Its distance from <span class="math inline">(1,4)</span>
+is</p>
+<p><span class="math display">
+d=\sqrt{(x-1)^2+(y-4)^2}
+</span></p>
+<p>Since <span class="math inline">y^2=2x</span>, we have <span
+class="math inline">x=y^2/2</span>. It is easier to minimize the square
+of the distance because the square-root function is increasing.
+Define</p>
+<p><span class="math display">
+F(y)=d^2=\left(\frac{y^2}{2}-1\right)^2+(y-4)^2
+</span></p>
+<p>Differentiating and simplifying gives</p>
+<p><span class="math display">
+F&#39;(y)=y^3-8
+</span></p>
+<p>Setting <span class="math inline">F&#39;(y)=0</span> gives <span
+class="math inline">y^3=8</span>, so <span
+class="math inline">y=2</span>. The derivative is negative when <span
+class="math inline">y&lt;2</span> and positive when <span
+class="math inline">y&gt;2</span>, so <span class="math inline">F</span>
+has an absolute minimum at <span class="math inline">y=2</span>. The
+corresponding <span class="math inline">x</span>-coordinate is <span
+class="math inline">x=y^2/2=2</span>. Therefore, the closest point is
+<span class="math inline">(2,2)</span>. The distance is <span
+class="math inline">\sqrt{(2-1)^2+(2-4)^2}=\sqrt5</span>.</p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="green" id="example-4">Example 4</h2>
+<p>A woman launches her boat from point A on a bank of a straight river,
+3 km wide, and wants to reach point B, 8 km downstream on the opposite
+bank, as quickly as possible. She could row her boat directly across the
+river to point C and then run to B, or she could row directly to B, or
+she could row to some point D between C and B and then run to B. If she
+can row 6 km/h and run 8 km/h, where should she land to reach B as soon
+as possible? Assume that the speed of the water is negligible compared
+with the speed at which she rows.</p>
+<div style="text-align: center;">
+<p><img src="../images/1407.png" style="width: 415 px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 7.</strong> A river 3 km wide showing the
+starting point A, the point C directly across the river, the destination
+B 8 km downstream, and a possible landing point D.</span></p>
+</div>
+<div style="text-align: center;">
+<p><img src="../images/1408.png" style="width: 637 px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 8.</strong> The graph of total travel time <span
+class="math inline">T(x)</span> over the interval <span
+class="math inline">[0,8]</span>.</span></p>
+</div>
+<h2 class="green" id="solution-3">Solution</h2>
+<p>Let <span class="math inline">x</span> be the distance from <span
+class="math inline">C</span> to <span class="math inline">D</span>,
+measured downstream. The running distance is <span
+class="math inline">8-x</span> km. By the Pythagorean Theorem, the
+rowing distance is <span class="math inline">\sqrt{x^2+9}</span> km.
+Since time equals distance divided by speed, the total travel time
+is</p>
+<p><span class="math display">
+T(x)=\frac{\sqrt{x^2+9}}{6}+\frac{8-x}{8}
+</span></p>
+<p>The domain is <span class="math inline">0\leq x\leq8</span>.
+Differentiating gives</p>
+<p><span class="math display">
+T&#39;(x)=\frac{x}{6\sqrt{x^2+9}}-\frac18
+</span></p>
+<p>Setting <span class="math inline">T&#39;(x)=0</span> and solving
+gives</p>
+<p><span class="math display">
+\frac{x}{6\sqrt{x^2+9}}=\frac18
+</span></p>
+<p><span class="math display">
+4x=3\sqrt{x^2+9}
+</span></p>
+<p><span class="math display">
+16x^2=9x^2+81
+</span></p>
+<p><span class="math display">
+x=\frac{9}{\sqrt7}
+</span></p>
+<p>To find the absolute minimum, compare the critical value with the
+endpoint values.</p>
+<p><span class="math display">
+T(0)=1.5 \qquad T\left(\frac{9}{\sqrt7}\right)\approx1.33 \qquad
+T(8)\approx1.42
+</span></p>
+<p>The smallest time occurs at <span
+class="math inline">x=9/\sqrt7\approx3.4</span> km.</p>
+<p>Therefore, she should land approximately <strong>3.4 km downstream
+from point C</strong> and run the remaining distance to B.</p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="green" id="example-5">Example 5</h2>
+<p>Find the area of the largest rectangle that can be inscribed in a
+semicircle of radius <span class="math inline">r</span>.</p>
+<div style="text-align: center;">
+<p><img src="../images/1409.png" style="width: 652 px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 9.</strong> A rectangle inscribed in the upper
+semicircle of radius <span class="math inline">r</span>, with
+upper-right vertex <span class="math inline">(x,y)</span>.</span></p>
+</div>
+<div style="text-align: center;">
+<p><img src="../images/1410.png" style="width: 665 px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 10.</strong> The radius of the semicircle and
+the angle <span class="math inline">\theta</span> used to express the
+rectangle’s dimensions.</span></p>
+</div>
+<h2 class="green" id="solution-4">Solution</h2>
+<p><strong>Solution 1</strong></p>
+<p>Take the semicircle to be the upper half of <span
+class="math inline">x^2+y^2=r^2</span>. If <span
+class="math inline">(x,y)</span> is the upper-right vertex of the
+rectangle, its width is <span class="math inline">2x</span> and its
+height is <span class="math inline">y</span>. Thus, its area is <span
+class="math inline">A=2xy</span>. Since <span
+class="math inline">x^2+y^2=r^2</span>, we have <span
+class="math inline">y=\sqrt{r^2-x^2}</span>. Therefore,</p>
+<p><span class="math display">
+A(x)=2x\sqrt{r^2-x^2}
+</span></p>
+<p>The domain is <span class="math inline">0\leq x\leq r</span>.
+Differentiating gives</p>
+<p><span class="math display">
+A&#39;(x)=\frac{2(r^2-2x^2)}{\sqrt{r^2-x^2}}
+</span></p>
+<p>The interior critical number satisfies <span
+class="math inline">r^2-2x^2=0</span>, so <span
+class="math inline">x=r/\sqrt2</span>. The area is zero at both
+endpoints, so this critical number gives the maximum. Substituting <span
+class="math inline">x=r/\sqrt2</span> and <span
+class="math inline">y=r/\sqrt2</span> gives</p>
+<p><span class="math display">
+A_{\max}=2\left(\frac{r}{\sqrt2}\right)\left(\frac{r}{\sqrt2}\right)=r^2
+</span></p>
+<p><strong>Solution 2</strong></p>
+<p>Let <span class="math inline">\theta</span> be the angle shown in
+Figure 10. The rectangle has width <span
+class="math inline">2r\cos\theta</span> and height <span
+class="math inline">r\sin\theta</span>. Therefore,</p>
+<p><span class="math display">
+A(\theta)=(2r\cos\theta)(r\sin\theta)=r^2\sin(2\theta)
+</span></p>
+<p>The maximum value of <span class="math inline">\sin(2\theta)</span>
+is <span class="math inline">1</span>, attained when <span
+class="math inline">2\theta=\pi/2</span>. Hence <span
+class="math inline">\theta=\pi/4</span> and the maximum area is <span
+class="math inline">r^2</span>.</p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="quick-check">Quick Check</h1>
+<h2 class="red" id="question-1">Question 1</h2>
+<p>A rectangle borders a river and requires fencing on only three sides.
+If <span class="math inline">2x+y=100</span>, write its area as a
+function of <span class="math inline">x</span>.</p>
+<h2 class="red" id="answer">Answer</h2>
+<p>The area is <span class="math inline">A=xy</span>. Since <span
+class="math inline">y=100-2x</span>, the objective function is</p>
+<p><span class="math display">
+A(x)=x(100-2x)=100x-2x^2
+</span></p>
+<h2 class="red" id="question-2">Question 2</h2>
+<p>Why is it useful to minimize the square of a distance rather than the
+distance itself?</p>
+<h2 class="red" id="answer-1">Answer</h2>
+<p>For nonnegative distances, squaring preserves their order. Therefore,
+the distance and its square attain their minimum at the same point, but
+the squared distance often avoids a square root and is easier to
+differentiate.</p>
+<div class="question-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="applications-to-business-and-economics">Applications to Business
+and Economics</h1>
+<h2 id="cost-demand-revenue-and-profit">Cost, Demand, Revenue, and
+Profit</h2>
+<ul>
+<li>If <span class="math inline">C(x)</span> is the cost of producing
+<span class="math inline">x</span> units of a product, then the marginal
+cost is <span class="math inline">C&#39;(x)</span>, which describes the
+rate at which cost changes with production.</li>
+<li>If <span class="math inline">p(x)</span> is the price per unit at
+which a company can sell <span class="math inline">x</span> units, then
+<span class="math inline">p(x)</span> is the demand or price function.
+In many models, the price decreases as the number of units sold
+increases.</li>
+<li>Revenue is the quantity sold multiplied by the price per unit.
+Therefore,</li>
+</ul>
+<p><span class="math display">
+R(x)=xp(x)
+</span></p>
+<ul>
+<li>The marginal revenue is <span class="math inline">R&#39;(x)</span>,
+which describes the rate of change of revenue with respect to the number
+of units sold.</li>
+<li>Profit is revenue minus cost. Thus,</li>
+</ul>
+<p><span class="math display">
+P(x)=R(x)-C(x)
+</span></p>
+<ul>
+<li>The marginal profit is <span class="math inline">P&#39;(x)</span>.
+Critical numbers of revenue or profit functions can identify candidate
+sales levels for maximum revenue or profit, provided that the relevant
+domain and endpoint behavior are also considered.</li>
+</ul>
+<h2 class="green" id="example-6">Example 6</h2>
+<p>A store has been selling 200 TV monitors a week at $350 each. A
+market survey indicates that for each $10 rebate offered to buyers, the
+number of monitors sold will increase by 20 a week. Find the demand
+function and the revenue function. How large a rebate should the store
+offer to maximize revenue?</p>
+<h2 class="green" id="solution-5">Solution</h2>
+<p>Let <span class="math inline">x</span> be the number of monitors sold
+per week. The price is $350 when <span class="math inline">x=200</span>.
+For every increase of 20 monitors sold, the price decreases by <span
+class="math inline">10</span>, so the price decreases by <span
+class="math inline">10/20=0.50</span> dollars per additional monitor. A
+linear demand function therefore has slope <span
+class="math inline">-0.5</span>. Using the point <span
+class="math inline">(200,350)</span> gives</p>
+<p><span class="math display">
+p(x)=350-0.5(x-200)=450-0.5x
+</span></p>
+<p>Revenue is quantity multiplied by price, so</p>
+<p><span class="math display">
+R(x)=xp(x)=450x-0.5x^2
+</span></p>
+<p>Differentiating gives</p>
+<p><span class="math display">
+R&#39;(x)=450-x
+</span></p>
+<p>Setting the derivative equal to zero gives <span
+class="math inline">x=450</span>. Since the revenue function is a
+downward-opening quadratic, this critical number gives the maximum
+revenue in the model. The price at this sales level is</p>
+<p><span class="math display">
+p(450)=450-0.5(450)=225
+</span></p>
+<p>The store currently charges $350, so the required rebate is
+$350-$225=$125.</p>
+<p>Therefore, the store should offer a <strong>$125 rebate</strong> to
+maximize revenue under the given model.</p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="quick-check-1">Quick Check</h1>
+<h2 class="red" id="question-1-1">Question 1</h2>
+<p>A company sells <span class="math inline">x</span> units at a price
+of <span class="math inline">p(x)=80-2x</span> dollars per unit. Write
+its revenue function.</p>
+<h2 class="red" id="answer-2">Answer</h2>
+<p>Revenue equals quantity multiplied by price.</p>
+<p><span class="math display">
+R(x)=xp(x)=80x-2x^2
+</span></p>
+<h2 class="red" id="question-2-1">Question 2</h2>
+<p>If <span class="math inline">R(x)</span> is revenue and <span
+class="math inline">C(x)</span> is cost, how is profit defined, and what
+does <span class="math inline">P&#39;(x)</span> represent?</p>
+<h2 class="red" id="answer-3">Answer</h2>
+<p>Profit is revenue minus cost, so <span
+class="math inline">P(x)=R(x)-C(x)</span>. Its derivative <span
+class="math inline">P&#39;(x)</span> is the marginal profit, or the rate
+of change of profit with respect to the number of units produced and
+sold.</p>
+<div class="question-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="green" id="scenario-problem">Scenario Problem</h2>
+<p>A mechatronics team is programming a small delivery robot to move
+equipment across a workshop. The robot can travel along a straight aisle
+at <span class="math inline">2</span> m/s and must then travel across a
+side corridor at <span class="math inline">1.5</span> m/s. The corridor
+is <span class="math inline">6</span> m across, and the destination is
+<span class="math inline">10</span> m down the aisle from the point
+directly opposite the robot’s starting position. The robot can travel
+diagonally across the corridor to a point <span
+class="math inline">x</span> metres down the aisle, then travel along
+the aisle to the destination. Determine the landing point that minimizes
+the total travel time.</p>
+<h2 class="green" id="solution-6">Solution</h2>
+<p>Let <span class="math inline">x</span> be the distance down the aisle
+to the point where the robot crosses the corridor. The corridor distance
+is <span class="math inline">\sqrt{x^2+36}</span> m, and the remaining
+aisle distance is <span class="math inline">10-x</span> m. The total
+travel time is</p>
+<p><span class="math display">
+T(x)=\frac{\sqrt{x^2+36}}{1.5}+\frac{10-x}{2}
+</span></p>
+<p>The feasible domain is <span class="math inline">0\leq
+x\leq10</span>. Differentiating gives</p>
+<p><span class="math display">
+T&#39;(x)=\frac{x}{1.5\sqrt{x^2+36}}-\frac12
+</span></p>
+<p>Setting <span class="math inline">T&#39;(x)=0</span> gives</p>
+<p><span class="math display">
+\frac{x}{1.5\sqrt{x^2+36}}=\frac12
+</span></p>
+<p><span class="math display">
+2x=1.5\sqrt{x^2+36}
+</span></p>
+<p>Squaring both sides gives <span
+class="math inline">4x^2=2.25x^2+81</span>, so <span
+class="math inline">1.75x^2=81</span>. Hence,</p>
+<p><span class="math display">
+x=\sqrt{\frac{324}{7}}\approx6.80
+</span></p>
+<p>The critical value lies in the feasible interval. Comparing the total
+time there with the endpoint values confirms that it gives the least
+time.</p>
+<p><span class="math display">
+T(0)=\frac{6}{1.5}+\frac{10}{2}=9\text{ s}
+</span></p>
+<p><span class="math display">
+T(10)=\frac{\sqrt{136}}{1.5}\approx7.77\text{ s}
+</span></p>
+<p><span class="math display">
+T(6.80)\approx\frac{\sqrt{82.24}}{1.5}+\frac{3.20}{2}\approx7.65\text{
+s}
+</span></p>
+<p>Therefore, the robot should cross the corridor at a point
+approximately <strong>6.80 m down the aisle</strong> from the point
+directly opposite its starting position. The minimum travel time is
+approximately <strong>7.65 seconds</strong> under this simplified
+model.</p>
+<h1 id="summary">Summary</h1>
+<ul>
+<li>Optimization problems ask us to maximize or minimize a measurable
+quantity subject to given constraints.</li>
+<li>A useful solution begins by understanding the problem, drawing a
+diagram when appropriate, introducing variables, and writing an
+objective function.</li>
+<li>Constraints help reduce an objective function with several variables
+to a function of one variable.</li>
+<li>Critical numbers are candidates for extrema, but the domain and
+endpoint values must also be considered when determining absolute
+extrema.</li>
+<li>The surface area of a closed cylindrical can with fixed volume is
+minimized when its height equals its diameter.</li>
+<li>For distance problems, minimizing the square of a distance often
+simplifies the calculation without changing the minimizing point.</li>
+<li>Travel-time optimization combines distance formulas with the
+relationship time = distance/rate.</li>
+<li>Demand functions describe price in relation to quantity sold, while
+revenue is quantity multiplied by price.</li>
+<li>Profit equals revenue minus cost, and derivatives of cost, revenue,
+and profit describe their marginal rates of change.</li>
+<li>The final mathematical result must be interpreted in the context of
+the original engineering or business problem.</li>
+</ul>
+<h1 id="exercises">Exercises</h1>
+<h2 id="exercises-set">Exercises Set</h2>
+<p>Solve the odd number exercises from exercise 1 to 88.</p>
+<ul>
+<li><p>Exercises help transform theoretical concepts into practical
+understanding.</p></li>
+<li><p>Mathematics is learned by doing and solving exercises will train
+you to analyze problems, select appropriate methods, and construct
+logical solutions.</p></li>
+<li><p>Attempting problems sometimes leads to mistakes which provide
+opportunities for learning and improvement.</p></li>
+<li><p>Regular practice increases speed, accuracy, and
+confidence.</p></li>
+<li><p>Exercises are given in the Exercises file and you are expected to
+solve them on your own.</p></li>
+</ul>
+</body>
+</html>
