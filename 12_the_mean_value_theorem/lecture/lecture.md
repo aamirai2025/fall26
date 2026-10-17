@@ -290,6 +290,14 @@ $$
 h(x)=f(x)-f(a)-\frac{f(b)-f(a)}{b-a}(x-a)
 $$
 
+
+<div style="text-align: center;">
+<img src="../images/1205.png" style="width: 671 px; display: block; margin: 0 auto 10px auto;">
+
+<span><strong>Figure 4.</strong> The difference between heights of secant line and $f(x)$.</span>
+</div>
+
+
 Because $f$ is continuous on $[a,b]$ and the other terms form a linear function, $h$ is continuous on $[a,b]$. Similarly, because $f$ is differentiable on $(a,b)$, $h$ is differentiable on $(a,b)$.
 
 At $x=a$,
