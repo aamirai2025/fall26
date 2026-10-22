@@ -274,6 +274,34 @@ Hence, the area under $y=x^2$ from $0$ to $1$ is $\frac13$ square unit.
 
 <div class="example-end">$\blacksquare$</div>
 
+* A Python program to compute the area under the curve is given below.
+
+```python
+import numpy as np
+
+def f(x):
+    return x**2
+
+a = float(input("Enter the start of domain: "))
+b = float(input("Enter the domain end: "))
+n = int(input("Enter the number of rectangles: "))
+
+dx = (b - a)/n
+
+width = np.linspace(a, b, n+1)
+
+rsum = 0
+lsum = 0
+
+print("S. No.     R_Sum           L_Sum")
+print("=======    ============    ============")
+
+for counter in range(len(width)-1):
+    rsum += f(width[counter + 1])*dx
+    lsum += f(width[counter])*dx
+    print(f"{counter + 1:<11d}{rsum:<16.4g}{lsum:<16.4g}")
+```
+
 ## Estimating Area for Other Functions
 
 * The same process can be used for functions other than $x^2$. For example, the area under $f(x)=e^{-x}$ from $x=0$ to $x=2$ can be approximated using right endpoints or midpoints.
@@ -301,6 +329,34 @@ $$
 
 <span><strong>Figure 13.</strong> A more detailed rectangular approximation to the area under $y=e^{-x}$.</span>
 </div>
+
+* A Python program to determine the area under the curve of $e^{-x}$ in $[0,2]$ is shown below.
+
+```python
+import numpy as np
+
+def f(x):
+    return np.exp(-x)
+
+a = float(input("Enter the start of domain: "))
+b = float(input("Enter the domain end: "))
+n = int(input("Enter the number of rectangles: "))
+
+dx = (b - a)/n
+
+width = np.linspace(a, b, n+1)
+
+rsum = 0
+lsum = 0
+
+print("S. No.     R_Sum           L_Sum")
+print("=======    ============    ============")
+
+for counter in range(len(width)-1):
+    rsum += f(width[counter + 1])*dx
+    lsum += f(width[counter])*dx
+    print(f"{counter + 1:<11d}{rsum:<16.4g}{lsum:<16.4g}")
+```
 
 # Quick Check
 
