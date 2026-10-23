@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>lecture</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="../styles/style.css" />
+  <script defer="" src="../katex/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <link rel="stylesheet" href="../katex/dist/katex.min.css" />
+</head>
+<body>
+<h1 id="calculus-and-analytical-geometry">Calculus and Analytical
+Geometry</h1>
+<h2 id="the-fundamental-theorem-of-calculus">The Fundamental Theorem of
+Calculus</h2>
+<h3 id="dr.-aamir-alaud-din">Dr. Aamir Alaud Din</h3>
+<h1 id="objectives">Objectives</h1>
+<p>After preparing this topic, you should be able to:</p>
+<ol type="1">
+<li>Explain the first part of the Fundamental Theorem of Calculus and
+use it to differentiate functions defined by definite integrals with
+variable upper limits.</li>
+<li>Apply the second part of the Fundamental Theorem of Calculus to
+evaluate definite integrals using antiderivatives.</li>
+<li>Explain how differentiation and integration act as inverse processes
+and use this relationship to solve mathematical and engineering
+problems.</li>
+</ol>
+<h1 id="the-why-section">The Why Section</h1>
+<ul>
+<li><p>In mechanical engineering, sensors often record a changing
+quantity such as velocity, force, or temperature. Engineers may need to
+determine the accumulated effect of that quantity over a time interval
+and also understand how the accumulated quantity changes at a particular
+instant.</p></li>
+<li><p>For example, the distance travelled by a moving mechanism can be
+obtained by accumulating its velocity over time. Conversely, if the
+position of the mechanism is known as a function of time,
+differentiation gives its instantaneous velocity.</p></li>
+<li><p>Definite integrals provide a way to calculate accumulated
+quantities, while derivatives describe instantaneous rates of change.
+However, evaluating an integral directly from its definition can require
+a large number of calculations.</p></li>
+<li><p>The Fundamental Theorem of Calculus establishes a connection
+between these two operations. Its first part explains how
+differentiating an accumulation function recovers the original
+continuous function. Its second part provides a practical method for
+evaluating definite integrals using an antiderivative.</p></li>
+<li><p>This relationship is also useful in mechatronics and computer
+science. A controller may use sensor measurements of velocity to
+estimate a robot’s displacement, while a known position function can be
+differentiated to estimate its velocity. The same mathematical
+relationship appears in signal processing, simulation, and numerical
+modelling.</p></li>
+<li><p>Therefore, studying this topic gives us a systematic way to move
+between rates of change and accumulated quantities and allows many
+definite integrals to be evaluated without constructing Riemann
+sums.</p></li>
+</ul>
+<h1
+id="objective-1-the-fundamental-theorem-of-calculus-part-1">Objective 1:
+The Fundamental Theorem of Calculus, Part 1</h1>
+<h2 id="an-accumulation-function">An Accumulation Function</h2>
+<ul>
+<li>Let <span class="math inline">f</span> be a continuous function on
+the interval <span class="math inline">[a,b]</span>. We define a new
+function by integrating <span class="math inline">f</span> from a fixed
+lower limit <span class="math inline">a</span> to a variable upper limit
+<span class="math inline">x</span>.</li>
+</ul>
+<p><span class="math display">
+g(x)=\int_a^x f(t)\,dt \qquad a\leq x\leq b
+</span></p>
+<ul>
+<li><p>The variable <span class="math inline">t</span> is the variable
+of integration. It is a dummy variable, so it can be replaced by another
+symbol without changing the integral.</p></li>
+<li><p>The value of <span class="math inline">g(x)</span> represents the
+accumulated signed area under the graph of <span
+class="math inline">f</span> from <span class="math inline">a</span> to
+<span class="math inline">x</span>. Areas above the horizontal axis
+contribute positively, while areas below the axis contribute
+negatively.</p></li>
+<li><p>As <span class="math inline">x</span> changes, the amount
+accumulated also changes. If <span class="math inline">f</span> is
+positive, increasing the upper limit adds positive area; if <span
+class="math inline">f</span> is negative, increasing the upper limit
+adds negative signed area.</p></li>
+</ul>
+<div style="text-align: center;">
+<p><img src="../images/1701.png" style="width: 728 px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 1.</strong> The area under the graph of <span
+class="math inline">y=f(t)</span> from the fixed lower limit <span
+class="math inline">a</span> to the variable upper limit <span
+class="math inline">x</span>.</span></p>
+</div>
+<h2 id="the-fundamental-theorem-of-calculus-part-1">The Fundamental
+Theorem of Calculus, Part 1</h2>
+<h2 class="orange" id="theorem">Theorem</h2>
+<p>If <span class="math inline">f</span> is continuous on <span
+class="math inline">[a,b]</span> and</p>
+<p><span class="math display">
+g(x)=\int_a^x f(t)\,dt
+</span></p>
+<p>then <span class="math inline">g</span> is continuous on <span
+class="math inline">[a,b]</span>, differentiable on <span
+class="math inline">(a,b)</span>, and</p>
+<p><span class="math display">
+g&#39;(x)=f(x)
+</span></p>
+<div class="theorem-end">
+<p><span class="math inline">\blacksquare</span></p>
+</div>
+<ul>
+<li><p>The theorem says that if we define a function by accumulating the
+values of a continuous function through integration, then
+differentiating that accumulation function gives us the original
+function.</p></li>
+<li><p>In Leibniz notation, the result can be written as</p></li>
+</ul>
+<p><span class="math display">
+\frac{d}{dx}\int_a^x f(t)\,dt=f(x)
+</span></p>
+<ul>
+<li><p>This result is particularly useful because the integral may
+define a function even when the integral cannot be expressed
+conveniently using elementary functions.</p></li>
+<li><p>For example, if <span class="math inline">g(x)=\int_0^x
+\sqrt{1+t^2}\,dt</span>, the Fundamental Theorem allows us to find <span
+class="math inline">g&#39;(x)</span> directly without first evaluating
+the integral.</p></li>
+</ul>
+<h2 id="understanding-the-result">Understanding the Result</h2>
+<ul>
+<li>Suppose <span class="math inline">g(x)=\int_a^x f(t)\,dt</span>. The
+difference <span class="math inline">g(x+h)-g(x)</span> is the signed
+area accumulated between <span class="math inline">x</span> and <span
+class="math inline">x+h</span>.</li>
+</ul>
+<p><span class="math display">
+g(x+h)-g(x)=\int_x^{x+h} f(t)\,dt
+</span></p>
+<ul>
+<li>Dividing by <span class="math inline">h</span> gives the average
+value of <span class="math inline">f</span> over the short interval,
+with the orientation of the interval taken into account.</li>
+</ul>
+<p><span class="math display">
+\frac{g(x+h)-g(x)}{h}
+=\frac{1}{h}\int_x^{x+h} f(t)\,dt
+</span></p>
+<ul>
+<li><p>When <span class="math inline">h</span> is close to zero and
+<span class="math inline">f</span> is continuous, the values of <span
+class="math inline">f</span> on this short interval are close to <span
+class="math inline">f(x)</span>. Thus the average value approaches <span
+class="math inline">f(x)</span> as <span class="math inline">h</span>
+approaches zero.</p></li>
+<li><p>The left-hand side approaches the derivative <span
+class="math inline">g&#39;(x)</span>. Therefore, <span
+class="math inline">g&#39;(x)=f(x)</span>, which is the central
+conclusion of Part 1.</p></li>
+</ul>
+<h2 class="green" id="example-1">Example 1</h2>
+<p>If <span class="math inline">f</span> is the function whose graph is
+shown in Figure 2 and <span class="math inline">g(x)=\int_0^x
+f(t)\,dt</span>, find the values of <span
+class="math inline">g(0)</span>, <span class="math inline">g(1)</span>,
+<span class="math inline">g(2)</span>, <span
+class="math inline">g(3)</span>, <span class="math inline">g(4)</span>,
+and <span class="math inline">g(5)</span>. Then sketch a rough graph of
+<span class="math inline">g</span>.</p>
+<div style="text-align: center;">
+<p><img src="../images/1702.png" style="width: 616 px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 2.</strong> The graph of <span
+class="math inline">y=f(t)</span> used to determine accumulated signed
+areas.</span></p>
+</div>
+<h2 class="green" id="solution">Solution</h2>
+<ul>
+<li>Since the upper and lower limits are equal, the integral is
+zero.</li>
+</ul>
+<p><span class="math display">
+g(0)=\int_0^0 f(t)\,dt=0
+</span></p>
+<ul>
+<li>From Figure 3, the area from <span class="math inline">0</span> to
+<span class="math inline">1</span> is a triangle with base <span
+class="math inline">1</span> and height <span
+class="math inline">2</span>. Therefore,</li>
+</ul>
+<p><span class="math display">
+g(1)=\int_0^1 f(t)\,dt=\frac12(1)(2)=1
+</span></p>
+<ul>
+<li>From <span class="math inline">1</span> to <span
+class="math inline">2</span>, the graph forms a rectangle with width
+<span class="math inline">1</span> and height <span
+class="math inline">2</span>. Adding this area to the previous
+accumulated area gives</li>
+</ul>
+<p><span class="math display">
+g(2)=g(1)+\int_1^2 f(t)\,dt=1+(1)(2)=3
+</span></p>
+<ul>
+<li>From <span class="math inline">2</span> to <span
+class="math inline">3</span>, we add the area under the curved portion
+of the graph. From the figure, this area is approximately <span
+class="math inline">1.3</span>.</li>
+</ul>
+<p><span class="math display">
+g(3)=g(2)+\int_2^3 f(t)\,dt\approx3+1.3=4.3
+</span></p>
+<ul>
+<li>For <span class="math inline">t&gt;3</span>, the graph lies below
+the horizontal axis. The signed area must therefore be subtracted. The
+area from <span class="math inline">3</span> to <span
+class="math inline">4</span> is approximately <span
+class="math inline">1.3</span>.</li>
+</ul>
+<p><span class="math display">
+g(4)=g(3)+\int_3^4 f(t)\,dt\approx4.3-1.3=3.0
+</span></p>
+<ul>
+<li>The area below the axis from <span class="math inline">4</span> to
+<span class="math inline">5</span> is approximately <span
+class="math inline">1.3</span>, so</li>
+</ul>
+<p><span class="math display">
+g(5)=g(4)+\int_4^5 f(t)\,dt\approx3.0-1.3=1.7
+</span></p>
+<ul>
+<li>The accumulated function increases while <span
+class="math inline">f</span> is positive and decreases while <span
+class="math inline">f</span> is negative. Its maximum occurs near the
+point where <span class="math inline">f</span> changes from positive to
+negative.</li>
+</ul>
+<div style="text-align: center;">
+<p><img src="../images/1703a.png" style="width: 1200 px; display: block; margin: 0 auto 10px auto;">
+<img src="../images/1703b.png" style="width: 1200 px; display: block; margin: 0 auto 10px auto;">
+<span><strong>Figure 3.</strong> Accumulated areas used to estimate
+<span class="math inline">g(1)</span> through <span
+class="math inline">g(5)</span>.</span></p>
+</div>
+<div style="text-align: center;">
+<p><img src="../images/1704.png" style="width: 632 px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 4.</strong> A rough graph of the accumulation
+function <span class="math inline">g(x)=\int_0^x
+f(t)\,dt</span>.</span></p>
+</div>
+<div class="example-end">
+<p><span class="math inline">\blacksquare</span></p>
+</div>
+<h2 class="green" id="example-2">Example 2</h2>
+<p>Find the derivative of the function</p>
+<p><span class="math display">
+g(x)=\int_0^x \sqrt{1+t^2}\,dt
+</span></p>
+<h2 class="green" id="solution-1">Solution</h2>
+<ul>
+<li>The integrand <span class="math inline">f(t)=\sqrt{1+t^2}</span> is
+continuous for all real <span class="math inline">t</span>. By Part 1 of
+the Fundamental Theorem of Calculus, we differentiate the accumulation
+function by evaluating the integrand at the upper limit.</li>
+</ul>
+<p><span class="math display">
+g&#39;(x)=\sqrt{1+x^2}
+</span></p>
+<div class="example-end">
+<p><span class="math inline">\blacksquare</span></p>
+</div>
+<h2 class="green" id="example-3">Example 3</h2>
+<p>The Fresnel function is defined by</p>
+<p><span class="math display">
+S(x)=\int_0^x \sin\left(\frac{\pi t^2}{2}\right)\,dt
+</span></p>
+<p>Find <span class="math inline">S&#39;(x)</span>.</p>
+<h2 class="green" id="solution-2">Solution</h2>
+<ul>
+<li>The integrand is continuous, so Part 1 of the Fundamental Theorem
+applies directly.</li>
+</ul>
+<p><span class="math display">
+S&#39;(x)=\sin\left(\frac{\pi x^2}{2}\right)
+</span></p>
+<ul>
+<li>The integral defines a function whose derivative can be found even
+though the integral does not generally have an elementary
+antiderivative.</li>
+</ul>
+<div style="text-align: center;">
+<p><img src="../images/1705.png" style="width: 642 px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 5.</strong> Graphs of the integrand <span
+class="math inline">f(x)=\sin(\pi x^2/2)</span> and its accumulation
+function <span class="math inline">S(x)</span>.</span></p>
+</div>
+<div style="text-align: center;">
+<p><img src="../images/1706.png" style="width: 655 px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 6.</strong> The Fresnel function <span
+class="math inline">S(x)=\int_0^x\sin(\pi t^2/2)\,dt</span>.</span></p>
+</div>
+<div class="example-end">
+<p><span class="math inline">\blacksquare</span></p>
+</div>
+<h2 id="when-the-upper-limit-is-a-function">When the Upper Limit Is a
+Function</h2>
+<ul>
+<li><p>Sometimes the upper limit is not simply <span
+class="math inline">x</span> but a differentiable function of <span
+class="math inline">x</span>. In that case, the Chain Rule must be used
+along with Part 1.</p></li>
+<li><p>If</p></li>
+</ul>
+<p><span class="math display">
+G(x)=\int_a^{u(x)} f(t)\,dt
+</span></p>
+<p>then</p>
+<p><span class="math display">
+G&#39;(x)=f(u(x))u&#39;(x)
+</span></p>
+<h2 class="green" id="example-4">Example 4</h2>
+<p>Find</p>
+<p><span class="math display">
+\frac{d}{dx}\int_1^{x^4}\sec t\,dt
+</span></p>
+<h2 class="green" id="solution-3">Solution</h2>
+<ul>
+<li>Let <span class="math inline">u=x^4</span>. By the Chain Rule and
+Part 1 of the Fundamental Theorem,</li>
+</ul>
+<p><span class="math display">
+\begin{aligned}
+\frac{d}{dx}\int_1^{x^4}\sec t\,dt
+&amp;=\sec(x^4)\frac{d}{dx}(x^4)\\
+&amp;=4x^3\sec(x^4)
+\end{aligned}
+</span></p>
+<div class="example-end">
+<p><span class="math inline">\blacksquare</span></p>
+</div>
+<h1 id="quick-check">Quick Check</h1>
+<h2 class="red" id="question-1">Question 1</h2>
+<p>If <span class="math inline">G(x)=\int_2^x (t^3+1)\,dt</span>, find
+<span class="math inline">G&#39;(x)</span>.</p>
+<h2 class="red" id="answer">Answer</h2>
+<p>By Part 1 of the Fundamental Theorem of Calculus,</p>
+<p><span class="math display">
+G&#39;(x)=x^3+1
+</span></p>
+<h2 class="red" id="question-2">Question 2</h2>
+<p>If <span class="math inline">H(x)=\int_0^{3x}\cos t\,dt</span>, find
+<span class="math inline">H&#39;(x)</span>.</p>
+<h2 class="red" id="answer-1">Answer</h2>
+<p>Using the Chain Rule,</p>
+<p><span class="math display">
+H&#39;(x)=3\cos(3x)
+</span></p>
+<div class="question-end">
+<p><span class="math inline">\blacksquare</span></p>
+</div>
+<h1
+id="objective-2-the-fundamental-theorem-of-calculus-part-2">Objective 2:
+The Fundamental Theorem of Calculus, Part 2</h1>
+<h2 id="evaluating-definite-integrals-with-antiderivatives">Evaluating
+Definite Integrals with Antiderivatives</h2>
+<ul>
+<li><p>The first part of the Fundamental Theorem connects an
+accumulation function with its derivative. The second part gives a
+practical method for evaluating definite integrals.</p></li>
+<li><p>Suppose <span class="math inline">f</span> is continuous on <span
+class="math inline">[a,b]</span> and <span class="math inline">F</span>
+is any antiderivative of <span class="math inline">f</span>, meaning
+that <span class="math inline">F&#39;(x)=f(x)</span>. Then the definite
+integral is the difference between the values of <span
+class="math inline">F</span> at the endpoints.</p></li>
+</ul>
+<h2 class="orange" id="theorem-1">Theorem</h2>
+<p>If <span class="math inline">f</span> is continuous on <span
+class="math inline">[a,b]</span> and <span
+class="math inline">F&#39;(x)=f(x)</span> on the interval, then</p>
+<p><span class="math display">
+\int_a^b f(x)\,dx=F(b)-F(a)
+</span></p>
+<div class="theorem-end">
+<p><span class="math inline">\blacksquare</span></p>
+</div>
+<ul>
+<li><p>The expression <span class="math inline">F(b)-F(a)</span> is
+sometimes written as <span class="math inline">[F(x)]_a^b</span>. To
+evaluate a definite integral, we find an antiderivative, substitute the
+upper endpoint, subtract the value at the lower endpoint, and
+simplify.</p></li>
+<li><p>This method avoids calculating the limit of Riemann sums for each
+integral. Any antiderivative may be used because the constant of
+integration cancels when the endpoint values are subtracted.</p></li>
+</ul>
+<h2 class="green" id="example-5">Example 5</h2>
+<p>Evaluate the integral</p>
+<p><span class="math display">
+\int_1^3 e^x\,dx
+</span></p>
+<h2 class="green" id="solution-4">Solution</h2>
+<ul>
+<li>An antiderivative of <span class="math inline">e^x</span> is <span
+class="math inline">F(x)=e^x</span>. Applying Part 2 gives</li>
+</ul>
+<p><span class="math display">
+\begin{aligned}
+\int_1^3 e^x\,dx
+&amp;=F(3)-F(1)\\
+&amp;=e^3-e
+\end{aligned}
+</span></p>
+<div class="example-end">
+<p><span class="math inline">\blacksquare</span></p>
+</div>
+<h2 id="interpreting-the-definite-integral">Interpreting the Definite
+Integral</h2>
+<ul>
+<li><p>The definite integral represents signed accumulation over an
+interval. If the graph is above the horizontal axis, the corresponding
+contribution is positive; if it is below the axis, the contribution is
+negative.</p></li>
+<li><p>In a motion problem, if <span class="math inline">v(t)</span> is
+velocity and <span class="math inline">s&#39;(t)=v(t)</span>,
+then</p></li>
+</ul>
+<p><span class="math display">
+\int_a^b v(t)\,dt=s(b)-s(a)
+</span></p>
+<ul>
+<li>Thus the integral of velocity gives displacement, not necessarily
+total distance travelled. When velocity changes sign, the displacement
+accounts for direction, whereas total distance requires accumulating the
+absolute value of velocity.</li>
+</ul>
+<h1 id="quick-check-1">Quick Check</h1>
+<h2 class="red" id="question-1-1">Question 1</h2>
+<p>Evaluate <span class="math inline">\int_0^2 3x^2\,dx</span> using an
+antiderivative.</p>
+<h2 class="red" id="answer-2">Answer</h2>
+<ul>
+<li>An antiderivative of <span class="math inline">3x^2</span> is <span
+class="math inline">F(x)=x^3</span>. Therefore,</li>
+</ul>
+<p><span class="math display">
+\int_0^2 3x^2\,dx=2^3-0^3=8
+</span></p>
+<h2 class="red" id="question-2-1">Question 2</h2>
+<p>If <span class="math inline">F&#39;(x)=f(x)</span>, is <span
+class="math inline">\int_a^b f(x)\,dx</span> equal to <span
+class="math inline">F(a)-F(b)</span> or <span
+class="math inline">F(b)-F(a)</span>?</p>
+<h2 class="red" id="answer-3">Answer</h2>
+<ul>
+<li>The upper endpoint value is subtracted by the lower endpoint value,
+so the correct expression is</li>
+</ul>
+<p><span class="math display">
+\int_a^b f(x)\,dx=F(b)-F(a)
+</span></p>
+<div class="question-end">
+<p><span class="math inline">\blacksquare</span></p>
+</div>
+<h1
+id="objective-3-differentiation-and-integration-as-inverse-processes">Objective
+3: Differentiation and Integration as Inverse Processes</h1>
+<h2 id="the-relationship-between-the-two-operations">The Relationship
+Between the Two Operations</h2>
+<ul>
+<li><p>Differentiation measures the instantaneous rate of change of a
+function, while integration accumulates the values of a function over an
+interval. The Fundamental Theorem shows that these processes are closely
+related.</p></li>
+<li><p>If <span class="math inline">f</span> is continuous and we define
+<span class="math inline">g(x)=\int_a^x f(t)\,dt</span>, Part 1 states
+that <span class="math inline">g&#39;(x)=f(x)</span>. In this sense,
+differentiation reverses the accumulation represented by the
+integral.</p></li>
+<li><p>Part 2 states that a definite integral can be evaluated using an
+antiderivative. If <span class="math inline">F&#39;=f</span>, then
+integrating <span class="math inline">f</span> from <span
+class="math inline">a</span> to <span class="math inline">b</span> gives
+the net change <span class="math inline">F(b)-F(a)</span>.</p></li>
+<li><p>The two statements together explain why differentiation and
+integration are often described as inverse processes. They are not
+identical operations in every context, but the theorem establishes the
+precise relationship under its continuity and differentiability
+conditions.</p></li>
+</ul>
+<h2
+id="differentiating-an-integral-and-integrating-a-derivative">Differentiating
+an Integral and Integrating a Derivative</h2>
+<ul>
+<li>If <span class="math inline">f</span> is continuous, then</li>
+</ul>
+<p><span class="math display">
+\frac{d}{dx}\left(\int_a^x f(t)\,dt\right)=f(x)
+</span></p>
+<ul>
+<li>If <span class="math inline">F</span> is differentiable and <span
+class="math inline">F&#39;=f</span>, then</li>
+</ul>
+<p><span class="math display">
+\int_a^b F&#39;(x)\,dx=F(b)-F(a)
+</span></p>
+<ul>
+<li><p>The first formula recovers the integrand from its accumulation
+function. The second formula recovers the net change in a function by
+integrating its derivative.</p></li>
+<li><p>For example, if the position of a robot is <span
+class="math inline">s(t)=t^3+2t</span>, then its velocity is <span
+class="math inline">v(t)=3t^2+2</span>. Integrating this velocity from
+<span class="math inline">t=a</span> to <span
+class="math inline">t=b</span> gives the difference between the final
+and initial positions.</p></li>
+</ul>
+<p><span class="math display">
+\int_a^b (3t^2+2)\,dt=(b^3+2b)-(a^3+2a)
+</span></p>
+<ul>
+<li>This identity is useful in engineering because rates of change are
+often measured by sensors, while accumulated changes are needed to
+estimate positions, total energy, or other quantities.</li>
+</ul>
+<h2 id="why-the-constant-of-integration-does-not-matter">Why the
+Constant of Integration Does Not Matter</h2>
+<ul>
+<li><p>An indefinite integral gives a family of antiderivatives that
+differ by a constant. If <span
+class="math inline">F&#39;(x)=f(x)</span>, then <span
+class="math inline">F(x)+C</span> is also an antiderivative.</p></li>
+<li><p>For a definite integral, the constant cancels when we subtract
+the endpoint values.</p></li>
+</ul>
+<p><span class="math display">
+[F(b)+C]-[F(a)+C]=F(b)-F(a)
+</span></p>
+<ul>
+<li>Therefore, any antiderivative of the integrand can be used in Part
+<ol start="2" type="1">
+<li></li>
+</ol></li>
+</ul>
+<h1 id="quick-check-2">Quick Check</h1>
+<h2 class="red" id="question-1-2">Question 1</h2>
+<p>Let <span class="math inline">F(x)=x^2+4</span>. Find <span
+class="math inline">\int_1^3 F&#39;(x)\,dx</span> without first
+expanding the derivative.</p>
+<h2 class="red" id="answer-4">Answer</h2>
+<ul>
+<li>By the Fundamental Theorem of Calculus,</li>
+</ul>
+<p><span class="math display">
+\int_1^3 F&#39;(x)\,dx=F(3)-F(1)=13-5=8
+</span></p>
+<h2 class="red" id="question-2-2">Question 2</h2>
+<p>If <span class="math inline">G(x)=\int_0^x f(t)\,dt</span> and <span
+class="math inline">f</span> is continuous, what is <span
+class="math inline">G&#39;(x)</span>?</p>
+<h2 class="red" id="answer-5">Answer</h2>
+<p><span class="math display">
+G&#39;(x)=f(x)
+</span></p>
+<ul>
+<li>Differentiating the accumulation function recovers the original
+integrand.</li>
+</ul>
+<div class="question-end">
+<p><span class="math inline">\blacksquare</span></p>
+</div>
+<h1 id="scenario-problem">Scenario Problem</h1>
+<h2 class="green" id="problem">Problem</h2>
+<p>A small autonomous mobile robot moves along a straight test track.
+Its measured velocity is modelled by</p>
+<p><span class="math display">
+v(t)=3t^2+2
+</span></p>
+<p>where <span class="math inline">v</span> is measured in metres per
+second and <span class="math inline">t</span> is measured in seconds.
+The robot’s initial position is <span class="math inline">s(0)=1</span>
+metre. Use the Fundamental Theorem of Calculus to determine the robot’s
+displacement between <span class="math inline">t=0</span> and <span
+class="math inline">t=2</span> seconds and its position at <span
+class="math inline">t=2</span> seconds.</p>
+<h2 class="green" id="solution-5">Solution</h2>
+<ul>
+<li>The displacement is the definite integral of velocity over the time
+interval.</li>
+</ul>
+<p><span class="math display">
+\begin{aligned}
+\Delta s
+&amp;=\int_0^2 (3t^2+2)\,dt\\
+&amp;=[t^3+2t]_0^2\\
+&amp;=(8+4)-0\\
+&amp;=12\text{ m}
+\end{aligned}
+</span></p>
+<ul>
+<li>The final position equals the initial position plus the
+displacement.</li>
+</ul>
+<p><span class="math display">
+s(2)=s(0)+\Delta s=1+12=13\text{ m}
+</span></p>
+<ul>
+<li>Therefore, the robot travels a displacement of <span
+class="math inline">12</span> metres and reaches a position of <span
+class="math inline">13</span> metres from the chosen origin at <span
+class="math inline">t=2</span> seconds.</li>
+</ul>
+<div class="example-end">
+<p><span class="math inline">\blacksquare</span></p>
+</div>
+<h1 id="summary">Summary</h1>
+<ul>
+<li>The Fundamental Theorem of Calculus connects differential calculus
+with integral calculus.</li>
+<li>Part 1 states that if <span class="math inline">f</span> is
+continuous and <span class="math inline">g(x)=\int_a^x f(t)\,dt</span>,
+then <span class="math inline">g&#39;(x)=f(x)</span>.</li>
+<li>The accumulation function represents signed area from a fixed lower
+endpoint to a variable upper endpoint.</li>
+<li>When the upper limit is a differentiable function, the Chain Rule
+must be used with Part 1.</li>
+<li>Part 2 states that a definite integral can be evaluated by
+subtracting the antiderivative’s value at the lower endpoint from its
+value at the upper endpoint.</li>
+<li>Areas below the horizontal axis contribute negatively to a definite
+integral.</li>
+<li>The integral of velocity gives displacement, while total distance
+may require integrating the absolute value of velocity.</li>
+<li>Differentiation recovers the integrand of an accumulation function,
+and integration of a derivative gives the net change in the original
+function.</li>
+<li>The constant of integration cancels when endpoint values are
+subtracted in a definite integral.</li>
+</ul>
+<h1 id="exercises">Exercises</h1>
+<h2 id="exercises-set">Exercises Set</h2>
+<p>Solve the odd number exercises from exercise 1 to 91.</p>
+<ul>
+<li><p>Exercises help transform theoretical concepts into practical
+understanding.</p></li>
+<li><p>Mathematics is learned by doing and solving exercises will train
+you to analyze problems, select appropriate methods, and construct
+logical solutions.</p></li>
+<li><p>Attempting problems sometimes leads to mistakes which provide
+opportunities for learning and improvement.</p></li>
+<li><p>Regular practice increases speed, accuracy, and
+confidence.</p></li>
+<li><p>Exercises are given in the Exercises file and you are expected to
+solve them on your own.</p></li>
+</ul>
+</body>
+</html>
