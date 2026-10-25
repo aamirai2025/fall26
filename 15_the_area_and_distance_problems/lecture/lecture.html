@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>lecture</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="../styles/style.css" />
+  <script defer="" src="../katex/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <link rel="stylesheet" href="../katex/dist/katex.min.css" />
+</head>
+<body>
+<h1 id="calculus-and-analytical-geometry">Calculus and Analytical
+Geometry</h1>
+<h2 id="the-area-problem">The Area Problem</h2>
+<h3 id="dr.-aamir-alaud-din">Dr. Aamir Alaud Din</h3>
+<h1 id="objectives">Objectives</h1>
+<ol type="1">
+<li>Explain how areas under curves can be approximated by rectangles and
+how left-endpoint and right-endpoint sums behave as the number of
+rectangles increases.</li>
+<li>Define the area under a continuous, nonnegative function as a limit
+of rectangle sums, and express the sums using partitions, sample points,
+and sigma notation.</li>
+<li>Set up and evaluate or estimate area expressions using limits and
+midpoint sums, and interpret rectangle sums in an engineering or
+computing application.</li>
+<li>To estimate the distance travelled by an object whose velocity
+varies with time by using velocity measurements, rectangular
+approximations, and left- and right-endpoint sums, and to generalize
+these approximations for a velocity function on a time interval.</li>
+</ol>
+<h1 id="the-why-section">The Why Section</h1>
+<p>A mechatronics engineer may test a mobile robot whose speed changes
+continuously as it moves along a track. Knowing the speed at every
+instant is not enough to use the constant-speed formula, distance =
+speed × time, because the speed is changing. The engineer needs to
+estimate the distance traveled by dividing time into small intervals and
+adding the distance covered during each interval; geometrically, these
+additions resemble the areas of rectangles under a speed-versus-time
+graph. A computer-science application may similarly need to accumulate a
+changing signal over time. Studying the area problem teaches us how to
+construct these approximations and how to define an exact accumulated
+quantity by taking a limit as the intervals become narrower. We will use
+this topic to develop the mathematical method needed to solve such
+problems.</p>
+<p>In many mechanical and mechatronic systems, knowing the velocity at
+every instant does not immediately give us the total distance travelled
+when the velocity is changing. A robot may accelerate, slow down, and
+change its speed while moving through a warehouse. If its controller
+records velocity at regular time intervals, we can estimate how far it
+has travelled by treating the velocity as approximately constant during
+each short interval and adding the distances travelled during those
+intervals.</p>
+<p>For constant velocity, the distance travelled is given by</p>
+<p><span class="math display">
+\text{distance}=\text{velocity}\times\text{time}
+</span></p>
+<p>When velocity changes, however, one velocity value cannot accurately
+describe the entire journey. We can divide the time period into smaller
+intervals, estimate the distance travelled during each interval, and add
+the estimates. The more frequently we record the velocity, the more
+refined our estimate can become. This is the central idea behind the
+distance problem.</p>
+<p>For example, a mobile robot’s sensor may record its speed every few
+seconds. The method developed in this topic can be used to estimate the
+distance travelled from those measurements. The same approach is
+relevant to vehicle tracking, automated guided vehicles, motion
+analysis, and other systems in which velocity data are available but the
+total distance must be estimated.</p>
+<h1 id="the-area-problem-1">The Area Problem</h1>
+<h2 id="the-geometric-meaning-of-area">The Geometric Meaning of
+Area</h2>
+<p><strong>Find the area under the curve of <span
+class="math inline">f(x)</span> shown in Figure 1.</strong></p>
+<div style="text-align: center;">
+<p><img src="../images/1501.png" style="width: 686 px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 1.</strong> A continuous curve <span
+class="math inline">y=f(x)</span> above the <span
+class="math inline">x</span>-axis between <span
+class="math inline">x=a</span> and <span class="math inline">x=b</span>,
+with the region <span class="math inline">S</span> under the curve
+shaded.</span></p>
+</div>
+<p>Area is the part of a plane covered by a two-dimensional region. For
+familiar regions with straight sides, we already have formulas for area.
+The area of a rectangle is length times width, <span
+class="math inline">A=lw</span>. The area of a triangle is one-half the
+base times the height, <span class="math inline">A=\frac12 bh</span>. A
+polygon can be divided into triangles, and its area is the sum of the
+areas of those triangles.</p>
+<div style="text-align: center;">
+<p><img src="../images/1502.png" style="width: 1200 px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 2.</strong> A rectangle labeled <span
+class="math inline">A=lw</span>, a triangle labeled <span
+class="math inline">A=\frac12 bh</span>, and a polygon divided into
+triangles labeled with the sum of their areas.</span></p>
+</div>
+<p>It is not so easy to find the area of a region with a curved
+boundary. One goal of the area problem is to turn our intuitive idea of
+area into an exact mathematical definition. We use an idea similar to
+the one used when defining a tangent line. First, we approximated the
+tangent slope using secant lines through a fixed point <span
+class="math inline">P</span> and a moving point <span
+class="math inline">Q</span>. We then allowed <span
+class="math inline">Q</span> to approach <span
+class="math inline">P</span> and took a limit. For area, we first
+approximate the region with rectangles and then take the limit of the
+sum of their areas as the number of rectangles increases.</p>
+<h2 class="green" id="example-1">Example 1</h2>
+<p>Use rectangles to estimate the area under the parabola <span
+class="math inline">y=x^2</span> from <span class="math inline">0</span>
+to <span class="math inline">1</span> (the parabolic region <span
+class="math inline">S</span> illustrated in Figure 3).</p>
+<div style="text-align: center;">
+<p><img src="../images/1503.png" style="width: 663 px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 3.</strong> The parabolic region <span
+class="math inline">S</span> under <span
+class="math inline">y=x^2</span> from <span
+class="math inline">x=0</span> to <span
+class="math inline">x=1</span>.</span></p>
+</div>
+<h2 class="green" id="solution">Solution</h2>
+<p>The region <span class="math inline">S</span> is contained in a
+square with side length <span class="math inline">1</span>, so its area
+<span class="math inline">A</span> is between <span
+class="math inline">0</span> and <span class="math inline">1</span>. We
+can improve this broad estimate by dividing the interval <span
+class="math inline">[0,1]</span> into four equal subintervals. Draw
+vertical lines at <span class="math inline">x=\frac14</span>, <span
+class="math inline">x=\frac12</span>, and <span
+class="math inline">x=\frac34</span>, as shown in Figure 4.</p>
+<p>The width of each subinterval is</p>
+<p><span class="math display">
+\Delta x=\frac{1-0}{4}=\frac14
+</span></p>
+<p>The four subintervals are <span
+class="math inline">[0,\frac14]</span>, <span
+class="math inline">[\frac14,\frac12]</span>, <span
+class="math inline">[\frac12,\frac34]</span>, and <span
+class="math inline">[\frac34,1]</span>.</p>
+<div style="text-align: center;">
+<p><img src="../images/1504.png" style="width: 1200 px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 4.</strong> The region under <span
+class="math inline">y=x^2</span> divided into four vertical strips,
+followed by four rectangles whose heights are determined by the right
+edges of the strips.</span></p>
+</div>
+<h3 id="using-right-endpoints">Using right endpoints</h3>
+<p>Approximate each strip by a rectangle with the same width and with
+height equal to the function value at the right endpoint. The right
+endpoints are <span class="math inline">\frac14</span>, <span
+class="math inline">\frac12</span>, <span
+class="math inline">\frac34</span>, and <span
+class="math inline">1</span>. Since <span
+class="math inline">f(x)=x^2</span>, the rectangle heights are</p>
+<p><span class="math display">
+f\left(\frac14\right)=\frac1{16},\quad
+f\left(\frac12\right)=\frac14,\quad
+f\left(\frac34\right)=\frac9{16},\quad
+f(1)=1
+</span></p>
+<p>Each rectangle has width <span class="math inline">\frac14</span>. If
+<span class="math inline">R_4</span> denotes the sum of their areas,
+then</p>
+<p><span class="math display">
+\begin{aligned}
+R_4&amp;=\frac14\left(\frac14\right)^2
++\frac14\left(\frac12\right)^2
++\frac14\left(\frac34\right)^2
++\frac14(1)^2\\
+&amp;=\frac14\left(\frac1{16}+\frac4{16}+\frac9{16}+\frac{16}{16}\right)\\
+&amp;=\frac{30}{64}\\
+&amp;=\frac{15}{32}=0.46875
+\end{aligned}
+</span></p>
+<p>Because <span class="math inline">f(x)=x^2</span> is increasing on
+<span class="math inline">[0,1]</span>, the right-endpoint rectangles
+extend above the curve. Therefore, <span class="math inline">R_4</span>
+is an overestimate of the area, and <span
+class="math inline">A&lt;0.46875</span>.</p>
+<h3 id="using-left-endpoints">Using left endpoints</h3>
+<p>We can instead use the left endpoint of each subinterval to determine
+the rectangle height. The left endpoints are <span
+class="math inline">0</span>, <span class="math inline">\frac14</span>,
+<span class="math inline">\frac12</span>, and <span
+class="math inline">\frac34</span>. Their function values are <span
+class="math inline">0</span>, <span
+class="math inline">\frac1{16}</span>, <span
+class="math inline">\frac14</span>, and <span
+class="math inline">\frac9{16}</span>. The first rectangle has height
+zero and therefore collapses to the <span
+class="math inline">x</span>-axis, as shown in Figure 5.</p>
+<p>The left-endpoint sum is</p>
+<p><span class="math display">
+\begin{aligned}
+L_4&amp;=\frac14(0)^2+\frac14\left(\frac14\right)^2
++\frac14\left(\frac12\right)^2+\frac14\left(\frac34\right)^2\\
+&amp;=\frac14\left(0+\frac1{16}+\frac4{16}+\frac9{16}\right)\\
+&amp;=\frac{14}{64}\\
+&amp;=\frac7{32}=0.21875
+\end{aligned}
+</span></p>
+<p>Since the function is increasing, the left-endpoint rectangles lie
+below the curve, so <span class="math inline">L_4</span> is an
+underestimate. Combining both estimates gives</p>
+<p><span class="math display">
+0.21875&lt;A&lt;0.46875
+</span></p>
+<div style="text-align: center;">
+<p><img src="../images/1505.png" style="width: 637 px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 5.</strong> Four left-endpoint rectangles under
+<span class="math inline">y=x^2</span> on <span
+class="math inline">[0,1]</span>, with the first rectangle having zero
+height.</span></p>
+</div>
+<h3 id="increasing-the-number-of-rectangles">Increasing the number of
+rectangles</h3>
+<p>We can obtain better estimates by dividing the region into eight
+equal strips. Figure 6 compares the left- and right-endpoint rectangles
+for <span class="math inline">n=8</span>. The left rectangles give a
+lower estimate, while the right rectangles give an upper estimate:</p>
+<p><span class="math display">
+0.2734375&lt;A&lt;0.3984375
+</span></p>
+<div style="text-align: center;">
+<p><img src="../images/1506.png" style="width: 1200 px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 6.</strong> Two diagrams of the region under
+<span class="math inline">y=x^2</span> using eight rectangles, one based
+on left endpoints and the other on right endpoints.</span></p>
+</div>
+<p>The estimates improve as the number of rectangles increases. The
+following table, calculated using left and right endpoints, shows how
+the two estimates move closer together.</p>
+<div style="text-align: center;">
+<p><span><strong>Table 1.</strong> Left- and right-endpoint estimates
+for the area under <span class="math inline">y=x^2</span> on <span
+class="math inline">[0,1]</span>.</span></p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Number of rectangles <span
+class="math inline">n</span></th>
+<th style="text-align: right;">Left sum <span
+class="math inline">L_n</span></th>
+<th style="text-align: right;">Right sum <span
+class="math inline">R_n</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">0.2850000</td>
+<td style="text-align: right;">0.3850000</td>
+</tr>
+<tr>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">0.3087500</td>
+<td style="text-align: right;">0.3587500</td>
+</tr>
+<tr>
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">0.3168519</td>
+<td style="text-align: right;">0.3501852</td>
+</tr>
+<tr>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">0.3234000</td>
+<td style="text-align: right;">0.3434000</td>
+</tr>
+<tr>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">0.3283500</td>
+<td style="text-align: right;">0.3383500</td>
+</tr>
+<tr>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">0.3328335</td>
+<td style="text-align: right;">0.3338335</td>
+</tr>
+</tbody>
+</table>
+<p>For this increasing function, the left sums increase and the right
+sums decrease as <span class="math inline">n</span> increases. The gap
+between the estimates becomes smaller. With <span
+class="math inline">1000</span> rectangles, the area lies between <span
+class="math inline">0.3328335</span> and <span
+class="math inline">0.3338335</span>. Averaging these bounds gives the
+estimate <span class="math inline">A\approx0.3333335</span>.</p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 id="from-rectangle-estimates-to-a-limit">From Rectangle Estimates to
+a Limit</h2>
+<p>So far, we have used a finite number of rectangles. Their top edges
+do not generally match the curved boundary exactly, so the sums give
+approximations rather than the exact area. What if we increase the
+number of rectangles without bound? As the number <span
+class="math inline">n</span> grows, each rectangle becomes narrower. If
+the left- and right-endpoint sums approach the same number, that common
+limit gives the exact area. Example 2 establishes this result for <span
+class="math inline">y=x^2</span> on <span
+class="math inline">[0,1]</span>.</p>
+<h2 class="green" id="example-2">Example 2</h2>
+<p>For the region <span class="math inline">S</span> in Example 1, show
+that the approximating sums <span class="math inline">R_n</span>
+approach <span class="math inline">\frac13</span>, that is,</p>
+<p><span class="math display">
+\lim_{n\to\infty}R_n=\frac13
+</span></p>
+<h2 class="green" id="solution-1">Solution</h2>
+<p>Divide <span class="math inline">[0,1]</span> into <span
+class="math inline">n</span> equal subintervals. Each rectangle has
+width <span class="math inline">\Delta x=\frac1n</span>. The right
+endpoints are</p>
+<p><span class="math display">
+x_i=\frac{i}{n},\qquad i=1,2,\ldots,n
+</span></p>
+<p>The height of the <span class="math inline">i</span>th rectangle is
+<span class="math inline">f(x_i)=x_i^2=(\frac{i}{n})^2</span>.
+Therefore, the right-endpoint sum is</p>
+<p><span class="math display">
+\begin{aligned}
+R_n&amp;=\sum_{i=1}^{n}f(x_i)\Delta x\\
+&amp;=\sum_{i=1}^{n}\left(\frac{i}{n}\right)^2\frac1n\\
+&amp;=\frac1{n^3}\sum_{i=1}^{n}i^2
+\end{aligned}
+</span></p>
+<p>Use the sum-of-squares formula</p>
+<p><span class="math display">
+1^2+2^2+\cdots+n^2=\frac{n(n+1)(2n+1)}6
+</span></p>
+<p>Substituting this formula gives</p>
+<p><span class="math display">
+\begin{aligned}
+R_n&amp;=\frac1{n^3}\cdot\frac{n(n+1)(2n+1)}6\\
+&amp;=\frac{n(n+1)(2n+1)}{6n^3}\\
+&amp;=\frac16\left(1+\frac1n\right)\left(2+\frac1n\right)
+\end{aligned}
+</span></p>
+<p>As <span class="math inline">n\to\infty</span>, <span
+class="math inline">\frac1n\to0</span>. Hence,</p>
+<p><span class="math display">
+\begin{aligned}
+\lim_{n\to\infty}R_n
+&amp;=\frac16(1+0)(2+0)\\
+&amp;=\frac13
+\end{aligned}
+</span></p>
+<p>Therefore, the right-endpoint sums approach <span
+class="math inline">\frac13</span>.</p>
+<div style="text-align: center;">
+<p><img src="../images/1507.png" style="width: 637 px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 7.</strong> The region under <span
+class="math inline">y=x^2</span> on <span
+class="math inline">[0,1]</span> approximated by <span
+class="math inline">n</span> right-endpoint rectangles of width <span
+class="math inline">\frac1n</span>.</span></p>
+</div>
+<p>The left-endpoint sum is</p>
+<p><span class="math display">
+\begin{aligned}
+L_n&amp;=\frac1n\sum_{i=0}^{n-1}\left(\frac{i}{n}\right)^2\\
+&amp;=\frac1{n^3}\sum_{i=0}^{n-1}i^2\\
+&amp;=\frac{(n-1)n(2n-1)}{6n^3}
+\end{aligned}
+</span></p>
+<p>Taking the limit also gives</p>
+<p><span class="math display">
+\lim_{n\to\infty}L_n=\frac13
+</span></p>
+<p>Thus, both left- and right-endpoint sums approach the same area,
+<span class="math inline">\frac13</span>.</p>
+<p>The diagrams in Figures 8 and 9 compare approximations for <span
+class="math inline">n=10</span>, <span class="math inline">30</span>,
+and <span class="math inline">50</span>. In Figure 8, the right-endpoint
+sums are <span class="math inline">R_{10}=0.385</span>, <span
+class="math inline">R_{30}\approx0.3502</span>, and <span
+class="math inline">R_{50}=0.3434</span>. These are overestimates that
+decrease toward <span class="math inline">\frac13</span>. In Figure 9,
+the left-endpoint sums are <span
+class="math inline">L_{10}=0.285</span>, <span
+class="math inline">L_{30}\approx0.3169</span>, and <span
+class="math inline">L_{50}=0.3234</span>. These are underestimates that
+increase toward <span class="math inline">\frac13</span>. As <span
+class="math inline">n</span> increases, both types of estimates converge
+to the exact area.</p>
+<div style="text-align: center;">
+<p><img src="../images/1508a.png" style="width: 794 px; display: block; margin: 0 auto 10px auto;">
+<img src="../images/1508b.png" style="width: 794 px; display: block; margin: 0 auto 10px auto;">
+<img src="../images/1508c.png" style="width: 794 px; display: block; margin: 0 auto 10px auto;">
+<span><strong>Figure 8.</strong> Right-endpoint rectangle approximations
+for <span class="math inline">y=x^2</span> with <span
+class="math inline">n=10</span>, <span class="math inline">n=30</span>,
+and <span class="math inline">n=50</span>, showing decreasing upper
+estimates.</span></p>
+</div>
+<div style="text-align: center;">
+<p><img src="../images/1509a.png" style="width: 792 px; display: block; margin: 0 auto 10px auto;">
+<img src="../images/1509b.png" style="width: 792 px; display: block; margin: 0 auto 10px auto;">
+<img src="../images/1509c.png" style="width: 792 px; display: block; margin: 0 auto 10px auto;">
+<span><strong>Figure 9.</strong> Left-endpoint rectangle approximations
+for <span class="math inline">y=x^2</span> with <span
+class="math inline">n=10</span>, <span class="math inline">n=30</span>,
+and <span class="math inline">n=50</span>, showing increasing lower
+estimates.</span></p>
+</div>
+<h2 id="generalizing-the-rectangle-method">Generalizing the Rectangle
+Method</h2>
+<p>Now consider a continuous function <span
+class="math inline">y=f(x)</span> that is nonnegative on <span
+class="math inline">[a,b]</span>. Divide the region under the graph into
+<span class="math inline">n</span> vertical strips of equal width, as
+illustrated in Figure 10. The interval length is <span
+class="math inline">b-a</span>, so the width of each strip is</p>
+<p><span class="math display">
+\Delta x=\frac{b-a}{n}
+</span></p>
+<p>The partition points are</p>
+<p><span class="math display">
+x_0=a,\quad x_1=a+\Delta x,\quad x_2=a+2\Delta x,\quad\ldots,\quad x_n=b
+</span></p>
+<p>In general,</p>
+<p><span class="math display">
+x_i=a+i\Delta x=a+i\frac{b-a}{n}
+</span></p>
+<p>The interval is divided into subintervals <span
+class="math inline">[x_0,x_1]</span>, <span
+class="math inline">[x_1,x_2]</span>, and so on, through <span
+class="math inline">[x_{n-1},x_n]</span>. Each has width <span
+class="math inline">x_i-x_{i-1}=\Delta x</span>.</p>
+<div style="text-align: center;">
+<p><img src="../images/1510.png" style="width: 1200 px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 10.</strong> A general nonnegative continuous
+curve <span class="math inline">y=f(x)</span> on <span
+class="math inline">[a,b]</span>, divided into <span
+class="math inline">n</span> vertical strips with partition points
+labeled along the <span class="math inline">x</span>-axis.</span></p>
+</div>
+<p>Approximate the <span class="math inline">i</span>th strip by a
+rectangle whose width is <span class="math inline">\Delta x</span> and
+whose height is the value of <span class="math inline">f</span> at the
+right endpoint, <span class="math inline">f(x_i)</span>, as shown in
+Figure 11. Its area is <span class="math inline">f(x_i)\Delta x</span>.
+Adding the areas of all <span class="math inline">n</span> rectangles
+gives</p>
+<p><span class="math display">
+R_n=f(x_1)\Delta x+f(x_2)\Delta x+\cdots+f(x_n)\Delta x
+</span></p>
+<div style="text-align: center;">
+<p><img src="../images/1511.png" style="width: 1200 px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 11.</strong> A general region divided into
+rectangles, with one representative rectangle labeled with width <span
+class="math inline">\Delta x</span> and height <span
+class="math inline">f(x_i)</span>.</span></p>
+</div>
+<p>The right-endpoint sum <span class="math inline">R_n</span>
+approximates the area. Figure 12 shows rectangle approximations using
+<span class="math inline">n=2</span>, <span
+class="math inline">4</span>, <span class="math inline">8</span>, and
+<span class="math inline">12</span>. With only two rectangles, the
+approximation may differ substantially from the curved region.
+Increasing the number to four, eight, and twelve makes the rectangles
+narrower and typically improves the fit. As <span
+class="math inline">n\to\infty</span>, the width <span
+class="math inline">\Delta x</span> approaches zero, and the sums
+approach the exact area for a continuous function.</p>
+<div style="text-align: center;">
+<p><img src="../images/1512a.png" style="width: 592 px; display: block; margin: 0 auto 10px auto;">
+<img src="../images/1512b.png" style="width: 592 px; display: block; margin: 0 auto 10px auto;">
+<img src="../images/1512c.png" style="width: 592 px; display: block; margin: 0 auto 10px auto;">
+<span><strong>Figure 12.</strong> Four approximations to a general
+region under <span class="math inline">y=f(x)</span> using <span
+class="math inline">n=2</span>, <span class="math inline">n=4</span>,
+<span class="math inline">n=8</span>, and <span
+class="math inline">n=12</span> rectangles.</span></p>
+</div>
+<h2 class="blue"
+id="definition-area-of-a-region-bounded-by-fx-and-y0-between-ab">Definition:
+Area of a Region Bounded by <span class="math inline">f(x)</span> and
+<span class="math inline">y=0</span> between <span
+class="math inline">[a,b]</span></h2>
+<p>The area <span class="math inline">A</span> of the region <span
+class="math inline">S</span> that lies under the graph of a continuous,
+nonnegative function <span class="math inline">f</span> on <span
+class="math inline">[a,b]</span> is the limit of the sums of the areas
+of the approximating rectangles:</p>
+<p><span class="math display">
+A=\lim_{n\to\infty}R_n
+=\lim_{n\to\infty}\left[f(x_1)\Delta x+f(x_2)\Delta
+x+\cdots+f(x_n)\Delta x\right]
+</span></p>
+<p>where <span class="math inline">\Delta x=\frac{b-a}{n}</span> and
+<span class="math inline">x_i=a+i\Delta x</span>. Because <span
+class="math inline">f</span> is continuous, this limit exists. The same
+area is obtained by using left endpoints:</p>
+<p><span class="math display">
+A=\lim_{n\to\infty}L_n
+=\lim_{n\to\infty}\left[f(x_0)\Delta x+f(x_1)\Delta
+x+\cdots+f(x_{n-1})\Delta x\right]
+</span></p>
+<p>Thus, left-endpoint and right-endpoint sums may differ for a finite
+number of rectangles, but they approach the same area as <span
+class="math inline">n</span> tends to infinity.</p>
+<div class="definition-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 id="sample-points-lower-sums-and-upper-sums">Sample Points, Lower
+Sums, and Upper Sums</h2>
+<p>Instead of using a left or right endpoint to determine a rectangle’s
+height, choose any sample point <span class="math inline">x_i^*</span>
+in the <span class="math inline">i</span>th subinterval <span
+class="math inline">[x_{i-1},x_i]</span>. The height is <span
+class="math inline">f(x_i^*)</span>, and the rectangle area is <span
+class="math inline">f(x_i^*)\Delta x</span>. Figure 13 illustrates
+rectangles whose sample points are chosen within the subintervals rather
+than necessarily at endpoints.</p>
+<p>The corresponding sum is</p>
+<p><span class="math display">
+S_n=\sum_{i=1}^{n}f(x_i^*)\Delta x
+</span></p>
+<p>For a continuous function, these sums approach the same area as the
+subinterval widths approach zero:</p>
+<p><span class="math display">
+A=\lim_{n\to\infty}\sum_{i=1}^{n}f(x_i^*)\Delta x
+</span></p>
+<div style="text-align: center;">
+<p><img src="../images/1513.png" style="width: 1200 px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 13.</strong> Rectangle approximations under a
+general curve using sample points <span
+class="math inline">x_1^*,x_2^*,\ldots,x_n^*</span> selected within
+their respective subintervals.</span></p>
+</div>
+<p>On each subinterval, choose the minimum value of <span
+class="math inline">f</span> to obtain a rectangle that lies at or below
+the curve. The sum of these areas is called a <strong>lower
+sum</strong>. Choosing the maximum value of <span
+class="math inline">f</span> on each subinterval gives rectangles that
+cover the curve on those subintervals; the sum is called an
+<strong>upper sum</strong>. Since a continuous function attains its
+minimum and maximum on each closed subinterval, these sums are
+well-defined. Figure 14 shows lower sums, upper sums, and both types
+together. The area is greater than or equal to every lower sum and less
+than or equal to every upper sum. The area is the unique number lying
+between all lower and upper sums.</p>
+<div style="text-align: center;">
+<p><img src="../images/1514a.png" style="width: 796 px; display: block; margin: 0 auto 10px auto;">
+<img src="../images/1514b.png" style="width: 796 px; display: block; margin: 0 auto 10px auto;">
+<img src="../images/1514c.png" style="width: 796 px; display: block; margin: 0 auto 10px auto;">
+<span><strong>Figure 14.</strong> Three diagrams illustrating lower
+sums, upper sums, and lower and upper rectangles together.</span></p>
+</div>
+<p>For <span class="math inline">f(x)=x^2</span> on <span
+class="math inline">[0,1]</span>, the left-endpoint sum is a lower sum
+and the right-endpoint sum is an upper sum because the function is
+increasing. With <span class="math inline">\Delta x=\frac1n</span>,
+these sums are</p>
+<p><span class="math display">
+L_n=\frac1n\sum_{i=0}^{n-1}\left(\frac{i}{n}\right)^2
+</span></p>
+<p><span class="math display">
+R_n=\frac1n\sum_{i=1}^{n}\left(\frac{i}{n}\right)^2
+</span></p>
+<p>A sample-point sum for this same function is</p>
+<p><span class="math display">
+S_n=\frac1n\sum_{i=1}^{n}(x_i^*)^2
+</span></p>
+<p>where <span
+class="math inline">x_i^*\in[\frac{i-1}{n},\frac{i}{n}]</span>. All
+three sums approach <span class="math inline">\frac13</span> as <span
+class="math inline">n\to\infty</span>. Notice that left endpoints are
+not always lower endpoints, nor are right endpoints always upper
+endpoints; that relationship depends on the function’s behavior.</p>
+<p>Sigma notation is a compact way to write sums with many terms. The
+expression <span class="math inline">\sum_{i=1}^{n}f(x_i)\Delta x</span>
+means to add <span class="math inline">f(x_i)\Delta x</span> for <span
+class="math inline">i=1,2,\ldots,n</span>. The lower index indicates
+where the sum begins, and the upper index indicates where it ends. The
+three area formulas can therefore be written as</p>
+<p><span class="math display">
+A=\lim_{n\to\infty}\sum_{i=1}^{n}f(x_i)\Delta x
+</span></p>
+<p><span class="math display">
+A=\lim_{n\to\infty}\sum_{i=1}^{n}f(x_{i-1})\Delta x
+</span></p>
+<p><span class="math display">
+A=\lim_{n\to\infty}\sum_{i=1}^{n}f(x_i^*)\Delta x
+</span></p>
+<h2 class="green" id="example-3">Example 3</h2>
+<p>Let <span class="math inline">A</span> be the area of the region that
+lies under the graph of <span class="math inline">f(x)=e^{-x}</span>
+between <span class="math inline">x=0</span> and <span
+class="math inline">x=2</span>.</p>
+<p><strong>(a)</strong> Using right endpoints, find an expression for
+<span class="math inline">A</span> as a limit. Do not evaluate the
+limit.</p>
+<p><strong>(b)</strong> Estimate the area by taking the sample points to
+be midpoints and using four subintervals and then ten subintervals.</p>
+<h2 class="green" id="solution-2">Solution</h2>
+<h3 id="part-a-expressing-the-area-as-a-limit">Part (a): Expressing the
+area as a limit</h3>
+<p>Here <span class="math inline">a=0</span>, <span
+class="math inline">b=2</span>, and <span
+class="math inline">f(x)=e^{-x}</span>. Divide <span
+class="math inline">[0,2]</span> into <span class="math inline">n</span>
+equal subintervals. The width of each subinterval is</p>
+<p><span class="math display">
+\Delta x=\frac{2-0}{n}=\frac2n
+</span></p>
+<p>The right endpoints are</p>
+<p><span class="math display">
+x_i=a+i\Delta x=\frac{2i}{n}
+</span></p>
+<p>The height of the <span class="math inline">i</span>th rectangle is
+<span class="math inline">f(x_i)=e^{-2i/n}</span>. Therefore, the sum of
+the rectangle areas is</p>
+<p><span class="math display">
+\begin{aligned}
+R_n&amp;=\sum_{i=1}^{n}f(x_i)\Delta x\\
+&amp;=\sum_{i=1}^{n}e^{-2i/n}\frac2n\\
+&amp;=\frac2n\sum_{i=1}^{n}e^{-2i/n}
+\end{aligned}
+</span></p>
+<p>By the definition of area, the exact area is expressed as</p>
+<p><span class="math display">
+A=\lim_{n\to\infty}\frac2n\sum_{i=1}^{n}e^{-2i/n}
+</span></p>
+<p>The problem asks us to set up this limit, not evaluate it.</p>
+<h3 id="part-b-midpoint-estimate-using-four-subintervals">Part (b):
+Midpoint estimate using four subintervals</h3>
+<p>For <span class="math inline">n=4</span>, the width is <span
+class="math inline">\Delta x=\frac24=0.5</span>. The subintervals are
+<span class="math inline">[0,0.5]</span>, <span
+class="math inline">[0.5,1]</span>, <span
+class="math inline">[1,1.5]</span>, and <span
+class="math inline">[1.5,2]</span>. Their midpoints are <span
+class="math inline">0.25</span>, <span class="math inline">0.75</span>,
+<span class="math inline">1.25</span>, and <span
+class="math inline">1.75</span>, as shown in Figure 15.</p>
+<p>The midpoint sum is</p>
+<p><span class="math display">
+\begin{aligned}
+M_4&amp;=\sum_{i=1}^{4}f(x_i^*)\Delta x\\
+&amp;=0.5\left(e^{-0.25}+e^{-0.75}+e^{-1.25}+e^{-1.75}\right)\\
+&amp;\approx0.8557
+\end{aligned}
+</span></p>
+<p>Thus, the midpoint estimate of the area is <span
+class="math inline">M_4\approx0.8557</span>.</p>
+<div style="text-align: center;">
+<p><img src="../images/1515.png" style="width: 651 px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 15.</strong> The graph <span
+class="math inline">y=e^{-x}</span> from <span
+class="math inline">x=0</span> to <span class="math inline">x=2</span>,
+with four midpoint rectangles of width <span
+class="math inline">0.5</span>.</span></p>
+</div>
+<h3 id="midpoint-estimate-using-ten-subintervals">Midpoint estimate
+using ten subintervals</h3>
+<p>For <span class="math inline">n=10</span>, the width is <span
+class="math inline">\Delta x=\frac2{10}=0.2</span>. The subintervals are
+<span class="math inline">[0,0.2]</span>, <span
+class="math inline">[0.2,0.4]</span>, and so on, through <span
+class="math inline">[1.8,2]</span>. The midpoints are <span
+class="math inline">0.1</span>, <span class="math inline">0.3</span>,
+<span class="math inline">0.5</span>, and so on, through <span
+class="math inline">1.9</span>, as shown in Figure 16.</p>
+<p>The midpoint sum is</p>
+<p><span class="math display">
+\begin{aligned}
+M_{10}&amp;=\sum_{i=1}^{10}f(x_i^*)\Delta x\\
+&amp;=0.2\left(e^{-0.1}+e^{-0.3}+e^{-0.5}+\cdots+e^{-1.9}\right)\\
+&amp;\approx0.8632
+\end{aligned}
+</span></p>
+<p>Thus, the midpoint estimate is <span
+class="math inline">M_{10}\approx0.8632</span>. This estimate is closer
+to the area than the four-subinterval estimate, illustrating how a finer
+partition can improve an approximation.</p>
+<div style="text-align: center;">
+<p><img src="../images/1516.png" style="width: 651 px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 16.</strong> The graph <span
+class="math inline">y=e^{-x}</span> from <span
+class="math inline">x=0</span> to <span class="math inline">x=2</span>,
+with ten midpoint rectangles of width <span
+class="math inline">0.2</span>.</span></p>
+</div>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="quick-check">Quick Check</h1>
+<h2 class="red" id="question-1">Question 1</h2>
+<p>For <span class="math inline">f(x)=x^2</span> on <span
+class="math inline">[0,1]</span>, calculate the right-endpoint sum <span
+class="math inline">R_2</span> using two equal subintervals.</p>
+<h2 class="red" id="answer">Answer</h2>
+<p>The width is <span class="math inline">\Delta x=\frac12</span> and
+the right endpoints are <span class="math inline">\frac12</span> and
+<span class="math inline">1</span>. Therefore,</p>
+<p><span class="math display">
+R_2=\frac12\left[f\left(\frac12\right)+f(1)\right]
+=\frac12\left(\frac14+1\right)
+=\frac58=0.625
+</span></p>
+<h2 class="red" id="question-2">Question 2</h2>
+<p>If a function is increasing on <span
+class="math inline">[a,b]</span>, do left-endpoint rectangles give an
+overestimate or an underestimate of the area under its graph?</p>
+<h2 class="red" id="answer-1">Answer</h2>
+<p>They give an underestimate because the left-endpoint height is no
+greater than the function values to its right on each subinterval.
+Right-endpoint rectangles give an overestimate.</p>
+<div class="question-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="scenario-problem">Scenario Problem</h1>
+<h2 class="green" id="problem">Problem</h2>
+<p>A mechatronics team tests a mobile robot moving along a straight
+track. Its speed is modeled by <span
+class="math inline">v(t)=0.5t+1</span> meters per second for <span
+class="math inline">0\leq t\leq4</span>, where <span
+class="math inline">t</span> is measured in seconds. Estimate the
+distance traveled using four right-endpoint rectangles.</p>
+<h2 class="green" id="solution-3">Solution</h2>
+<p>Divide the interval <span class="math inline">[0,4]</span> into four
+equal subintervals. The width is</p>
+<p><span class="math display">
+\Delta t=\frac{4-0}{4}=1\text{ second}
+</span></p>
+<p>The right endpoints are <span class="math inline">t=1,2,3,4</span>.
+The corresponding speeds are <span class="math inline">v(1)=1.5</span>,
+<span class="math inline">v(2)=2</span>, <span
+class="math inline">v(3)=2.5</span>, and <span
+class="math inline">v(4)=3</span> meters per second. The right-endpoint
+estimate for distance is</p>
+<p><span class="math display">
+\begin{aligned}
+R_4&amp;=[v(1)+v(2)+v(3)+v(4)]\Delta t\\
+&amp;=(1.5+2+2.5+3)(1)\\
+&amp;=9\text{ m}
+\end{aligned}
+</span></p>
+<p>The estimated distance is <span class="math inline">9</span> meters.
+Since the speed is increasing, right-endpoint rectangles overestimate
+the distance on each subinterval. Using more, narrower time intervals
+would improve the estimate and, in the limit, the rectangle sums would
+approach the exact accumulated distance.</p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="summary">Summary</h1>
+<p>The area problem is solved by approximating the region under a
+continuous, nonnegative function with rectangles. Dividing <span
+class="math inline">[a,b]</span> into <span class="math inline">n</span>
+equal subintervals gives <span class="math inline">\Delta
+x=(b-a)/n</span>, and rectangle heights can be selected from left
+endpoints, right endpoints, or sample points. For the increasing
+function <span class="math inline">f(x)=x^2</span> on <span
+class="math inline">[0,1]</span>, left-endpoint sums underestimate the
+area and right-endpoint sums overestimate it. As the number of
+rectangles increases, both sums approach the exact area, which is <span
+class="math inline">\frac13</span>.</p>
+<p>In general, the area is defined as the limit of the rectangle sums as
+<span class="math inline">n\to\infty</span>. Lower sums use the minimum
+function value on each subinterval, while upper sums use the maximum;
+sample-point sums provide a more general formulation. These ideas also
+help estimate accumulated quantities such as distance from a changing
+speed. The rectangle method is the foundation for the integral concepts
+developed later in calculus.</p>
+<h1 id="the-distance-problem">The Distance Problem</h1>
+<h2 id="from-constant-velocity-to-variable-velocity">From Constant
+Velocity to Variable Velocity</h2>
+<p>If an object moves at a constant velocity <span
+class="math inline">v</span> for a time interval of length <span
+class="math inline">t</span>, the distance travelled in the direction of
+motion is</p>
+<p><span class="math display">
+d=vt
+</span></p>
+<p>This formula works directly when the velocity is constant. If
+velocity varies with time, we cannot generally multiply one velocity
+reading by the entire time interval. Instead, we estimate the distance
+over short intervals during which the velocity does not change very
+much.</p>
+<p>Suppose the velocity is positive and is represented by <span
+class="math inline">v=f(t)</span> over the interval <span
+class="math inline">a\leq t\leq b</span>. Divide the time interval into
+smaller subintervals. On each subinterval, approximate the velocity by a
+selected velocity reading. The estimated distance over that subinterval
+is the selected velocity multiplied by the length of the subinterval.
+Adding these estimated distances gives an approximation to the total
+distance.</p>
+<p>Geometrically, each product is the area of a rectangle under or near
+the velocity graph. Thus, the sum of the rectangle areas estimates the
+area under the velocity curve, and that area estimates the distance
+travelled.</p>
+<h2 class="green" id="example-4">Example 4</h2>
+<p>Suppose the odometer on our car is broken and we want to estimate the
+distance driven over a 30-second time interval. We take speedometer
+readings every five seconds and record them in the following table.</p>
+<div style="text-align: center;">
+<p><span><strong>Table 1.</strong> Recorded time and speedometer
+readings.</span></p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Time (s)</th>
+<th style="text-align: right;">0</th>
+<th style="text-align: right;">5</th>
+<th style="text-align: right;">10</th>
+<th style="text-align: right;">15</th>
+<th style="text-align: right;">20</th>
+<th style="text-align: right;">25</th>
+<th style="text-align: right;">30</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Velocity (km/h)</td>
+<td style="text-align: right;">27</td>
+<td style="text-align: right;">34</td>
+<td style="text-align: right;">39</td>
+<td style="text-align: right;">47</td>
+<td style="text-align: right;">51</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">45</td>
+</tr>
+</tbody>
+</table>
+<h2 class="green" id="solution-4">Solution</h2>
+<h3 id="step-1-convert-the-velocity-readings-to-metres-per-second">Step
+1: Convert the velocity readings to metres per second</h3>
+<p>Time is measured in seconds, so we should express velocity in metres
+per second. We use</p>
+<p><span class="math display">
+1\text{ km/h}=\frac{1000}{3600}\text{ m/s}=\frac{1}{3.6}\text{ m/s}
+</span></p>
+<p>Using the approximate converted readings listed in the textbook gives
+the following table. These are approximate values used for the distance
+estimates.</p>
+<div style="text-align: center;">
+<p><span><strong>Table 2.</strong> Velocity readings converted to metres
+per second.</span></p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Time (s)</th>
+<th style="text-align: right;">0</th>
+<th style="text-align: right;">5</th>
+<th style="text-align: right;">10</th>
+<th style="text-align: right;">15</th>
+<th style="text-align: right;">20</th>
+<th style="text-align: right;">25</th>
+<th style="text-align: right;">30</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Velocity (m/s)</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">11</td>
+</tr>
+</tbody>
+</table>
+<p>For example, the first reading is</p>
+<p><span class="math display">
+27\text{ km/h}=\frac{27}{3.6}\text{ m/s}=7.5\text{ m/s}\approx8\text{
+m/s}
+</span></p>
+<p>The time readings divide the 30-second period into six intervals,
+each of width</p>
+<p><span class="math display">
+\Delta t=5\text{ s}
+</span></p>
+<h3 id="step-2-estimate-distance-during-the-first-two-intervals">Step 2:
+Estimate distance during the first two intervals</h3>
+<p>During the first interval, from <span class="math inline">t=0</span>
+to <span class="math inline">t=5</span> seconds, the velocity is
+approximately <span class="math inline">8</span> m/s if we use the
+reading at the beginning of the interval. The estimated distance is</p>
+<p><span class="math display">
+d_1\approx(8\text{ m/s})(5\text{ s})=40\text{ m}
+</span></p>
+<p>During the second interval, from <span class="math inline">t=5</span>
+to <span class="math inline">t=10</span> seconds, we use the initial
+velocity reading of <span class="math inline">9</span> m/s. Thus,</p>
+<p><span class="math display">
+d_2\approx(9\text{ m/s})(5\text{ s})=45\text{ m}
+</span></p>
+<p>We continue in the same way for the remaining intervals. This is a
+left-endpoint estimate because the velocity at the left endpoint of each
+interval is used.</p>
+<h3 id="step-3-estimate-the-complete-distance-using-left-endpoints">Step
+3: Estimate the complete distance using left endpoints</h3>
+<p>Using the velocity at the beginning of each interval, the six
+estimates are</p>
+<p><span class="math display">
+\begin{aligned}
+d_1&amp;\approx8(5)=40\text{ m}\\
+d_2&amp;\approx9(5)=45\text{ m}\\
+d_3&amp;\approx10(5)=50\text{ m}\\
+d_4&amp;\approx12(5)=60\text{ m}\\
+d_5&amp;\approx13(5)=65\text{ m}\\
+d_6&amp;\approx12(5)=60\text{ m}
+\end{aligned}
+</span></p>
+<p>Adding the estimates gives</p>
+<p><span class="math display">
+\begin{aligned}
+L&amp;=(8+9+10+12+13+12)(5)\\
+&amp;=64(5)\\
+&amp;=320\text{ m}
+\end{aligned}
+</span></p>
+<p>Therefore, the left-endpoint estimate of the distance travelled
+is</p>
+<p><span class="math display">
+\boxed{L=320\text{ m}}
+</span></p>
+<h3
+id="step-4-estimate-the-complete-distance-using-right-endpoints">Step 4:
+Estimate the complete distance using right endpoints</h3>
+<p>We can instead use the velocity at the end of each interval. The six
+velocity readings are now <span
+class="math inline">9,10,12,13,12,</span> and <span
+class="math inline">11</span> m/s. The estimated distances for the first
+two intervals are</p>
+<p><span class="math display">
+d_1\approx(9\text{ m/s})(5\text{ s})=45\text{ m}
+</span></p>
+<p><span class="math display">
+d_2\approx(10\text{ m/s})(5\text{ s})=50\text{ m}
+</span></p>
+<p>For all six intervals, the right-endpoint estimate is</p>
+<p><span class="math display">
+\begin{aligned}
+R&amp;=(9+10+12+13+12+11)(5)\\
+&amp;=67(5)\\
+&amp;=335\text{ m}
+\end{aligned}
+</span></p>
+<p>Thus, the right-endpoint estimate of the distance travelled is</p>
+<p><span class="math display">
+\boxed{R=335\text{ m}}
+</span></p>
+<p>The two estimates differ because the velocity changes during the
+30-second period and the two methods use different readings on each
+interval. The estimates are not expected to be exactly equal. They
+provide two approximations to the distance travelled.</p>
+<p>Location of Figure 17: Velocity graph with rectangular approximations
+using left-endpoint velocities, more frequent velocity readings, and a
+refined approximation to the area under the velocity curve.</p>
+<p>Figure 17 illustrates the idea geometrically. In panel (a), the
+rectangles use velocities at the beginning of the intervals. In panel
+(b), more intervals give a finer approximation. In panel (c), the
+rectangles fit the area under the velocity curve more closely. Each
+rectangle’s height represents velocity and its width represents elapsed
+time, so its area represents an estimated distance.</p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 id="generalizing-the-distance-estimate">Generalizing the Distance
+Estimate</h2>
+<p>Suppose an object moves in the positive direction with velocity</p>
+<p><span class="math display">
+v=f(t),\qquad a\leq t\leq b
+</span></p>
+<p>We want to estimate the distance travelled from time <span
+class="math inline">t=a</span> to time <span
+class="math inline">t=b</span>.</p>
+<h3 id="step-1-divide-the-time-interval">Step 1: Divide the time
+interval</h3>
+<p>Divide <span class="math inline">[a,b]</span> into <span
+class="math inline">n</span> equal subintervals. The width of each
+interval is</p>
+<p><span class="math display">
+\Delta t=\frac{b-a}{n}
+</span></p>
+<p>The partition points are</p>
+<p><span class="math display">
+t_i=a+i\Delta t,\qquad i=0,1,\ldots,n
+</span></p>
+<p>Thus, <span class="math inline">t_0=a</span> and <span
+class="math inline">t_n=b</span>. Each interval is <span
+class="math inline">[t_{i-1},t_i]</span> and has width <span
+class="math inline">\Delta t</span>.</p>
+<h3 id="step-2-use-left-endpoints">Step 2: Use left endpoints</h3>
+<p>On the first interval, <span class="math inline">[t_0,t_1]</span>,
+approximate the velocity by <span class="math inline">f(t_0)</span>. The
+estimated distance is</p>
+<p><span class="math display">
+f(t_0)\Delta t
+</span></p>
+<p>On the second interval, <span class="math inline">[t_1,t_2]</span>,
+use <span class="math inline">f(t_1)</span>, giving the estimate</p>
+<p><span class="math display">
+f(t_1)\Delta t
+</span></p>
+<p>Continuing in this way, the left-endpoint estimate for the whole time
+interval is</p>
+<p><span class="math display">
+L_n=f(t_0)\Delta t+f(t_1)\Delta t+\cdots+f(t_{n-1})\Delta t
+</span></p>
+<p>Equivalently,</p>
+<p><span class="math display">
+\boxed{L_n=\sum_{i=1}^{n}f(t_{i-1})\Delta t}
+</span></p>
+<p>This sum is called a left-endpoint sum. Each term is the area of a
+rectangle whose height is the velocity at the left endpoint and whose
+width is <span class="math inline">\Delta t</span>.</p>
+<h3 id="step-3-use-right-endpoints">Step 3: Use right endpoints</h3>
+<p>We can instead use the velocity at the right endpoint of each
+subinterval. For the first interval, use <span
+class="math inline">f(t_1)</span>; for the second, use <span
+class="math inline">f(t_2)</span>; and so on. The estimate becomes</p>
+<p><span class="math display">
+R_n=f(t_1)\Delta t+f(t_2)\Delta t+\cdots+f(t_n)\Delta t
+</span></p>
+<p>Equivalently,</p>
+<p><span class="math display">
+\boxed{R_n=\sum_{i=1}^{n}f(t_i)\Delta t}
+</span></p>
+<p>This is called a right-endpoint sum. Again, each term represents a
+rectangle area and the sum estimates the distance travelled.</p>
+<h3 id="step-4-increase-the-number-of-subintervals">Step 4: Increase the
+number of subintervals</h3>
+<p>When <span class="math inline">n</span> increases, the width <span
+class="math inline">\Delta t=(b-a)/n</span> decreases. The velocity
+usually varies less over each shorter interval, so the constant-velocity
+approximation on each interval becomes more representative of the actual
+motion. Consequently, the rectangular estimates generally improve as the
+intervals become finer.</p>
+<p>For a sufficiently well-behaved velocity function, the left- and
+right-endpoint sums approach the same limit as the number of
+subintervals increases without bound. The exact distance is therefore
+represented by</p>
+<p><span class="math display">
+\boxed{
+d=\lim_{n\to\infty}\sum_{i=1}^{n}f(t_{i-1})\Delta t
+=\lim_{n\to\infty}\sum_{i=1}^{n}f(t_i)\Delta t
+}
+</span></p>
+<p>The equality does <strong>not</strong> mean that the left- and
+right-endpoint estimates are equal for every finite value of <span
+class="math inline">n</span>. In general, <span
+class="math inline">L_n</span> and <span class="math inline">R_n</span>
+can differ, as they did in Example 4. The statement means that, as the
+intervals become arbitrarily small, both sums approach the same exact
+distance.</p>
+<p>Geometrically, the sums are areas of rectangles under or near the
+graph of velocity against time. In the limit, the approximation becomes
+the area under the velocity curve. This gives the central connection
+between the distance problem and the area problem.</p>
+<h1 id="quick-check-1">Quick Check</h1>
+<h2 class="red" id="question-1-1">Question 1</h2>
+<p>A robot moves at an approximately constant velocity of <span
+class="math inline">3</span> m/s for <span class="math inline">4</span>
+seconds. Estimate the distance travelled.</p>
+<h2 class="red" id="answer-2">Answer</h2>
+<p>Using distance = velocity <span class="math inline">\times</span>
+time,</p>
+<p><span class="math display">
+d=3(4)=12\text{ m}
+</span></p>
+<p><span class="math display">
+\boxed{12\text{ m}}
+</span></p>
+<h2 class="red" id="question-2-1">Question 2</h2>
+<p>For a time interval divided into <span class="math inline">n</span>
+equal subintervals, which velocity readings are used in a left-endpoint
+sum and which are used in a right-endpoint sum?</p>
+<h2 class="red" id="answer-3">Answer</h2>
+<p>A left-endpoint sum uses the velocity at the beginning of each
+subinterval:</p>
+<p><span class="math display">
+L_n=\sum_{i=1}^{n}f(t_{i-1})\Delta t
+</span></p>
+<p>A right-endpoint sum uses the velocity at the end of each
+subinterval:</p>
+<p><span class="math display">
+R_n=\sum_{i=1}^{n}f(t_i)\Delta t
+</span></p>
+<div class="question-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="scenario-problem-1">Scenario Problem</h1>
+<h2 class="green" id="problem-1">Problem</h2>
+<p>A mobile robot travels along a straight warehouse aisle. Its
+controller records the robot’s forward velocity at five-second intervals
+over a 20-second period. The readings, expressed in metres per second,
+are shown below.</p>
+<div style="text-align: center;">
+<p><span><strong>Table 3.</strong> Recorded velocity of a mobile
+robot.</span></p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Time (s)</th>
+<th style="text-align: right;">0</th>
+<th style="text-align: right;">5</th>
+<th style="text-align: right;">10</th>
+<th style="text-align: right;">15</th>
+<th style="text-align: right;">20</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Velocity (m/s)</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">4</td>
+</tr>
+</tbody>
+</table>
+<p>Estimate the distance travelled over the 20-second period using (a)
+left endpoints and (b) right endpoints.</p>
+<h2 class="green" id="solution-5">Solution</h2>
+<p>The interval width is <span class="math inline">\Delta t=5</span>
+seconds. There are four subintervals.</p>
+<p><strong>(a) Left-endpoint estimate</strong></p>
+<p>Use the velocities at <span class="math inline">t=0,5,10,15</span>
+seconds: <span class="math inline">1,2,3,4</span> m/s.</p>
+<p><span class="math display">
+\begin{aligned}
+L&amp;=(1+2+3+4)(5)\\
+&amp;=10(5)\\
+&amp;=50\text{ m}
+\end{aligned}
+</span></p>
+<p>Therefore, the left-endpoint estimate is</p>
+<p><span class="math display">
+\boxed{L=50\text{ m}}
+</span></p>
+<p><strong>(b) Right-endpoint estimate</strong></p>
+<p>Use the velocities at <span class="math inline">t=5,10,15,20</span>
+seconds: <span class="math inline">2,3,4,4</span> m/s.</p>
+<p><span class="math display">
+\begin{aligned}
+R&amp;=(2+3+4+4)(5)\\
+&amp;=13(5)\\
+&amp;=65\text{ m}
+\end{aligned}
+</span></p>
+<p>Therefore, the right-endpoint estimate is</p>
+<p><span class="math display">
+\boxed{R=65\text{ m}}
+</span></p>
+<p>The estimates differ because the velocity readings selected for each
+interval differ. Both approximate the distance travelled; more frequent
+readings would allow the motion to be represented using narrower
+intervals and could improve the estimates.</p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="summary-1">Summary</h1>
+<p>When velocity is constant, distance is velocity multiplied by time.
+When velocity varies, we estimate the distance on short time intervals
+by assuming the velocity is approximately constant on each interval,
+then add the resulting distances. Geometrically, each product is the
+area of a rectangle on a velocity-time graph. In Example 4, after
+converting the recorded speeds to metres per second, the left-endpoint
+estimate is <span class="math inline">320</span> m and the
+right-endpoint estimate is <span class="math inline">335</span> m.</p>
+<p>For a velocity function <span class="math inline">v=f(t)</span> on
+<span class="math inline">[a,b]</span>, divide the interval into <span
+class="math inline">n</span> equal parts of width <span
+class="math inline">\Delta t=(b-a)/n</span>. The left-endpoint estimate
+is <span class="math inline">L_n=\sum_{i=1}^{n}f(t_{i-1})\Delta
+t</span>, while the right-endpoint estimate is <span
+class="math inline">R_n=\sum_{i=1}^{n}f(t_i)\Delta t</span>. For a
+sufficiently well-behaved velocity function, both sums approach the same
+limit as <span class="math inline">n\to\infty</span>. The limiting value
+represents the exact distance travelled and connects the distance
+problem to the area under a velocity curve.</p>
+<h1 id="exercises">Exercises</h1>
+<p>Exercises help in transforming theoretical concepts into practical
+understanding. Mathematics is learned by doing and solving exercises
+which train you to analyze problems, select appropriate methods, and
+construct logical solutions. Attempting problems sometimes leads to
+mistakes which provide opportunities for learning and improvement.
+Regular practice increases speed, accuracy, and confidence. Exercises
+are given in the recommended book which has also been provided to you
+and you are expected to solve them on your own.</p>
+<h2 id="exercises-1">Exercises</h2>
+<p>Solve the odd number exercises from exercise 1 to 50.</p>
+</body>
+</html>
