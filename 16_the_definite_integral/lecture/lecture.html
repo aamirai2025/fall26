@@ -45,264 +45,512 @@ Geometry</h1>
 <h2 id="the-definite-integral">The Definite Integral</h2>
 <h3 id="dr.-aamir-alaud-din">Dr. Aamir Alaud Din</h3>
 <h1 id="objectives">Objectives</h1>
-<p>After preparing this topic, you should be able to:</p>
-<ol type="1">
-<li>Define the definite integral as the limit of Riemann sums and
-interpret it as signed area between a curve and the <span
-class="math inline">x</span>-axis.</li>
-<li>Evaluate definite integrals by expressing them as limits of Riemann
-sums and by using standard summation formulas.</li>
-<li>Apply the Midpoint Rule to approximate definite integrals
-numerically and explain how the choice of subintervals affects the
-approximation.</li>
-<li>Use the properties of the definite integral to simplify integrals,
-compare their values, and combine integrals over adjacent
-intervals.</li>
-</ol>
+<p>After preparing this topic you must be able to 1. Define the definite
+integral as a limit of Riemann sums, interpret it as signed (net) area,
+understand the precise meaning and notation of the integral, and use
+right-endpoint sums to express limits as definite integrals. 2. Evaluate
+definite integrals by expressing them as limits of Riemann sums,
+applying formulas for sums of powers and properties of sums, and
+interpreting definite integrals geometrically as signed areas. 3. Use
+the Midpoint Rule to approximate definite integrals by partitioning an
+interval into equal subintervals, evaluating the integrand at each
+subinterval’s midpoint, and interpreting the resulting approximation
+geometrically and numerically. 4. Apply the fundamental properties of
+definite integrals—including reversing or equating limits, linearity,
+additivity over adjacent intervals, and comparison bounds—to simplify
+and evaluate definite integrals and estimate their values.</p>
 <h1 id="the-why-section">The Why Section</h1>
-<ul>
-<li><p>In engineering and computer science, many important quantities
-are not measured at a single instant or position but accumulate over an
-interval.</p></li>
-<li><p>For example, the velocity of a moving mechanical component may
-vary with time, so its total displacement cannot generally be found by
-multiplying one velocity value by the elapsed time.</p></li>
-<li><p>Similarly, a robot may experience a changing force as it moves, a
-sensor may record a changing signal, and a computer system may process a
-continuously varying rate of data.</p></li>
-<li><p>The definite integral provides a mathematical way to combine the
-contributions of a changing quantity over an interval.</p></li>
-<li><p>Geometrically, it can be understood through the areas of thin
-rectangles that approximate the region between a graph and the
-horizontal axis. As the rectangles become narrower, their total signed
-area approaches the definite integral.</p></li>
-<li><p>The definite integral is defined using a limit of Riemann sums.
-This definition explains the meaning of integration and provides a
-foundation for evaluating integrals.</p></li>
-<li><p>In practical computations, a limit of sums may be lengthy.
-Summation formulas make such calculations manageable, while numerical
-methods such as the Midpoint Rule estimate integrals when an exact
-calculation is unavailable or inconvenient.</p></li>
-<li><p>The properties of definite integrals allow us to split an
-interval, reverse its direction, combine functions, and compare
-accumulated quantities without returning to the definition each
-time.</p></li>
-<li><p>Consider a mechatronic positioning system whose controller
-measures the power consumed by a motor as the motor moves a robotic arm.
-Since power changes during operation, the total energy consumed can be
-determined by integrating power over time. This type of problem can be
-solved by studying the definite integral, methods of evaluating it,
-numerical approximation, and its properties.</p></li>
-</ul>
-<h1 id="objective-1-the-definite-integral">Objective 1: The Definite
-Integral</h1>
-<h2 id="riemann-sums">Riemann Sums</h2>
-<ul>
-<li><p>Suppose that <span class="math inline">f</span> is a nonnegative
-function defined on the interval <span class="math inline">[a,b]</span>.
-We want to estimate the area of the region bounded by the graph of <span
-class="math inline">f</span>, the <span
-class="math inline">x</span>-axis, and the vertical lines <span
-class="math inline">x=a</span> and <span
-class="math inline">x=b</span>.</p></li>
-<li><p>We divide the interval <span class="math inline">[a,b]</span>
-into <span class="math inline">n</span> subintervals of equal
-width.</p></li>
-</ul>
+<p>A definite integral provides a systematic way to accumulate a
+continuously varying quantity over an interval. In mechanical
+engineering, it can be used to estimate the net displacement of a moving
+component from its velocity, the work done by a variable force, or the
+accumulated effect of a changing load. In computer science and
+mechatronics, sensor measurements may vary continuously over time, and
+an integral can estimate the total accumulated signal or motion from
+those changing measurements.</p>
+<p>For example, suppose a mechatronic positioning system records the
+velocity of a moving platform as a function of time. The velocity may be
+positive during forward motion and negative during reverse motion.
+Adding the signed contributions over a time interval gives the
+platform’s net displacement. To understand how this accumulation is
+represented mathematically and how it can be calculated from
+increasingly fine subdivisions, we study the definite integral and
+Riemann sums.</p>
+<p>A definite integral allows us to combine many small contributions
+into a single total quantity. In mechanical engineering, these
+contributions may represent small amounts of work along a displacement,
+the effect of a varying force, or the accumulated response of a system.
+In computer science and data science, the same mathematical idea appears
+when accumulating a continuously varying quantity or approximating a
+total from many small intervals.</p>
+<p>For example, imagine a mechatronic actuator whose force varies with
+its position. The total work performed while the actuator moves from one
+position to another depends on the force throughout the motion, not just
+on its force at the starting or ending point. We can divide the interval
+into small pieces, approximate the work on each piece, add the
+contributions, and then take a limit as the pieces become increasingly
+narrow. The definite integral formalizes this process. In this lecture,
+we will learn how to evaluate definite integrals from their Riemann-sum
+definition and how to interpret their values geometrically.</p>
+<p>A definite integral can represent an accumulated quantity, such as
+distance travelled, energy consumed, fluid volume, or the total effect
+of a changing force. In practical problems, an exact antiderivative may
+be difficult to find, or the available information may consist only of
+measurements taken at selected points. Numerical integration provides a
+way to estimate the accumulated quantity from a finite number of
+function values.</p>
+<p>The Midpoint Rule is a numerical integration method that approximates
+the area over each subinterval by using a rectangle whose height is the
+function value at the midpoint of that subinterval. Compared with using
+only the left or right endpoint, a midpoint sample can provide a better
+approximation for many functions. The quality of an approximation still
+depends on the behavior of the function and the number of
+subintervals.</p>
+<p><strong>Mechatronics scenario.</strong> Imagine a mobile robot whose
+speed changes as it moves along a factory floor. Its controller records
+speed at the midpoint of each short time interval. By multiplying each
+midpoint speed by the corresponding time interval and adding the
+results, the controller can estimate the total distance travelled.
+Studying the Midpoint Rule gives us the numerical method needed to make
+this estimate.</p>
+<p>A definite integral can represent accumulated change or the signed
+area between a graph and the horizontal axis. In engineering and
+computing, such quantities arise when estimating total displacement from
+a velocity profile, calculating accumulated energy, or adding a signal’s
+contribution over successive time intervals. Once an integral has been
+defined, its properties let us combine simpler integrals, reverse an
+interval when necessary, and obtain useful bounds without evaluating
+every integral from first principles.</p>
+<p>Consider a mechatronic actuator whose sensor records a time-dependent
+signal <span class="math inline">f(t)</span>. The total signed
+contribution over a time interval can be represented by a definite
+integral. If the interval is divided into adjacent parts, we should be
+able to combine the contributions from those parts; if the signal is
+bounded above and below, we should also be able to estimate the total
+contribution. These are exactly the kinds of questions that can be
+handled by studying the properties of the definite integral.</p>
+<h1 id="the-definite-integral-1">The Definite Integral</h1>
+<h2 id="from-the-area-problem-to-a-limit">From the Area Problem to a
+Limit</h2>
+<p>In the area problem, we approximated the area under a curve by
+dividing the interval into many small subintervals and adding the areas
+of the corresponding rectangles. As the number of subintervals
+increases, their widths become smaller and the rectangular approximation
+can approach the exact area.</p>
+<p>For a function <span class="math inline">f</span> on <span
+class="math inline">[a,b]</span>, divide the interval into <span
+class="math inline">n</span> equal subintervals. Each subinterval has
+width</p>
 <p><span class="math display">
 \Delta x=\frac{b-a}{n}
 </span></p>
-<ul>
-<li>The partition points are</li>
-</ul>
+<p>Choose a sample point <span class="math inline">x_i^*</span> from the
+<span class="math inline">i</span>th subinterval. The height of the
+corresponding rectangle is <span class="math inline">f(x_i^*)</span>, so
+its signed contribution is <span class="math inline">f(x_i^*)\Delta
+x</span>. Adding all the contributions gives the Riemann sum</p>
 <p><span class="math display">
-x_0=a,\quad x_1=a+\Delta x,\quad \ldots,\quad x_n=b
+\sum_{i=1}^{n} f(x_i^*)\Delta x
 </span></p>
-<ul>
-<li><p>In each subinterval, we choose a sample point <span
-class="math inline">x_i^*</span> and construct a rectangle whose height
-is <span class="math inline">f(x_i^*)</span> and whose width is <span
-class="math inline">\Delta x</span>.</p></li>
-<li><p>The area of the <span class="math inline">i</span>th rectangle is
-<span class="math inline">f(x_i^*)\Delta x</span>, so the sum of the
-areas of all rectangles is</p></li>
-</ul>
+<p>As <span class="math inline">n</span> increases and the widths of the
+subintervals approach zero, this sum approaches the definite integral,
+provided the function is integrable:</p>
 <p><span class="math display">
-\sum_{i=1}^{n}f(x_i^*)\Delta x
+\lim_{n\to\infty}\sum_{i=1}^{n}f(x_i^*)\Delta x
 </span></p>
-<ul>
-<li>This sum is called a <strong>Riemann sum</strong>. It approximates
-the area under the curve, and the approximation generally improves as
-the widths of the rectangles decrease.</li>
-</ul>
-<div style="text-align: center;">
-<p><img src="../images/1601.png" style="width: 1200 px; display: block; margin: 0 auto 10px auto;"></p>
-<p><span><strong>Figure 1.</strong> A region under a curve approximated
-by rectangles forming a Riemann sum vs the exact area under the curve
-using integral.</span></p>
-</div>
-<ul>
-<li>When <span class="math inline">f</span> is continuous on <span
-class="math inline">[a,b]</span>, the limit of these sums exists as the
-largest subinterval width approaches zero. The limit gives the exact
-accumulated signed area.</li>
-</ul>
+<p>The same limiting process can be used when some of the graph lies
+below the <span class="math inline">x</span>-axis. In that case, the
+contributions below the axis are negative, so the integral represents
+signed or net area rather than the total geometric area.</p>
 <h2 class="blue" id="definition-the-definite-integral">Definition: The
 Definite Integral</h2>
-<p>If <span class="math inline">f</span> is defined on <span
-class="math inline">[a,b]</span>, the definite integral of <span
-class="math inline">f</span> from <span class="math inline">a</span> to
-<span class="math inline">b</span> is</p>
+<p>If <span class="math inline">f</span> is defined on the interval
+<span class="math inline">[a,b]</span>, divide the interval into <span
+class="math inline">n</span> equal subintervals, each of width</p>
+<p><span class="math display">
+\Delta x=\frac{b-a}{n}
+</span></p>
+<p>Let the endpoints be <span
+class="math inline">x_0=a,x_1,\ldots,x_n=b</span>, and choose a sample
+point <span class="math inline">x_i^*</span> in each subinterval <span
+class="math inline">[x_{i-1},x_i]</span>. The <strong>definite
+integral</strong> of <span class="math inline">f</span> from <span
+class="math inline">a</span> to <span class="math inline">b</span> is
+defined by</p>
 <p><span class="math display">
 \int_a^b f(x)\,dx
 =
-\lim_{n\to\infty}
-\sum_{i=1}^{n}f(x_i^*)\Delta x
+\lim_{n\to\infty}\sum_{i=1}^{n}f(x_i^*)\Delta x
 </span></p>
-<p>provided that the limit exists, where <span
-class="math inline">\Delta x=(b-a)/n</span> and <span
-class="math inline">x_i^*</span> is a sample point in the <span
-class="math inline">i</span>th subinterval.</p>
+<p>provided this limit exists and has the same value for every allowable
+choice of sample points. If the limit exists, <span
+class="math inline">f</span> is said to be integrable on <span
+class="math inline">[a,b]</span>.</p>
 <div class="definition-end">
 <span class="math inline">\blacksquare</span>
 </div>
-<ul>
-<li><p>The symbol <span class="math inline">\int</span> is an elongated
-letter S, reminding us of a sum. The expression <span
-class="math inline">f(x)</span> is called the integrand, <span
-class="math inline">a</span> is the lower limit of integration, and
-<span class="math inline">b</span> is the upper limit of
-integration.</p></li>
-<li><p>The variable <span class="math inline">x</span> is a variable of
-integration. It is a dummy variable, so the value of the integral does
-not change if <span class="math inline">x</span> is replaced
-consistently by another variable.</p></li>
-</ul>
+<h2 id="the-precise-meaning-of-the-limit">The Precise Meaning of the
+Limit</h2>
+<p>The statement</p>
 <p><span class="math display">
-\int_a^b f(x)\,dx=\int_a^b f(t)\,dt
+\lim_{n\to\infty}\sum_{i=1}^{n}f(x_i^*)\Delta x
+=
+\int_a^b f(x)\,dx
 </span></p>
-<ul>
-<li>A continuous function on a closed interval is integrable. More
-generally, a bounded function with only finitely many discontinuities on
-the interval is also integrable.</li>
-</ul>
-<h2 id="signed-area">Signed Area</h2>
-<ul>
-<li><p>If <span class="math inline">f(x)\geq 0</span> on <span
-class="math inline">[a,b]</span>, then <span
-class="math inline">\int_a^b f(x)\,dx</span> represents the area under
-the graph and above the <span
-class="math inline">x</span>-axis.</p></li>
-<li><p>If the graph lies below the <span
-class="math inline">x</span>-axis, the definite integral is negative.
-Therefore, a definite integral represents <strong>signed area</strong>,
-not always ordinary geometric area.</p></li>
-<li><p>If a graph lies above the axis over one part of an interval and
-below it over another part, the integral is the area above the axis
-minus the area below the axis.</p></li>
-</ul>
-<div style="text-align: center;">
-<p><img src="../images/1602.png" style="width: 1200 px; display: block; margin: 0 auto 10px auto;"></p>
-<p><span><strong>Figure 2.</strong> A graph crossing the <span
-class="math inline">x</span>-axis, showing positive and negative
-contributions to a definite integral.</span></p>
-</div>
-<ul>
-<li>If <span class="math inline">A_1</span> is the area above the <span
-class="math inline">x</span>-axis and <span
-class="math inline">A_2</span> is the area below the <span
-class="math inline">x</span>-axis, then</li>
-</ul>
+<p>means that the Riemann sums can be made as close as desired to the
+definite integral by choosing a sufficiently large number of
+subintervals. More precisely, for every <span
+class="math inline">\epsilon&gt;0</span>, there is an integer <span
+class="math inline">N</span> such that</p>
+<p><span class="math display">
+\left|\int_a^b f(x)\,dx-\sum_{i=1}^{n}f(x_i^*)\Delta
+x\right|&lt;\epsilon
+</span></p>
+<p>whenever <span class="math inline">n&gt;N</span> and the sample
+points are chosen in their respective subintervals.</p>
+<p>Here, <span class="math inline">\epsilon</span> is any prescribed
+positive error tolerance. The condition says that once the partition is
+sufficiently fine, every permitted Riemann sum is within <span
+class="math inline">\epsilon</span> of the integral. The same value must
+be approached regardless of the sample points selected.</p>
+<h2 id="notes-on-integral-notation">Notes on Integral Notation</h2>
+<p><strong>Note 1: The integral sign and terminology.</strong> The
+symbol <span class="math inline">\int</span> is an elongated letter
+<span class="math inline">S</span>, chosen to recall a limit of sums. In
+<span class="math inline">\int_a^b f(x)\,dx</span>, the expression <span
+class="math inline">f(x)</span> is the <strong>integrand</strong>, <span
+class="math inline">a</span> is the <strong>lower limit of
+integration</strong>, and <span class="math inline">b</span> is the
+<strong>upper limit of integration</strong>. The symbol <span
+class="math inline">dx</span> indicates the variable of integration; in
+this definition it corresponds to the small widths <span
+class="math inline">\Delta x</span>. The process of calculating an
+integral is called <strong>integration</strong>.</p>
+<p><strong>Note 2: The value does not depend on the variable’s
+name.</strong> A definite integral is a number, so the integration
+variable can be renamed without changing its value:</p>
+<p><span class="math display">
+\int_a^b f(x)\,dx
+=
+\int_a^b f(t)\,dt
+=
+\int_a^b f(r)\,dr
+</span></p>
+<p><strong>Note 3: The Riemann sum.</strong> The sum</p>
+<p><span class="math display">
+\sum_{i=1}^{n}f(x_i^*)\Delta x
+</span></p>
+<p>is called a <strong>Riemann sum</strong>, named after the
+mathematician Bernhard Riemann. It approximates the definite integral
+and can be interpreted geometrically through the signed areas of
+rectangles.</p>
+<h2 id="riemann-sums-and-area-under-a-curve">Riemann Sums and Area Under
+a Curve</h2>
+<p>When <span class="math inline">f(x)\geq 0</span> on <span
+class="math inline">[a,b]</span>, each rectangle’s contribution is
+nonnegative. The Riemann sum adds the areas of the rectangles, and in
+the limit the definite integral gives the area under the curve from
+<span class="math inline">a</span> to $b.</p>
+<p>Location of Figure 1. Riemann rectangles approximating the area under
+a nonnegative curve; the Riemann sum is the sum of the rectangle
+areas.</p>
+<p>Location of Figure 2. The region under the curve <span
+class="math inline">y=f(x)</span> from <span
+class="math inline">a</span> to <span class="math inline">b</span>,
+representing the definite integral when <span
+class="math inline">f(x)\geq 0</span>.</p>
+<p>The figures illustrate the transition from a rectangular
+approximation to the exact area. As the widths shrink, the Riemann sum
+approaches the area beneath the curve.</p>
+<h2 id="definite-integrals-as-net-area">Definite Integrals as Net
+Area</h2>
+<p>A function need not be positive throughout the interval. If the graph
+lies below the <span class="math inline">x</span>-axis, the
+corresponding function values are negative, so the associated terms
+<span class="math inline">f(x_i^*)\Delta x</span> are negative. The
+Riemann sum therefore adds areas above the axis and subtracts areas
+below it.</p>
+<p>Location of Figure 3. Riemann rectangles for a function that crosses
+the <span class="math inline">x</span>-axis, with contributions above
+the axis positive and contributions below the axis negative.</p>
+<p>Location of Figure 4. The signed or net area between the curve and
+the <span class="math inline">x</span>-axis, showing positive and
+negative regions.</p>
+<p>Let <span class="math inline">A_1</span> denote the geometric area
+above the <span class="math inline">x</span>-axis and below the curve,
+and let <span class="math inline">A_2</span> denote the geometric area
+below the <span class="math inline">x</span>-axis and above the curve.
+Then the definite integral is the <strong>net area</strong>:</p>
 <p><span class="math display">
 \int_a^b f(x)\,dx=A_1-A_2
 </span></p>
-<ul>
-<li>The total geometric area, in contrast, is <span
-class="math inline">A_1+A_2</span>. This distinction is important
-whenever a function changes sign.</li>
-</ul>
+<p>Thus, a definite integral is not always the total geometric area. If
+the graph lies entirely above the axis, the integral is the area; if
+some of the graph lies below the axis, those regions contribute
+negatively.</p>
 <h2 class="green" id="example-1">Example 1</h2>
 <p>Evaluate the Riemann sum for <span
-class="math inline">f(x)=x^2-6x</span>, <span class="math inline">0\leq
-x\leq3</span>, using <span class="math inline">n=6</span> subintervals
-and the right endpoints.</p>
+class="math inline">f(x)=x^3-6x</span> on <span
+class="math inline">[0,3]</span>, using <span
+class="math inline">n=6</span> equal subintervals and right
+endpoints.</p>
 <h2 class="green" id="solution">Solution</h2>
 <p>The interval is <span class="math inline">[0,3]</span> and the number
-of subintervals is <span class="math inline">n=6</span>.</p>
+of subintervals is <span class="math inline">n=6</span>. Therefore, the
+width of each subinterval is</p>
 <p><span class="math display">
 \Delta x=\frac{3-0}{6}=\frac12
 </span></p>
 <p>Using right endpoints, the sample points are</p>
 <p><span class="math display">
-x_i=\frac{i}{2},\qquad i=1,2,\ldots,6
+x_1=0.5,\quad x_2=1,\quad x_3=1.5,\quad x_4=2,\quad x_5=2.5,\quad x_6=3
 </span></p>
-<p>Thus, the right-endpoint Riemann sum is</p>
+<p>The Riemann sum is</p>
 <p><span class="math display">
-R_6=\sum_{i=1}^{6}f\left(\frac{i}{2}\right)\frac12
+R_6=\sum_{i=1}^{6}f(x_i)\Delta x
 </span></p>
-<p>Substituting the sample points into <span
-class="math inline">f(x)=x^2-6x</span> gives</p>
+<p>Substitute <span class="math inline">f(x)=x^3-6x</span> and <span
+class="math inline">\Delta x=\frac12</span>:</p>
+<p><span class="math display">
+R_6=\frac12\left[f(0.5)+f(1)+f(1.5)+f(2)+f(2.5)+f(3)\right]
+</span></p>
+<p>Evaluate the function at each right endpoint:</p>
+<p><span class="math display">
+\begin{aligned}
+f(0.5)&amp;=(0.5)^3-6(0.5)=-2.875\\
+f(1)&amp;=1^3-6(1)=-5\\
+f(1.5)&amp;=(1.5)^3-6(1.5)=-5.625\\
+f(2)&amp;=2^3-6(2)=-4\\
+f(2.5)&amp;=(2.5)^3-6(2.5)=0.625\\
+f(3)&amp;=3^3-6(3)=9
+\end{aligned}
+</span></p>
+<p>Therefore,</p>
 <p><span class="math display">
 \begin{aligned}
 R_6
-&amp;=\frac12\left[f\left(\frac12\right)+f(1)+f\left(\frac32\right)\right.\\
-&amp;\qquad\left.+f(2)+f\left(\frac52\right)+f(3)\right]\\
-&amp;=\frac12\left[-\frac{11}{4}-5-\frac{27}{4}-8-\frac{35}{4}-9\right]\\
-&amp;=-\frac{161}{8}\\
-&amp;=-20.125
+&amp;=\frac12(-2.875-5-5.625-4+0.625+9)\\
+&amp;=-3.9375
 \end{aligned}
 </span></p>
-<p>The Riemann sum is an approximation to the signed area. Because the
-function is mostly below the <span class="math inline">x</span>-axis on
-this interval, a negative value is reasonable.</p>
+<p>Location of Figure 5. Graph of <span
+class="math inline">y=x^3-6x</span> on <span
+class="math inline">[0,3]</span> with six right-endpoint rectangles;
+rectangles above the <span class="math inline">x</span>-axis contribute
+positively and those below it negatively.</p>
+<p>The result is negative because the total signed contribution from the
+rectangles below the <span class="math inline">x</span>-axis exceeds the
+contribution from the rectangle above the axis. The Riemann sum is an
+approximation using six rectangles; it is not yet the exact definite
+integral.</p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 id="unequal-subintervals-and-the-general-limit">Unequal Subintervals
+and the General Limit</h2>
+<p><strong>Note 4: Unequal widths.</strong> Equal-width subdivisions are
+convenient, but some applications provide data at unequally spaced times
+or require subdivisions of different sizes. Riemann sums can also be
+defined for unequal subintervals. If the widths are <span
+class="math inline">\Delta x_1,\Delta x_2,\ldots,\Delta x_n</span>, the
+sum is</p>
+<p><span class="math display">
+\sum_{i=1}^{n} f(x_i^*)\Delta x_i
+</span></p>
+<p>The limiting process requires the largest subinterval width to
+approach zero. Writing <span class="math inline">\max \Delta x_i</span>
+for the largest width, the general definition is</p>
+<p><span class="math display">
+\int_a^b f(x)\,dx
+=
+\lim_{\max\Delta x_i\to0}
+\sum_{i=1}^{n}f(x_i^*)\Delta x_i
+</span></p>
+<p>This form is useful when the observations or sampling times are not
+equally spaced. The essential condition is that the widths of all
+subintervals become arbitrarily small.</p>
+<h2 class="orange" id="theorem">Theorem</h2>
+<p>If <span class="math inline">f</span> is continuous on <span
+class="math inline">[a,b]</span>, or if it has only a finite number of
+jump discontinuities on <span class="math inline">[a,b]</span>, then
+<span class="math inline">f</span> is integrable on <span
+class="math inline">[a,b]</span>. In other words, the definite
+integral</p>
+<p><span class="math display">
+\int_a^b f(x)\,dx
+</span></p>
+<p>exists.</p>
+<div class="theorem-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="orange"
+id="theorem-definite-integral-as-a-limit-of-right-endpoint-sums">Theorem:
+Definite Integral as a Limit of Right-Endpoint Sums</h2>
+<p>If <span class="math inline">f</span> is integrable on <span
+class="math inline">[a,b]</span>, then</p>
+<p><span class="math display">
+\int_a^b f(x)\,dx
+=
+\lim_{n\to\infty}\sum_{i=1}^{n}f(x_i)\Delta x
+</span></p>
+<p>where</p>
+<p><span class="math display">
+\Delta x=\frac{b-a}{n}
+\qquad\text{and}\qquad
+x_i=a+i\Delta x
+</span></p>
+<p>Here, <span class="math inline">x_i</span> is the right endpoint of
+the <span class="math inline">i</span>th subinterval. This theorem lets
+us express a limit of sums as a definite integral by identifying the
+function, the interval, and the subinterval width.</p>
+<div class="theorem-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="green" id="example-2">Example 2</h2>
+<p>Express the following limit as a definite integral on the interval
+<span class="math inline">[0,\pi]</span>:</p>
+<p><span class="math display">
+\lim_{n\to\infty}\sum_{i=1}^{n}(x_i^3+x_i\sin x_i)\Delta x
+</span></p>
+<h2 class="green" id="solution-1">Solution</h2>
+<p>Compare the given limit with the right-endpoint sum formula</p>
+<p><span class="math display">
+\int_a^b f(x)\,dx
+=
+\lim_{n\to\infty}\sum_{i=1}^{n}f(x_i)\Delta x
+</span></p>
+<p>The expression being evaluated at each sample point is <span
+class="math inline">x_i^3+x_i\sin x_i</span>. Therefore, the
+corresponding function is</p>
+<p><span class="math display">
+f(x)=x^3+x\sin x
+</span></p>
+<p>The interval is <span class="math inline">[0,\pi]</span>, so <span
+class="math inline">a=0</span> and <span
+class="math inline">b=\pi</span>. The subinterval width is <span
+class="math inline">\Delta x=\frac{\pi}{n}</span>, and the right
+endpoints are <span class="math inline">x_i=0+i\Delta x</span>.</p>
+<p>Applying the theorem gives</p>
+<p><span class="math display">
+\boxed{
+\lim_{n\to\infty}\sum_{i=1}^{n}(x_i^3+x_i\sin x_i)\Delta x
+=
+\int_0^\pi (x^3+x\sin x)\,dx
+}
+</span></p>
 <div class="example-end">
 <span class="math inline">\blacksquare</span>
 </div>
 <h1 id="quick-check">Quick Check</h1>
 <h2 class="red" id="question-1">Question 1</h2>
-<p>What does the expression <span class="math inline">f(x_i^*)\Delta
-x</span> represent in a Riemann sum?</p>
+<p>A function is divided into <span class="math inline">n=8</span> equal
+subintervals on <span class="math inline">[2,10]</span>. Find the width
+<span class="math inline">\Delta x</span>.</p>
 <h2 class="red" id="answer">Answer</h2>
-<p>It represents the signed area of the rectangle with width <span
-class="math inline">\Delta x</span> and height <span
-class="math inline">f(x_i^*)</span>.</p>
-<h2 class="red" id="question-2">Question 2</h2>
-<p>If a graph lies entirely below the <span
-class="math inline">x</span>-axis on <span
-class="math inline">[a,b]</span>, what is the sign of <span
-class="math inline">\int_a^b f(x)\,dx</span>?</p>
-<h2 class="red" id="answer-1">Answer</h2>
-<p>The integral is negative because the function values are negative
-throughout the interval.</p>
+<p><span class="math display">
+\Delta x=\frac{10-2}{8}=1
+</span></p>
 <div class="question-end">
 <span class="math inline">\blacksquare</span>
 </div>
-<h1 id="objective-2-evaluating-definite-integrals">Objective 2:
-Evaluating Definite Integrals</h1>
-<h2 id="evaluating-an-integral-from-its-definition">Evaluating an
-Integral from Its Definition</h2>
-<ul>
-<li><p>The definition of the definite integral expresses it as a limit
-of Riemann sums. To evaluate an integral directly from the definition,
-we write the sum, substitute the function and sample points, simplify
-the expression, and then evaluate the limit as <span
-class="math inline">n</span> approaches infinity.</p></li>
-<li><p>For equal subintervals on <span class="math inline">[a,b]</span>,
-the width is <span class="math inline">\Delta x=(b-a)/n</span>. If right
-endpoints are used, the sample points are <span
-class="math inline">x_i=a+i\Delta x</span>.</p></li>
-<li><p>The resulting sum is</p></li>
-</ul>
+<h2 class="red" id="question-2">Question 2</h2>
+<p>A graph has geometric area <span class="math inline">A_1=12</span>
+above the <span class="math inline">x</span>-axis and area <span
+class="math inline">A_2=5</span> below the <span
+class="math inline">x</span>-axis. Find the definite integral over that
+interval.</p>
+<h2 class="red" id="answer-1">Answer</h2>
+<p>The definite integral gives net area:</p>
+<p><span class="math display">
+\int_a^b f(x)\,dx=A_1-A_2=12-5=7
+</span></p>
+<div class="question-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="scenario-problem">Scenario Problem</h1>
+<h2 class="green" id="problem">Problem</h2>
+<p>A mechatronic cart moves along a straight track. Its velocity, in
+metres per second, is modeled over the time interval <span
+class="math inline">0\leq t\leq3</span> by</p>
+<p><span class="math display">
+v(t)=t-2
+</span></p>
+<p>The cart initially moves in the negative direction and later moves in
+the positive direction. Use the interpretation of the definite integral
+as net area to determine its net displacement over the three-second
+interval.</p>
+<h2 class="green" id="solution-2">Solution</h2>
+<p>The net displacement is the definite integral of velocity over
+time:</p>
+<p><span class="math display">
+\text{Net displacement}=\int_0^3 v(t)\,dt=\int_0^3(t-2)\,dt
+</span></p>
+<p>The velocity is negative on <span class="math inline">0\leq
+t&lt;2</span> and positive on <span
+class="math inline">2&lt;t\leq3</span>. Thus, the region below the time
+axis contributes negatively and the region above it contributes
+positively.</p>
+<p>The geometric area below the axis from <span
+class="math inline">t=0</span> to <span class="math inline">t=2</span>
+is a triangle with base <span class="math inline">2</span> and height
+<span class="math inline">2</span>:</p>
+<p><span class="math display">
+A_1=\frac12(2)(2)=2
+</span></p>
+<p>The geometric area above the axis from <span
+class="math inline">t=2</span> to <span class="math inline">t=3</span>
+is a triangle with base <span class="math inline">1</span> and height
+<span class="math inline">1</span>:</p>
+<p><span class="math display">
+A_2=\frac12(1)(1)=\frac12
+</span></p>
+<p>The signed area, and hence the net displacement, is</p>
+<p><span class="math display">
+\int_0^3(t-2)\,dt=-2+\frac12=-\frac32\text{ m}
+</span></p>
+<p>Therefore, the cart’s net displacement is <span
+class="math inline">-1.5</span> m. The negative sign indicates that its
+final position is 1.5 m in the negative direction relative to its
+initial position.</p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="evaluating-definite-integrals">Evaluating Definite
+Integrals</h1>
+<h2 id="the-definite-integral-as-a-limit-of-sums">The Definite Integral
+as a Limit of Sums</h2>
+<p>Suppose that <span class="math inline">f</span> is integrable on the
+interval <span class="math inline">[a,b]</span>. Divide the interval
+into <span class="math inline">n</span> equal subintervals, each of
+width</p>
+<p><span class="math display">
+\Delta x=\frac{b-a}{n}
+</span></p>
+<p>Using right endpoints, the sample point in the <span
+class="math inline">i</span>th subinterval is</p>
+<p><span class="math display">
+x_i=a+i\Delta x
+</span></p>
+<p>The corresponding Riemann sum is</p>
+<p><span class="math display">
+\sum_{i=1}^{n} f(x_i)\Delta x
+</span></p>
+<p>As <span class="math inline">n</span> increases, the widths of the
+subintervals approach zero. The limit of these sums gives the definite
+integral:</p>
 <p><span class="math display">
 \int_a^b f(x)\,dx
 =
-\lim_{n\to\infty}
-\sum_{i=1}^{n}f(a+i\Delta x)\Delta x
+\lim_{n\to\infty}\sum_{i=1}^{n}f(x_i)\Delta x
 </span></p>
-<ul>
-<li>The following summation formulas are useful when simplifying Riemann
-sums.</li>
-</ul>
+<p>where <span class="math inline">\Delta x=(b-a)/n</span> and <span
+class="math inline">x_i=a+i\Delta x</span>. This definition is the basis
+for the calculations in this lecture.</p>
+<h2 id="sums-of-powers">Sums of Powers</h2>
+<p>When we use the definition of a definite integral, we often need to
+simplify a sum involving powers of the integers <span
+class="math inline">1,2,\ldots,n</span>. The following formulas make it
+possible to evaluate the sums that arise from polynomial functions.</p>
 <p><span class="math display">
 \sum_{i=1}^{n}1=n
 </span></p>
@@ -315,469 +563,1199 @@ sums.</li>
 <p><span class="math display">
 \sum_{i=1}^{n}i^3=\left[\frac{n(n+1)}{2}\right]^2
 </span></p>
-<ul>
-<li>We also use the properties of sums, such as separating a sum of
-terms and taking a constant outside the summation.</li>
-</ul>
+<h2 id="properties-of-sums">Properties of Sums</h2>
+<p>We will also use the following properties to separate sums and take
+constant factors outside the summation sign.</p>
 <p><span class="math display">
-\sum_{i=1}^{n}(a_i+b_i)
+\sum_{i=1}^{n}ca_i=c\sum_{i=1}^{n}a_i
+</span></p>
+<p><span class="math display">
+\sum_{i=1}^{n}(a_i+b_i)=\sum_{i=1}^{n}a_i+\sum_{i=1}^{n}b_i
+</span></p>
+<p><span class="math display">
+\sum_{i=1}^{n}(a_i-b_i)=\sum_{i=1}^{n}a_i-\sum_{i=1}^{n}b_i
+</span></p>
+<p>These formulas allow us to rewrite a Riemann sum as a combination of
+simpler sums, evaluate each sum, and then calculate the limit.</p>
+<h2 class="green" id="example-3">Example 3</h2>
+<p>Evaluate <span
+class="math inline">\displaystyle\int_0^3(x^3-6x)\,dx</span>.</p>
+<h2 class="green" id="solution-3">Solution</h2>
+<p>We use the definition of the definite integral. Here, <span
+class="math inline">f(x)=x^3-6x</span>, <span
+class="math inline">a=0</span>, and <span
+class="math inline">b=3</span>. Therefore,</p>
+<p><span class="math display">
+\Delta x=\frac{b-a}{n}=\frac{3}{n}
+</span></p>
+<p>The right endpoints of the subintervals are</p>
+<p><span class="math display">
+x_i=a+i\Delta x=\frac{3i}{n}
+</span></p>
+<p>By the definition,</p>
+<p><span class="math display">
+\int_0^3(x^3-6x)\,dx
 =
-\sum_{i=1}^{n}a_i+\sum_{i=1}^{n}b_i
+\lim_{n\to\infty}\sum_{i=1}^{n}
+\left[\left(\frac{3i}{n}\right)^3-6\left(\frac{3i}{n}\right)\right]\frac{3}{n}
 </span></p>
+<p>Simplify the expression inside the summation:</p>
 <p><span class="math display">
-\sum_{i=1}^{n}c\,a_i=c\sum_{i=1}^{n}a_i
+\begin{aligned}
+&amp;\left[\left(\frac{3i}{n}\right)^3-6\left(\frac{3i}{n}\right)\right]\frac{3}{n}\\
+&amp;=\left(\frac{27i^3}{n^3}-\frac{18i}{n}\right)\frac{3}{n}\\
+&amp;=\frac{81i^3}{n^4}-\frac{54i}{n^2}
+\end{aligned}
 </span></p>
-<h2 class="green" id="example-2">Example 2</h2>
-<p>Evaluate <span class="math inline">\int_0^3 (x^2-6x)\,dx</span> by
-expressing it as a limit of Riemann sums.</p>
-<h2 class="green" id="solution-1">Solution</h2>
-<p>Divide <span class="math inline">[0,3]</span> into <span
-class="math inline">n</span> equal subintervals. The width is</p>
+<p>Thus,</p>
 <p><span class="math display">
-\Delta x=\frac{3}{n}
+\int_0^3(x^3-6x)\,dx
+=
+\lim_{n\to\infty}
+\left[
+\frac{81}{n^4}\sum_{i=1}^{n}i^3
+-
+\frac{54}{n^2}\sum_{i=1}^{n}i
+\right]
+</span></p>
+<p>Apply the formulas for the sums of cubes and integers:</p>
+<p><span class="math display">
+=
+\lim_{n\to\infty}
+\left[
+\frac{81}{n^4}\left(\frac{n(n+1)}{2}\right)^2
+-
+\frac{54}{n^2}\frac{n(n+1)}{2}
+\right]
+</span></p>
+<p>Simplifying gives</p>
+<p><span class="math display">
+=
+\lim_{n\to\infty}
+\left[
+\frac{81}{4}\left(1+\frac{1}{n}\right)^2
+-
+27\left(1+\frac{1}{n}\right)
+\right]
+</span></p>
+<p>As <span class="math inline">n\to\infty</span>, we have <span
+class="math inline">1/n\to0</span>. Therefore,</p>
+<p><span class="math display">
+\begin{aligned}
+\int_0^3(x^3-6x)\,dx
+&amp;=\frac{81}{4}-27\\
+&amp;=-\frac{27}{4}\\
+&amp;=-6.75
+\end{aligned}
+</span></p>
+<p>The graph of <span class="math inline">y=x^3-6x</span> crosses the
+<span class="math inline">x</span>-axis within the interval. The
+definite integral is therefore the area above the axis minus the area
+below it. In Figure 6, the positive area <span
+class="math inline">A_1</span> is smaller than the negative-area
+magnitude <span class="math inline">A_2</span>, so the signed result
+<span class="math inline">A_1-A_2</span> is negative.</p>
+<p>Location of Figure 6. Graph of <span
+class="math inline">y=x^3-6x</span> on <span
+class="math inline">[0,3]</span>, illustrating the positive area <span
+class="math inline">A_1</span> and negative area <span
+class="math inline">A_2</span> and the signed integral <span
+class="math inline">A_1-A_2=-6.75</span>.</p>
+<div style="text-align: center;">
+<p><img src="../images/0506.png" style="width: 650px; display: block; margin: 0 auto 10px auto;">
+<span><strong>Figure 6.</strong> The signed area for <span
+class="math inline">\int_0^3(x^3-6x)\,dx</span>.</span></p>
+</div>
+<h3 id="riemann-sum-approximation-using-n40">Riemann-sum approximation
+using <span class="math inline">n=40</span></h3>
+<p>The right Riemann sum for <span
+class="math inline">f(x)=x^3-6x</span> on <span
+class="math inline">[0,3]</span> is</p>
+<p><span class="math display">
+R_n=\sum_{i=1}^{n}f\left(\frac{3i}{n}\right)\frac{3}{n}
+</span></p>
+<p>For <span class="math inline">n=40</span>, the interval is divided
+into 40 narrow subintervals. The rectangles below the <span
+class="math inline">x</span>-axis contribute negatively, while
+rectangles above the axis contribute positively. Their signed total
+approximates the definite integral.</p>
+<p>Location of Figure 7. Right-endpoint rectangles for <span
+class="math inline">y=x^3-6x</span> on <span
+class="math inline">[0,3]</span> with <span
+class="math inline">n=40</span> subintervals.</p>
+<div style="text-align: center;">
+<p><img src="../images/0507.png" style="width: 650px; display: block; margin: 0 auto 10px auto;">
+<span><strong>Figure 7.</strong> Right Riemann sum with <span
+class="math inline">n=40</span> for <span
+class="math inline">y=x^3-6x</span> on <span
+class="math inline">[0,3]</span>.</span></p>
+</div>
+<p>The table below shows that the right Riemann sums approach the exact
+value <span class="math inline">-6.75</span> as <span
+class="math inline">n</span> increases.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Number of subintervals <span
+class="math inline">n</span></th>
+<th style="text-align: right;">Right Riemann sum <span
+class="math inline">R_n</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">-6.3998</td>
+</tr>
+<tr>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">-6.6130</td>
+</tr>
+<tr>
+<td style="text-align: right;">500</td>
+<td style="text-align: right;">-6.7229</td>
+</tr>
+<tr>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">-6.7365</td>
+</tr>
+<tr>
+<td style="text-align: right;">5000</td>
+<td style="text-align: right;">-6.7473</td>
+</tr>
+</tbody>
+</table>
+<div style="text-align: center;">
+<p><span><strong>Table 1.</strong> Effect of the number of subintervals
+on the right Riemann sum for <span
+class="math inline">\int_0^3(x^3-6x)\,dx</span>.</span></p>
+</div>
+<p>As the number of rectangles increases, the approximation gets closer
+to <span class="math inline">-6.75</span>. This illustrates the defining
+limit of the definite integral. Notice that the integral is not the
+total unsigned area: it is the difference between the area above the
+<span class="math inline">x</span>-axis and the area below it.</p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="green" id="example-4">Example 4</h2>
+<p><strong>(a)</strong> Set up an expression for <span
+class="math inline">\displaystyle\int_1^3 e^x\,dx</span> as a limit of
+sums.</p>
+<p><strong>(b)</strong> Use a computer algebra system to evaluate the
+expression.</p>
+<h2 class="green" id="solution-4">Solution</h2>
+<h3 id="part-a">Part (a)</h3>
+<p>Here, <span class="math inline">f(x)=e^x</span>, <span
+class="math inline">a=1</span>, and <span
+class="math inline">b=3</span>. The width of each subinterval is</p>
+<p><span class="math display">
+\Delta x=\frac{b-a}{n}=\frac{2}{n}
 </span></p>
 <p>Using right endpoints, the sample points are</p>
 <p><span class="math display">
-x_i=\frac{3i}{n}
+x_i=a+i\Delta x=1+\frac{2i}{n}
 </span></p>
-<p>By the definition of the definite integral,</p>
+<p>By the definition of a definite integral,</p>
 <p><span class="math display">
-\int_0^3(x^2-6x)\,dx
+\int_1^3 e^x\,dx
 =
-\lim_{n\to\infty}
-\sum_{i=1}^{n}
-\left[\left(\frac{3i}{n}\right)^2-6\left(\frac{3i}{n}\right)\right]\frac{3}{n}
+\lim_{n\to\infty}\sum_{i=1}^{n}f(x_i)\Delta x
 </span></p>
-<p>Simplifying the terms gives</p>
+<p>Substitute <span class="math inline">f(x)=e^x</span>, <span
+class="math inline">x_i=1+2i/n</span>, and <span
+class="math inline">\Delta x=2/n</span>:</p>
 <p><span class="math display">
-\begin{aligned}
-\int_0^3(x^2-6x)\,dx
-&amp;=\lim_{n\to\infty}
-\sum_{i=1}^{n}\left(\frac{27i^2}{n^3}-\frac{54i}{n^2}\right)\\
-&amp;=\lim_{n\to\infty}
-\left[\frac{27}{n^3}\sum_{i=1}^{n}i^2
--\frac{54}{n^2}\sum_{i=1}^{n}i\right]\\
-&amp;=\lim_{n\to\infty}
-\left[\frac{27}{n^3}\frac{n(n+1)(2n+1)}{6}
--\frac{54}{n^2}\frac{n(n+1)}{2}\right]\\
-&amp;=\lim_{n\to\infty}
-\left[\frac{9(n+1)(2n+1)}{2n^2}
--\frac{27(n+1)}{n}\right]\\
-&amp;=9-27\\
-&amp;=-18
-\end{aligned}
+\boxed{
+\int_1^3e^x\,dx
+=
+\lim_{n\to\infty}\frac{2}{n}
+\sum_{i=1}^{n}e^{1+2i/n}
+}
 </span></p>
-<p>Therefore,</p>
+<p>This is the required expression as a limit of Riemann sums.</p>
+<h3 id="part-b">Part (b)</h3>
+<p>A computer algebra system can simplify the finite geometric sum and
+evaluate its limit. The resulting exact value is</p>
 <p><span class="math display">
-\boxed{\int_0^3(x^2-6x)\,dx=-18}
+\int_1^3e^x\,dx=e^3-e
 </span></p>
-<div class="example-end">
-<span class="math inline">\blacksquare</span>
-</div>
-<h2 id="numerical-evaluation-and-the-meaning-of-the-integral">Numerical
-Evaluation and the Meaning of the Integral</h2>
-<ul>
-<li><p>The definition is fundamental, but evaluating a limit of sums can
-require substantial algebra. Numerical approximations are useful when
-the function is known only from measurements, when an exact
-antiderivative is unavailable, or when an approximate answer is
-sufficient.</p></li>
-<li><p>The Midpoint Rule, introduced in the next objective, is one such
-method. Before applying it, it is important to remember that the
-definite integral measures signed accumulation, so numerical estimates
-may be negative when the function is mostly below the horizontal
-axis.</p></li>
-</ul>
-<h1 id="quick-check-1">Quick Check</h1>
-<h2 class="red" id="question-1-1">Question 1</h2>
-<p>Write the width <span class="math inline">\Delta x</span> and the
-right-endpoint sample points for <span class="math inline">[1,5]</span>
-divided into <span class="math inline">n</span> equal subintervals.</p>
-<h2 class="red" id="answer-2">Answer</h2>
-<p>The width and right endpoints are</p>
-<p><span class="math display">
-\Delta x=\frac{4}{n}
-\qquad
-x_i=1+\frac{4i}{n}
-</span></p>
-<h2 class="red" id="question-2-1">Question 2</h2>
-<p>Which summation formula is needed when evaluating a Riemann sum for a
-quadratic function?</p>
-<h2 class="red" id="answer-3">Answer</h2>
-<p>The sum of squares formula is needed.</p>
-<p><span class="math display">
-\sum_{i=1}^{n}i^2=\frac{n(n+1)(2n+1)}{6}
-</span></p>
-<div class="question-end">
-<span class="math inline">\blacksquare</span>
-</div>
-<h1 id="objective-3-the-midpoint-rule">Objective 3: The Midpoint
-Rule</h1>
-<h2 id="the-midpoint-rule">The Midpoint Rule</h2>
-<ul>
-<li><p>To approximate a definite integral, we can divide <span
-class="math inline">[a,b]</span> into <span class="math inline">n</span>
-subintervals of equal width and use the midpoint of each subinterval as
-the sample point.</p></li>
-<li><p>The width of each subinterval is</p></li>
-</ul>
-<p><span class="math display">
-\Delta x=\frac{b-a}{n}
-</span></p>
-<ul>
-<li>The midpoint of the <span class="math inline">i</span>th subinterval
-is</li>
-</ul>
-<p><span class="math display">
-\bar{x}_i=\frac{x_{i-1}+x_i}{2}
-</span></p>
-<ul>
-<li>The Midpoint Rule approximates the definite integral by adding the
-areas of rectangles whose heights are the function values at the
-midpoints.</li>
-</ul>
-<h2 class="blue" id="definition-midpoint-rule">Definition: Midpoint
-Rule</h2>
-<p>For a function <span class="math inline">f</span> on <span
-class="math inline">[a,b]</span>, the Midpoint Rule with <span
-class="math inline">n</span> equal subintervals is</p>
-<p><span class="math display">
-\int_a^b f(x)\,dx
-\approx
-M_n=\Delta x\sum_{i=1}^{n}f(\bar{x}_i)
-</span></p>
-<p>where <span class="math inline">\Delta x=(b-a)/n</span> and <span
-class="math inline">\bar{x}_i</span> is the midpoint of the <span
-class="math inline">i</span>th subinterval.</p>
-<div class="definition-end">
-<span class="math inline">\blacksquare</span>
-</div>
+<p>Numerically, this is approximately <span
+class="math inline">17.3673</span>. The graph of <span
+class="math inline">y=e^x</span> is above the <span
+class="math inline">x</span>-axis on <span
+class="math inline">[1,3]</span>, so the definite integral is the
+positive area under the curve between <span
+class="math inline">x=1</span> and <span
+class="math inline">x=3</span>.</p>
+<p>Location of Figure 8. The region under <span
+class="math inline">y=e^x</span> and above the <span
+class="math inline">x</span>-axis from <span
+class="math inline">x=1</span> to <span
+class="math inline">x=3</span>.</p>
 <div style="text-align: center;">
-<p><img src="../images/1603.png" style="width: 671 px; display: block; margin: 0 auto 10px auto;"></p>
-<p><span><strong>Figure 3.</strong> Rectangles used in the Midpoint
-Rule, with each rectangle’s height determined by the function value at
-the midpoint of its subinterval.</span></p>
+<p><img src="../images/0508.png" style="width: 550px; display: block; margin: 0 auto 10px auto;">
+<span><strong>Figure 8.</strong> The area represented by <span
+class="math inline">\int_1^3e^x\,dx</span>.</span></p>
 </div>
-<ul>
-<li>The Midpoint Rule is an approximation, not usually an exact
-equality. Using more subintervals often improves the approximation for a
-well-behaved function, although the error depends on the function’s
-curvature as well as the number of subintervals.</li>
-</ul>
-<h2 class="green" id="example-3">Example 3</h2>
-<p>Use the Midpoint Rule with <span class="math inline">n=5</span> to
-approximate <span class="math inline">\int_1^2
-\frac{1}{x}\,dx</span>.</p>
-<h2 class="green" id="solution-2">Solution</h2>
-<p>The interval is <span class="math inline">[1,2]</span> and <span
-class="math inline">n=5</span>, so</p>
-<p><span class="math display">
-\Delta x=\frac{2-1}{5}=0.2
-</span></p>
-<p>The subintervals have midpoints</p>
-<p><span class="math display">
-1.1,\quad1.3,\quad1.5,\quad1.7,\quad1.9
-</span></p>
-<p>Since <span class="math inline">f(x)=1/x</span>, the Midpoint Rule
-gives</p>
-<p><span class="math display">
-\begin{aligned}
-M_5
-&amp;=0.2\left[f(1.1)+f(1.3)+f(1.5)+f(1.7)+f(1.9)\right]\\
-&amp;=0.2\left(\frac{1}{1.1}+\frac{1}{1.3}+\frac{1}{1.5}
-+\frac{1}{1.7}+\frac{1}{1.9}\right)\\
-&amp;\approx0.6919
-\end{aligned}
-</span></p>
-<p>Therefore, the integral is approximately <span
-class="math inline">0.6919</span> using five midpoint rectangles.</p>
-<div class="example-end">
-<span class="math inline">\blacksquare</span>
-</div>
-<h2 id="choosing-the-number-of-subintervals">Choosing the Number of
-Subintervals</h2>
-<ul>
-<li><p>Increasing the number of subintervals makes each rectangle
-narrower and usually gives a better representation of the
-curve.</p></li>
-<li><p>A numerical method is especially valuable when the function comes
-from sensor data or a computer simulation and an exact integral is
-difficult to obtain.</p></li>
-<li><p>The approximation should be reported with a suitable number of
-decimal places, because additional digits do not necessarily imply
-additional accuracy.</p></li>
-</ul>
-<h1 id="quick-check-2">Quick Check</h1>
-<h2 class="red" id="question-1-2">Question 1</h2>
-<p>Use the Midpoint Rule with <span class="math inline">n=2</span> to
-approximate <span class="math inline">\int_0^2 x^2\,dx</span>.</p>
-<h2 class="red" id="answer-4">Answer</h2>
-<p>The width is <span class="math inline">\Delta x=1</span> and the
-midpoints are <span class="math inline">0.5</span> and <span
-class="math inline">1.5</span>.</p>
-<p><span class="math display">
-M_2=1\left[(0.5)^2+(1.5)^2\right]=2.5
-</span></p>
-<h2 class="red" id="question-2-2">Question 2</h2>
-<p>For a fixed interval, what happens to the width of each subinterval
-when <span class="math inline">n</span> increases?</p>
-<h2 class="red" id="answer-5">Answer</h2>
-<p>The width <span class="math inline">\Delta x=(b-a)/n</span>
-decreases, so the rectangles become narrower.</p>
-<div class="question-end">
-<span class="math inline">\blacksquare</span>
-</div>
-<h1 id="objective-4-properties-of-the-definite-integral">Objective 4:
-Properties of the Definite Integral</h1>
-<h2
-id="reversing-the-limits-and-integrating-over-a-zero-length-interval">Reversing
-the Limits and Integrating over a Zero-Length Interval</h2>
-<ul>
-<li>Reversing the limits of integration changes the sign of the definite
-integral. This reflects the fact that the direction of accumulation is
-reversed.</li>
-</ul>
-<p><span class="math display">
-\int_a^b f(x)\,dx=-\int_b^a f(x)\,dx
-</span></p>
-<ul>
-<li>When the upper and lower limits are equal, the interval has zero
-width and the integral is zero.</li>
-</ul>
-<p><span class="math display">
-\int_a^a f(x)\,dx=0
-</span></p>
-<h2 id="constant-multiples-and-sums">Constant Multiples and Sums</h2>
-<ul>
-<li>A constant factor can be taken outside a definite integral.</li>
-</ul>
-<p><span class="math display">
-\int_a^b c f(x)\,dx=c\int_a^b f(x)\,dx
-</span></p>
-<ul>
-<li>The integral of a sum is the sum of the integrals, provided the
-functions are integrable on the interval.</li>
-</ul>
-<p><span class="math display">
-\int_a^b[f(x)+g(x)]\,dx
-=
-\int_a^b f(x)\,dx+\int_a^b g(x)\,dx
-</span></p>
-<ul>
-<li>Similarly, the integral of a difference is the difference of the
-integrals.</li>
-</ul>
-<p><span class="math display">
-\int_a^b[f(x)-g(x)]\,dx
-=
-\int_a^b f(x)\,dx-\int_a^b g(x)\,dx
-</span></p>
-<h2 id="additivity-over-adjacent-intervals">Additivity over Adjacent
-Intervals</h2>
-<ul>
-<li>If <span class="math inline">a&lt;c&lt;b</span>, the integral over
-<span class="math inline">[a,b]</span> can be divided at <span
-class="math inline">c</span>. The total accumulation is the sum of the
-accumulations over the two smaller intervals.</li>
-</ul>
-<p><span class="math display">
-\int_a^b f(x)\,dx
-=
-\int_a^c f(x)\,dx+\int_c^b f(x)\,dx
-</span></p>
-<ul>
-<li>This property is useful when a function changes formula or sign at a
-particular point, or when measured data are recorded over separate time
-intervals.</li>
-</ul>
-<h2 id="comparison-properties">Comparison Properties</h2>
-<ul>
-<li>If <span class="math inline">f(x)\geq0</span> on <span
-class="math inline">[a,b]</span>, then its definite integral is
-nonnegative.</li>
-</ul>
-<p><span class="math display">
-\int_a^b f(x)\,dx\geq0
-</span></p>
-<ul>
-<li>If <span class="math inline">f(x)\geq g(x)</span> on <span
-class="math inline">[a,b]</span>, then the integral of <span
-class="math inline">f</span> is at least as large as the integral of
-<span class="math inline">g</span>.</li>
-</ul>
-<p><span class="math display">
-\int_a^b f(x)\,dx\geq\int_a^b g(x)\,dx
-</span></p>
-<ul>
-<li>If <span class="math inline">m\leq f(x)\leq M</span> on <span
-class="math inline">[a,b]</span>, then the integral is bounded by the
-areas of rectangles of heights <span class="math inline">m</span> and
-<span class="math inline">M</span>.</li>
-</ul>
-<p><span class="math display">
-m(b-a)\leq\int_a^b f(x)\,dx\leq M(b-a)
-</span></p>
-<ul>
-<li>These properties can be used to estimate the size of an integral
-without calculating its exact value.</li>
-</ul>
-<h2 class="green" id="example-4">Example 4</h2>
-<p>Suppose that <span class="math inline">\int_1^4 f(x)\,dx=7</span> and
-<span class="math inline">\int_4^6 f(x)\,dx=-2</span>. Find <span
-class="math inline">\int_1^6 f(x)\,dx</span> and <span
-class="math inline">\int_6^4 f(x)\,dx</span>.</p>
-<h2 class="green" id="solution-3">Solution</h2>
-<p>By additivity over adjacent intervals,</p>
-<p><span class="math display">
-\begin{aligned}
-\int_1^6 f(x)\,dx
-&amp;=\int_1^4 f(x)\,dx+\int_4^6 f(x)\,dx\\
-&amp;=7+(-2)\\
-&amp;=5
-\end{aligned}
-</span></p>
-<p>Reversing the limits changes the sign of the integral.</p>
-<p><span class="math display">
-\int_6^4 f(x)\,dx=-\int_4^6 f(x)\,dx=2
-</span></p>
 <div class="example-end">
 <span class="math inline">\blacksquare</span>
 </div>
 <h2 class="green" id="example-5">Example 5</h2>
-<p>Use the properties of definite integrals to evaluate <span
-class="math inline">\int_0^1(4+3x^2)\,dx</span>, given that <span
-class="math inline">\int_0^1x^2\,dx=\frac13</span>.</p>
-<h2 class="green" id="solution-4">Solution</h2>
+<p>Evaluate the following integrals by interpreting each in terms of
+areas.</p>
+<p><strong>(a)</strong> <span
+class="math inline">\displaystyle\int_0^1\sqrt{1-x^2}\,dx</span></p>
+<p><strong>(b)</strong> <span
+class="math inline">\displaystyle\int_0^3(x-1)\,dx</span></p>
+<h2 class="green" id="solution-5">Solution</h2>
+<h3 id="part-a-1">Part (a)</h3>
+<p>The integrand is <span class="math inline">y=\sqrt{1-x^2}</span>,
+which is nonnegative on <span class="math inline">[0,1]</span>. Squaring
+both sides gives</p>
+<p><span class="math display">
+y^2=1-x^2
+</span></p>
+<p>or</p>
+<p><span class="math display">
+x^2+y^2=1
+</span></p>
+<p>This is the equation of a circle of radius <span
+class="math inline">1</span> centered at the origin. In the first
+quadrant, the curve is a quarter-circle. Therefore, the integral equals
+the area of a quarter-circle of radius <span
+class="math inline">1</span>:</p>
+<p><span class="math display">
+\int_0^1\sqrt{1-x^2}\,dx
+=
+\frac14\pi(1)^2
+</span></p>
+<p>Hence,</p>
+<p><span class="math display">
+\boxed{\int_0^1\sqrt{1-x^2}\,dx=\frac{\pi}{4}}
+</span></p>
+<p>Location of Figure 9. The quarter-circle <span
+class="math inline">y=\sqrt{1-x^2}</span> in the first quadrant, bounded
+by the coordinate axes and the curve.</p>
+<div style="text-align: center;">
+<p><img src="../images/0509.png" style="width: 430px; display: block; margin: 0 auto 10px auto;">
+<span><strong>Figure 9.</strong> The quarter-circle region for <span
+class="math inline">\int_0^1\sqrt{1-x^2}\,dx</span>.</span></p>
+</div>
+<h3 id="part-b-1">Part (b)</h3>
+<p>The graph of <span class="math inline">y=x-1</span> is a straight
+line. It crosses the <span class="math inline">x</span>-axis at <span
+class="math inline">x=1</span> and passes through <span
+class="math inline">(3,2)</span>. The integral from <span
+class="math inline">0</span> to <span class="math inline">3</span> is
+the signed area: the region above the axis from <span
+class="math inline">x=1</span> to <span class="math inline">x=3</span>
+contributes positively, and the region below the axis from <span
+class="math inline">x=0</span> to <span class="math inline">x=1</span>
+contributes negatively.</p>
+<p>The positive region is a triangle with base <span
+class="math inline">2</span> and height <span
+class="math inline">2</span>, so</p>
+<p><span class="math display">
+A_1=\frac12(2)(2)=2
+</span></p>
+<p>The negative region has base <span class="math inline">1</span> and
+height <span class="math inline">1</span>, so its area magnitude is</p>
+<p><span class="math display">
+A_2=\frac12(1)(1)=\frac12
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+\begin{aligned}
+\int_0^3(x-1)\,dx
+&amp;=A_1-A_2\\
+&amp;=2-\frac12\\
+&amp;=\frac32
+\end{aligned}
+</span></p>
+<p>Hence,</p>
+<p><span class="math display">
+\boxed{\int_0^3(x-1)\,dx=\frac32=1.5}
+</span></p>
+<p>Location of Figure 10. The line <span
+class="math inline">y=x-1</span> from <span
+class="math inline">x=0</span> to <span class="math inline">x=3</span>,
+showing the triangular regions below and above the <span
+class="math inline">x</span>-axis.</p>
+<div style="text-align: center;">
+<p><img src="../images/0510.png" style="width: 520px; display: block; margin: 0 auto 10px auto;">
+<span><strong>Figure 10.</strong> Signed triangular areas for <span
+class="math inline">\int_0^3(x-1)\,dx</span>.</span></p>
+</div>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="quick-check-1">Quick Check</h1>
+<h2 class="red" id="question-1-1">Question 1</h2>
+<p>Evaluate <span
+class="math inline">\displaystyle\sum_{i=1}^{n}i</span> using the
+formula for the sum of the first <span class="math inline">n</span>
+positive integers.</p>
+<h2 class="red" id="answer-2">Answer</h2>
+<p><span class="math display">
+\boxed{\sum_{i=1}^{n}i=\frac{n(n+1)}{2}}
+</span></p>
+<h2 class="red" id="question-2-1">Question 2</h2>
+<p>If a graph lies entirely below the <span
+class="math inline">x</span>-axis on an interval, is its definite
+integral positive or negative?</p>
+<h2 class="red" id="answer-3">Answer</h2>
+<p>The definite integral is negative because it represents signed area,
+with regions below the <span class="math inline">x</span>-axis
+contributing negatively.</p>
+<div class="question-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="scenario-problem-1">Scenario Problem</h1>
+<h2 class="green" id="problem-1">Problem</h2>
+<p>A mechatronic actuator moves along a straight track from position
+<span class="math inline">x=0</span> to <span
+class="math inline">x=3</span> meters. Its force, in newtons, varies
+with position according to <span class="math inline">F(x)=x^3-6x</span>.
+The work performed by a variable force along this path is represented by
+the definite integral</p>
+<p><span class="math display">
+W=\int_0^3F(x)\,dx
+</span></p>
+<p>Use the Riemann-sum definition to determine the work represented by
+this model.</p>
+<h2 class="green" id="solution-6">Solution</h2>
+<p>Substituting the force function gives</p>
+<p><span class="math display">
+W=\int_0^3(x^3-6x)\,dx
+</span></p>
+<p>From Example 3, the Riemann-sum calculation gives</p>
+<p><span class="math display">
+W=-\frac{27}{4}\text{ J}
+</span></p>
+<p>Thus, the signed work represented by this model is <span
+class="math inline">-6.75</span> joules. The negative value indicates
+that the force’s contribution below the <span
+class="math inline">x</span>-axis outweighs the positive contribution
+above the axis over the specified interval.</p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="the-midpoint-rule">The Midpoint Rule</h1>
+<h2 id="from-riemann-sums-to-the-midpoint-rule">From Riemann Sums to the
+Midpoint Rule</h2>
+<p>A Riemann sum approximates the definite integral of a function by
+adding the areas of rectangles. Divide the interval <span
+class="math inline">[a,b]</span> into <span class="math inline">n</span>
+equal subintervals. The width of each subinterval is</p>
+<p><span class="math display">
+\Delta x=\frac{b-a}{n}
+</span></p>
+<p>The partition points are</p>
+<p><span class="math display">
+x_i=a+i\Delta x,\qquad i=0,1,\ldots,n
+</span></p>
+<p>For the Midpoint Rule, we choose the sample point at the centre of
+each subinterval <span class="math inline">[x_{i-1},x_i]</span>. Its
+midpoint is</p>
+<p><span class="math display">
+\bar{x}_i=\frac{x_{i-1}+x_i}{2}
+</span></p>
+<p>The height of the rectangle over that subinterval is <span
+class="math inline">f(\bar{x}_i)</span>, so its signed area is
+approximately <span class="math inline">f(\bar{x}_i)\Delta x</span>.
+Adding the contributions from all <span class="math inline">n</span>
+subintervals gives the Midpoint Rule.</p>
+<h2 class="blue" id="definition-midpoint-rule">Definition: Midpoint
+Rule</h2>
+<p>For a function <span class="math inline">f</span> on the interval
+<span class="math inline">[a,b]</span>, divide <span
+class="math inline">[a,b]</span> into <span class="math inline">n</span>
+equal subintervals, each of width</p>
+<p><span class="math display">
+\Delta x=\frac{b-a}{n}
+</span></p>
+<p>Let <span class="math inline">\bar{x}_i</span> be the midpoint of the
+<span class="math inline">i</span>th subinterval:</p>
+<p><span class="math display">
+\bar{x}_i=\frac{x_{i-1}+x_i}{2}
+</span></p>
+<p>The Midpoint Rule approximates the definite integral by</p>
+<p><span class="math display">
+\int_a^b f(x)\,dx\approx M_n
+=\sum_{i=1}^{n}f(\bar{x}_i)\Delta x
+</span></p>
+<p>Equivalently,</p>
+<p><span class="math display">
+M_n=\Delta x\left[f(\bar{x}_1)+f(\bar{x}_2)+\cdots+f(\bar{x}_n)\right]
+</span></p>
+<p>The midpoint of each subinterval is used as the sample point, and the
+sum of the corresponding rectangle areas gives the approximation.</p>
+<div class="definition-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 id="how-to-apply-the-midpoint-rule">How to Apply the Midpoint
+Rule</h2>
+<ol type="1">
+<li>Identify the integrand <span class="math inline">f(x)</span> and the
+integration interval <span class="math inline">[a,b]</span>.</li>
+<li>Determine the number of subintervals <span
+class="math inline">n</span>.</li>
+<li>Calculate the common width <span class="math inline">\Delta
+x=(b-a)/n</span>.</li>
+<li>Find the midpoint of every subinterval.</li>
+<li>Evaluate <span class="math inline">f</span> at each midpoint.</li>
+<li>Add the function values and multiply their sum by <span
+class="math inline">\Delta x</span>.</li>
+</ol>
+<p>When <span class="math inline">f(\bar{x}_i)</span> is positive, the
+corresponding rectangle contributes positively to the approximation;
+when it is negative, it contributes negatively. Thus, the Midpoint Rule
+approximates the <strong>signed</strong> area represented by the
+definite integral, not necessarily the total geometric area between the
+curve and the <span class="math inline">x</span>-axis.</p>
+<h2 class="green" id="example-6">Example 6</h2>
+<p>Use the Midpoint Rule with <span class="math inline">n=5</span> equal
+subintervals to approximate</p>
+<p><span class="math display">
+\int_1^2\frac{1}{x}\,dx
+</span></p>
+<h2 class="green" id="solution-7">Solution</h2>
+<p><strong>Step 1: Identify the function and interval.</strong></p>
+<p>Here,</p>
+<p><span class="math display">
+f(x)=\frac{1}{x},\qquad a=1,\qquad b=2,\qquad n=5
+</span></p>
+<p><strong>Step 2: Calculate the width of each subinterval.</strong></p>
+<p><span class="math display">
+\Delta x=\frac{b-a}{n}=\frac{2-1}{5}=\frac15=0.2
+</span></p>
+<p>The six partition points are</p>
+<p><span class="math display">
+1,\ 1.2,\ 1.4,\ 1.6,\ 1.8,\ 2
+</span></p>
+<p>Therefore, the five subintervals are <span
+class="math inline">[1,1.2]</span>, <span
+class="math inline">[1.2,1.4]</span>, <span
+class="math inline">[1.4,1.6]</span>, <span
+class="math inline">[1.6,1.8]</span>, and <span
+class="math inline">[1.8,2]</span>.</p>
+<p><strong>Step 3: Find the midpoint of each subinterval.</strong></p>
+<p>Using <span class="math inline">\bar{x}_i=(x_{i-1}+x_i)/2</span>, the
+five midpoints are</p>
+<p><span class="math display">
+\begin{aligned}
+\bar{x}_1&amp;=\frac{1+1.2}{2}=1.1\\
+\bar{x}_2&amp;=\frac{1.2+1.4}{2}=1.3\\
+\bar{x}_3&amp;=\frac{1.4+1.6}{2}=1.5\\
+\bar{x}_4&amp;=\frac{1.6+1.8}{2}=1.7\\
+\bar{x}_5&amp;=\frac{1.8+2}{2}=1.9
+\end{aligned}
+</span></p>
+<p>Location of Figure 11: The five equal subintervals on <span
+class="math inline">[1,2]</span>, each of width <span
+class="math inline">\Delta x=0.2</span>, with midpoints <span
+class="math inline">1.1</span>, <span class="math inline">1.3</span>,
+<span class="math inline">1.5</span>, <span
+class="math inline">1.7</span>, and <span class="math inline">1.9</span>
+marked.</p>
+<p><strong>Step 4: Evaluate the function at each midpoint.</strong></p>
+<p>Since <span class="math inline">f(x)=1/x</span>,</p>
+<p><span class="math display">
+\begin{aligned}
+f(1.1)&amp;=\frac{1}{1.1}\\
+f(1.3)&amp;=\frac{1}{1.3}\\
+f(1.5)&amp;=\frac{1}{1.5}\\
+f(1.7)&amp;=\frac{1}{1.7}\\
+f(1.9)&amp;=\frac{1}{1.9}
+\end{aligned}
+</span></p>
+<p><strong>Step 5: Apply the Midpoint Rule.</strong></p>
+<p>For five subintervals,</p>
+<p><span class="math display">
+M_5=\Delta x\left[f(1.1)+f(1.3)+f(1.5)+f(1.7)+f(1.9)\right]
+</span></p>
+<p>Substituting <span class="math inline">\Delta x=1/5</span> gives</p>
+<p><span class="math display">
+M_5=\frac15\left(
+\frac1{1.1}+\frac1{1.3}+\frac1{1.5}+\frac1{1.7}+\frac1{1.9}
+\right)
+</span></p>
+<p>Evaluating the sum,</p>
+<p><span class="math display">
+M_5\approx 0.691908
+</span></p>
+<p>Therefore, the Midpoint Rule approximation is</p>
+<p><span class="math display">
+\boxed{\int_1^2\frac1x\,dx\approx 0.691908}
+</span></p>
+<p>Location of Figure 12: The graph of <span
+class="math inline">y=1/x</span> on <span
+class="math inline">[1,2]</span> with five midpoint rectangles
+illustrating the area approximation <span
+class="math inline">M_5\approx0.691908</span>.</p>
+<p><strong>Interpreting the result.</strong> The function <span
+class="math inline">1/x</span> is positive on <span
+class="math inline">[1,2]</span>, so the integral represents the area
+under the curve and above the <span class="math inline">x</span>-axis.
+The five rectangles approximate this area. Their heights are taken from
+the function values at the midpoints, rather than at the left or right
+endpoints.</p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2
+id="comparing-the-midpoint-rule-with-a-right-endpoint-approximation">Comparing
+the Midpoint Rule with a Right-Endpoint Approximation</h2>
+<p>The sample point used in a Riemann sum affects the approximation. For
+a given partition, the right-endpoint rule uses the right endpoint of
+every subinterval, while the Midpoint Rule uses its centre. For some
+functions, the midpoint rectangles track the curve more effectively and
+produce a more accurate result. This is not a guarantee for every
+individual function and partition, but it is an important practical
+advantage of the method.</p>
+<p>The book’s earlier Example 3 considers the integral of <span
+class="math inline">f(x)=x^3-6x</span> from <span
+class="math inline">0</span> to <span class="math inline">3</span>. Its
+exact value is</p>
+<p><span class="math display">
+\begin{aligned}
+\int_0^3(x^3-6x)\,dx
+&amp;=\left[\frac{x^4}{4}-3x^2\right]_0^3\\
+&amp;=\frac{81}{4}-27\\
+&amp;=-6.75
+\end{aligned}
+</span></p>
+<p>Using <span class="math inline">40</span> subintervals, the midpoint
+approximation is approximately <span
+class="math inline">M_{40}=-6.7563</span>, whereas the right-endpoint
+approximation is approximately <span
+class="math inline">R_{40}=-6.3998</span>.</p>
+<p>Location of Figure 13: The graph of <span
+class="math inline">y=x^3-6x</span> on <span
+class="math inline">[0,3]</span> with the region represented by the
+definite integral and the midpoint approximation labelled <span
+class="math inline">M_{40}\approx-6.7563</span>.</p>
+<p>The absolute error of the midpoint approximation is approximately</p>
+<p><span class="math display">
+|M_{40}-(-6.75)|=|-6.7563+6.75|=0.0063
+</span></p>
+<p>The absolute error of the right-endpoint approximation is
+approximately</p>
+<p><span class="math display">
+|R_{40}-(-6.75)|=|-6.3998+6.75|=0.3502
+</span></p>
+<p>Thus, for this example, <span class="math inline">M_{40}</span> is
+much closer to the exact value than <span
+class="math inline">R_{40}</span>. The example illustrates how choosing
+midpoints can substantially improve an approximation for a particular
+function and partition.</p>
+<h1 id="quick-check-2">Quick Check</h1>
+<h2 class="red" id="question-1-2">Question 1</h2>
+<p>Use the Midpoint Rule with <span class="math inline">n=2</span> to
+approximate</p>
+<p><span class="math display">
+\int_0^2 x^2\,dx
+</span></p>
+<h2 class="red" id="answer-4">Answer</h2>
+<p>The width is</p>
+<p><span class="math display">
+\Delta x=\frac{2-0}{2}=1
+</span></p>
+<p>The two subintervals are <span class="math inline">[0,1]</span> and
+<span class="math inline">[1,2]</span>, with midpoints <span
+class="math inline">0.5</span> and <span class="math inline">1.5</span>.
+Therefore,</p>
+<p><span class="math display">
+\begin{aligned}
+M_2&amp;=1\left[f(0.5)+f(1.5)\right]\\
+&amp;=(0.5)^2+(1.5)^2\\
+&amp;=0.25+2.25\\
+&amp;=2.5
+\end{aligned}
+</span></p>
+<p><span class="math display">
+\boxed{M_2=2.5}
+</span></p>
+<h2 class="red" id="question-2-2">Question 2</h2>
+<p>A student divides <span class="math inline">[0,4]</span> into <span
+class="math inline">4</span> equal subintervals. What is the width <span
+class="math inline">\Delta x</span>, and what sample point should be
+used in the second subinterval?</p>
+<h2 class="red" id="answer-5">Answer</h2>
+<p>The width is</p>
+<p><span class="math display">
+\Delta x=\frac{4-0}{4}=1
+</span></p>
+<p>The second subinterval is <span class="math inline">[1,2]</span>, so
+its midpoint is</p>
+<p><span class="math display">
+\bar{x}_2=\frac{1+2}{2}=1.5
+</span></p>
+<p><span class="math display">
+\boxed{\Delta x=1,\qquad \bar{x}_2=1.5}
+</span></p>
+<div class="question-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="scenario-problem-2">Scenario Problem</h1>
+<h2 class="green" id="problem-2">Problem</h2>
+<p>A mobile robot moves along a straight factory aisle. Its speed
+changes over a time interval of <span class="math inline">0</span> to
+<span class="math inline">4</span> seconds and is modelled by</p>
+<p><span class="math display">
+v(t)=2+t^2\quad\text{m/s}
+</span></p>
+<p>The robot’s controller estimates the distance travelled by sampling
+the speed at the midpoint of each of four equal time intervals. Use the
+Midpoint Rule to estimate the distance travelled during the four
+seconds.</p>
+<h2 class="green" id="solution-8">Solution</h2>
+<p>The distance is approximated by the integral of speed over time:</p>
+<p><span class="math display">
+D=\int_0^4 v(t)\,dt
+</span></p>
+<p>For <span class="math inline">n=4</span> subintervals, the width
+is</p>
+<p><span class="math display">
+\Delta t=\frac{4-0}{4}=1\text{ s}
+</span></p>
+<p>The subintervals are <span class="math inline">[0,1]</span>, <span
+class="math inline">[1,2]</span>, <span
+class="math inline">[2,3]</span>, and <span
+class="math inline">[3,4]</span>. Their midpoints are</p>
+<p><span class="math display">
+0.5,\quad 1.5,\quad 2.5,\quad 3.5
+</span></p>
+<p>Evaluate the speed at each midpoint:</p>
+<p><span class="math display">
+\begin{aligned}
+v(0.5)&amp;=2+(0.5)^2=2.25\\
+v(1.5)&amp;=2+(1.5)^2=4.25\\
+v(2.5)&amp;=2+(2.5)^2=8.25\\
+v(3.5)&amp;=2+(3.5)^2=14.25
+\end{aligned}
+</span></p>
+<p>Applying the Midpoint Rule,</p>
+<p><span class="math display">
+\begin{aligned}
+D&amp;\approx M_4\\
+&amp;=\Delta t\left[v(0.5)+v(1.5)+v(2.5)+v(3.5)\right]\\
+&amp;=1(2.25+4.25+8.25+14.25)\\
+&amp;=29\text{ m}
+\end{aligned}
+</span></p>
+<p>Therefore, the estimated distance travelled is</p>
+<p><span class="math display">
+\boxed{D\approx29\text{ m}}
+</span></p>
+<p>The controller approximates the distance by treating the speed as
+constant at each interval’s midpoint value. This is a numerical
+estimate; increasing the number of subintervals can improve the
+approximation in many practical applications.</p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="properties-of-the-definite-integral">Properties of the Definite
+Integral</h1>
+<h2 id="reversing-the-limits-of-integration">Reversing the Limits of
+Integration</h2>
+<p>The definite integral is defined using a limit of Riemann sums. The
+interval’s orientation matters: interchanging the limits changes the
+sign of the integral.</p>
+<p><span class="math display">
+\int_b^a f(x)\,dx=-\int_a^b f(x)\,dx
+</span></p>
+<p>This means that the integral from <span class="math inline">a</span>
+to <span class="math inline">b</span> and the integral from <span
+class="math inline">b</span> to <span class="math inline">a</span> have
+equal magnitudes but opposite signs, provided the integrals exist. When
+the graph lies above the <span class="math inline">x</span>-axis, the
+integral from left to right is positive, while reversing the direction
+makes it negative. The same sign-reversal rule holds when the function
+takes both positive and negative values.</p>
+<h2 id="equal-limits-of-integration">Equal Limits of Integration</h2>
+<p>When the upper and lower limits are equal, the interval has zero
+width. Therefore, the definite integral is zero:</p>
+<p><span class="math display">
+\int_a^a f(x)\,dx=0
+</span></p>
+<p>There is no interval over which to accumulate area or signed change,
+so the result is zero.</p>
+<h2 id="four-fundamental-properties-of-the-definite-integral">Four
+Fundamental Properties of the Definite Integral</h2>
+<p>Assume the functions involved are integrable on <span
+class="math inline">[a,b]</span>, and let <span
+class="math inline">c</span> be a constant.</p>
+<ol type="1">
+<li><p><strong>Integral of a constant</strong></p>
+<p><span class="math display">
+\int_a^b c\,dx=c(b-a)
+</span></p></li>
+<li><p><strong>Integral of a sum</strong></p>
+<p><span class="math display">
+\int_a^b [f(x)+g(x)]\,dx
+=
+\int_a^b f(x)\,dx+\int_a^b g(x)\,dx
+</span></p></li>
+<li><p><strong>Constant multiple rule</strong></p>
+<p><span class="math display">
+\int_a^b cf(x)\,dx
+=
+c\int_a^b f(x)\,dx
+</span></p></li>
+<li><p><strong>Integral of a difference</strong></p>
+<p><span class="math display">
+\int_a^b [f(x)-g(x)]\,dx
+=
+\int_a^b f(x)\,dx-\int_a^b g(x)\,dx
+</span></p></li>
+</ol>
+<p>These rules allow us to split a complicated integrand into simpler
+parts and evaluate each part separately.</p>
+<h2 id="property-1-integral-of-a-constant">Property 1: Integral of a
+Constant</h2>
+<p>For a constant function <span class="math inline">f(x)=c</span>, the
+graph is the horizontal line <span class="math inline">y=c</span>. Over
+the interval <span class="math inline">[a,b]</span>, the region is a
+rectangle with height <span class="math inline">c</span> and width <span
+class="math inline">b-a</span>. When <span
+class="math inline">c&gt;0</span>, its area is <span
+class="math inline">c(b-a)</span>, which gives</p>
+<p><span class="math display">
+\int_a^b c\,dx=c(b-a)
+</span></p>
+<p>The formula also works for negative <span
+class="math inline">c</span>, with the integral representing signed
+area.</p>
+<p>Location of Figure 14: The graph of the constant function <span
+class="math inline">y=c</span> over <span
+class="math inline">[a,b]</span>, showing a rectangle of width <span
+class="math inline">b-a</span>, height <span
+class="math inline">c</span>, and area <span
+class="math inline">c(b-a)</span>.</p>
+<h2 id="property-2-integral-of-a-sum">Property 2: Integral of a Sum</h2>
+<p>The integral of a sum equals the sum of the integrals:</p>
+<p><span class="math display">
+\int_a^b [f(x)+g(x)]\,dx
+=
+\int_a^b f(x)\,dx+\int_a^b g(x)\,dx
+</span></p>
+<h3 id="geometric-explanation-using-figure-15">Geometric explanation
+using Figure 15</h3>
+<p>When <span class="math inline">f</span> and <span
+class="math inline">g</span> are nonnegative, the graph of <span
+class="math inline">f+g</span> is obtained by adding their heights at
+each <span class="math inline">x</span>-value. The area under <span
+class="math inline">f+g</span> therefore combines the area under <span
+class="math inline">f</span> with the area under <span
+class="math inline">g</span>. Figure 15 illustrates this relationship:
+the vertical heights of the two functions add, so their accumulated
+areas add as well.</p>
+<p>Location of Figure 15: Graphs of <span class="math inline">f</span>,
+<span class="math inline">g</span>, and <span
+class="math inline">f+g</span> over <span
+class="math inline">[a,b]</span>, illustrating that the area under <span
+class="math inline">f+g</span> is the sum of the areas under <span
+class="math inline">f</span> and <span class="math inline">g</span>.</p>
+<h3 id="mathematical-proof-using-riemann-sums">Mathematical proof using
+Riemann sums</h3>
+<p>Divide <span class="math inline">[a,b]</span> into <span
+class="math inline">n</span> subintervals of width <span
+class="math inline">\Delta x</span>, and choose a sample point <span
+class="math inline">x_i^*</span> in each subinterval. The Riemann sum
+for <span class="math inline">f+g</span> is</p>
+<p><span class="math display">
+\sum_{i=1}^{n}[f(x_i^*)+g(x_i^*)]\Delta x
+</span></p>
+<p>Distributing the sum gives</p>
+<p><span class="math display">
+\sum_{i=1}^{n}f(x_i^*)\Delta x
++
+\sum_{i=1}^{n}g(x_i^*)\Delta x
+</span></p>
+<p>Taking the limit as the largest subinterval width approaches zero,
+each Riemann sum approaches its corresponding definite integral.
+Hence,</p>
+<p><span class="math display">
+\begin{aligned}
+\int_a^b [f(x)+g(x)]\,dx
+&amp;=\lim_{n\to\infty}\sum_{i=1}^{n}[f(x_i^*)+g(x_i^*)]\Delta x\\
+&amp;=\lim_{n\to\infty}\sum_{i=1}^{n}f(x_i^*)\Delta x
++\lim_{n\to\infty}\sum_{i=1}^{n}g(x_i^*)\Delta x\\
+&amp;=\int_a^b f(x)\,dx+\int_a^b g(x)\,dx
+\end{aligned}
+</span></p>
+<p>This proves Property 2.</p>
+<h2 id="property-3-constant-multiple-rule">Property 3: Constant Multiple
+Rule</h2>
+<p>For any constant <span class="math inline">c</span>,</p>
+<p><span class="math display">
+\int_a^b cf(x)\,dx=c\int_a^b f(x)\,dx
+</span></p>
+<p>Multiplying a function by a positive constant scales every height by
+that constant. The corresponding signed area is scaled by the same
+factor. A negative constant also reverses the sign of the function, so
+the signed integral changes sign accordingly.</p>
+<h2 id="property-4-integral-of-a-difference">Property 4: Integral of a
+Difference</h2>
+<p>The difference rule is</p>
+<p><span class="math display">
+\int_a^b [f(x)-g(x)]\,dx
+=
+\int_a^b f(x)\,dx-\int_a^b g(x)\,dx
+</span></p>
+<p>It follows from Property 2 by writing <span
+class="math inline">f-g=f+(-g)</span>, then applying Property 3 with the
+constant <span class="math inline">c=-1</span>:</p>
+<p><span class="math display">
+\begin{aligned}
+\int_a^b [f(x)-g(x)]\,dx
+&amp;=\int_a^b [f(x)+(-g(x))]\,dx\\
+&amp;=\int_a^b f(x)\,dx+\int_a^b [-g(x)]\,dx\\
+&amp;=\int_a^b f(x)\,dx-\int_a^b g(x)\,dx
+\end{aligned}
+</span></p>
+<h2 class="green" id="example-7">Example 7</h2>
+<p>Use the properties of integrals to evaluate <span
+class="math inline">\int_0^1 (4+3x^2)\,dx</span>.</p>
+<h2 class="green" id="solution-9">Solution</h2>
 <p>Using the sum rule and constant multiple rule,</p>
 <p><span class="math display">
 \begin{aligned}
 \int_0^1(4+3x^2)\,dx
-&amp;=\int_0^1 4\,dx+3\int_0^1x^2\,dx\\
-&amp;=4(1-0)+3\left(\frac13\right)\\
+&amp;=\int_0^1 4\,dx+\int_0^1 3x^2\,dx\\
+&amp;=\int_0^1 4\,dx+3\int_0^1 x^2\,dx
+\end{aligned}
+</span></p>
+<p>By the integral-of-a-constant property,</p>
+<p><span class="math display">
+\int_0^1 4\,dx=4(1-0)=4
+</span></p>
+<p>Also, using the known result <span class="math inline">\int_0^1
+x^2\,dx=\frac13</span>,</p>
+<p><span class="math display">
+\begin{aligned}
+\int_0^1(4+3x^2)\,dx
+&amp;=4+3\left(\frac13\right)\\
 &amp;=4+1\\
 &amp;=5
 \end{aligned}
 </span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+\boxed{\int_0^1(4+3x^2)\,dx=5}
+</span></p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 id="property-5-combining-integrals-over-adjacent-intervals">Property
+5: Combining Integrals over Adjacent Intervals</h2>
+<p>If <span class="math inline">a&lt;c&lt;b</span>, then</p>
+<p><span class="math display">
+\int_a^c f(x)\,dx+\int_c^b f(x)\,dx
+=
+\int_a^b f(x)\,dx
+</span></p>
+<p>The interval <span class="math inline">[a,b]</span> is divided into
+two adjacent intervals, <span class="math inline">[a,c]</span> and <span
+class="math inline">[c,b]</span>. The total signed area over the whole
+interval is the sum of the signed areas over its two parts. This
+property allows an integral over one interval to be found by subtracting
+the integral over an adjacent interval from a known total.</p>
+<p>Location of Figure 16: The graph of <span
+class="math inline">y=f(x)</span> over <span
+class="math inline">[a,b]</span>, divided at <span
+class="math inline">x=c</span> into the adjacent intervals <span
+class="math inline">[a,c]</span> and <span
+class="math inline">[c,b]</span>.</p>
+<h2 class="green" id="example-8">Example 8</h2>
+<p>If it is known that <span class="math inline">\int_0^{10}
+f(x)\,dx=17</span> and <span class="math inline">\int_0^8
+f(x)\,dx=12</span>, find <span class="math inline">\int_8^{10}
+f(x)\,dx</span>.</p>
+<h2 class="green" id="solution-10">Solution</h2>
+<p>By Property 5,</p>
+<p><span class="math display">
+\int_0^8 f(x)\,dx+\int_8^{10} f(x)\,dx
+=
+\int_0^{10} f(x)\,dx
+</span></p>
+<p>Substitute the given values:</p>
+<p><span class="math display">
+12+\int_8^{10} f(x)\,dx=17
+</span></p>
+<p>Subtract <span class="math inline">12</span> from both sides:</p>
+<p><span class="math display">
+\int_8^{10} f(x)\,dx=17-12=5
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+\boxed{\int_8^{10} f(x)\,dx=5}
+</span></p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 id="comparison-properties-of-the-integral">Comparison Properties of
+the Integral</h2>
+<p>The next properties compare the value of an integral with zero, with
+another integral, or with bounds based on the minimum and maximum values
+of a function. For these comparison properties, assume <span
+class="math inline">a\leq b</span>.</p>
+<h3 id="property-6-nonnegative-functions">Property 6: Nonnegative
+Functions</h3>
+<p>If <span class="math inline">f(x)\geq0</span> for all <span
+class="math inline">x</span> in <span class="math inline">[a,b]</span>,
+then</p>
+<p><span class="math display">
+\int_a^b f(x)\,dx\geq0
+</span></p>
+<p>When a function is nonnegative, its graph lies on or above the <span
+class="math inline">x</span>-axis. Its signed area is therefore
+nonnegative.</p>
+<h3 id="property-7-comparing-two-functions">Property 7: Comparing Two
+Functions</h3>
+<p>If <span class="math inline">f(x)\geq g(x)</span> for all <span
+class="math inline">x</span> in <span class="math inline">[a,b]</span>,
+then</p>
+<p><span class="math display">
+\int_a^b f(x)\,dx\geq\int_a^b g(x)\,dx
+</span></p>
+<p>The function that is greater at every point has an integral at least
+as large as the integral of the lower function over the same interval.
+This follows because <span class="math inline">f(x)-g(x)\geq0</span>, so
+Property 6 gives</p>
+<p><span class="math display">
+\int_a^b [f(x)-g(x)]\,dx\geq0
+</span></p>
+<p>Using the difference rule,</p>
+<p><span class="math display">
+\int_a^b f(x)\,dx-\int_a^b g(x)\,dx\geq0
+</span></p>
+<p>which yields the comparison.</p>
+<h3 id="property-8-bounds-from-minimum-and-maximum-values">Property 8:
+Bounds from Minimum and Maximum Values</h3>
+<p>If <span class="math inline">m\leq f(x)\leq M</span> for all <span
+class="math inline">x</span> in <span class="math inline">[a,b]</span>,
+then</p>
+<p><span class="math display">
+m(b-a)\leq\int_a^b f(x)\,dx\leq M(b-a)
+</span></p>
+<p>The function stays between the horizontal lines <span
+class="math inline">y=m</span> and <span class="math inline">y=M</span>.
+Therefore, its integral is bounded by the areas of the rectangles with
+heights <span class="math inline">m</span> and <span
+class="math inline">M</span> and width <span
+class="math inline">b-a</span>.</p>
+<p>Location of Figure 17: A graph of <span
+class="math inline">y=f(x)</span> bounded between the horizontal lines
+<span class="math inline">y=m</span> and <span
+class="math inline">y=M</span> over <span
+class="math inline">[a,b]</span>, together with the lower and upper
+rectangles.</p>
+<h3 class="orange" id="proof-of-property-8">Proof of Property 8</h3>
+<p>Since <span class="math inline">m\leq f(x)\leq M</span> on <span
+class="math inline">[a,b]</span>, the comparison property gives</p>
+<p><span class="math display">
+\int_a^b m\,dx\leq\int_a^b f(x)\,dx\leq\int_a^b M\,dx
+</span></p>
+<p>Evaluating the two constant integrals using Property 1,</p>
+<p><span class="math display">
+m(b-a)\leq\int_a^b f(x)\,dx\leq M(b-a)
+</span></p>
+<p>Thus, Property 8 is proved.</p>
+<div class="theorem-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="green" id="example-9">Example 9</h2>
+<p>Use Property 8 to estimate <span class="math inline">\int_0^1
+e^{-x^2}\,dx</span>.</p>
+<h2 class="green" id="solution-11">Solution</h2>
+<p>Let <span class="math inline">f(x)=e^{-x^2}</span> on <span
+class="math inline">[0,1]</span>. This function is decreasing on the
+interval, so its maximum value is</p>
+<p><span class="math display">
+M=f(0)=e^0=1
+</span></p>
+<p>and its minimum value is</p>
+<p><span class="math display">
+m=f(1)=e^{-1}
+</span></p>
+<p>Property 8 gives</p>
+<p><span class="math display">
+m(1-0)\leq\int_0^1 e^{-x^2}\,dx\leq M(1-0)
+</span></p>
+<p>Substituting <span class="math inline">m=e^{-1}</span> and <span
+class="math inline">M=1</span>,</p>
+<p><span class="math display">
+e^{-1}\leq\int_0^1 e^{-x^2}\,dx\leq1
+</span></p>
+<p>Since <span class="math inline">e^{-1}\approx0.3679</span>, a
+numerical version of the estimate is</p>
+<p><span class="math display">
+\boxed{0.367\leq\int_0^1 e^{-x^2}\,dx\leq1}
+</span></p>
+<p>The integral is greater than or equal to the area of the lower
+rectangle and less than or equal to the area of the upper rectangle.</p>
+<p>Location of Figure 18: The graph of <span
+class="math inline">y=e^{-x^2}</span> on <span
+class="math inline">[0,1]</span>, bounded above by <span
+class="math inline">y=1</span> and below by <span
+class="math inline">y=1/e</span>, showing the corresponding rectangular
+area bounds.</p>
 <div class="example-end">
 <span class="math inline">\blacksquare</span>
 </div>
 <h1 id="quick-check-3">Quick Check</h1>
 <h2 class="red" id="question-1-3">Question 1</h2>
-<p>If <span class="math inline">\int_2^5 f(x)\,dx=8</span>, find <span
-class="math inline">\int_5^2 f(x)\,dx</span>.</p>
+<p>Given that <span class="math inline">\int_2^5 f(x)\,dx=9</span>,
+evaluate <span class="math inline">\int_5^2 f(x)\,dx</span>.</p>
 <h2 class="red" id="answer-6">Answer</h2>
-<p>Reversing the limits changes the sign.</p>
+<p>Reversing the limits changes the sign:</p>
 <p><span class="math display">
-\boxed{\int_5^2 f(x)\,dx=-8}
+\boxed{\int_5^2 f(x)\,dx=-9}
 </span></p>
 <h2 class="red" id="question-2-3">Question 2</h2>
-<p>If <span class="math inline">\int_0^2 f(x)\,dx=3</span> and <span
-class="math inline">\int_2^5 f(x)\,dx=4</span>, find <span
-class="math inline">\int_0^5 f(x)\,dx</span>.</p>
+<p>Suppose <span class="math inline">2\leq f(x)\leq6</span> on <span
+class="math inline">[1,4]</span>. Give lower and upper bounds for <span
+class="math inline">\int_1^4 f(x)\,dx</span>.</p>
 <h2 class="red" id="answer-7">Answer</h2>
-<p>By additivity over adjacent intervals,</p>
+<p>Using Property 8 with <span class="math inline">m=2</span>, <span
+class="math inline">M=6</span>, and <span
+class="math inline">b-a=4-1=3</span>,</p>
 <p><span class="math display">
-\boxed{\int_0^5 f(x)\,dx=3+4=7}
+2(3)\leq\int_1^4 f(x)\,dx\leq6(3)
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+\boxed{6\leq\int_1^4 f(x)\,dx\leq18}
 </span></p>
 <div class="question-end">
 <span class="math inline">\blacksquare</span>
 </div>
-<h1 id="scenario-problem">Scenario Problem</h1>
-<h2 class="green" id="problem">Problem</h2>
-<p>A mechatronic robotic arm uses a motor whose electrical power
-consumption during a short movement is modeled by</p>
+<h1 id="scenario-problem-3">Scenario Problem</h1>
+<h2 class="green" id="problem-3">Problem</h2>
+<p>A mechatronic system records a nonnegative sensor signal <span
+class="math inline">f(t)</span> over the interval <span
+class="math inline">0\leq t\leq4</span> seconds. Calibration establishes
+that the signal always remains between <span
+class="math inline">2</span> and <span class="math inline">5</span>
+units. Without knowing the exact formula for the signal, estimate bounds
+for its total accumulated signal <span class="math inline">\int_0^4
+f(t)\,dt</span>.</p>
+<h2 class="green" id="solution-12">Solution</h2>
+<p>The signal satisfies</p>
 <p><span class="math display">
-P(t)=20+4t
+2\leq f(t)\leq5
 </span></p>
-<p>where <span class="math inline">P(t)</span> is measured in watts and
-<span class="math inline">t</span> is measured in seconds for <span
-class="math inline">0\leq t\leq5</span>. Estimate the total energy
-consumed during the movement using the Midpoint Rule with <span
-class="math inline">n=5</span> equal subintervals, and then calculate
-the exact energy using the definite integral.</p>
-<h2 class="green" id="solution-5">Solution</h2>
-<p>Energy consumed is the integral of power over time.</p>
+<p>for every <span class="math inline">t</span> in <span
+class="math inline">[0,4]</span>. Thus, the minimum bound is <span
+class="math inline">m=2</span>, the maximum bound is <span
+class="math inline">M=5</span>, and the interval width is <span
+class="math inline">4-0=4</span>.</p>
+<p>By Property 8,</p>
 <p><span class="math display">
-E=\int_0^5 P(t)\,dt
+m(b-a)\leq\int_a^b f(t)\,dt\leq M(b-a)
 </span></p>
-<p>First, apply the Midpoint Rule. The subinterval width is</p>
+<p>Substitute the values:</p>
 <p><span class="math display">
-\Delta t=\frac{5-0}{5}=1
+2(4)\leq\int_0^4 f(t)\,dt\leq5(4)
 </span></p>
-<p>The midpoints are <span class="math inline">0.5</span>, <span
-class="math inline">1.5</span>, <span class="math inline">2.5</span>,
-<span class="math inline">3.5</span>, and <span
-class="math inline">4.5</span>. The corresponding power values are</p>
+<p>Therefore,</p>
 <p><span class="math display">
-P(0.5)=22,\quad P(1.5)=26,\quad P(2.5)=30
+\boxed{8\leq\int_0^4 f(t)\,dt\leq20}
 </span></p>
-<p><span class="math display">
-P(3.5)=34,\quad P(4.5)=38
-</span></p>
-<p>Therefore, the approximate energy is</p>
-<p><span class="math display">
-\begin{aligned}
-M_5
-&amp;=\Delta t\left[P(0.5)+P(1.5)+P(2.5)+P(3.5)+P(4.5)\right]\\
-&amp;=1(22+26+30+34+38)\\
-&amp;=150\text{ J}
-\end{aligned}
-</span></p>
-<p>Now evaluate the integral exactly.</p>
-<p><span class="math display">
-\begin{aligned}
-E
-&amp;=\int_0^5(20+4t)\,dt\\
-&amp;=20(5-0)+4\left[\frac{t^2}{2}\right]_0^5\\
-&amp;=100+2(25)\\
-&amp;=150\text{ J}
-\end{aligned}
-</span></p>
-<p>The Midpoint Rule gives the exact answer in this case because the
-power function is linear and the midpoint rectangles balance the
-variation over each subinterval.</p>
+<p>The accumulated signal lies between <span
+class="math inline">8</span> and <span class="math inline">20</span>
+unit-seconds. These bounds can be obtained from the known signal range
+without calculating the integral exactly.</p>
 <div class="example-end">
 <span class="math inline">\blacksquare</span>
 </div>
 <h1 id="summary">Summary</h1>
-<ul>
-<li>The definite integral is defined as the limit of Riemann sums and
-represents signed accumulation over an interval.</li>
-<li>A Riemann sum approximates the integral by adding the signed areas
-of rectangles.</li>
-<li>When a graph is above the <span class="math inline">x</span>-axis,
-it contributes positively to the integral, while a graph below the axis
-contributes negatively.</li>
-<li>Summation formulas allow definite integrals to be evaluated directly
-from their Riemann-sum definition.</li>
-<li>The Midpoint Rule approximates an integral by using the function
-values at the midpoints of equal subintervals.</li>
-<li>Increasing the number of subintervals generally improves a numerical
-approximation for a well-behaved function.</li>
-<li>Reversing the limits of integration changes the sign, and an
-integral with equal limits is zero.</li>
-<li>Definite integrals are linear, so constants can be factored out and
-sums or differences can be integrated term by term.</li>
-<li>Additivity allows an integral to be split across adjacent intervals
-and recombined.</li>
-<li>Comparison properties provide useful bounds for definite integrals
-without requiring an exact evaluation.</li>
-</ul>
+<p>The definite integral is defined as the limit of Riemann sums as the
+subinterval widths approach zero. For a nonnegative function, it
+represents the area under the curve; when a graph lies both above and
+below the <span class="math inline">x</span>-axis, the integral
+represents net area, with regions below the axis counted negatively. The
+integral notation identifies the integrand, the lower and upper limits,
+and the variable of integration. The precise meaning of the limit states
+that for every positive error tolerance <span
+class="math inline">\epsilon</span>, sufficiently fine subdivisions make
+the Riemann sum differ from the integral by less than <span
+class="math inline">\epsilon</span>.</p>
+<p>Continuous functions and functions with only finitely many jump
+discontinuities are integrable on a closed interval. For an integrable
+function, the definite integral can be expressed as the limit of
+right-endpoint Riemann sums, with <span class="math inline">\Delta
+x=(b-a)/n</span> and <span class="math inline">x_i=a+i\Delta x</span>.
+This connection allows limits of sums to be written as definite
+integrals and gives the integral its role as a mathematical tool for
+accumulating continuously varying quantities.</p>
+<p>A definite integral can be defined as the limit of Riemann sums,
+<span class="math inline">\int_a^b
+f(x)\,dx=\lim_{n\to\infty}\sum_{i=1}^{n}f(x_i)\Delta x</span>, where
+<span class="math inline">\Delta x=(b-a)/n</span> and the right
+endpoints are <span class="math inline">x_i=a+i\Delta x</span>. To
+evaluate these limits, we use the formulas for sums of powers and the
+properties of sums to simplify the summation before taking the limit.
+Examples show how this definition yields exact integral values and how
+numerical Riemann sums approach those values as the number of
+subintervals increases.</p>
+<p>A definite integral also represents signed area: regions above the
+<span class="math inline">x</span>-axis contribute positively, while
+regions below it contribute negatively. This interpretation allows us to
+evaluate integrals geometrically, as with a quarter-circle or the
+difference between two triangular areas. Both the limit-of-sums
+definition and the signed-area interpretation connect definite integrals
+to accumulated quantities in engineering and computing.</p>
+<p>The Midpoint Rule is a numerical method for approximating a definite
+integral using rectangles whose heights are determined by the integrand
+at the midpoints of equal subintervals. For <span
+class="math inline">n</span> subintervals, the width is <span
+class="math inline">\Delta x=(b-a)/n</span>, each midpoint is <span
+class="math inline">\bar{x}_i=(x_{i-1}+x_i)/2</span>, and the
+approximation is <span class="math inline">M_n=\Delta
+x\sum_{i=1}^{n}f(\bar{x}_i)</span>. In the worked example, using five
+subintervals to approximate <span
+class="math inline">\int_1^2(1/x)\,dx</span> gives <span
+class="math inline">M_5\approx0.691908</span>. The accompanying figures
+show the subinterval midpoints and the rectangles used to approximate
+the area.</p>
+<p>The comparison with the integral of <span
+class="math inline">x^3-6x</span> on <span
+class="math inline">[0,3]</span> illustrates that <span
+class="math inline">M_{40}\approx-6.7563</span> is much closer to the
+exact value <span class="math inline">-6.75</span> than the
+right-endpoint estimate <span
+class="math inline">R_{40}\approx-6.3998</span>. The Midpoint Rule is
+useful for estimating accumulated quantities such as distance from
+sampled velocity data, but its result remains an approximation whose
+accuracy depends on the function and the partition.</p>
+<p>The definite integral changes sign when its limits are exchanged and
+equals zero when its limits are the same. Its fundamental properties
+state that the integral of a constant is the constant multiplied by the
+interval width, the integral of a sum or difference is the corresponding
+sum or difference of integrals, and a constant factor can be taken
+outside the integral. Integrals over adjacent intervals combine to give
+the integral over the full interval.</p>
+<p>Comparison properties state that a nonnegative function has a
+nonnegative integral, that ordering two functions orders their integrals
+over the same interval, and that if <span class="math inline">m\leq
+f(x)\leq M</span> on <span class="math inline">[a,b]</span>, then <span
+class="math inline">m(b-a)\leq\int_a^b f(x)\,dx\leq M(b-a)</span>. These
+properties simplify calculations and provide estimates even when an
+exact integral is difficult to evaluate.</p>
 <h1 id="exercises">Exercises</h1>
-<h2 id="exercises-set">Exercises Set</h2>
-<p>Solve the odd number exercises from exercise 1 to 84.</p>
-<ul>
-<li><p>Exercises help transform theoretical concepts into practical
-understanding.</p></li>
-<li><p>Mathematics is learned by doing and solving exercises will train
-you to analyze problems, select appropriate methods, and construct
-logical solutions.</p></li>
-<li><p>Attempting problems sometimes leads to mistakes which provide
-opportunities for learning and improvement.</p></li>
-<li><p>Regular practice increases speed, accuracy, and
-confidence.</p></li>
-<li><p>Exercises are given in the Exercises file and you are expected to
-solve them on your own.</p></li>
-</ul>
+<p>Exercises help in transforming theoretical concepts into practical
+understanding. Mathematics is learned by doing and solving exercises
+which train you to analyze problems, select appropriate methods, and
+construct logical solutions. Attempting problems sometimes leads to
+mistakes which provide opportunities for learning and improvement.
+Regular practice increases speed, accuracy, and confidence. Exercises
+are given in the recommended book which has also been provided to you
+and you are expected to solve them on your own.</p>
+<h2 id="exercises-1">Exercises</h2>
+<p>Solve the odd number exercises from exercise 1 to 82.</p>
 </body>
 </html>
