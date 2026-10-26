@@ -744,60 +744,6 @@ Right-endpoint rectangles give an overestimate.</p>
 <div class="question-end">
 <span class="math inline">\blacksquare</span>
 </div>
-<h1 id="scenario-problem">Scenario Problem</h1>
-<h2 class="green" id="problem">Problem</h2>
-<p>A mechatronics team tests a mobile robot moving along a straight
-track. Its speed is modeled by <span
-class="math inline">v(t)=0.5t+1</span> meters per second for <span
-class="math inline">0\leq t\leq4</span>, where <span
-class="math inline">t</span> is measured in seconds. Estimate the
-distance traveled using four right-endpoint rectangles.</p>
-<h2 class="green" id="solution-3">Solution</h2>
-<p>Divide the interval <span class="math inline">[0,4]</span> into four
-equal subintervals. The width is</p>
-<p><span class="math display">
-\Delta t=\frac{4-0}{4}=1\text{ second}
-</span></p>
-<p>The right endpoints are <span class="math inline">t=1,2,3,4</span>.
-The corresponding speeds are <span class="math inline">v(1)=1.5</span>,
-<span class="math inline">v(2)=2</span>, <span
-class="math inline">v(3)=2.5</span>, and <span
-class="math inline">v(4)=3</span> meters per second. The right-endpoint
-estimate for distance is</p>
-<p><span class="math display">
-\begin{aligned}
-R_4&amp;=[v(1)+v(2)+v(3)+v(4)]\Delta t\\
-&amp;=(1.5+2+2.5+3)(1)\\
-&amp;=9\text{ m}
-\end{aligned}
-</span></p>
-<p>The estimated distance is <span class="math inline">9</span> meters.
-Since the speed is increasing, right-endpoint rectangles overestimate
-the distance on each subinterval. Using more, narrower time intervals
-would improve the estimate and, in the limit, the rectangle sums would
-approach the exact accumulated distance.</p>
-<div class="example-end">
-<span class="math inline">\blacksquare</span>
-</div>
-<h1 id="summary">Summary</h1>
-<p>The area problem is solved by approximating the region under a
-continuous, nonnegative function with rectangles. Dividing <span
-class="math inline">[a,b]</span> into <span class="math inline">n</span>
-equal subintervals gives <span class="math inline">\Delta
-x=(b-a)/n</span>, and rectangle heights can be selected from left
-endpoints, right endpoints, or sample points. For the increasing
-function <span class="math inline">f(x)=x^2</span> on <span
-class="math inline">[0,1]</span>, left-endpoint sums underestimate the
-area and right-endpoint sums overestimate it. As the number of
-rectangles increases, both sums approach the exact area, which is <span
-class="math inline">\frac13</span>.</p>
-<p>In general, the area is defined as the limit of the rectangle sums as
-<span class="math inline">n\to\infty</span>. Lower sums use the minimum
-function value on each subinterval, while upper sums use the maximum;
-sample-point sums provide a more general formulation. These ideas also
-help estimate accumulated quantities such as distance from a changing
-speed. The rectangle method is the foundation for the integral concepts
-developed later in calculus.</p>
 <h1 id="the-distance-problem">The Distance Problem</h1>
 <h2 id="from-constant-velocity-to-variable-velocity">From Constant
 Velocity to Variable Velocity</h2>
@@ -859,7 +805,7 @@ readings.</span></p>
 </tr>
 </tbody>
 </table>
-<h2 class="green" id="solution-4">Solution</h2>
+<h2 class="green" id="solution-3">Solution</h2>
 <h3 id="step-1-convert-the-velocity-readings-to-metres-per-second">Step
 1: Convert the velocity readings to metres per second</h3>
 <p>Time is measured in seconds, so we should express velocity in metres
@@ -1121,7 +1067,41 @@ R_n=\sum_{i=1}^{n}f(t_i)\Delta t
 <div class="question-end">
 <span class="math inline">\blacksquare</span>
 </div>
-<h1 id="scenario-problem-1">Scenario Problem</h1>
+<h1 id="scenario-problem">Scenario Problem</h1>
+<h2 class="green" id="problem">Problem</h2>
+<p>A mechatronics team tests a mobile robot moving along a straight
+track. Its speed is modeled by <span
+class="math inline">v(t)=0.5t+1</span> meters per second for <span
+class="math inline">0\leq t\leq4</span>, where <span
+class="math inline">t</span> is measured in seconds. Estimate the
+distance traveled using four right-endpoint rectangles.</p>
+<h2 class="green" id="solution-4">Solution</h2>
+<p>Divide the interval <span class="math inline">[0,4]</span> into four
+equal subintervals. The width is</p>
+<p><span class="math display">
+\Delta t=\frac{4-0}{4}=1\text{ second}
+</span></p>
+<p>The right endpoints are <span class="math inline">t=1,2,3,4</span>.
+The corresponding speeds are <span class="math inline">v(1)=1.5</span>,
+<span class="math inline">v(2)=2</span>, <span
+class="math inline">v(3)=2.5</span>, and <span
+class="math inline">v(4)=3</span> meters per second. The right-endpoint
+estimate for distance is</p>
+<p><span class="math display">
+\begin{aligned}
+R_4&amp;=[v(1)+v(2)+v(3)+v(4)]\Delta t\\
+&amp;=(1.5+2+2.5+3)(1)\\
+&amp;=9\text{ m}
+\end{aligned}
+</span></p>
+<p>The estimated distance is <span class="math inline">9</span> meters.
+Since the speed is increasing, right-endpoint rectangles overestimate
+the distance on each subinterval. Using more, narrower time intervals
+would improve the estimate and, in the limit, the rectangle sums would
+approach the exact accumulated distance.</p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
 <h2 class="green" id="problem-1">Problem</h2>
 <p>A mobile robot travels along a straight warehouse aisle. Its
 controller records the robot’s forward velocity at five-second intervals
@@ -1193,15 +1173,33 @@ intervals and could improve the estimates.</p>
 <div class="example-end">
 <span class="math inline">\blacksquare</span>
 </div>
-<h1 id="summary-1">Summary</h1>
-<p>When velocity is constant, distance is velocity multiplied by time.
-When velocity varies, we estimate the distance on short time intervals
-by assuming the velocity is approximately constant on each interval,
-then add the resulting distances. Geometrically, each product is the
-area of a rectangle on a velocity-time graph. In Example 4, after
-converting the recorded speeds to metres per second, the left-endpoint
-estimate is <span class="math inline">320</span> m and the
-right-endpoint estimate is <span class="math inline">335</span> m.</p>
+<h1 id="summary">Summary</h1>
+<p>The area problem is solved by approximating the region under a
+continuous, nonnegative function with rectangles. Dividing <span
+class="math inline">[a,b]</span> into <span class="math inline">n</span>
+equal subintervals gives <span class="math inline">\Delta
+x=(b-a)/n</span>, and rectangle heights can be selected from left
+endpoints, right endpoints, or sample points. For the increasing
+function <span class="math inline">f(x)=x^2</span> on <span
+class="math inline">[0,1]</span>, left-endpoint sums underestimate the
+area and right-endpoint sums overestimate it. As the number of
+rectangles increases, both sums approach the exact area, which is <span
+class="math inline">\frac13</span>.</p>
+<p>In general, the area is defined as the limit of the rectangle sums as
+<span class="math inline">n\to\infty</span>. Lower sums use the minimum
+function value on each subinterval, while upper sums use the maximum;
+sample-point sums provide a more general formulation. These ideas also
+help estimate accumulated quantities such as distance from a changing
+speed. The rectangle method is the foundation for the integral concepts
+developed later in calculus. When velocity is constant, distance is
+velocity multiplied by time. When velocity varies, we estimate the
+distance on short time intervals by assuming the velocity is
+approximately constant on each interval, then add the resulting
+distances. Geometrically, each product is the area of a rectangle on a
+velocity-time graph. In Example 4, after converting the recorded speeds
+to metres per second, the left-endpoint estimate is <span
+class="math inline">320</span> m and the right-endpoint estimate is
+<span class="math inline">335</span> m.</p>
 <p>For a velocity function <span class="math inline">v=f(t)</span> on
 <span class="math inline">[a,b]</span>, divide the interval into <span
 class="math inline">n</span> equal parts of width <span

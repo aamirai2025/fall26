@@ -124,9 +124,17 @@ is called a **Riemann sum**, named after the mathematician Bernhard Riemann. It 
 
 When $f(x)\geq 0$ on $[a,b]$, each rectangle's contribution is nonnegative. The Riemann sum adds the areas of the rectangles, and in the limit the definite integral gives the area under the curve from $a$ to $b.
 
-Location of Figure 1. Riemann rectangles approximating the area under a nonnegative curve; the Riemann sum is the sum of the rectangle areas.
+<div style="text-align: center;">
+<img src="../images/1601.png" style="width: 769 px; display: block; margin: 0 auto 10px auto;">
 
-Location of Figure 2. The region under the curve $y=f(x)$ from $a$ to $b$, representing the definite integral when $f(x)\geq 0$.
+<span><strong>Figure 1.</strong> Riemann rectangles approximating the area under a nonnegative curve; the Riemann sum is the sum of the rectangle areas.</span>
+</div>
+
+<div style="text-align: center;">
+<img src="../images/1602.png" style="width: 769 px; display: block; margin: 0 auto 10px auto;">
+
+<span><strong>Figure 2.</strong> The region under the curve $y=f(x)$ from $a$ to $b$, representing the definite integral when $f(x)\geq 0$.</span>
+</div>
 
 The figures illustrate the transition from a rectangular approximation to the exact area. As the widths shrink, the Riemann sum approaches the area beneath the curve.
 
@@ -134,9 +142,17 @@ The figures illustrate the transition from a rectangular approximation to the ex
 
 A function need not be positive throughout the interval. If the graph lies below the $x$-axis, the corresponding function values are negative, so the associated terms $f(x_i^*)\Delta x$ are negative. The Riemann sum therefore adds areas above the axis and subtracts areas below it.
 
-Location of Figure 3. Riemann rectangles for a function that crosses the $x$-axis, with contributions above the axis positive and contributions below the axis negative.
+<div style="text-align: center;">
+<img src="../images/1603.png" style="width: 688 px; display: block; margin: 0 auto 10px auto;">
 
-Location of Figure 4. The signed or net area between the curve and the $x$-axis, showing positive and negative regions.
+<span><strong>Figure 3.</strong> Riemann rectangles for a function that crosses the $x$-axis, with contributions above the axis positive and contributions below the axis negative.</span>
+</div>
+
+<div style="text-align: center;">
+<img src="../images/1604.png" style="width: 688 px; display: block; margin: 0 auto 10px auto;">
+
+<span><strong>Figure 4.</strong> The signed or net area between the curve and the $x$-axis, showing positive and negative regions.</span>
+</div>
 
 Let $A_1$ denote the geometric area above the $x$-axis and below the curve, and let $A_2$ denote the geometric area below the $x$-axis and above the curve. Then the definite integral is the **net area**:
 
@@ -199,7 +215,11 @@ R_6
 \end{aligned}
 $$
 
-Location of Figure 5. Graph of $y=x^3-6x$ on $[0,3]$ with six right-endpoint rectangles; rectangles above the $x$-axis contribute positively and those below it negatively.
+<div style="text-align: center;">
+<img src="../images/1605.png" style="width: 720 px; display: block; margin: 0 auto 10px auto;">
+
+<span><strong>Figure 5.</strong> Graph of $y=x^3-6x$ on $[0,3]$ with six right-endpoint rectangles; rectangles above the $x$-axis contribute positively and those below it negatively.</span>
+</div>
 
 The result is negative because the total signed contribution from the rectangles below the $x$-axis exceeds the contribution from the rectangle above the axis. The Riemann sum is an approximation using six rectangles; it is not yet the exact definite integral.
 
@@ -525,11 +545,11 @@ $$
 
 The graph of $y=x^3-6x$ crosses the $x$-axis within the interval. The definite integral is therefore the area above the axis minus the area below it. In Figure 6, the positive area $A_1$ is smaller than the negative-area magnitude $A_2$, so the signed result $A_1-A_2$ is negative.
 
-Location of Figure 6. Graph of $y=x^3-6x$ on $[0,3]$, illustrating the positive area $A_1$ and negative area $A_2$ and the signed integral $A_1-A_2=-6.75$.
 
 <div style="text-align: center;">
-<img src="../images/0506.png" style="width: 650px; display: block; margin: 0 auto 10px auto;">
-<span><strong>Figure 6.</strong> The signed area for $\int_0^3(x^3-6x)\,dx$.</span>
+<img src="../images/1606.png" style="width: 703 px; display: block; margin: 0 auto 10px auto;">
+
+<span><strong>Figure 6.</strong> Graph of $y=x^3-6x$ on $[0,3]$, illustrating the positive area $A_1$ and negative area $A_2$ and the signed integral $A_1-A_2=-6.75$.</span>
 </div>
 
 ### Riemann-sum approximation using $n=40$
@@ -542,14 +562,17 @@ $$
 
 For $n=40$, the interval is divided into 40 narrow subintervals. The rectangles below the $x$-axis contribute negatively, while rectangles above the axis contribute positively. Their signed total approximates the definite integral.
 
-Location of Figure 7. Right-endpoint rectangles for $y=x^3-6x$ on $[0,3]$ with $n=40$ subintervals.
-
 <div style="text-align: center;">
-<img src="../images/0507.png" style="width: 650px; display: block; margin: 0 auto 10px auto;">
-<span><strong>Figure 7.</strong> Right Riemann sum with $n=40$ for $y=x^3-6x$ on $[0,3]$.</span>
+<img src="../images/1607.png" style="width: 771 px; display: block; margin: 0 auto 10px auto;">
+
+<span><strong>Figure 7.</strong> Right-endpoint rectangles for $y=x^3-6x$ on $[0,3]$ with $n=40$ subintervals.</span>
 </div>
 
 The table below shows that the right Riemann sums approach the exact value $-6.75$ as $n$ increases.
+
+<div style="text-align: center;">
+<span><strong>Table 1.</strong> Effect of the number of subintervals on the right Riemann sum for $\int_0^3(x^3-6x)\,dx$.</span>
+</div>
 
 | Number of subintervals $n$ | Right Riemann sum $R_n$ |
 |---:|---:|
@@ -558,10 +581,6 @@ The table below shows that the right Riemann sums approach the exact value $-6.7
 | 500 | -6.7229 |
 | 1000 | -6.7365 |
 | 5000 | -6.7473 |
-
-<div style="text-align: center;">
-<span><strong>Table 1.</strong> Effect of the number of subintervals on the right Riemann sum for $\int_0^3(x^3-6x)\,dx$.</span>
-</div>
 
 As the number of rectangles increases, the approximation gets closer to $-6.75$. This illustrates the defining limit of the definite integral. Notice that the integral is not the total unsigned area: it is the difference between the area above the $x$-axis and the area below it.
 
@@ -620,11 +639,10 @@ $$
 
 Numerically, this is approximately $17.3673$. The graph of $y=e^x$ is above the $x$-axis on $[1,3]$, so the definite integral is the positive area under the curve between $x=1$ and $x=3$.
 
-Location of Figure 8. The region under $y=e^x$ and above the $x$-axis from $x=1$ to $x=3$.
-
 <div style="text-align: center;">
-<img src="../images/0508.png" style="width: 550px; display: block; margin: 0 auto 10px auto;">
-<span><strong>Figure 8.</strong> The area represented by $\int_1^3e^x\,dx$.</span>
+<img src="../images/1608.png" style="width: 610 px; display: block; margin: 0 auto 10px auto;">
+
+<span><strong>Figure 8.</strong> The region under $y=e^x$ and above the $x$-axis from $x=1$ to $x=3$.</span>
 </div>
 
 <div class="example-end">$\blacksquare$</div>
@@ -667,10 +685,8 @@ $$
 \boxed{\int_0^1\sqrt{1-x^2}\,dx=\frac{\pi}{4}}
 $$
 
-Location of Figure 9. The quarter-circle $y=\sqrt{1-x^2}$ in the first quadrant, bounded by the coordinate axes and the curve.
-
 <div style="text-align: center;">
-<img src="../images/0509.png" style="width: 430px; display: block; margin: 0 auto 10px auto;">
+<img src="../images/1609.png" style="width: 608px; display: block; margin: 0 auto 10px auto;">
 <span><strong>Figure 9.</strong> The quarter-circle region for $\int_0^1\sqrt{1-x^2}\,dx$.</span>
 </div>
 
@@ -707,10 +723,8 @@ $$
 \boxed{\int_0^3(x-1)\,dx=\frac32=1.5}
 $$
 
-Location of Figure 10. The line $y=x-1$ from $x=0$ to $x=3$, showing the triangular regions below and above the $x$-axis.
-
 <div style="text-align: center;">
-<img src="../images/0510.png" style="width: 520px; display: block; margin: 0 auto 10px auto;">
+<img src="../images/1610.png" style="width: 669 px; display: block; margin: 0 auto 10px auto;">
 <span><strong>Figure 10.</strong> Signed triangular areas for $\int_0^3(x-1)\,dx$.</span>
 </div>
 
@@ -880,7 +894,11 @@ $$
 \end{aligned}
 $$
 
-Location of Figure 11: The five equal subintervals on $[1,2]$, each of width $\Delta x=0.2$, with midpoints $1.1$, $1.3$, $1.5$, $1.7$, and $1.9$ marked.
+<div style="text-align: center;">
+<img src="../images/1611.png" style="width: 690 px; display: block; margin: 0 auto 10px auto;">
+
+<span><strong>Figure 11.</strong> The five equal subintervals on $[1,2]$, each of width $\Delta x=0.2$, with midpoints $1.1$, $1.3$, $1.5$, $1.7$, and $1.9$ marked.</span>
+</div>
 
 **Step 4: Evaluate the function at each midpoint.**
 
@@ -924,7 +942,11 @@ $$
 \boxed{\int_1^2\frac1x\,dx\approx 0.691908}
 $$
 
-Location of Figure 12: The graph of $y=1/x$ on $[1,2]$ with five midpoint rectangles illustrating the area approximation $M_5\approx0.691908$.
+<div style="text-align: center;">
+<img src="../images/1612.png" style="width: 667 px; display: block; margin: 0 auto 10px auto;">
+
+<span><strong>Figure 12.</strong> The graph of $y=1/x$ on $[1,2]$ with five midpoint rectangles illustrating the area approximation $M_5\approx0.691908$.</span>
+</div>
 
 **Interpreting the result.** The function $1/x$ is positive on $[1,2]$, so the integral represents the area under the curve and above the $x$-axis. The five rectangles approximate this area. Their heights are taken from the function values at the midpoints, rather than at the left or right endpoints.
 
@@ -947,7 +969,11 @@ $$
 
 Using $40$ subintervals, the midpoint approximation is approximately $M_{40}=-6.7563$, whereas the right-endpoint approximation is approximately $R_{40}=-6.3998$.
 
-Location of Figure 13: The graph of $y=x^3-6x$ on $[0,3]$ with the region represented by the definite integral and the midpoint approximation labelled $M_{40}\approx-6.7563$.
+<div style="text-align: center;">
+<img src="../images/1613.png" style="width: 780 px; display: block; margin: 0 auto 10px auto;">
+
+<span><strong>Figure 13.</strong> The graph of $y=x^3-6x$ on $[0,3]$ with the region represented by the definite integral and the midpoint approximation labelled $M_{40}\approx-6.7563$.</span>
+</div>
 
 The absolute error of the midpoint approximation is approximately
 
@@ -1152,7 +1178,11 @@ $$
 
 The formula also works for negative $c$, with the integral representing signed area.
 
-Location of Figure 14: The graph of the constant function $y=c$ over $[a,b]$, showing a rectangle of width $b-a$, height $c$, and area $c(b-a)$.
+<div style="text-align: center;">
+<img src="../images/1614.png" style="width: 711 px; display: block; margin: 0 auto 10px auto;">
+
+<span><strong>Figure 14.</strong> The graph of the constant function $y=c$ over $[a,b]$, showing a rectangle of width $b-a$, height $c$, and area $c(b-a)$.</span>
+</div>
 
 ## Property 2: Integral of a Sum
 
@@ -1168,7 +1198,11 @@ $$
 
 When $f$ and $g$ are nonnegative, the graph of $f+g$ is obtained by adding their heights at each $x$-value. The area under $f+g$ therefore combines the area under $f$ with the area under $g$. Figure 15 illustrates this relationship: the vertical heights of the two functions add, so their accumulated areas add as well.
 
-Location of Figure 15: Graphs of $f$, $g$, and $f+g$ over $[a,b]$, illustrating that the area under $f+g$ is the sum of the areas under $f$ and $g$.
+<div style="text-align: center;">
+<img src="../images/1615.png" style="width: 709 px; display: block; margin: 0 auto 10px auto;">
+
+<span><strong>Figure 15.</strong> Graphs of $f$, $g$, and $f+g$ over $[a,b]$, illustrating that the area under $f+g$ is the sum of the areas under $f$ and $g$.</span>
+</div>
 
 ### Mathematical proof using Riemann sums
 
@@ -1284,7 +1318,11 @@ $$
 
 The interval $[a,b]$ is divided into two adjacent intervals, $[a,c]$ and $[c,b]$. The total signed area over the whole interval is the sum of the signed areas over its two parts. This property allows an integral over one interval to be found by subtracting the integral over an adjacent interval from a known total.
 
-Location of Figure 16: The graph of $y=f(x)$ over $[a,b]$, divided at $x=c$ into the adjacent intervals $[a,c]$ and $[c,b]$.
+<div style="text-align: center;">
+<img src="../images/1616.png" style="width: 671 px; display: block; margin: 0 auto 10px auto;">
+
+<span><strong>Figure 16.</strong> The graph of $y=f(x)$ over $[a,b]$, divided at $x=c$ into the adjacent intervals $[a,c]$ and $[c,b]$.</span>
+</div>
 
 ## Example 8 {.green}
 
@@ -1366,7 +1404,11 @@ $$
 
 The function stays between the horizontal lines $y=m$ and $y=M$. Therefore, its integral is bounded by the areas of the rectangles with heights $m$ and $M$ and width $b-a$.
 
-Location of Figure 17: A graph of $y=f(x)$ bounded between the horizontal lines $y=m$ and $y=M$ over $[a,b]$, together with the lower and upper rectangles.
+<div style="text-align: center;">
+<img src="../images/1617.png" style="width: 699 px; display: block; margin: 0 auto 10px auto;">
+
+<span><strong>Figure 17.</strong> A graph of $y=f(x)$ bounded between the horizontal lines $y=m$ and $y=M$ over $[a,b]$, together with the lower and upper rectangles.</span>
+</div>
 
 ### Proof of Property 8 {.orange}
 
@@ -1424,7 +1466,11 @@ $$
 
 The integral is greater than or equal to the area of the lower rectangle and less than or equal to the area of the upper rectangle.
 
-Location of Figure 18: The graph of $y=e^{-x^2}$ on $[0,1]$, bounded above by $y=1$ and below by $y=1/e$, showing the corresponding rectangular area bounds.
+<div style="text-align: center;">
+<img src="../images/1618.png" style="width: 673 px; display: block; margin: 0 auto 10px auto;">
+
+<span><strong>Figure 18.</strong> The graph of $y=e^{-x^2}$ on $[0,1]$, bounded above by $y=1$ and below by $y=1/e$, showing the corresponding rectangular area bounds.</span>
+</div>
 
 <div class="example-end">$\blacksquare$</div>
 
