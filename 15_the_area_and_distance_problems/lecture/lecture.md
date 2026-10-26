@@ -165,6 +165,30 @@ For this increasing function, the left sums increase and the right sums decrease
 
 <div class="example-end">$\blacksquare$</div>
 
+A Python program to estimate the area with any domain and number of subintervals is given below.
+
+```python
+import numpy as np
+
+def f(x):
+    return x**2
+    
+start = float(input("Enter the starting point: "))
+stop = float(input("Enter the stopping point: "))
+sub_intervals = int(input("Enter the number of subintervals: "))
+
+delta_x = np.linspace(start, stop, sub_intervals+1)
+width = delta_x[1]
+
+areas = width*f(delta_x)
+
+sum_right = np.sum(areas[1:])
+print(f"R = {sum_right:.6f}")
+
+sum_left = np.sum(areas[:-1])
+print(f"L = {sum_left:.6f}")
+```
+
 ## From Rectangle Estimates to a Limit
 
 So far, we have used a finite number of rectangles. Their top edges do not generally match the curved boundary exactly, so the sums give approximations rather than the exact area. What if we increase the number of rectangles without bound? As the number $n$ grows, each rectangle becomes narrower. If the left- and right-endpoint sums approach the same number, that common limit gives the exact area. Example 2 establishes this result for $y=x^2$ on $[0,1]$.
@@ -482,6 +506,30 @@ Thus, the midpoint estimate is $M_{10}\approx0.8632$. This estimate is closer to
 </div>
 
 <div class="example-end">$\blacksquare$</div>
+
+A Python program to estimate the area under the curve of $e^{-x}$ in any defined domain and number of subintervals is given below.
+
+```python
+import numpy as np
+
+def f(x):
+    return np.exp(-x)
+    
+start = float(input("Enter the starting point: "))
+stop = float(input("Enter the stopping point: "))
+sub_intervals = int(input("Enter the number of subintervals: "))
+
+delta_x = np.linspace(start, stop, sub_intervals+1)
+width = delta_x[1]
+
+areas = width*f(delta_x)
+
+sum_right = np.sum(areas[1:])
+print(f"R = {sum_right:.6f}")
+
+sum_left = np.sum(areas[:-1])
+print(f"L = {sum_left:.6f}")
+```
 
 # Quick Check
 
