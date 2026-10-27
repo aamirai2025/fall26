@@ -45,13 +45,18 @@ Geometry</h1>
 <h2 id="the-fundamental-theorem-of-calculus">The Fundamental Theorem of
 Calculus</h2>
 <h3 id="dr.-aamir-alaud-din">Dr. Aamir Alaud Din</h3>
-<h3 id="october-26-2026">October 26, 2026</h3>
 <h1 id="objectives">Objectives</h1>
-<p>To explain and apply the Fundamental Theorem of Calculus, Part 1, by
+<ol type="1">
+<li>To explain and apply the Fundamental Theorem of Calculus, Part 1, by
 interpreting an integral with a variable upper limit as an accumulation
 function, differentiating that function, understanding the theorem’s
 proof, and using the result to differentiate functions defined by
-integrals.</p>
+integrals.</li>
+<li>To apply the second part of the Fundamental Theorem of Calculus to
+evaluate definite integrals using antiderivatives, interpret definite
+integrals as net changes in quantities such as position, and understand
+how differentiation and integration are inverse processes.</li>
+</ol>
 <h1 id="the-why-section">The Why Section</h1>
 <p>Differential calculus studies rates of change, while integral
 calculus studies accumulation, such as area, displacement, and total
@@ -75,6 +80,27 @@ can therefore be analyzed using this topic: if its displacement is
 represented by an integral of velocity, we can determine the
 instantaneous rate of change of displacement by differentiating the
 accumulation function.</p>
+<p>A definite integral can represent accumulated change. For example, if
+the velocity of a robot arm is known throughout a time interval,
+repeatedly adding tiny displacements would be a lengthy way to calculate
+its total change in position. The second part of the Fundamental Theorem
+of Calculus provides a much simpler method: find an antiderivative of
+the velocity and evaluate it at the endpoints.</p>
+<p>The theorem is useful in mechanical engineering when calculating
+displacement from velocity, work-related accumulation, or the area under
+a curve. It is also useful in computer science and mechatronics, where
+software integrates sensor measurements or a modeled rate of change to
+estimate a system’s accumulated output. Instead of approximating the
+accumulation with many small pieces, the theorem can give an exact
+result when a suitable antiderivative is available.</p>
+<p>Consider a mechatronic positioning system whose velocity is described
+by a continuous function <span class="math inline">v(t)</span>. If the
+system is at position <span class="math inline">s(a)</span> at time
+<span class="math inline">a</span>, we want to determine its position at
+time <span class="math inline">b</span>. Studying the second part of the
+Fundamental Theorem of Calculus will show how the accumulated velocity
+determines the change in position and how the final position can be
+calculated.</p>
 <h1 id="the-fundamental-theorem-of-calculus-part-1">The Fundamental
 Theorem of Calculus, Part 1</h1>
 <h2 id="the-connection-between-differentiation-and-integration">The
@@ -563,6 +589,466 @@ differentiating the displacement function recovers the velocity.</p>
 <div class="example-end">
 <span class="math inline">\blacksquare</span>
 </div>
+<h1 id="the-fundamental-theorem-of-calculus-part-2">The Fundamental
+Theorem of Calculus, Part 2</h1>
+<h2 id="why-is-the-second-part-important">Why Is the Second Part
+Important?</h2>
+<p>The first part of the Fundamental Theorem of Calculus connects
+accumulation and differentiation: if a function is defined by an
+integral with a variable upper limit, differentiating it recovers the
+integrand under the theorem’s continuity condition. The second part
+gives a practical method for evaluating a definite integral.</p>
+<p>Earlier, a definite integral was interpreted as the limit of Riemann
+sums. Although this definition is fundamental, calculating a limit of
+sums can be long and difficult. The second part of the theorem replaces
+that procedure with a simpler calculation: find an antiderivative and
+subtract its values at the endpoints.</p>
+<h2 class="orange" id="theorem">Theorem</h2>
+<p><strong>The Fundamental Theorem of Calculus, Part 2.</strong> If
+<span class="math inline">f</span> is continuous on <span
+class="math inline">[a,b]</span>, then</p>
+<p><span class="math display">
+\int_a^b f(x)\,dx=F(b)-F(a)
+</span></p>
+<p>where <span class="math inline">F</span> is any antiderivative of
+<span class="math inline">f</span>, that is, a function satisfying <span
+class="math inline">F&#39;(x)=f(x)</span>.</p>
+<h2 class="orange" id="proof-1">Proof</h2>
+<p>Define</p>
+<p><span class="math display">
+g(x)=\int_a^x f(t)\,dt
+</span></p>
+<p>Since <span class="math inline">f</span> is continuous on <span
+class="math inline">[a,b]</span>, the first part of the Fundamental
+Theorem of Calculus gives</p>
+<p><span class="math display">
+g&#39;(x)=f(x)
+</span></p>
+<p>Thus, <span class="math inline">g</span> is an antiderivative of
+<span class="math inline">f</span> on the interval.</p>
+<p>Let <span class="math inline">F</span> be any other antiderivative of
+<span class="math inline">f</span>. Then</p>
+<p><span class="math display">
+F&#39;(x)=f(x)
+</span></p>
+<p>and</p>
+<p><span class="math display">
+g&#39;(x)=f(x)
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+F&#39;(x)=g&#39;(x)
+</span></p>
+<p>It follows that the derivative of <span
+class="math inline">F-g</span> is zero:</p>
+<p><span class="math display">
+\frac{d}{dx}[F(x)-g(x)]=0
+</span></p>
+<p>A function whose derivative is zero on an interval is constant there.
+Hence, for some constant <span class="math inline">C</span>,</p>
+<p><span class="math display">
+F(x)-g(x)=C
+</span></p>
+<p>or</p>
+<p><span class="math display">
+F(x)=g(x)+C
+</span></p>
+<p>This equality holds throughout the interval, including its endpoints
+by continuity.</p>
+<p>Now set <span class="math inline">x=a</span>. From the definition of
+<span class="math inline">g</span>,</p>
+<p><span class="math display">
+g(a)=\int_a^a f(t)\,dt=0
+</span></p>
+<p>Consequently,</p>
+<p><span class="math display">
+F(a)=g(a)+C=C
+</span></p>
+<p>Next, set <span class="math inline">x=b</span>:</p>
+<p><span class="math display">
+F(b)=g(b)+C
+</span></p>
+<p>Subtracting <span class="math inline">F(a)=C</span> from <span
+class="math inline">F(b)=g(b)+C</span> gives</p>
+<p><span class="math display">
+F(b)-F(a)=g(b)
+</span></p>
+<p>Using the definition of <span class="math inline">g</span>, we
+obtain</p>
+<p><span class="math display">
+F(b)-F(a)=\int_a^b f(t)\,dt
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+\boxed{\int_a^b f(x)\,dx=F(b)-F(a)}
+</span></p>
+<p>This proves the second part of the Fundamental Theorem of
+Calculus.</p>
+<div class="theorem-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 id="interpreting-the-theorem-as-net-change">Interpreting the Theorem
+as Net Change</h2>
+<p>Suppose <span class="math inline">s(t)</span> denotes the position of
+a moving object and <span class="math inline">v(t)</span> its velocity.
+Since velocity is the derivative of position,</p>
+<p><span class="math display">
+s&#39;(t)=v(t)
+</span></p>
+<p>Therefore, <span class="math inline">s</span> is an antiderivative of
+<span class="math inline">v</span>. Applying the theorem gives</p>
+<p><span class="math display">
+\int_a^b v(t)\,dt=s(b)-s(a)
+</span></p>
+<p>The integral of velocity over a time interval is the <strong>net
+change in position</strong>, or displacement, over that interval. It is
+not necessarily the total distance travelled: if the object reverses
+direction, positive and negative parts of velocity can cancel in the
+integral.</p>
+<p>The same reasoning applies to other rates of change. If <span
+class="math inline">Q&#39;(t)=r(t)</span>, then</p>
+<p><span class="math display">
+\int_a^b r(t)\,dt=Q(b)-Q(a)
+</span></p>
+<p>Thus, integrating a rate over an interval gives the net change in the
+quantity whose derivative is that rate.</p>
+<h2 class="green" id="example-5">Example 5</h2>
+<p>Evaluate the integral</p>
+<p><span class="math display">
+\int_1^3 e^x\,dx
+</span></p>
+<h2 class="green" id="solution-5">Solution</h2>
+<p>The integrand is <span class="math inline">f(x)=e^x</span>. An
+antiderivative is</p>
+<p><span class="math display">
+F(x)=e^x
+</span></p>
+<p>because <span class="math inline">F&#39;(x)=e^x</span>. By the second
+part of the Fundamental Theorem of Calculus,</p>
+<p><span class="math display">
+\begin{aligned}
+\int_1^3 e^x\,dx
+&amp;=F(3)-F(1)\\
+&amp;=e^3-e
+\end{aligned}
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+\boxed{\int_1^3 e^x\,dx=e^3-e}
+</span></p>
+<p>Notice that any antiderivative <span class="math inline">e^x+C</span>
+would give the same result, because the constant cancels when the
+endpoint values are subtracted. It is therefore convenient to use the
+simplest antiderivative, <span class="math inline">F(x)=e^x</span>.</p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 id="another-notation-for-the-theorem">Another Notation for the
+Theorem</h2>
+<p>The endpoint evaluation is often written using bracket notation:</p>
+<p><span class="math display">
+\left.F(x)\right|_a^b=F(b)-F(a)
+</span></p>
+<p>Therefore, the theorem can also be written as</p>
+<p><span class="math display">
+\int_a^b f(x)\,dx=\left.F(x)\right|_a^b
+</span></p>
+<p>where <span class="math inline">F&#39;=f</span>. The notation means:
+evaluate <span class="math inline">F</span> at the upper endpoint <span
+class="math inline">b</span>, evaluate it at the lower endpoint <span
+class="math inline">a</span>, and subtract the second value from the
+first.</p>
+<h2 class="green" id="example-6">Example 6</h2>
+<p>Find the area under the parabola <span
+class="math inline">y=x^2</span> from <span class="math inline">0</span>
+to <span class="math inline">1</span>.</p>
+<h2 class="green" id="solution-6">Solution</h2>
+<p>The required area is</p>
+<p><span class="math display">
+A=\int_0^1 x^2\,dx
+</span></p>
+<p>An antiderivative of <span class="math inline">x^2</span> is</p>
+<p><span class="math display">
+F(x)=\frac{x^3}{3}
+</span></p>
+<p>Applying the Fundamental Theorem of Calculus gives</p>
+<p><span class="math display">
+\begin{aligned}
+A
+&amp;=\left.\frac{x^3}{3}\right|_0^1\\
+&amp;=\frac{1^3}{3}-\frac{0^3}{3}\\
+&amp;=\frac13
+\end{aligned}
+</span></p>
+<p>Therefore, the area is</p>
+<p><span class="math display">
+\boxed{A=\frac13}
+</span></p>
+<p>This calculation is much shorter than evaluating the area by taking a
+limit of Riemann sums.</p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="green" id="example-7">Example 7</h2>
+<p>Evaluate</p>
+<p><span class="math display">
+\int_3^6 \frac{dx}{x}
+</span></p>
+<h2 class="green" id="solution-7">Solution</h2>
+<p>We can write the integral as</p>
+<p><span class="math display">
+\int_3^6 \frac{1}{x}\,dx
+</span></p>
+<p>An antiderivative of <span class="math inline">1/x</span>, for <span
+class="math inline">x&gt;0</span>, is <span class="math inline">\ln
+x</span>. Since the interval <span class="math inline">[3,6]</span> lies
+entirely in the positive real numbers, we can use <span
+class="math inline">F(x)=\ln x</span>.</p>
+<p>By the Fundamental Theorem of Calculus,</p>
+<p><span class="math display">
+\begin{aligned}
+\int_3^6 \frac{1}{x}\,dx
+&amp;=\left.\ln x\right|_3^6\\
+&amp;=\ln 6-\ln 3\\
+&amp;=\ln\left(\frac63\right)\\
+&amp;=\ln 2
+\end{aligned}
+</span></p>
+<p>Hence,</p>
+<p><span class="math display">
+\boxed{\int_3^6 \frac{1}{x}\,dx=\ln 2}
+</span></p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="green" id="example-8">Example 8</h2>
+<p>Find the area under the cosine curve from <span
+class="math inline">0</span> to <span class="math inline">b</span>,
+where <span class="math inline">0\leq b\leq \pi/2</span>.</p>
+<h2 class="green" id="solution-8">Solution</h2>
+<p>On the interval <span class="math inline">0\leq x\leq
+b\leq\pi/2</span>, the cosine function is nonnegative. Therefore, the
+area under the curve <span class="math inline">y=\cos x</span> from
+<span class="math inline">x=0</span> to <span
+class="math inline">x=b</span> is</p>
+<p><span class="math display">
+A=\int_0^b \cos x\,dx
+</span></p>
+<p>An antiderivative of <span class="math inline">\cos x</span> is <span
+class="math inline">\sin x</span>. Applying the Fundamental Theorem of
+Calculus,</p>
+<p><span class="math display">
+\begin{aligned}
+A
+&amp;=\left.\sin x\right|_0^b\\
+&amp;=\sin b-\sin 0\\
+&amp;=\sin b
+\end{aligned}
+</span></p>
+<p>Thus,</p>
+<p><span class="math display">
+\boxed{A=\sin b}
+</span></p>
+<p>In particular, if <span class="math inline">b=\pi/2</span>, then</p>
+<p><span class="math display">
+A=\sin\frac{\pi}{2}=1
+</span></p>
+<p>So the area under the cosine curve from <span
+class="math inline">0</span> to <span class="math inline">\pi/2</span>
+is <span class="math inline">1</span>.</p>
+<div style="text-align: center;">
+<p><img src="../images/1709.png" style="width: 622 px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 9.</strong> The area under the curve <span
+class="math inline">y=\cos x</span> from <span
+class="math inline">x=0</span> to <span class="math inline">x=b</span>,
+with <span class="math inline">0\leq b\leq\pi/2</span>.</span></p>
+</div>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="green" id="example-9">Example 9</h2>
+<p>What is wrong with the following calculation?</p>
+<p><span class="math display">
+\int_{-1}^{3}\frac{1}{x^2}\,dx
+=\left.-\frac{1}{x}\right|_{-1}^{3}
+=-\frac13-1
+=-\frac43
+</span></p>
+<h2 class="green" id="solution-9">Solution</h2>
+<p>The calculation is incorrect because the Fundamental Theorem of
+Calculus, Part 2, requires the integrand to be continuous on the entire
+closed interval <span class="math inline">[a,b]</span>. Here,</p>
+<p><span class="math display">
+f(x)=\frac{1}{x^2}
+</span></p>
+<p>is not defined at <span class="math inline">x=0</span>, which lies
+inside <span class="math inline">[-1,3]</span>. Therefore, <span
+class="math inline">f</span> is not continuous on the interval, and the
+theorem cannot be applied directly.</p>
+<p>There is also a useful reason to question the result: <span
+class="math inline">1/x^2</span> is positive wherever it is defined, so
+an integral representing its accumulated area cannot give a negative
+value.</p>
+<p>The improper integral must be split at the discontinuity and treated
+using limits:</p>
+<p><span class="math display">
+\int_{-1}^{3}\frac{1}{x^2}\,dx
+=
+\int_{-1}^{0}\frac{1}{x^2}\,dx
++
+\int_{0}^{3}\frac{1}{x^2}\,dx
+</span></p>
+<p>Each part is defined as a one-sided limit. For the left part,</p>
+<p><span class="math display">
+\begin{aligned}
+\int_{-1}^{0}\frac{1}{x^2}\,dx
+&amp;=\lim_{c\to0^-}\int_{-1}^{c}x^{-2}\,dx\\
+&amp;=\lim_{c\to0^-}\left[-\frac1x\right]_{-1}^{c}\\
+&amp;=\lim_{c\to0^-}\left(-\frac1c-1\right)\\
+&amp;=+\infty
+\end{aligned}
+</span></p>
+<p>For the right part,</p>
+<p><span class="math display">
+\begin{aligned}
+\int_{0}^{3}\frac{1}{x^2}\,dx
+&amp;=\lim_{d\to0^+}\int_d^3x^{-2}\,dx\\
+&amp;=\lim_{d\to0^+}\left[-\frac1x\right]_d^3\\
+&amp;=\lim_{d\to0^+}\left(-\frac13+\frac1d\right)\\
+&amp;=+\infty
+\end{aligned}
+</span></p>
+<p>Both parts diverge. Therefore, the improper integral does not exist
+as a finite value:</p>
+<p><span class="math display">
+\boxed{\int_{-1}^{3}\frac{1}{x^2}\,dx\text{ diverges}}
+</span></p>
+<p>The error was applying the theorem across a point where the integrand
+is discontinuous.</p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2
+id="differentiation-and-integration-as-inverse-processes">Differentiation
+and Integration as Inverse Processes</h2>
+<p>The two parts of the Fundamental Theorem of Calculus express the
+close relationship between differentiation and integration.</p>
+<h3 id="part-1-differentiating-an-accumulation-function">Part 1:
+Differentiating an Accumulation Function</h3>
+<p>If <span class="math inline">f</span> is continuous and</p>
+<p><span class="math display">
+g(x)=\int_a^x f(t)\,dt
+</span></p>
+<p>then</p>
+<p><span class="math display">
+g&#39;(x)=f(x)
+</span></p>
+<p>In words, differentiating an accumulation function recovers the
+original integrand.</p>
+<h3 id="part-2-evaluating-a-definite-integral">Part 2: Evaluating a
+Definite Integral</h3>
+<p>If <span class="math inline">f</span> is continuous on <span
+class="math inline">[a,b]</span> and <span
+class="math inline">F&#39;=f</span>, then</p>
+<p><span class="math display">
+\int_a^b f(x)\,dx=F(b)-F(a)
+</span></p>
+<p>In words, a definite integral can be evaluated by finding an
+antiderivative and subtracting its values at the endpoints.</p>
+<p>Together, these results show that differentiation and integration are
+inverse processes, with the endpoint difference in Part 2 accounting for
+the net accumulation over an interval. Part 1 differentiates an integral
+with a variable upper limit; Part 2 evaluates a definite integral using
+an antiderivative.</p>
+<h1 id="quick-check-1">Quick Check</h1>
+<h2 class="red" id="question-1-1">Question 1</h2>
+<p>Evaluate</p>
+<p><span class="math display">
+\int_0^2 3x^2\,dx
+</span></p>
+<h2 class="red" id="answer-2">Answer</h2>
+<p>An antiderivative of <span class="math inline">3x^2</span> is <span
+class="math inline">x^3</span>. Hence,</p>
+<p><span class="math display">
+\begin{aligned}
+\int_0^2 3x^2\,dx
+&amp;=\left.x^3\right|_0^2\\
+&amp;=2^3-0^3\\
+&amp;=8
+\end{aligned}
+</span></p>
+<p><span class="math display">
+\boxed{8}
+</span></p>
+<h2 class="red" id="question-2-1">Question 2</h2>
+<p>Can the Fundamental Theorem of Calculus, Part 2, be applied directly
+to <span class="math inline">\int_{-1}^{1}1/x^2\,dx</span>? Explain
+briefly.</p>
+<h2 class="red" id="answer-3">Answer</h2>
+<p>No. The function <span class="math inline">1/x^2</span> is not
+continuous on <span class="math inline">[-1,1]</span>, because it is
+undefined at <span class="math inline">x=0</span>. The integral is
+improper and diverges.</p>
+<div class="question-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="scenario-problem-1">Scenario Problem</h1>
+<h2 class="green" id="problem-1">Problem</h2>
+<p>A mechatronic actuator moves along a straight guide. Its velocity at
+time <span class="math inline">t</span>, measured in metres per second,
+is modelled by</p>
+<p><span class="math display">
+v(t)=3t^2+2t
+</span></p>
+<p>for <span class="math inline">0\leq t\leq2</span>. If the actuator is
+at position <span class="math inline">s(0)=0.5</span> metres at <span
+class="math inline">t=0</span>, determine its displacement over the two
+seconds and its final position at <span
+class="math inline">t=2</span>.</p>
+<h2 class="green" id="solution-10">Solution</h2>
+<p>The displacement is the integral of velocity over the time
+interval:</p>
+<p><span class="math display">
+\Delta s=\int_0^2 v(t)\,dt
+</span></p>
+<p>Substitute the given velocity function:</p>
+<p><span class="math display">
+\Delta s=\int_0^2(3t^2+2t)\,dt
+</span></p>
+<p>An antiderivative is</p>
+<p><span class="math display">
+F(t)=t^3+t^2
+</span></p>
+<p>By the Fundamental Theorem of Calculus, Part 2,</p>
+<p><span class="math display">
+\begin{aligned}
+\Delta s
+&amp;=\left.(t^3+t^2)\right|_0^2\\
+&amp;=(2^3+2^2)-(0^3+0^2)\\
+&amp;=8+4\\
+&amp;=12\text{ m}
+\end{aligned}
+</span></p>
+<p>Thus, the actuator’s displacement is</p>
+<p><span class="math display">
+\boxed{\Delta s=12\text{ m}}
+</span></p>
+<p>Final position equals initial position plus displacement:</p>
+<p><span class="math display">
+s(2)=s(0)+\Delta s
+</span></p>
+<p><span class="math display">
+s(2)=0.5+12=12.5\text{ m}
+</span></p>
+<p>Therefore, the actuator is at position</p>
+<p><span class="math display">
+\boxed{s(2)=12.5\text{ m}}
+</span></p>
+<p>The theorem has converted the accumulated velocity into a net change
+in position by evaluating an antiderivative at the two endpoints.</p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
 <h1 id="summary">Summary</h1>
 <p>The Fundamental Theorem of Calculus, Part 1, connects integration and
 differentiation. If <span class="math inline">f</span> is continuous on
@@ -586,6 +1072,21 @@ class="math inline">\frac{d}{dx}\int_a^{u(x)}f(t)\,dt=f(u(x))u&#39;(x)</span>,
 where the continuity conditions for the integrand hold. This result
 makes it possible to differentiate many integral-defined functions
 without first evaluating their integrals.</p>
+<p>The second part of the Fundamental Theorem of Calculus states that if
+(f) is continuous on ([a,b]) and (F’=f), then (_a^b f(x),dx=F(b)-F(a)).
+It provides a short and exact method for evaluating definite integrals
+using antiderivatives rather than limits of Riemann sums. The result is
+often written as (.F(x)|_a^b=F(b)-F(a)). In applications, integrating a
+rate of change gives the net change in the corresponding quantity; in
+particular, (_a^b v(t),dt=s(b)-s(a)). The continuity condition matters:
+the theorem cannot be applied directly across an interior discontinuity,
+as shown by the divergent integral of (1/x^2) across zero.</p>
+<p>The two parts of the Fundamental Theorem describe differentiation and
+integration as inverse processes. Part 1 says that differentiating an
+accumulation function (_a^x f(t),dt) recovers (f(x)), while Part 2 says
+that a definite integral can be evaluated by subtracting endpoint values
+of an antiderivative. Together, these results connect rates, accumulated
+quantities, and areas under curves.</p>
 <h1 id="exercises">Exercises</h1>
 <p>Exercises help in transforming theoretical concepts into practical
 understanding. Mathematics is learned by doing and solving exercises
@@ -595,7 +1096,9 @@ mistakes which provide opportunities for learning and improvement.
 Regular practice increases speed, accuracy, and confidence. Exercises
 are given in the recommended book which has also been provided to you
 and you are expected to solve them on your own.</p>
-<h2 id="exercises-1">Exercises</h2>
-<p>Solve the odd number exercises from exercise 1 to 50.</p>
+<h2 id="exercises-set-1">Exercises Set 1</h2>
+<p>Solve the odd number exercises from exercise 1 to 80.</p>
+<h2 id="exercises-set-2">Exercises Set 2</h2>
+<p>Solve the odd number exercises from exercise 83 to 95.</p>
 </body>
 </html>
