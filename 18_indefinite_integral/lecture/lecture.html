@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>lecture</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="../styles/style.css" />
+  <script defer="" src="../katex/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <link rel="stylesheet" href="../katex/dist/katex.min.css" />
+</head>
+<body>
+<h1 id="calculus-and-analytical-geometry">Calculus and Analytical
+Geometry</h1>
+<h2 id="indefinite-integrals-and-the-net-change-theorem">Indefinite
+Integrals and the Net Change Theorem</h2>
+<h3 id="dr.-aamir-alaud-din">Dr. Aamir Alaud Din</h3>
+<h1 id="objectives">Objectives</h1>
+<p>After preparing this topic you should be able to</p>
+<ol type="1">
+<li>Understand indefinite integrals as families of antiderivatives, use
+the Fundamental Theorem of Calculus and standard integration formulas to
+evaluate indefinite and definite integrals, and interpret definite
+integrals as net change.</li>
+<li>Apply the Net Change Theorem to determine the net change in a
+quantity over an interval by integrating its rate of change, and
+interpret the result in applications involving accumulation, motion, and
+other changing quantities.</li>
+</ol>
+<h1 id="the-why-section">The Why Section</h1>
+<h2 id="why-study-indefinite-integrals">Why Study Indefinite
+Integrals?</h2>
+<p>In mechanical engineering, many quantities describe rates of change.
+For example, velocity describes the rate at which position changes,
+acceleration describes the rate at which velocity changes, and the rate
+of heat transfer describes how thermal energy changes with time. In
+computer science and mechatronics, sensors and control systems
+frequently provide rate information. A controller may measure the
+velocity of a robotic actuator, while the system requires its position.
+Similarly, a program may know the rate at which data is being generated
+but need the total amount generated over a period. Differentiation moves
+from a quantity to its rate of change. <strong>Integration reverses this
+process:</strong> it allows us to recover a function from its
+derivative, subject to an unknown constant. The Fundamental Theorem of
+Calculus connects derivatives and definite integrals. It explains why
+finding an antiderivative provides an efficient way to evaluate a
+definite integral. The notation for an indefinite integral represents a
+family of functions rather than a single number. The constant of
+integration is essential because functions that differ by a constant
+have the same derivative. Standard antiderivative formulas make
+integration systematic. They allow us to integrate powers, exponential
+functions, trigonometric functions, and other commonly occurring
+expressions.</p>
+<p>Many quantities in engineering and computer science change
+continuously with time, position, or another independent variable. In
+practical problems, we are often given the <strong>rate at which a
+quantity changes</strong>, rather than the quantity itself. For example,
+a water tank may be filled and drained at different rates. Knowing the
+inflow rate over a time interval allows us to determine the net change
+in the amount of water stored in the tank. Similarly, the concentration
+of a chemical product changes as a reaction proceeds. If the rate of
+change of concentration is known, integration determines the overall
+change in concentration during a specified time interval. The same
+principle applies to population growth, production cost, the mass of a
+nonuniform rod, and energy consumption.</p>
+<p>In mechanical engineering and mechatronics, the velocity of a moving
+component is the rate of change of its position. Integrating velocity
+gives its displacement. If the component changes direction, however,
+displacement and total distance travelled are different quantities. A
+related situation occurs in a computer-controlled robotic actuator. Its
+controller may record the actuator’s velocity throughout a movement. We
+may need to determine its final position relative to its starting point,
+or the total distance travelled by the actuator. These questions can be
+answered by integrating the velocity and, when necessary, its absolute
+value.</p>
+<p>The Net Change Theorem gives one general mathematical method for
+solving all these problems: <strong>the integral of a rate of change
+over an interval gives the net change in the original quantity over that
+interval.</strong></p>
+<h1 id="indefinite-integrals">Indefinite Integrals</h1>
+<h2 id="the-fundamental-theorem-of-calculus-and-antiderivatives">The
+Fundamental Theorem of Calculus and Antiderivatives</h2>
+<p>The Fundamental Theorem of Calculus (FTC) establishes a connection
+between differentiation and integration. Recall that the theorem has two
+parts, commonly called FTC1 and FTC2.</p>
+<h3
+id="ftc1-the-first-part-of-the-fundamental-theorem-of-calculus">FTC1:
+The First Part of the Fundamental Theorem of Calculus</h3>
+<p>Suppose that <span class="math inline">f</span> is continuous on
+<span class="math inline">[a,b]</span> and define</p>
+<p><span class="math display">
+g(x)=\int_a^x f(t)\,dt
+</span></p>
+<p>FTC1 states that <span class="math inline">g</span> is differentiable
+on <span class="math inline">(a,b)</span> and</p>
+<p><span class="math display">
+g&#39;(x)=f(x)
+</span></p>
+<p>In other words, differentiating an accumulation function defined by
+an integral recovers the original integrand. The variable <span
+class="math inline">t</span> is a <strong>dummy variable of
+integration</strong>. The variable <span class="math inline">x</span> is
+the upper limit and determines the value of the function <span
+class="math inline">g</span>.</p>
+<h3
+id="ftc2-the-second-part-of-the-fundamental-theorem-of-calculus">FTC2:
+The Second Part of the Fundamental Theorem of Calculus</h3>
+<p>Suppose that <span class="math inline">f</span> is continuous on
+<span class="math inline">[a,b]</span> and <span
+class="math inline">F</span> is any antiderivative of <span
+class="math inline">f</span> on this interval. Then</p>
+<p><span class="math display">
+\int_a^b f(x)\,dx=F(b)-F(a)
+</span></p>
+<p>FTC2 tells us that a definite integral can be evaluated by finding an
+antiderivative and subtracting its value at the lower limit from its
+value at the upper limit. Thus, FTC1 shows that differentiation reverses
+the accumulation process, while FTC2 provides a method for evaluating
+definite integrals using antiderivatives.</p>
+<h2 id="antiderivatives">Antiderivatives</h2>
+<p>A function <span class="math inline">F</span> is called an
+<strong>antiderivative</strong> of a function <span
+class="math inline">f</span> on an interval if</p>
+<p><span class="math display">
+F&#39;(x)=f(x)
+</span></p>
+<p>For example, consider</p>
+<p><span class="math display">
+f(x)=x^2
+</span></p>
+<p>Since</p>
+<p><span class="math display">
+\frac{d}{dx}\left(\frac{x^3}{3}\right)=x^2
+</span></p>
+<p>The function <span class="math inline">F(x)=x^3/3</span> is an
+antiderivative of <span class="math inline">f(x)=x^2</span>. However, it
+is not the only antiderivative. For any constant <span
+class="math inline">C</span>,</p>
+<p><span class="math display">
+\frac{d}{dx}\left(\frac{x^3}{3}+C\right)=x^2
+</span></p>
+<p>Therefore, all functions of the form</p>
+<p><span class="math display">
+F(x)=\frac{x^3}{3}+C
+</span></p>
+<p>are antiderivatives of <span class="math inline">x^2</span>.</p>
+<h2 id="indefinite-integral-notation">Indefinite Integral Notation</h2>
+<p>The Fundamental Theorem of Calculus establishes a connection between
+antiderivatives and definite integrals. To work conveniently with
+antiderivatives, we use the notation</p>
+<p><span class="math display">
+\int f(x)\,dx=F(x)+C
+</span></p>
+<p>This is read as the <strong>indefinite integral of <span
+class="math inline">f(x)</span> with respect to <span
+class="math inline">x</span></strong>. The notation means that <span
+class="math inline">F&#39;(x)=f(x)</span>. For example,</p>
+<p><span class="math display">
+\int x^2\,dx=\frac{x^3}{3}+C
+</span></p>
+<p>because</p>
+<p><span class="math display">
+\frac{d}{dx}\left(\frac{x^3}{3}+C\right)=x^2
+</span></p>
+<p>An indefinite integral represents a <strong>family of
+functions</strong>: one antiderivative for each value of the constant
+<span class="math inline">C</span>. In contrast, a definite integral
+such as <span class="math inline">\int_a^b f(x)\,dx</span> represents a
+number, provided the integral exists.</p>
+<h2 id="why-is-the-constant-of-integration-necessary">Why Is the
+Constant of Integration Necessary?</h2>
+<p>The derivative of a constant is zero.</p>
+<p><span class="math display">
+\frac{d}{dx}(C)=0
+</span></p>
+<p>Consequently, adding a constant to an antiderivative does not change
+its derivative. For example, the functions</p>
+<p><span class="math display">
+F_1(x)=\frac{x^3}{3}
+\qquad
+F_2(x)=\frac{x^3}{3}+5
+</span></p>
+<p>have the same derivative:</p>
+<p><span class="math display">
+F_1&#39;(x)=F_2&#39;(x)=x^2
+</span></p>
+<p>In fact, every function of the form <span
+class="math inline">x^3/3+C</span> has derivative <span
+class="math inline">x^2</span>. Therefore, when we write a general
+indefinite integral, we must include the arbitrary constant <span
+class="math inline">C</span>. Omitting <span
+class="math inline">C</span> would give only one antiderivative instead
+of the complete family of antiderivatives. The constant can be
+determined if an additional condition is supplied. For example, if <span
+class="math inline">F(0)=4</span> and <span
+class="math inline">F&#39;(x)=x^2</span>, then</p>
+<p><span class="math display">
+F(x)=\frac{x^3}{3}+C
+</span></p>
+<p>Using <span class="math inline">F(0)=4</span> gives <span
+class="math inline">C=4</span>, so the particular antiderivative is</p>
+<p><span class="math display">
+F(x)=\frac{x^3}{3}+4
+</span></p>
+<h2 id="basic-properties-of-indefinite-integrals">Basic Properties of
+Indefinite Integrals</h2>
+<p>A constant factor can be taken outside an integral.</p>
+<p><span class="math display">
+\int c f(x)\,dx=c\int f(x)\,dx
+</span></p>
+<p>The integral of a sum is the sum of the integrals.</p>
+<p><span class="math display">
+\int [f(x)+g(x)]\,dx
+=
+\int f(x)\,dx+\int g(x)\,dx
+</span></p>
+<p>Similarly, the integral of a difference is the difference of the
+integrals.</p>
+<p><span class="math display">
+\int [f(x)-g(x)]\,dx
+=
+\int f(x)\,dx-\int g(x)\,dx
+</span></p>
+<p>These properties allow us to integrate complicated expressions by
+separating them into simpler terms.</p>
+<h2 id="table-of-indefinite-integrals">Table of Indefinite
+Integrals</h2>
+<p>The following formulas are standard antiderivatives. They can be
+verified by differentiating the expression on the right-hand side.</p>
+<div style="text-align: center;">
+<p><span><strong>Table 1.</strong> Basic formulas for indefinite
+integrals.</span></p>
+</div>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">Function</th>
+<th style="text-align: left;">Indefinite integral</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Constant multiple</td>
+<td style="text-align: left;"><span class="math inline">\displaystyle
+\int c f(x)\,dx=c\int f(x)\,dx</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">Constant</td>
+<td style="text-align: left;"><span class="math inline">\displaystyle
+\int k\,dx=kx+C</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">Power, <span class="math inline">n\neq
+-1</span></td>
+<td style="text-align: left;"><span class="math inline">\displaystyle
+\int x^n\,dx=\frac{x^{n+1}}{n+1}+C</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">Reciprocal</td>
+<td style="text-align: left;"><span class="math inline">\displaystyle
+\int \frac{1}{x}\,dx=\ln|x|+C</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">Exponential</td>
+<td style="text-align: left;"><span class="math inline">\displaystyle
+\int e^x\,dx=e^x+C</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">Exponential, <span
+class="math inline">b&gt;0</span></td>
+<td style="text-align: left;"><span class="math inline">\displaystyle
+\int b^x\,dx=\frac{b^x}{\ln b}+C</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">Sine</td>
+<td style="text-align: left;"><span class="math inline">\displaystyle
+\int \sin x\,dx=-\cos x+C</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">Cosine</td>
+<td style="text-align: left;"><span class="math inline">\displaystyle
+\int \cos x\,dx=\sin x+C</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">Secant squared</td>
+<td style="text-align: left;"><span class="math inline">\displaystyle
+\int \sec^2 x\,dx=\tan x+C</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">Cosecant squared</td>
+<td style="text-align: left;"><span class="math inline">\displaystyle
+\int \csc^2 x\,dx=-\cot x+C</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">Secant–tangent</td>
+<td style="text-align: left;"><span class="math inline">\displaystyle
+\int \sec x\tan x\,dx=\sec x+C</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">Cosecant–cotangent</td>
+<td style="text-align: left;"><span class="math inline">\displaystyle
+\int \csc x\cot x\,dx=-\csc x+C</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">Inverse tangent form</td>
+<td style="text-align: left;"><span class="math inline">\displaystyle
+\int \frac{1}{x^2+1}\,dx=\tan^{-1}x+C</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">Inverse sine form</td>
+<td style="text-align: left;"><span class="math inline">\displaystyle
+\int \frac{1}{\sqrt{1-x^2}}\,dx=\sin^{-1}x+C</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">Hyperbolic sine</td>
+<td style="text-align: left;"><span class="math inline">\displaystyle
+\int \sinh x\,dx=\cosh x+C</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">Hyperbolic cosine</td>
+<td style="text-align: left;"><span class="math inline">\displaystyle
+\int \cosh x\,dx=\sinh x+C</span></td>
+</tr>
+</tbody>
+</table>
+<p>The power rule is valid for <span class="math inline">n\neq
+-1</span>. The case <span class="math inline">n=-1</span> is treated
+separately by the logarithmic formula. The formula for <span
+class="math inline">\int 1/x\,dx</span> is written with an absolute
+value because the antiderivative is <span
+class="math inline">\ln|x|</span> on any interval that does not contain
+zero. The formula for <span class="math inline">\int b^x\,dx</span>
+assumes <span class="math inline">b&gt;0</span> and <span
+class="math inline">b\neq1</span>. The most general antiderivative is
+understood on an interval where the integrand is defined. If the domain
+has separate intervals, the constants on those intervals may be
+different. For example,</p>
+<p><span class="math display">
+\int \frac{1}{x^2}\,dx=-\frac{1}{x}+C
+</span></p>
+<p>is valid on an interval contained in <span
+class="math inline">(0,\infty)</span> or on an interval contained in
+<span class="math inline">(-\infty,0)</span>. The domain excludes <span
+class="math inline">x=0</span>, so a single constant need not describe
+antiderivatives on both disconnected intervals.</p>
+<h2 class="green" id="example-1">Example 1</h2>
+<p>Find the general indefinite integral</p>
+<p><span class="math display">
+\int (10x^4-2\sec^2 x)\,dx
+</span></p>
+<h2 class="green" id="solution">Solution</h2>
+<p>We use the sum and constant multiple properties to separate the
+integral.</p>
+<p><span class="math display">
+\begin{aligned}
+\int (10x^4-2\sec^2 x)\,dx
+&amp;=10\int x^4\,dx-2\int\sec^2 x\,dx
+\end{aligned}
+</span></p>
+<p>Using the power rule,</p>
+<p><span class="math display">
+\int x^4\,dx=\frac{x^5}{5}+C
+</span></p>
+<p>and using the standard trigonometric integral,</p>
+<p><span class="math display">
+\int\sec^2 x\,dx=\tan x+C
+</span></p>
+<p>we obtain</p>
+<p><span class="math display">
+\begin{aligned}
+\int (10x^4-2\sec^2 x)\,dx
+&amp;=10\left(\frac{x^5}{5}\right)-2\tan x+C\\
+&amp;=2x^5-2\tan x+C
+\end{aligned}
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+\boxed{\int (10x^4-2\sec^2 x)\,dx=2x^5-2\tan x+C}
+</span></p>
+<div style="text-align: center;">
+<p><img src="../images/1801.png" style="width: 737 px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 1.</strong> Family of curves representing the
+indefinite integral in Example 1.</span></p>
+</div>
+<p>The curves have the same shape but are shifted vertically because
+changing <span class="math inline">C</span> adds a constant to the
+antiderivative. Differentiating any one of these functions gives the
+same integrand, <span class="math inline">10x^4-2\sec^2x</span>.</p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="green" id="example-2">Example 2</h2>
+<p>Evaluate</p>
+<p><span class="math display">
+\int \frac{\cos\theta}{\sin^2\theta}\,d\theta
+</span></p>
+<h2 class="green" id="solution-1">Solution</h2>
+<p>The integrand is not immediately listed in the table in its present
+form. We rewrite it as a product.</p>
+<p><span class="math display">
+\begin{aligned}
+\int \frac{\cos\theta}{\sin^2\theta}\,d\theta
+&amp;=\int \left(\frac{1}{\sin\theta}\right)
+\left(\frac{\cos\theta}{\sin\theta}\right)\,d\theta\\
+&amp;=\int \csc\theta\cot\theta\,d\theta
+\end{aligned}
+</span></p>
+<p>From the table of indefinite integrals,</p>
+<p><span class="math display">
+\int \csc\theta\cot\theta\,d\theta=-\csc\theta+C
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+\boxed{\int \frac{\cos\theta}{\sin^2\theta}\,d\theta=-\csc\theta+C}
+</span></p>
+<p>We can verify the result by differentiation.</p>
+<p><span class="math display">
+\begin{aligned}
+\frac{d}{d\theta}(-\csc\theta+C)
+&amp;=\csc\theta\cot\theta\\
+&amp;=\frac{\cos\theta}{\sin^2\theta}
+\end{aligned}
+</span></p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 id="evaluating-definite-integrals-using-antiderivatives">Evaluating
+Definite Integrals Using Antiderivatives</h2>
+<p>FTC2 provides a direct method for evaluating definite integrals. If
+<span class="math inline">f</span> is continuous on <span
+class="math inline">[a,b]</span> and <span class="math inline">F</span>
+is an antiderivative of <span class="math inline">f</span>, then</p>
+<p><span class="math display">
+\int_a^b f(x)\,dx=F(b)-F(a)
+</span></p>
+<p>We use the notation</p>
+<p><span class="math display">
+\left[F(x)\right]_a^b=F(b)-F(a)
+</span></p>
+<p>Thus, we first find an antiderivative, substitute the upper limit,
+substitute the lower limit, and subtract. Notice that the arbitrary
+constant is not needed when evaluating a definite integral because it
+cancels:</p>
+<p><span class="math display">
+[F(b)+C]-[F(a)+C]=F(b)-F(a)
+</span></p>
+<h2 class="green" id="example-3">Example 3</h2>
+<p>Evaluate</p>
+<p><span class="math display">
+\int_0^3 (x^3-6x)\,dx
+</span></p>
+<h2 class="green" id="solution-2">Solution</h2>
+<p>We first find an antiderivative of the integrand.</p>
+<p><span class="math display">
+\begin{aligned}
+\int (x^3-6x)\,dx
+&amp;=\int x^3\,dx-6\int x\,dx\\
+&amp;=\frac{x^4}{4}-6\frac{x^2}{2}+C\\
+&amp;=\frac{x^4}{4}-3x^2+C
+\end{aligned}
+</span></p>
+<p>Using FTC2,</p>
+<p><span class="math display">
+\begin{aligned}
+\int_0^3 (x^3-6x)\,dx
+&amp;=\left[\frac{x^4}{4}-3x^2\right]_0^3\\
+&amp;=\left(\frac{3^4}{4}-3(3^2)\right)
+-\left(\frac{0^4}{4}-3(0^2)\right)\\
+&amp;=\frac{81}{4}-27\\
+&amp;=\frac{81-108}{4}\\
+&amp;=-\frac{27}{4}\\
+&amp;=-6.75
+\end{aligned}
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+\boxed{\int_0^3 (x^3-6x)\,dx=-\frac{27}{4}=-6.75}
+</span></p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="green" id="example-4">Example 4</h2>
+<p>Find</p>
+<p><span class="math display">
+\int_0^2 \left(2x^3-6x+\frac{3}{x^2+1}\right)\,dx
+</span></p>
+<p>and interpret the result in terms of areas.</p>
+<h2 class="green" id="solution-3">Solution</h2>
+<p>We first integrate each term separately.</p>
+<p><span class="math display">
+\begin{aligned}
+\int \left(2x^3-6x+\frac{3}{x^2+1}\right)\,dx
+&amp;=2\int x^3\,dx-6\int x\,dx
++3\int\frac{1}{x^2+1}\,dx\\
+&amp;=2\left(\frac{x^4}{4}\right)-6\left(\frac{x^2}{2}\right)
++3\tan^{-1}x+C\\
+&amp;=\frac{x^4}{2}-3x^2+3\tan^{-1}x+C
+\end{aligned}
+</span></p>
+<p>Applying FTC2,</p>
+<p><span class="math display">
+\begin{aligned}
+&amp;\int_0^2 \left(2x^3-6x+\frac{3}{x^2+1}\right)\,dx\\
+&amp;=\left[\frac{x^4}{2}-3x^2+3\tan^{-1}x\right]_0^2\\
+&amp;=\left(\frac{2^4}{2}-3(2^2)+3\tan^{-1}2\right)
+-\left(0-0+3\tan^{-1}0\right)\\
+&amp;=8-12+3\tan^{-1}2\\
+&amp;=-4+3\tan^{-1}2
+\end{aligned}
+</span></p>
+<p>Therefore, the exact value is</p>
+<p><span class="math display">
+\boxed{-4+3\tan^{-1}2}
+</span></p>
+<p>Using a calculator,</p>
+<p><span class="math display">
+\boxed{\int_0^2 \left(2x^3-6x+\frac{3}{x^2+1}\right)\,dx\approx
+-0.67855}
+</span></p>
+<div style="text-align: center;">
+<p><img src="../images/1802.png" style="width: 730 px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 2.</strong> Graph of the integrand in Example 4,
+showing the positive and negative regions between <span
+class="math inline">x=0</span> and <span
+class="math inline">x=2</span>.</span></p>
+</div>
+<p>A definite integral represents <strong>net signed area</strong>, not
+necessarily the total geometric area between the curve and the <span
+class="math inline">x</span>-axis. The regions above the <span
+class="math inline">x</span>-axis contribute positively, while the
+region below the <span class="math inline">x</span>-axis contributes
+negatively. In this example, the negative contribution is larger than
+the combined positive contributions. This is why the value of the
+integral is negative.</p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="green" id="example-5">Example 5</h2>
+<p>Evaluate</p>
+<p><span class="math display">
+\int_1^9 \frac{2t^2+t^2\sqrt{t}-1}{t^2}\,dt
+</span></p>
+<h2 class="green" id="solution-4">Solution</h2>
+<p>We first simplify the integrand by dividing each term in the
+numerator by <span class="math inline">t^2</span>.</p>
+<p><span class="math display">
+\begin{aligned}
+\frac{2t^2+t^2\sqrt{t}-1}{t^2}
+&amp;=\frac{2t^2}{t^2}+\frac{t^2\sqrt{t}}{t^2}-\frac{1}{t^2}\\
+&amp;=2+\sqrt{t}-\frac{1}{t^2}\\
+&amp;=2+t^{1/2}-t^{-2}
+\end{aligned}
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+\int_1^9 \frac{2t^2+t^2\sqrt{t}-1}{t^2}\,dt
+=
+\int_1^9 (2+t^{1/2}-t^{-2})\,dt
+</span></p>
+<p>Integrating term by term,</p>
+<p><span class="math display">
+\begin{aligned}
+\int (2+t^{1/2}-t^{-2})\,dt
+&amp;=2t+\frac{t^{3/2}}{3/2}-\frac{t^{-1}}{-1}+C\\
+&amp;=2t+\frac{2}{3}t^{3/2}+\frac{1}{t}+C
+\end{aligned}
+</span></p>
+<p>Applying FTC2,</p>
+<p><span class="math display">
+\begin{aligned}
+&amp;\int_1^9 (2+t^{1/2}-t^{-2})\,dt\\
+&amp;=\left[2t+\frac{2}{3}t^{3/2}+\frac{1}{t}\right]_1^9\\
+&amp;=\left(2(9)+\frac{2}{3}(9)^{3/2}+\frac{1}{9}\right)
+-\left(2(1)+\frac{2}{3}(1)^{3/2}+1\right)\\
+&amp;=\left(18+18+\frac{1}{9}\right)
+-\left(2+\frac{2}{3}+1\right)\\
+&amp;=\frac{325}{9}-\frac{33}{9}\\
+&amp;=\frac{292}{9}\\
+&amp;=32\frac{4}{9}
+\end{aligned}
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+\boxed{\int_1^9 \frac{2t^2+t^2\sqrt{t}-1}{t^2}\,dt
+=32\frac{4}{9}}
+</span></p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="quick-check">Quick Check</h1>
+<h2 class="red" id="question-1">Question 1</h2>
+<p>Find the general indefinite integral</p>
+<p><span class="math display">
+\int (6x^2-4\cos x)\,dx
+</span></p>
+<h2 class="red" id="answer">Answer</h2>
+<p>Integrating term by term,</p>
+<p><span class="math display">
+\begin{aligned}
+\int (6x^2-4\cos x)\,dx
+&amp;=6\frac{x^3}{3}-4\sin x+C\\
+&amp;=2x^3-4\sin x+C
+\end{aligned}
+</span></p>
+<p><span class="math display">
+\boxed{2x^3-4\sin x+C}
+</span></p>
+<h2 class="red" id="question-2">Question 2</h2>
+<p>A particle has position <span class="math inline">s(t)</span> and
+velocity <span class="math inline">v(t)=s&#39;(t)</span>. What does</p>
+<p><span class="math display">
+\int_1^4 v(t)\,dt
+</span></p>
+<p>represent?</p>
+<h2 class="red" id="answer-1">Answer</h2>
+<p>By the Net Change Theorem,</p>
+<p><span class="math display">
+\int_1^4 v(t)\,dt=s(4)-s(1)
+</span></p>
+<p>It represents the particle’s <strong>net displacement</strong> from
+time <span class="math inline">t=1</span> to time <span
+class="math inline">t=4</span>.</p>
+<div class="question-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="scenario-problem">Scenario Problem</h1>
+<h2 class="green" id="problem">Problem</h2>
+<p>A mechatronic positioning system uses a motor to move a robotic
+actuator along a straight guide. A sensor and controller provide the
+actuator’s velocity as a function of time:</p>
+<p><span class="math display">
+v(t)=3t^2-6t+2
+</span></p>
+<p>where <span class="math inline">v(t)</span> is measured in metres per
+second and <span class="math inline">t</span> is measured in
+seconds.</p>
+<p>At time <span class="math inline">t=0</span>, the actuator is at
+position <span class="math inline">s(0)=1</span> metre.</p>
+<p>Determine the position function <span class="math inline">s(t)</span>
+and the net displacement of the actuator during the first three
+seconds.</p>
+<h2 class="green" id="solution-5">Solution</h2>
+<p>We know that velocity is the derivative of position:</p>
+<p><span class="math display">
+v(t)=s&#39;(t)
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+s&#39;(t)=3t^2-6t+2
+</span></p>
+<p>To determine the position function, we integrate the velocity.</p>
+<p><span class="math display">
+\begin{aligned}
+s(t)
+&amp;=\int (3t^2-6t+2)\,dt\\
+&amp;=3\frac{t^3}{3}-6\frac{t^2}{2}+2t+C\\
+&amp;=t^3-3t^2+2t+C
+\end{aligned}
+</span></p>
+<p>We are given the initial condition <span
+class="math inline">s(0)=1</span>. Substituting <span
+class="math inline">t=0</span>,</p>
+<p><span class="math display">
+\begin{aligned}
+1&amp;=0^3-3(0)^2+2(0)+C\\
+C&amp;=1
+\end{aligned}
+</span></p>
+<p>Thus, the position function is</p>
+<p><span class="math display">
+\boxed{s(t)=t^3-3t^2+2t+1}
+</span></p>
+<p>Now we determine the net displacement during the first three seconds
+using the Net Change Theorem.</p>
+<p><span class="math display">
+\begin{aligned}
+\text{Net displacement}
+&amp;=\int_0^3 v(t)\,dt\\
+&amp;=\int_0^3(3t^2-6t+2)\,dt\\
+&amp;=\left[t^3-3t^2+2t\right]_0^3\\
+&amp;=(27-27+6)-0\\
+&amp;=6
+\end{aligned}
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+\boxed{\text{Net displacement}=6\text{ m}}
+</span></p>
+<p>The final position is</p>
+<p><span class="math display">
+s(3)=3^3-3(3)^2+2(3)+1=7\text{ m}
+</span></p>
+<p>Since the initial position was <span class="math inline">1</span>
+metre, the final position is <span class="math inline">7</span> metres
+and the net displacement is <span class="math inline">7-1=6</span>
+metres.</p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="the-net-change-theorem">The Net Change Theorem</h1>
+<h2 id="the-fundamental-theorem-of-calculus-part-2">The Fundamental
+Theorem of Calculus: Part 2</h2>
+<p>Recall the second part of the Fundamental Theorem of Calculus. If
+<span class="math inline">f</span> is continuous on <span
+class="math inline">[a,b]</span> and <span class="math inline">F</span>
+is an antiderivative of <span class="math inline">f</span>, then</p>
+<p><span class="math display">
+\int_a^b f(x)\,dx=F(b)-F(a)
+</span></p>
+<p>Since <span class="math inline">F&#39;(x)=f(x)</span>, the same
+result can be written as</p>
+<p><span class="math display">
+\int_a^b F&#39;(x)\,dx=F(b)-F(a)
+</span></p>
+<p>These equations connect integration with the evaluation of an
+antiderivative at the endpoints of an interval. The expression <span
+class="math inline">F(b)-F(a)</span> represents the change in the value
+of <span class="math inline">F</span> as its independent variable
+changes from <span class="math inline">a</span> to <span
+class="math inline">b</span>. Therefore, when the integrand is the rate
+of change of a quantity, its definite integral gives the change in that
+quantity over the interval.</p>
+<h2 class="blue" id="definition-net-change-theorem">Definition: Net
+Change Theorem</h2>
+<p>The <strong>Net Change Theorem</strong> states that the definite
+integral of a rate of change over an interval is equal to the net change
+in the quantity over that interval.</p>
+<p>If <span class="math inline">F&#39;(x)</span> is the rate of change
+of a quantity <span class="math inline">F(x)</span>, then</p>
+<p><span class="math display">
+\boxed{\int_a^b F&#39;(x)\,dx=F(b)-F(a)}
+</span></p>
+<p>The left-hand side represents the accumulated rate of change from
+<span class="math inline">a</span> to <span
+class="math inline">b</span>. The right-hand side represents the final
+value minus the initial value. The word <strong>net</strong> is
+important. It means that increases and decreases are both taken into
+account. An increase contributes positively, while a decrease
+contributes negatively. Consequently, the net change is not necessarily
+the same as the total amount of change. For example, an object may move
+forward and then backward. Its displacement is the net change in
+position, whereas its total distance travelled counts movement in both
+directions as positive.</p>
+<div class="definition-end">
+<p><span class="math inline">\blacksquare</span></p>
+</div>
+<h2 id="applications-of-the-net-change-theorem">Applications of the Net
+Change Theorem</h2>
+<p>The Net Change Theorem can be applied whenever the rate of change of
+a quantity is known.</p>
+<h3 id="volume-of-water-in-a-reservoir">Volume of Water in a
+Reservoir</h3>
+<p>Let <span class="math inline">V(t)</span> represent the volume of
+water in a reservoir at time <span class="math inline">t</span>. Its
+derivative <span class="math inline">V&#39;(t)</span> represents the
+rate at which the volume of water changes. If water flows into the
+reservoir at a greater rate than it flows out, then <span
+class="math inline">V&#39;(t)</span> is positive. If water flows out at
+a greater rate than it flows in, then <span
+class="math inline">V&#39;(t)</span> is negative. By the Net Change
+Theorem,</p>
+<p><span class="math display">
+\int_{t_1}^{t_2}V&#39;(t)\,dt=V(t_2)-V(t_1)
+</span></p>
+<p>Thus, the integral gives the net change in the volume of water
+between times <span class="math inline">t_1</span> and <span
+class="math inline">t_2</span>.</p>
+<h3 id="concentration-in-a-chemical-reaction">Concentration in a
+Chemical Reaction</h3>
+<p>Let <span class="math inline">C(t)</span> represent the concentration
+of a product in a chemical reaction at time <span
+class="math inline">t</span>. The rate of change of concentration is
+<span class="math inline">C&#39;(t)=\dfrac{dC}{dt}</span>. Applying the
+Net Change Theorem gives</p>
+<p><span class="math display">
+\int_{t_1}^{t_2}\frac{dC}{dt}\,dt=C(t_2)-C(t_1)
+</span></p>
+<p>This integral gives the change in the concentration of the product
+from time <span class="math inline">t_1</span> to time <span
+class="math inline">t_2</span>.</p>
+<h3 id="mass-of-a-nonuniform-rod">Mass of a Nonuniform Rod</h3>
+<p>Suppose a rod is measured from its left endpoint, and let <span
+class="math inline">m(x)</span> represent the mass of the portion of the
+rod from the left endpoint to position <span
+class="math inline">x</span>. The linear density of the rod is the rate
+at which its mass changes with respect to position:</p>
+<p><span class="math display">
+\rho(x)=m&#39;(x)
+</span></p>
+<p>Therefore, the mass of the part of the rod between positions <span
+class="math inline">a</span> and <span class="math inline">b</span>
+is</p>
+<p><span class="math display">
+\int_a^b\rho(x)\,dx=m(b)-m(a)
+</span></p>
+<p>Thus, integrating the linear density gives the mass of the segment of
+the rod between <span class="math inline">x=a</span> and <span
+class="math inline">x=b</span>.</p>
+<h3 id="population-growth">Population Growth</h3>
+<p>Let <span class="math inline">n(t)</span> represent the population of
+a region at time <span class="math inline">t</span>. The rate of
+population growth is <span class="math inline">\dfrac{dn}{dt}</span>.
+The Net Change Theorem gives</p>
+<p><span class="math display">
+\int_{t_1}^{t_2}\frac{dn}{dt}\,dt=n(t_2)-n(t_1)
+</span></p>
+<p>This is the net change in population during the time interval from
+<span class="math inline">t_1</span> to <span
+class="math inline">t_2</span>. Births increase the population, while
+deaths decrease it. The net change accounts for both.</p>
+<h3 id="cost-of-production">Cost of Production</h3>
+<p>Let <span class="math inline">C(x)</span> represent the total cost of
+producing <span class="math inline">x</span> units of a commodity. The
+derivative <span class="math inline">C&#39;(x)</span> is the marginal
+cost, which describes the rate at which the total cost changes as
+production increases. The Net Change Theorem gives</p>
+<p><span class="math display">
+\int_{x_1}^{x_2}C&#39;(x)\,dx=C(x_2)-C(x_1)
+</span></p>
+<p>This integral gives the increase in production cost when the number
+of units produced changes from <span class="math inline">x_1</span> to
+<span class="math inline">x_2</span>.</p>
+<h3 id="displacement-and-distance-from-velocity">Displacement and
+Distance from Velocity</h3>
+<p>Suppose an object moves along a straight line and its position at
+time <span class="math inline">t</span> is <span
+class="math inline">s(t)</span>. Its velocity is the derivative of its
+position:</p>
+<p><span class="math display">
+v(t)=s&#39;(t)
+</span></p>
+<p>By the Net Change Theorem,</p>
+<p><span class="math display">
+\boxed{\int_{t_1}^{t_2}v(t)\,dt=s(t_2)-s(t_1)}
+</span></p>
+<p>The integral of velocity gives the <strong>net change in
+position</strong>, which is called displacement. Velocity can be
+positive or negative. Positive velocity indicates motion in the positive
+direction, while negative velocity indicates motion in the negative
+direction. Therefore, displacement takes direction into account. If we
+want the <strong>total distance travelled</strong>, movement in either
+direction must contribute positively. We therefore integrate the speed,
+which is the absolute value of velocity:</p>
+<p><span class="math display">
+\boxed{\int_{t_1}^{t_2}|v(t)|\,dt=\text{total distance travelled}}
+</span></p>
+<p>If velocity changes sign during the interval, we split the integral
+at the times when the object changes direction.</p>
+<div style="text-align: center;">
+<p><img src="../images/1803.png" style="width: 700 px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 3.</strong> Displacement and total distance
+travelled represented by signed and unsigned areas under a velocity
+curve.</span></p>
+</div>
+<p>In the figure, the areas above the time axis contribute positively to
+displacement, while the area below the time axis contributes negatively.
+For total distance, all three areas contribute positively. Thus, if the
+three regions have areas <span class="math inline">A_1</span>, <span
+class="math inline">A_2</span>, and <span
+class="math inline">A_3</span>, respectively, then</p>
+<p><span class="math display">
+\text{Displacement}=A_1-A_2+A_3
+</span></p>
+<p><span class="math display">
+\text{Total distance}=A_1+A_2+A_3
+</span></p>
+<h3 id="acceleration-and-change-in-velocity">Acceleration and Change in
+Velocity</h3>
+<p>Acceleration is the rate of change of velocity. If <span
+class="math inline">v(t)</span> is the velocity of an object, then</p>
+<p><span class="math display">
+a(t)=v&#39;(t)
+</span></p>
+<p>Applying the Net Change Theorem gives</p>
+<p><span class="math display">
+\boxed{\int_{t_1}^{t_2}a(t)\,dt=v(t_2)-v(t_1)}
+</span></p>
+<p>Therefore, integrating acceleration over a time interval gives the
+change in velocity during that interval.</p>
+<h2 class="green" id="example-6">Example 6</h2>
+<p>A particle moves along a straight line with velocity</p>
+<p><span class="math display">
+v(t)=t^2-t-6
+</span></p>
+<p>where velocity is measured in meters per second. For the time
+interval <span class="math inline">1\leq t\leq4</span>, find:</p>
+<p><strong>(a)</strong> the displacement of the particle;</p>
+<p><strong>(b)</strong> the total distance travelled by the
+particle.</p>
+<h2 class="green" id="solution">Solution</h2>
+<p><strong>(a) Displacement</strong></p>
+<p>By the Net Change Theorem, displacement is the integral of velocity
+over the given time interval:</p>
+<p><span class="math display">
+\begin{aligned}
+\text{Displacement}
+&amp;=\int_1^4v(t)\,dt\\
+&amp;=\int_1^4(t^2-t-6)\,dt
+\end{aligned}
+</span></p>
+<p>An antiderivative of <span class="math inline">t^2-t-6</span> is</p>
+<p><span class="math display">
+\frac{t^3}{3}-\frac{t^2}{2}-6t
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+\begin{aligned}
+\text{Displacement}
+&amp;=\left[\frac{t^3}{3}-\frac{t^2}{2}-6t\right]_1^4\\
+&amp;=\left(\frac{64}{3}-8-24\right)
+-\left(\frac13-\frac12-6\right)\\
+&amp;=-\frac92
+\end{aligned}
+</span></p>
+<p>Hence,</p>
+<p><span class="math display">
+\boxed{\text{Displacement}=-\frac92\text{ m}}
+</span></p>
+<p>The negative sign indicates that the particle’s final position is
+<span class="math inline">4.5</span> m to the left of its initial
+position.</p>
+<p><strong>(b) Total distance travelled</strong></p>
+<p>To calculate total distance, we must integrate the speed <span
+class="math inline">|v(t)|</span>.</p>
+<p>First, factor the velocity function:</p>
+<p><span class="math display">
+v(t)=t^2-t-6=(t-3)(t+2)
+</span></p>
+<p>The velocity is negative for <span class="math inline">1\leq
+t&lt;3</span> and positive for <span
+class="math inline">3&lt;t\leq4</span>. Thus, the particle changes
+direction at <span class="math inline">t=3</span>.</p>
+<p>We split the distance integral at <span
+class="math inline">t=3</span>:</p>
+<p><span class="math display">
+\begin{aligned}
+\text{Distance}
+&amp;=\int_1^4|v(t)|\,dt\\
+&amp;=\int_1^3[-v(t)]\,dt+\int_3^4v(t)\,dt\\
+&amp;=\int_1^3(-t^2+t+6)\,dt\\
+&amp;\quad+\int_3^4(t^2-t-6)\,dt
+\end{aligned}
+</span></p>
+<p>For the first integral,</p>
+<p><span class="math display">
+\begin{aligned}
+\int_1^3(-t^2+t+6)\,dt
+&amp;=\left[-\frac{t^3}{3}+\frac{t^2}{2}+6t\right]_1^3\\
+&amp;=\frac{22}{3}
+\end{aligned}
+</span></p>
+<p>For the second integral,</p>
+<p><span class="math display">
+\begin{aligned}
+\int_3^4(t^2-t-6)\,dt
+&amp;=\left[\frac{t^3}{3}-\frac{t^2}{2}-6t\right]_3^4\\
+&amp;=\frac{17}{6}
+\end{aligned}
+</span></p>
+<p>Adding the two positive distances,</p>
+<p><span class="math display">
+\begin{aligned}
+\text{Distance}
+&amp;=\frac{26}{3}+\frac32\\
+&amp;=\frac{52+9}{6}\\
+&amp;=\frac{61}{6}
+\end{aligned}
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+\boxed{\text{Total distance}=\frac{61}{6}\text{ m}\approx10.17\text{ m}}
+</span></p>
+<p>The displacement is negative because the particle finishes to the
+left of its starting point. The total distance is positive because it
+measures the entire length of the path travelled.</p>
+<div class="example-end">
+<p><span class="math inline">\blacksquare</span></p>
+</div>
+<h2 class="green" id="example-7">Example 7</h2>
+The graph in Figure 4 shows the power consumption of the city of San
+Francisco during one day in September. Power <span
+class="math inline">P</span> is measured in megawatts, and time <span
+class="math inline">t</span> is measured in hours after midnight.
+Estimate the total energy used during that day.
+<div style="text-align: center;">
+<p><img src="../images/1804.png" style="width: 1100 px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 4.</strong> Graph of power consumption in San
+Francisco over a 24-hour day in September.</span></p>
+</div>
+<h2 class="green" id="solution-1">Solution</h2>
+<p>Power is the rate of change of energy. If <span
+class="math inline">E(t)</span> represents the energy used by time <span
+class="math inline">t</span>, then</p>
+<p><span class="math display">
+P(t)=E&#39;(t)
+</span></p>
+<p>By the Net Change Theorem,</p>
+<p><span class="math display">
+\int_0^{24}P(t)\,dt=E(24)-E(0)
+</span></p>
+<p>Thus, the integral of power over the 24-hour interval gives the total
+energy used during the day.</p>
+<p>The graph does not provide an algebraic formula for <span
+class="math inline">P(t)</span>, so we estimate the integral
+numerically. We use the <strong>Midpoint Rule</strong> with 12 equal
+subintervals.</p>
+<p>The interval is <span class="math inline">[0,24]</span>, so</p>
+<p><span class="math display">
+n=12
+</span></p>
+<p>and the width of each subinterval is</p>
+<p><span class="math display">
+\Delta t=\frac{24-0}{12}=2
+</span></p>
+<p>The midpoints are</p>
+<p><span class="math display">
+1,3,5,7,9,11,13,15,17,19,21,23
+</span></p>
+<p>Reading the approximate power values from Figure 4 at these midpoints
+gives</p>
+<p><span class="math display">
+\begin{aligned}
+&amp;P(1)\approx440,\quad P(3)\approx400,\quad P(5)\approx420\\
+&amp;P(7)\approx620,\quad P(9)\approx790,\quad P(11)\approx840\\
+&amp;P(13)\approx850,\quad P(15)\approx840,\quad P(17)\approx810\\
+&amp;P(19)\approx690,\quad P(21)\approx670,\quad P(23)\approx550
+\end{aligned}
+</span></p>
+<p>Using the Midpoint Rule,</p>
+<p><span class="math display">
+\begin{aligned}
+\int_0^{24}P(t)\,dt
+&amp;\approx [P(1)+P(3)+P(5)+\cdots+P(23)]\Delta t\\
+&amp;\approx (440+400+420+620+790+840\\
+&amp;\qquad+850+840+810+690+670+550)(2)\\
+&amp;=15,840
+\end{aligned}
+</span></p>
+<p>Since power is measured in megawatts and time in hours, the resulting
+unit is megawatt-hours.</p>
+<p>Therefore, the estimated energy used during the day is</p>
+<p><span class="math display">
+\boxed{15,840\text{ megawatt-hours}}
+</span></p>
+<div class="example-end">
+<p><span class="math inline">\blacksquare</span></p>
+</div>
+<h1 id="quick-check-1">Quick Check</h1>
+<h2 class="red" id="question-1">Question 1</h2>
+<p>The rate of change of the volume of water in a tank is <span
+class="math inline">V&#39;(t)=3t^2+2</span> liters per minute. Find the
+net change in volume from <span class="math inline">t=0</span> to <span
+class="math inline">t=2</span> minutes.</p>
+<h2 class="red" id="answer">Answer</h2>
+<p>By the Net Change Theorem,</p>
+<p><span class="math display">
+\begin{aligned}
+\Delta V
+&amp;=\int_0^2(3t^2+2)\,dt\\
+&amp;=[t^3+2t]_0^2\\
+&amp;=8+4\\
+&amp;=12
+\end{aligned}
+</span></p>
+<p><span class="math display">
+\boxed{\Delta V=12\text{ liters}}
+</span></p>
+<h2 class="red" id="question-2">Question 2</h2>
+<p>An object’s velocity is negative over a time interval. Is its
+displacement over that interval necessarily negative, and is its total
+distance travelled negative?</p>
+<h2 class="red" id="answer-1">Answer</h2>
+<p>If velocity is negative throughout the interval, displacement is
+negative because the object moves in the negative direction. Total
+distance is never negative because it is calculated by integrating the
+nonnegative speed <span class="math inline">|v(t)|</span>.</p>
+<p><span class="math display">
+\boxed{\text{Displacement: negative; total distance: nonnegative}}
+</span></p>
+<div class="question-end">
+<p><span class="math inline">\blacksquare</span></p>
+</div>
+<h1 id="scenario-problem-1">Scenario Problem</h1>
+<h2 class="green" id="problem">Problem</h2>
+<p>A computer-controlled linear actuator in a mechatronic positioning
+system moves a component along a straight guide. Its velocity during a
+four-second operating cycle is modeled by</p>
+<p><span class="math display">
+v(t)=t^2-4t+3
+</span></p>
+<p>where <span class="math inline">v(t)</span> is measured in meters per
+second and <span class="math inline">t</span> is measured in
+seconds.</p>
+<p>Using the Net Change Theorem, determine:</p>
+<p><strong>(a)</strong> the net displacement of the actuator during the
+four-second cycle;</p>
+<p><strong>(b)</strong> the total distance travelled by the actuator
+during the cycle;</p>
+<p><strong>(c)</strong> the times at which the actuator changes
+direction.</p>
+<h2 class="green" id="solution-2">Solution</h2>
+<p><strong>(a) Net displacement</strong></p>
+<p>The displacement is the integral of velocity over the interval <span
+class="math inline">0\leq t\leq4</span>:</p>
+<p><span class="math display">
+\begin{aligned}
+\Delta s
+&amp;=\int_0^4(t^2-4t+3)\,dt\\
+&amp;=\left[\frac{t^3}{3}-2t^2+3t\right]_0^4\\
+&amp;=\frac{64}{3}-32+12\\
+&amp;=\frac43
+\end{aligned}
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+\boxed{\Delta s=\frac43\text{ m}}
+</span></p>
+<p>The positive result indicates that the actuator finishes <span
+class="math inline">\frac43</span> m in the positive direction relative
+to its starting position.</p>
+<p><strong>(b) Total distance travelled</strong></p>
+<p>To find the total distance, we integrate the absolute value of
+velocity.</p>
+<p>First, factor the velocity function:</p>
+<p><span class="math display">
+v(t)=t^2-4t+3=(t-1)(t-3)
+</span></p>
+<p>The velocity is positive on <span class="math inline">[0,1)</span>,
+negative on <span class="math inline">(1,3)</span>, and positive on
+<span class="math inline">(3,4]</span>. Therefore,</p>
+<p><span class="math display">
+\begin{aligned}
+D
+&amp;=\int_0^4|v(t)|\,dt\\
+&amp;=\int_0^1v(t)\,dt-\int_1^3v(t)\,dt
++\int_3^4v(t)\,dt
+\end{aligned}
+</span></p>
+<p>An antiderivative is</p>
+<p><span class="math display">
+F(t)=\frac{t^3}{3}-2t^2+3t
+</span></p>
+<p>Evaluating the three parts,</p>
+<p><span class="math display">
+\int_0^1v(t)\,dt=F(1)-F(0)=\frac43
+</span></p>
+<p><span class="math display">
+-\int_1^3v(t)\,dt=-(F(3)-F(1))=\frac43
+</span></p>
+<p><span class="math display">
+\int_3^4v(t)\,dt=F(4)-F(3)=\frac43
+</span></p>
+<p>Hence,</p>
+<p><span class="math display">
+\begin{aligned}
+D&amp;=\frac43+\frac43+\frac43\\
+&amp;=4
+\end{aligned}
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+\boxed{D=4\text{ m}}
+</span></p>
+<p><strong>(c) Direction changes</strong></p>
+<p>The actuator changes direction when its velocity is zero:</p>
+<p><span class="math display">
+(t-1)(t-3)=0
+</span></p>
+<p>Thus,</p>
+<p><span class="math display">
+\boxed{t=1\text{ s}\quad\text{and}\quad t=3\text{ s}}
+</span></p>
+<p>The actuator moves in the positive direction from <span
+class="math inline">0</span> to <span class="math inline">1</span>
+second, in the negative direction from <span
+class="math inline">1</span> to <span class="math inline">3</span>
+seconds, and in the positive direction from <span
+class="math inline">3</span> to <span class="math inline">4</span>
+seconds.</p>
+<p>This example illustrates why displacement and total distance must be
+distinguished. The displacement records the net change in position,
+while total distance accounts for all movement regardless of
+direction.</p>
+<div class="example-end">
+<p><span class="math inline">\blacksquare</span></p>
+</div>
+<h1 id="summary">Summary</h1>
+<p>An antiderivative of a function <span class="math inline">f</span> is
+a function <span class="math inline">F</span> whose derivative is <span
+class="math inline">f</span>, and the indefinite integral <span
+class="math inline">\int f(x)\,dx=F(x)+C</span> represents the complete
+family of antiderivatives. The constant of integration is necessary
+because the derivative of a constant is zero. The Fundamental Theorem of
+Calculus connects differentiation and integration: FTC1 states that the
+derivative of an accumulation function <span
+class="math inline">\int_a^x f(t)\,dt</span> is <span
+class="math inline">f(x)</span>, while FTC2 states that a definite
+integral can be evaluated by subtracting the value of an antiderivative
+at the lower limit from its value at the upper limit. Standard formulas,
+together with the sum, difference, and constant multiple properties,
+provide methods for finding antiderivatives. The five examples
+illustrate the use of these formulas, including trigonometric integrals,
+power-rule integration, and definite integrals.</p>
+<p>The Net Change Theorem states that the integral of a rate of change
+over an interval equals the net change in the corresponding quantity:
+<span class="math inline">\int_a^b F&#39;(x)\,dx=F(b)-F(a)</span>. A
+definite integral gives signed or net accumulation, so increases and
+decreases contribute with their respective signs. This principle is
+useful in applications involving position and velocity, volume and flow
+rate, charge and electric current, and other quantities whose rates of
+change are known.</p>
+<p>The <strong>Net Change Theorem</strong> states that the definite
+integral of a rate of change over an interval equals the net change in
+the original quantity over that interval: <span
+class="math inline">\int_a^b F&#39;(x)\,dx=F(b)-F(a)</span>. It is the
+interpretation of the second part of the Fundamental Theorem of Calculus
+in terms of changing quantities. The theorem applies to the volume of
+water in a reservoir, concentration in a chemical reaction, the mass of
+a nonuniform rod, population growth, production cost, displacement, and
+change in velocity. In each case, integration accumulates the rate of
+change over the specified interval to obtain the difference between the
+final and initial values.</p>
+<p>For motion along a straight line, integrating velocity gives
+displacement, whereas integrating speed <span
+class="math inline">|v(t)|</span> gives total distance travelled. When
+velocity changes sign, the distance integral must be split at the points
+where the direction changes. The theorem also connects power with
+energy: integrating power over time gives the energy used. When a rate
+is available only from a graph or measured data, numerical methods such
+as the Midpoint Rule can be used to estimate the accumulated change.</p>
+<h1 id="exercises">Exercises</h1>
+<p>Exercises help in transforming theoretical concepts into practical
+understanding. Mathematics is learned by doing and solving exercises
+which train you to analyze problems, select appropriate methods, and
+construct logical solutions. Attempting problems sometimes leads to
+mistakes which provide opportunities for learning and improvement.
+Regular practice increases speed, accuracy, and confidence. Exercises
+are given in the recommended book which has also been provided to you
+and you are expected to solve them on your own.</p>
+<h2 id="exercises-1">Exercises</h2>
+<p>Solve the odd number exercises from exercise 1 to 83.</p>
+</body>
+</html>
