@@ -1,6 +1,22 @@
 /* ==========================================================
  *  Global Document Settings
  *  ========================================================== */
+ 
+@font-face {
+    font-family: "Ubuntu";
+    src: url("../fonts/ubuntu/Ubuntu-Regular.woff2")
+         format("woff2");
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: "Ubuntu Mono";
+    src: url("../fonts/ubuntu-mono/UbuntuMono-Regular.woff2")
+         format("woff2");
+    font-weight: 400;
+}
+
+
 
 body {
     font-family: "Ubuntu", sans-serif;
