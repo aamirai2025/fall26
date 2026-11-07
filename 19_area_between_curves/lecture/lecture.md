@@ -1,6 +1,6 @@
 # Calculus and Analytical Geometry
 
-## Area Between Curves: Integration With Respect to x
+## Area Between Curves
 
 ### Dr. Aamir Alaud Din
 
