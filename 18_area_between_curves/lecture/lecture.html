@@ -1,0 +1,1333 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>lecture</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="../styles/style.css" />
+  <script defer="" src="../katex/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <link rel="stylesheet" href="../katex/dist/katex.min.css" />
+</head>
+<body>
+<h1 id="calculus-and-analytical-geometry">Calculus and Analytical
+Geometry</h1>
+<h2 id="area-between-curves-integration-with-respect-to-x">Area Between
+Curves: Integration With Respect to x</h2>
+<h3 id="dr.-aamir-alaud-din">Dr. Aamir Alaud Din</h3>
+<h1 id="objectives">Objectives</h1>
+<p>After preparing this topic, you should be able to 1. Determine the
+area of a region bounded by two curves by expressing the area as a
+Riemann sum and evaluating the corresponding definite integral with
+respect to <span class="math inline">x</span>, including cases in which
+the upper and lower curves change order within the interval. 2.
+Determine the area of a region bounded by curves by integrating with
+respect to <span class="math inline">y</span>, select an appropriate
+horizontal-strip representation, and apply the method to geometric and
+practical problems.</p>
+<h1 id="the-why-section">The Why Section</h1>
+<p>In the previous topic, we used definite integrals to calculate the
+signed area between a curve and the horizontal axis. In this topic, we
+extend the same idea to regions enclosed by two curves. Many practical
+regions are not bounded by the horizontal axis; instead, their upper and
+lower boundaries are described by different functions. Finding the area
+of such regions requires us to calculate the difference between the two
+function values throughout the interval.</p>
+<p>This idea has applications in mechanical engineering, computer
+science, and mechatronics. For example, the cross-sectional region
+between two curved surfaces may represent the material enclosed between
+the inner and outer boundaries of a mechanical component. In computer
+graphics, the area between two curves can describe a two-dimensional
+shape, while in data science it can measure the difference between two
+continuous models over a specified range.</p>
+<p><strong>Mechatronics scenario.</strong> Imagine that a
+computer-controlled cutting machine is designed to cut a component whose
+upper and lower boundaries are represented by two mathematical curves.
+The machine needs to determine the amount of material enclosed between
+these boundaries in a cross-section. If the curves intersect, or if
+their positions change relative to one another, the area must be
+calculated over the appropriate intervals. Studying the area between
+curves provides the mathematical method needed to solve this
+problem.</p>
+<p>In the previous topic, we calculated areas between curves by using
+vertical approximating rectangles and integrating with respect to <span
+class="math inline">x</span>. In this approach, the height of each
+rectangle is the difference between the upper and lower curves. However,
+some regions are more naturally described by their left and right
+boundaries. For such regions, horizontal approximating rectangles
+provide a simpler method because their lengths are determined by the
+difference between the right and left curves.</p>
+<p>This method is useful in mechanical engineering and mechatronics when
+the cross-section of a component is described more conveniently by
+horizontal boundaries. For example, a computer-controlled manufacturing
+system may need to determine the cross-sectional area of a curved
+mechanical part whose left and right edges are represented as functions
+of height. In computer graphics, horizontal slices can also be used to
+calculate the area of a two-dimensional shape represented by curves.
+Studying integration with respect to <span class="math inline">y</span>
+provides a systematic way to determine these areas, particularly when
+integration with respect to <span class="math inline">x</span> would
+require splitting the region into several parts.</p>
+<p><strong>Mechatronics scenario.</strong> Imagine that a robotic
+cutting system is designed to manufacture a curved plate whose left and
+right boundaries change with its vertical position. The controller must
+determine the cross-sectional area of the plate to estimate the amount
+of material required. If the boundaries are expressed as <span
+class="math inline">x=f(y)</span> and <span
+class="math inline">x=g(y)</span>, this problem can be solved by
+studying and applying integration with respect to <span
+class="math inline">y</span>.</p>
+<h1 id="area-between-curves-integration-with-respect-to-x-1">Area
+Between Curves: Integration With Respect to x</h1>
+<h2 id="from-the-definite-integral-to-the-area-between-two-curves">From
+the Definite Integral to the Area Between Two Curves</h2>
+<p>In the previous topic, we studied how a definite integral represents
+the area under a curve and above the <span
+class="math inline">x</span>-axis when the function is nonnegative. We
+also interpreted the definite integral as a limit of Riemann sums. We
+now use the same limiting process to calculate the area of a region
+between two curves.</p>
+<p>Consider a region <span class="math inline">S</span> bounded by the
+curves <span class="math inline">y=f(x)</span> and <span
+class="math inline">y=g(x)</span> and by the vertical lines <span
+class="math inline">x=a</span> and <span class="math inline">x=b</span>,
+where both functions are continuous and <span
+class="math inline">f(x)\geq g(x)</span> throughout the interval <span
+class="math inline">[a,b]</span>. As illustrated in Figure 1, the curve
+<span class="math inline">y=f(x)</span> forms the upper boundary of the
+region, while <span class="math inline">y=g(x)</span> forms its lower
+boundary.</p>
+<div style="text-align: center;">
+<p><img src="../images/06101.png" style="width: 739px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 1.</strong> A region S bounded above by y=f(x),
+below by y=g(x), and on the sides by the vertical lines x=a and
+x=b.</span></p>
+</div>
+<p>To determine the area of this region, we divide it into narrow
+vertical strips. Each strip can be approximated by a rectangle whose
+width is <span class="math inline">\Delta x</span> and whose height is
+the vertical distance between the two curves. At a selected sample point
+<span class="math inline">x_i^*</span>, this height is <span
+class="math inline">f(x_i^*)-g(x_i^*)</span>. Therefore, the approximate
+area of the <span class="math inline">i</span>th rectangle is</p>
+<p><span class="math display">
+[f(x_i^*)-g(x_i^*)]\Delta x
+</span></p>
+<p>Adding the areas of all the rectangles gives the Riemann sum</p>
+<p><span class="math display">
+\sum_{i=1}^{n}[f(x_i^*)-g(x_i^*)]\Delta x
+</span></p>
+<p>Figure 2(a) illustrates a typical approximating rectangle. Its height
+is the difference between the upper and lower function values, and its
+width is <span class="math inline">\Delta x</span>. Figure 2(b) shows
+how the collection of rectangles approximates the entire region. As the
+number of rectangles increases, their widths become smaller and the
+approximation approaches the exact area.</p>
+<div style="text-align: center;">
+<p><img src="../images/06102.png" style="width: 1600px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 2.</strong> (a) A typical approximating
+rectangle of width Δx and height f(x_i<em>)−g(x_i</em>). (b) A
+collection of vertical rectangles approximating the region between the
+two curves.</span></p>
+</div>
+<p>For equal subdivisions, the width is <span class="math inline">\Delta
+x=(b-a)/n</span>. Taking the limit as the number of subintervals
+approaches infinity gives the exact area:</p>
+<p><span class="math display">
+A=\lim_{n\to\infty}\sum_{i=1}^{n}[f(x_i^*)-g(x_i^*)]\Delta x
+</span></p>
+<p>The limit is the definite integral of the difference between the two
+functions. Thus, the area can be calculated by integrating the upper
+function minus the lower function over the interval.</p>
+<h2 class="blue" id="definition-area-between-curves">Definition: Area
+Between Curves</h2>
+<p>Let <span class="math inline">f</span> and <span
+class="math inline">g</span> be continuous functions on <span
+class="math inline">[a,b]</span>, and suppose that <span
+class="math inline">f(x)\geq g(x)</span> for every <span
+class="math inline">x</span> in the interval. The area <span
+class="math inline">A</span> of the region bounded by the curves <span
+class="math inline">y=f(x)</span> and <span
+class="math inline">y=g(x)</span> and the vertical lines <span
+class="math inline">x=a</span> and <span class="math inline">x=b</span>
+is</p>
+<p><span class="math display">
+A=\int_a^b[f(x)-g(x)]\,dx
+</span></p>
+<div class="definition-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<p>The expression <span class="math inline">f(x)-g(x)</span> represents
+the vertical distance between the upper curve and the lower curve at
+each value of <span class="math inline">x</span>. Integrating this
+distance from <span class="math inline">a</span> to <span
+class="math inline">b</span> adds the areas of all the vertical strips
+across the region. Figure 3 illustrates this relationship. In the
+special case where <span class="math inline">g(x)=0</span>, the lower
+boundary is the <span class="math inline">x</span>-axis, and the formula
+reduces to the familiar area under a nonnegative curve.</p>
+<div style="text-align: center;">
+<p><img src="../images/06103.png" style="width: 746px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 3.</strong> The area between the curves y=f(x)
+and y=g(x), obtained by subtracting the area under the lower curve from
+the area under the upper curve.</span></p>
+</div>
+<h2 class="green" id="example-1">Example 1</h2>
+<p>Find the area of the region bounded above by <span
+class="math inline">y=e^x</span>, bounded below by <span
+class="math inline">y=x</span>, and bounded on the sides by <span
+class="math inline">x=0</span> and <span
+class="math inline">x=1</span>.</p>
+<h2 class="green" id="solution">Solution</h2>
+<p>The upper boundary is <span class="math inline">y=e^x</span>, and the
+lower boundary is <span class="math inline">y=x</span>. The region
+extends from <span class="math inline">x=0</span> to <span
+class="math inline">x=1</span>. Therefore, we identify</p>
+<p><span class="math display">
+f(x)=e^x,\qquad g(x)=x,\qquad a=0,\qquad b=1
+</span></p>
+<p>Using the area formula, we integrate the upper function minus the
+lower function:</p>
+<p><span class="math display">
+A=\int_0^1(e^x-x)\,dx
+</span></p>
+<p>An antiderivative of <span class="math inline">e^x-x</span> is <span
+class="math inline">e^x-\frac{x^2}{2}</span>. Hence,</p>
+<p><span class="math display">
+\begin{aligned}
+A&amp;=\left[e^x-\frac{x^2}{2}\right]_0^1\\
+&amp;=\left(e-\frac12\right)-\left(1-0\right)\\
+&amp;=e-\frac32
+\end{aligned}
+</span></p>
+<p>Therefore, the required area is</p>
+<p><span class="math display">
+\boxed{A=e-\frac32\approx1.2183}
+</span></p>
+<div style="text-align: center;">
+<p><img src="../images/06104.png" style="width: 746px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 4.</strong> The region bounded above by y=e^x,
+below by y=x, and between x=0 and x=1, together with a typical vertical
+approximating rectangle.</span></p>
+</div>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 id="area-using-top-and-bottom-functions">Area Using Top and Bottom
+Functions</h2>
+<p>The area formula can be expressed in terms of the top and bottom
+boundaries of a region. Let <span class="math inline">y_T</span>
+represent the top function and <span class="math inline">y_B</span>
+represent the bottom function. A typical vertical rectangle has width
+<span class="math inline">\Delta x</span> and height <span
+class="math inline">y_T-y_B</span>. Its approximate area is
+therefore</p>
+<p><span class="math display">
+\Delta A=(y_T-y_B)\Delta x
+</span></p>
+<p>Adding the areas of all such rectangles and taking the limit
+gives</p>
+<p><span class="math display">
+A=\lim_{n\to\infty}\sum_{i=1}^{n}
+[y_T(x_i^*)-y_B(x_i^*)]\Delta x
+</span></p>
+<p>Consequently, the area between the curves is</p>
+<p><span class="math display">
+A=\int_a^b(y_T-y_B)\,dx
+</span></p>
+<p>The important point is that the upper function must be subtracted
+from the lower function in the correct order: top minus bottom. Figure 5
+illustrates the vertical distance <span
+class="math inline">y_T-y_B</span> and the corresponding approximating
+rectangle.</p>
+<div style="text-align: center;">
+<p><img src="../images/06105.png" style="width: 746px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 5.</strong> A typical vertical rectangle between
+the top curve y_T and the bottom curve y_B, with height y_T−y_B and
+width Δx.</span></p>
+</div>
+<h2 class="green" id="example-2">Example 2</h2>
+<p>Find the area of the region enclosed by the parabolas <span
+class="math inline">y=2x-x^2</span> and <span
+class="math inline">y=x^2</span>.</p>
+<h2 class="green" id="solution-1">Solution</h2>
+<p>First, we find the points of intersection of the two parabolas. At an
+intersection point, their <span class="math inline">y</span>-coordinates
+are equal. Therefore,</p>
+<p><span class="math display">
+2x-x^2=x^2
+</span></p>
+<p>Rearranging gives</p>
+<p><span class="math display">
+2x^2-2x=0
+</span></p>
+<p>Factoring,</p>
+<p><span class="math display">
+2x(x-1)=0
+</span></p>
+<p>Thus, the curves intersect at <span class="math inline">x=0</span>
+and <span class="math inline">x=1</span>. These values determine the
+limits of integration.</p>
+<p>From the equations of the curves, the upper boundary is <span
+class="math inline">y_T=2x-x^2</span> and the lower boundary is <span
+class="math inline">y_B=x^2</span> on the interval <span
+class="math inline">[0,1]</span>. The area is therefore</p>
+<p><span class="math display">
+\begin{aligned}
+A&amp;=\int_0^1[(2x-x^2)-x^2]\,dx\\
+&amp;=\int_0^1(2x-2x^2)\,dx
+\end{aligned}
+</span></p>
+<p>Integrating,</p>
+<p><span class="math display">
+\begin{aligned}
+A&amp;=\left[x^2-\frac{2x^3}{3}\right]_0^1\\
+&amp;=\left(1-\frac23\right)-0\\
+&amp;=\frac13
+\end{aligned}
+</span></p>
+<p>Hence, the area enclosed by the two parabolas is</p>
+<p><span class="math display">
+\boxed{A=\frac13}
+</span></p>
+<div style="text-align: center;">
+<p><img src="../images/06106.png" style="width: 738px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 6.</strong> The region enclosed by the parabolas
+y=2x−x^2 and y=x^2, with intersection points (0,0) and (1,1) and a
+typical vertical rectangle.</span></p>
+</div>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="green" id="example-3">Example 3</h2>
+<p>Find the approximate area of the region bounded by the curves <span
+class="math inline">y=\dfrac{x}{\sqrt{x^2+1}}</span> and <span
+class="math inline">y=x^4-x</span>.</p>
+<h2 class="green" id="solution-2">Solution</h2>
+<p>The region is bounded by the two curves. One intersection point is
+the origin. To find the other intersection point, we would need to
+solve</p>
+<p><span class="math display">
+\frac{x}{\sqrt{x^2+1}}=x^4-x
+</span></p>
+<p>This equation is difficult to solve exactly. We therefore use a
+graphing calculator or computer to approximate the second intersection
+point. From the graph, the second intersection occurs at approximately
+<span class="math inline">x=1.18</span>.</p>
+<p>On the interval from <span class="math inline">x=0</span> to <span
+class="math inline">x\approx1.18</span>, the curve <span
+class="math inline">y=\dfrac{x}{\sqrt{x^2+1}}</span> lies above the
+curve <span class="math inline">y=x^4-x</span>. Thus, the required area
+is approximately</p>
+<p><span class="math display">
+A\approx\int_0^{1.18}
+\left[\frac{x}{\sqrt{x^2+1}}-(x^4-x)\right]dx
+</span></p>
+<p>We evaluate the first part using the substitution <span
+class="math inline">u=x^2+1</span>. Then <span
+class="math inline">du=2x\,dx</span>, so <span
+class="math inline">x\,dx=\frac12du</span>. When <span
+class="math inline">x=0</span>, <span class="math inline">u=1</span>,
+and when <span class="math inline">x=1.18</span>, <span
+class="math inline">u=1.18^2+1\approx2.39</span>. Therefore,</p>
+<p><span class="math display">
+\begin{aligned}
+\int_0^{1.18}\frac{x}{\sqrt{x^2+1}}\,dx
+&amp;=\frac12\int_1^{2.39}u^{-1/2}\,du\\
+&amp;=\left[\sqrt{u}\right]_1^{2.39}\\
+&amp;=\sqrt{2.39}-1
+\end{aligned}
+</span></p>
+<p>For the second part,</p>
+<p><span class="math display">
+\int_0^{1.18}(x^4-x)\,dx
+=
+\left[\frac{x^5}{5}-\frac{x^2}{2}\right]_0^{1.18}
+</span></p>
+<p>Combining the two results,</p>
+<p><span class="math display">
+\begin{aligned}
+A&amp;\approx\sqrt{2.39}-1
+-\left(\frac{1.18^5}{5}-\frac{1.18^2}{2}\right)\\
+&amp;\approx0.785
+\end{aligned}
+</span></p>
+<p>Therefore, the approximate area between the curves is</p>
+<p><span class="math display">
+\boxed{A\approx0.785}
+</span></p>
+<div style="text-align: center;">
+<p><img src="../images/06107.png" style="width: 693px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 7.</strong> Graphs of y=x/√(x²+1) and y=x^4−x,
+showing their intersection points at the origin and approximately at
+x=1.18, and the region between the curves.</span></p>
+</div>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 id="when-the-curves-change-their-relative-positions">When the Curves
+Change Their Relative Positions</h2>
+<p>So far, we have considered regions in which one curve remains above
+the other throughout the interval. In some problems, the curves
+intersect inside the interval, and their relative positions change. In
+that situation, one function may be above the other on one part of the
+interval, while the order is reversed on another part.</p>
+<p>Suppose that <span class="math inline">f(x)\geq g(x)</span> on one
+part of the interval. The area of that part is calculated by integrating
+<span class="math inline">f(x)-g(x)</span>. Where <span
+class="math inline">g(x)\geq f(x)</span>, the area is calculated by
+integrating <span class="math inline">g(x)-f(x)</span>. Figure 8
+illustrates a region divided into smaller regions at the points where
+the curves intersect. The total area is the sum of the individual
+positive areas.</p>
+<div style="text-align: center;">
+<p><img src="../images/06108.png" style="width: 719px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 8.</strong> A region between two curves whose
+relative positions change, divided into subregions S_1, S_2, and S_3 at
+their intersection points.</span></p>
+</div>
+<p>The area can be represented by the absolute difference between the
+functions:</p>
+<p><span class="math display">
+A=\int_a^b|f(x)-g(x)|\,dx
+</span></p>
+<p>The absolute value ensures that the vertical distance between the
+curves is nonnegative, regardless of which function is above the other.
+When evaluating this integral, we must split the interval at the
+intersection points where the order of the curves changes and evaluate
+the resulting integrals separately.</p>
+<h2 class="blue"
+id="definition-area-between-curves-when-their-order-changes">Definition:
+Area Between Curves When Their Order Changes</h2>
+<p>If <span class="math inline">f</span> and <span
+class="math inline">g</span> are continuous functions on <span
+class="math inline">[a,b]</span>, the area between their graphs is</p>
+<p><span class="math display">
+A=\int_a^b|f(x)-g(x)|\,dx
+</span></p>
+<p>This formula applies whether <span class="math inline">f</span> is
+above <span class="math inline">g</span> throughout the interval or the
+two curves change their relative positions. If the curves intersect at
+points inside the interval, divide the interval at those points and
+integrate the positive difference on each subinterval.</p>
+<div class="definition-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="green" id="example-4">Example 4</h2>
+<p>Find the area of the region bounded by the curves <span
+class="math inline">y=\sin x</span>, <span class="math inline">y=\cos
+x</span>, <span class="math inline">x=0</span>, and <span
+class="math inline">x=\dfrac{\pi}{2}</span>.</p>
+<h2 class="green" id="solution-3">Solution</h2>
+<p>First, we find where the two curves intersect. At an intersection
+point,</p>
+<p><span class="math display">
+\sin x=\cos x
+</span></p>
+<p>For <span class="math inline">0\leq x\leq\frac{\pi}{2}</span>, this
+occurs at</p>
+<p><span class="math display">
+x=\frac{\pi}{4}
+</span></p>
+<p>The order of the curves changes at this point. On the interval <span
+class="math inline">0\leq x\leq\frac{\pi}{4}</span>, <span
+class="math inline">\cos x</span> is above <span
+class="math inline">\sin x</span>. On the interval <span
+class="math inline">\frac{\pi}{4}\leq x\leq\frac{\pi}{2}</span>, <span
+class="math inline">\sin x</span> is above <span
+class="math inline">\cos x</span>. Therefore, we divide the required
+region into two parts:</p>
+<p><span class="math display">
+A=\int_0^{\pi/4}(\cos x-\sin x)\,dx
++\int_{\pi/4}^{\pi/2}(\sin x-\cos x)\,dx
+</span></p>
+<p>For the first part,</p>
+<p><span class="math display">
+\begin{aligned}
+A_1&amp;=\int_0^{\pi/4}(\cos x-\sin x)\,dx\\
+&amp;=[\sin x+\cos x]_0^{\pi/4}\\
+&amp;=\left(\frac{\sqrt2}{2}+\frac{\sqrt2}{2}\right)-(0+1)\\
+&amp;=\sqrt2-1
+\end{aligned}
+</span></p>
+<p>For the second part,</p>
+<p><span class="math display">
+\begin{aligned}
+A_2&amp;=\int_{\pi/4}^{\pi/2}(\sin x-\cos x)\,dx\\
+&amp;=[-\cos x-\sin x]_{\pi/4}^{\pi/2}\\
+&amp;=(-0-1)-\left(-\frac{\sqrt2}{2}-\frac{\sqrt2}{2}\right)\\
+&amp;=\sqrt2-1
+\end{aligned}
+</span></p>
+<p>The total area is the sum of these two parts:</p>
+<p><span class="math display">
+\begin{aligned}
+A&amp;=A_1+A_2\\
+&amp;=(\sqrt2-1)+(\sqrt2-1)\\
+&amp;=2\sqrt2-2
+\end{aligned}
+</span></p>
+<p>Hence, the required area is</p>
+<p><span class="math display">
+\boxed{A=2\sqrt2-2\approx0.8284}
+</span></p>
+<div style="text-align: center;">
+<p><img src="../images/06109.png" style="width: 786px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 9.</strong> The region bounded by y=sin x, y=cos
+x, x=0, and x=π/2, divided at x=π/4 into two regions of equal
+area.</span></p>
+</div>
+<p>The figure also shows the symmetry of the two regions about <span
+class="math inline">x=\frac{\pi}{4}</span>. Since the two areas are
+equal, the total area could alternatively be found by calculating one of
+them and multiplying by two.</p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="quick-check">Quick Check</h1>
+<h2 class="red" id="question-1">Question 1</h2>
+<p>The upper curve is <span class="math inline">y=5</span> and the lower
+curve is <span class="math inline">y=2</span> on the interval <span
+class="math inline">[1,4]</span>. Find the area between the curves.</p>
+<h2 class="red" id="answer">Answer</h2>
+<p>The area is the integral of the upper function minus the lower
+function:</p>
+<p><span class="math display">
+\begin{aligned}
+A&amp;=\int_1^4(5-2)\,dx\\
+&amp;=3(4-1)\\
+&amp;=9
+\end{aligned}
+</span></p>
+<p><span class="math display">
+\boxed{A=9}
+</span></p>
+<h2 class="red" id="question-2">Question 2</h2>
+<p>Two curves intersect at <span class="math inline">x=1</span> inside
+the interval <span class="math inline">[0,2]</span>, and their relative
+positions change at this point. Should the area be calculated using the
+signed integral of their difference over the whole interval or by
+splitting the interval at the intersection?</p>
+<h2 class="red" id="answer-1">Answer</h2>
+<p>The interval must be split at the intersection point. On each
+subinterval, subtract the lower function from the upper function so that
+each area is positive.</p>
+<div class="question-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="scenario-problem">Scenario Problem</h1>
+<h2 class="green" id="problem">Problem</h2>
+<p>A computer-controlled cutting machine is used to manufacture a thin
+mechanical plate. In a cross-section, the upper boundary of the plate is
+modelled by <span class="math inline">y=4-x^2</span>, while the lower
+boundary is modelled by <span class="math inline">y=x^2</span>. The two
+boundaries intersect at the ends of the region. Determine the
+cross-sectional area of the plate enclosed between the curves.</p>
+<h2 class="green" id="solution-4">Solution</h2>
+<p>First, find the points where the two curves intersect by equating
+their expressions:</p>
+<p><span class="math display">
+4-x^2=x^2
+</span></p>
+<p>Rearranging gives</p>
+<p><span class="math display">
+2x^2=4
+</span></p>
+<p>Thus, <span class="math inline">x=\pm\sqrt2</span>. The region
+extends from <span class="math inline">x=-\sqrt2</span> to <span
+class="math inline">x=\sqrt2</span>. On this interval, the upper curve
+is <span class="math inline">y_T=4-x^2</span> and the lower curve is
+<span class="math inline">y_B=x^2</span>.</p>
+<p>The cross-sectional area is therefore</p>
+<p><span class="math display">
+A=\int_{-\sqrt2}^{\sqrt2}[(4-x^2)-x^2]\,dx
+</span></p>
+<p>Simplifying and integrating,</p>
+<p><span class="math display">
+\begin{aligned}
+A&amp;=\int_{-\sqrt2}^{\sqrt2}(4-2x^2)\,dx\\
+&amp;=\left[4x-\frac{2x^3}{3}\right]_{-\sqrt2}^{\sqrt2}\\
+&amp;=\left(4\sqrt2-\frac{4\sqrt2}{3}\right)
+-\left(-4\sqrt2+\frac{4\sqrt2}{3}\right)\\
+&amp;=\frac{16\sqrt2}{3}
+\end{aligned}
+</span></p>
+<p>Therefore, the cross-sectional area of the plate is</p>
+<p><span class="math display">
+\boxed{A=\frac{16\sqrt2}{3}\approx7.543}
+</span></p>
+<p>The area is obtained by integrating the vertical distance between the
+upper and lower boundaries over the interval determined by their
+intersection points. This is the same method that can be used by a
+computer-controlled manufacturing system when the boundaries of a
+component are represented by mathematical functions.</p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="area-between-curves-integration-with-respect-to-y">Area Between
+Curves: Integration With Respect to y</h1>
+<h2 id="integrating-with-respect-to-y">Integrating with Respect to
+y</h2>
+<p>Some regions are more conveniently treated by regarding <span
+class="math inline">x</span> as a function of <span
+class="math inline">y</span>. Instead of dividing the region into
+vertical strips, we divide it into narrow horizontal strips. Consider a
+region bounded by the curves <span class="math inline">x=f(y)</span> and
+<span class="math inline">x=g(y)</span> and by the horizontal lines
+<span class="math inline">y=c</span> and <span
+class="math inline">y=d</span>. Suppose that both functions are
+continuous and that <span class="math inline">f(y)&gt;g(y)</span> for
+<span class="math inline">c&lt;y&lt;d</span>. In this situation, the
+curve <span class="math inline">x=f(y)</span> forms the right boundary,
+while <span class="math inline">x=g(y)</span> forms the left
+boundary.</p>
+<p>A typical horizontal approximating rectangle has height <span
+class="math inline">\Delta y</span>. Its horizontal length is the
+difference between the right and left boundary values, namely <span
+class="math inline">f(y)-g(y)</span>. Therefore, at a selected sample
+point <span class="math inline">y_i^*</span>, the approximate area of
+the rectangle is</p>
+<p><span class="math display">
+\Delta A=[f(y_i^*)-g(y_i^*)]\Delta y
+</span></p>
+<p>Adding the areas of all the horizontal rectangles gives the Riemann
+sum</p>
+<p><span class="math display">
+\sum_{i=1}^{n}[f(y_i^*)-g(y_i^*)]\Delta y
+</span></p>
+<p>As the number of rectangles increases and their heights approach
+zero, the sum approaches the exact area of the region. Thus, the area is
+obtained by integrating the horizontal length from the lower <span
+class="math inline">y</span>-value to the upper <span
+class="math inline">y</span>-value.</p>
+<div style="text-align: center;">
+<p><img src="../images/06110.png" style="width: 816px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 10.</strong> A region bounded by the curves
+<span class="math inline">x=f(y)</span> and <span
+class="math inline">x=g(y)</span> and the horizontal lines <span
+class="math inline">y=c</span> and <span class="math inline">y=d</span>,
+showing a typical horizontal approximating rectangle of height <span
+class="math inline">\Delta y</span>.</span></p>
+</div>
+<p>If we write <span class="math inline">x_R</span> for the right
+boundary and <span class="math inline">x_L</span> for the left boundary,
+the horizontal length of a typical rectangle is <span
+class="math inline">x_R-x_L</span>. Consequently, its approximate area
+is <span class="math inline">(x_R-x_L)\Delta y</span>. Integrating this
+horizontal distance from <span class="math inline">y=c</span> to <span
+class="math inline">y=d</span> gives the area of the complete
+region.</p>
+<div style="text-align: center;">
+<p><img src="../images/06111.png" style="width: 816px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 11.</strong> A horizontal approximating
+rectangle whose length is <span class="math inline">x_R-x_L</span> and
+whose height is <span class="math inline">\Delta y</span>, extending
+across a region between <span class="math inline">y=c</span> and <span
+class="math inline">y=d</span>.</span></p>
+</div>
+<h2 class="blue"
+id="definition-area-between-curves-using-integration-with-respect-to-y">Definition:
+Area Between Curves Using Integration with Respect to y</h2>
+<p>Let <span class="math inline">x=f(y)</span> and <span
+class="math inline">x=g(y)</span> be continuous functions on <span
+class="math inline">[c,d]</span>, where <span
+class="math inline">f(y)\geq g(y)</span> throughout the interval. The
+area of the region bounded by these curves and the horizontal lines
+<span class="math inline">y=c</span> and <span
+class="math inline">y=d</span> is</p>
+<p><span class="math display">
+A=\int_c^d[f(y)-g(y)]\,dy
+</span></p>
+<p>If <span class="math inline">x_R</span> and <span
+class="math inline">x_L</span> represent the right and left boundaries,
+respectively, the same formula can be written as</p>
+<p><span class="math display">
+A=\int_c^d(x_R-x_L)\,dy
+</span></p>
+<p>The important point is that the right boundary must be subtracted by
+the left boundary. The limits of integration are the lower and upper
+<span class="math inline">y</span>-coordinates of the region.</p>
+<div class="definition-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="green" id="example-5">Example 5</h2>
+<p>Find the area enclosed by the line <span
+class="math inline">y=x-1</span> and the parabola <span
+class="math inline">y^2=2x+6</span>.</p>
+<div style="text-align: center;">
+<p><img src="../images/06112.png" style="width: 770px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 12.</strong> The region enclosed by the line
+<span class="math inline">y=x-1</span> and the parabola <span
+class="math inline">y^2=2x+6</span>, with intersection points <span
+class="math inline">(-1,-2)</span> and <span
+class="math inline">(5,4)</span>, and the left and right boundary curves
+indicated.</span></p>
+</div>
+<h2 class="green" id="solution-5">Solution</h2>
+<p>We first find the points of intersection by solving the equations
+simultaneously. From the line <span class="math inline">y=x-1</span>, we
+obtain <span class="math inline">x=y+1</span>. Substituting this
+expression into the equation of the parabola gives</p>
+<p><span class="math display">
+y^2=2(y+1)+6
+</span></p>
+<p>Simplifying,</p>
+<p><span class="math display">
+y^2-2y-8=0
+</span></p>
+<p>Factoring,</p>
+<p><span class="math display">
+(y-4)(y+2)=0
+</span></p>
+<p>Therefore, the intersection values are <span
+class="math inline">y=-2</span> and <span
+class="math inline">y=4</span>. Substituting these values into <span
+class="math inline">x=y+1</span> gives the intersection points <span
+class="math inline">(-1,-2)</span> and <span
+class="math inline">(5,4)</span>. These <span
+class="math inline">y</span>-coordinates determine the limits of
+integration.</p>
+<p>Next, we express both curves in terms of <span
+class="math inline">y</span>. From the parabola,</p>
+<p><span class="math display">
+y^2=2x+6
+</span></p>
+<p>we obtain</p>
+<p><span class="math display">
+x=\frac{1}{2}y^2-3
+</span></p>
+<p>The line gives <span class="math inline">x=y+1</span>. From Figure
+12, the line is the right boundary and the parabola is the left
+boundary. Thus,</p>
+<p><span class="math display">
+x_R=y+1,\qquad x_L=\frac{1}{2}y^2-3
+</span></p>
+<p>Using the area formula,</p>
+<p><span class="math display">
+\begin{aligned}
+A&amp;=\int_{-2}^{4}(x_R-x_L)\,dy\\
+&amp;=\int_{-2}^{4}\left[(y+1)-\left(\frac{1}{2}y^2-3\right)\right]dy\\
+&amp;=\int_{-2}^{4}\left(-\frac{1}{2}y^2+y+4\right)dy
+\end{aligned}
+</span></p>
+<p>An antiderivative of the integrand is</p>
+<p><span class="math display">
+-\frac{y^3}{6}+\frac{y^2}{2}+4y
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+\begin{aligned}
+A&amp;=\left[-\frac{y^3}{6}+\frac{y^2}{2}+4y\right]_{-2}^{4}\\
+&amp;=\left(-\frac{64}{6}+8+16\right)
+-\left(\frac{8}{6}+2-8\right)\\
+&amp;=18
+\end{aligned}
+</span></p>
+<p>Hence, the area enclosed by the line and the parabola is</p>
+<p><span class="math display">
+\boxed{A=18}
+</span></p>
+<div style="text-align: center;">
+<p><img src="../images/06113.png" style="width: 836px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 13.</strong> The same region shown using
+vertical approximating strips. The lower boundary changes from one curve
+to another, dividing the region into two parts, <span
+class="math inline">A_1</span> and <span
+class="math inline">A_2</span>.</span></p>
+</div>
+<p><strong>Note.</strong> The area in Example 5 could also be found by
+integrating with respect to <span class="math inline">x</span>. However,
+this calculation is more involved because the bottom boundary of the
+region consists of two different curves. As illustrated in Figure 13,
+the region would have to be divided into two parts, <span
+class="math inline">A_1</span> and <span class="math inline">A_2</span>,
+and the areas of these parts would then be calculated separately.
+Integrating with respect to <span class="math inline">y</span> avoids
+this additional work because the region has a single right boundary and
+a single left boundary throughout the interval. This example illustrates
+why choosing the variable of integration carefully can simplify an area
+problem.</p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="green" id="example-6">Example 6</h2>
+<p>Find the area of the region enclosed by the curves <span
+class="math inline">y=\frac{1}{x}</span>, <span
+class="math inline">y=x</span>, and <span
+class="math inline">y=\frac{1}{4}x</span>, using (a) <span
+class="math inline">x</span> as the variable of integration and (b)
+<span class="math inline">y</span> as the variable of integration.</p>
+<div style="text-align: center;">
+<p><img src="../images/06114.png" style="width: 836px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 14.</strong> The region enclosed by <span
+class="math inline">y=\frac{1}{x}</span>, <span
+class="math inline">y=x</span>, and <span
+class="math inline">y=\frac{1}{4}x</span>, showing the intersection
+points <span class="math inline">(1,1)</span> and <span
+class="math inline">(2,\frac{1}{2})</span> and the two straight-line
+boundaries.</span></p>
+</div>
+<h2 class="green" id="solution-6">Solution</h2>
+<p>The region is shown in Figure 14. The curves <span
+class="math inline">y=x</span> and <span
+class="math inline">y=\frac{1}{4}x</span> intersect at the origin. The
+curve <span class="math inline">y=\frac{1}{x}</span> intersects <span
+class="math inline">y=x</span> at <span class="math inline">(1,1)</span>
+and intersects <span class="math inline">y=\frac{1}{4}x</span> at <span
+class="math inline">(2,\frac{1}{2})</span>.</p>
+<p><strong>(a) Integration with respect to <span
+class="math inline">x</span>.</strong> When we integrate with respect to
+<span class="math inline">x</span>, we use vertical approximating
+rectangles. The upper boundary changes at <span
+class="math inline">x=1</span>. For <span class="math inline">0\leq
+x\leq1</span>, the upper curve is <span class="math inline">y=x</span>
+and the lower curve is <span class="math inline">y=\frac{1}{4}x</span>.
+For <span class="math inline">1\leq x\leq2</span>, the upper curve is
+<span class="math inline">y=\frac{1}{x}</span> and the lower curve is
+<span class="math inline">y=\frac{1}{4}x</span>. Therefore, the region
+must be divided into two parts, as illustrated in Figure 15(a).</p>
+<div style="text-align: center;">
+<p><img src="../images/06115.png" style="width: 1600px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 15.</strong> (a) The region of Figure 14 divided
+into two subregions, <span class="math inline">A_1</span> and <span
+class="math inline">A_2</span>, using vertical strips. The top boundary
+is <span class="math inline">y=x</span> on the first interval and <span
+class="math inline">y=\frac{1}{x}</span> on the second interval. (b) The
+region of Figure 14 divided into two subregions, <span
+class="math inline">A_1</span> and <span class="math inline">A_2</span>,
+using horizontal strips. The right boundary is <span
+class="math inline">x=4y</span> on the first interval and <span
+class="math inline">x=\frac{1}{y}</span> on the second interval, while
+the left boundary is <span class="math inline">x=y</span>.</span></p>
+</div>
+<p>The total area is</p>
+<p><span class="math display">
+\begin{aligned}
+A&amp;=A_1+A_2\\
+&amp;=\int_0^1\left(x-\frac{1}{4}x\right)dx
++\int_1^2\left(\frac{1}{x}-\frac{1}{4}x\right)dx
+\end{aligned}
+</span></p>
+<p>Simplifying the first integral,</p>
+<p><span class="math display">
+\begin{aligned}
+A_1&amp;=\int_0^1\frac{3}{4}x\,dx\\
+&amp;=\left[\frac{3}{8}x^2\right]_0^1\\
+&amp;=\frac{3}{8}
+\end{aligned}
+</span></p>
+<p>For the second integral,</p>
+<p><span class="math display">
+\begin{aligned}
+A_2&amp;=\int_1^2\left(\frac{1}{x}-\frac{1}{4}x\right)dx\\
+&amp;=\left[\ln x-\frac{1}{8}x^2\right]_1^2\\
+&amp;=\ln 2-\frac{1}{2}-\left(0-\frac{1}{8}\right)\\
+&amp;=\ln 2-\frac{3}{8}
+\end{aligned}
+</span></p>
+<p>Adding the two parts,</p>
+<p><span class="math display">
+\begin{aligned}
+A&amp;=\frac{3}{8}+\ln 2-\frac{3}{8}\\
+&amp;=\ln 2
+\end{aligned}
+</span></p>
+<p><strong>(b) Integration with respect to <span
+class="math inline">y</span>.</strong> When we integrate with respect to
+<span class="math inline">y</span>, we use horizontal approximating
+rectangles. The right boundary changes at <span
+class="math inline">y=\frac{1}{2}</span>. For <span
+class="math inline">0\leq y\leq\frac{1}{2}</span>, the right boundary is
+the line <span class="math inline">y=\frac{1}{4}x</span>, or <span
+class="math inline">x=4y</span>, and the left boundary is <span
+class="math inline">y=x</span>, or <span class="math inline">x=y</span>.
+For <span class="math inline">\frac{1}{2}\leq y\leq1</span>, the right
+boundary is the curve <span class="math inline">y=\frac{1}{x}</span>, or
+<span class="math inline">x=\frac{1}{y}</span>, and the left boundary
+remains <span class="math inline">x=y</span>. Therefore, the region must
+again be divided into two parts, as shown in Figure 15(b).</p>
+<p>The total area is</p>
+<p><span class="math display">
+\begin{aligned}
+A&amp;=A_1+A_2\\
+&amp;=\int_0^{1/2}(4y-y)\,dy
++\int_{1/2}^{1}\left(\frac{1}{y}-y\right)dy
+\end{aligned}
+</span></p>
+<p>For the first part,</p>
+<p><span class="math display">
+\begin{aligned}
+A_1&amp;=\int_0^{1/2}3y\,dy\\
+&amp;=\left[\frac{3}{2}y^2\right]_0^{1/2}\\
+&amp;=\frac{3}{8}
+\end{aligned}
+</span></p>
+<p>For the second part,</p>
+<p><span class="math display">
+\begin{aligned}
+A_2&amp;=\int_{1/2}^{1}\left(\frac{1}{y}-y\right)dy\\
+&amp;=\left[\ln y-\frac{1}{2}y^2\right]_{1/2}^{1}\\
+&amp;=\left(0-\frac{1}{2}\right)
+-\left(-\ln2-\frac{1}{8}\right)\\
+&amp;=\ln2-\frac{3}{8}
+\end{aligned}
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+\begin{aligned}
+A&amp;=\frac{3}{8}+\ln2-\frac{3}{8}\\
+&amp;=\ln2
+\end{aligned}
+</span></p>
+<p>Thus, both methods give the same area:</p>
+<p><span class="math display">
+\boxed{A=\ln2\approx0.6931}
+</span></p>
+<p>This example demonstrates that the same region can be evaluated using
+either variable of integration. The choice of variable determines the
+direction of the approximating rectangles and the boundary functions
+used. In some problems, one method may require fewer subregions and
+simpler calculations than the other.</p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 id="applications-of-the-area-between-curves">Applications of the
+Area Between Curves</h2>
+<p>The area between two curves also has practical interpretations. For
+example, if two objects move along the same straight road and their
+velocities are represented by two curves, the area under each velocity
+curve gives the distance travelled by the corresponding object. The
+difference between these distances gives the separation between the
+objects, provided they start side by side and the first object remains
+ahead of the second.</p>
+<h2 class="green" id="example-7">Example 7</h2>
+<p>Figure 16 shows velocity curves for two cars, A and B, that start
+side by side and move along the same road. What does the area between
+the curves represent? Use the Midpoint Rule to estimate it.</p>
+<div style="text-align: center;">
+<p><img src="../images/06116.png" style="width: 826px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 16.</strong> Velocity curves for two cars, A and
+B, plotted against time from <span class="math inline">0</span> to <span
+class="math inline">16</span> seconds. Car A has the greater velocity
+throughout the interval.</span></p>
+</div>
+<h2 class="green" id="solution-7">Solution</h2>
+<p>The area under the velocity curve of car A represents the distance
+travelled by car A during the first <span class="math inline">16</span>
+seconds. Similarly, the area under the velocity curve of car B
+represents the distance travelled by car B during the same period. Since
+the cars start side by side, the area between their velocity curves
+represents the difference between the distances travelled by the two
+cars. Therefore, it gives the distance between the cars after <span
+class="math inline">16</span> seconds.</p>
+<p>The velocities are read from the graph and converted from kilometres
+per hour to metres per second using</p>
+<p><span class="math display">
+1\text{ km/h}=\frac{1000}{3600}\text{ m/s}
+</span></p>
+<p>The velocity values and their differences are given below.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;"><span class="math inline">t</span>
+(seconds)</th>
+<th style="text-align: right;"><span class="math inline">v_A</span>
+(m/s)</th>
+<th style="text-align: right;"><span class="math inline">v_B</span>
+(m/s)</th>
+<th style="text-align: right;"><span class="math inline">v_A-v_B</span>
+(m/s)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">10.4</td>
+<td style="text-align: right;">6.4</td>
+<td style="text-align: right;">4.0</td>
+</tr>
+<tr>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">16.5</td>
+<td style="text-align: right;">10.4</td>
+<td style="text-align: right;">6.1</td>
+</tr>
+<tr>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">20.4</td>
+<td style="text-align: right;">13.4</td>
+<td style="text-align: right;">7.0</td>
+</tr>
+<tr>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">23.2</td>
+<td style="text-align: right;">15.5</td>
+<td style="text-align: right;">7.7</td>
+</tr>
+<tr>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">25.6</td>
+<td style="text-align: right;">17.1</td>
+<td style="text-align: right;">8.5</td>
+</tr>
+<tr>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">27.1</td>
+<td style="text-align: right;">18.3</td>
+<td style="text-align: right;">8.8</td>
+</tr>
+<tr>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">28.0</td>
+<td style="text-align: right;">19.2</td>
+<td style="text-align: right;">8.8</td>
+</tr>
+<tr>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">29.0</td>
+<td style="text-align: right;">19.8</td>
+<td style="text-align: right;">9.2</td>
+</tr>
+</tbody>
+</table>
+<p>We use the Midpoint Rule with <span class="math inline">n=4</span>
+subintervals. The interval is <span class="math inline">[0,16]</span>,
+so the width of each subinterval is</p>
+<p><span class="math display">
+\Delta t=\frac{16-0}{4}=4
+</span></p>
+<p>The four subintervals are <span class="math inline">[0,4]</span>,
+<span class="math inline">[4,8]</span>, <span
+class="math inline">[8,12]</span>, and <span
+class="math inline">[12,16]</span>. Their midpoints are <span
+class="math inline">t=2</span>, <span class="math inline">t=6</span>,
+<span class="math inline">t=10</span>, and <span
+class="math inline">t=14</span>. From the table, the corresponding
+differences in velocity are <span class="math inline">4.0</span>, <span
+class="math inline">7.0</span>, <span class="math inline">8.5</span>,
+and <span class="math inline">8.8</span> metres per second.</p>
+<p>Applying the Midpoint Rule,</p>
+<p><span class="math display">
+\begin{aligned}
+\int_0^{16}(v_A-v_B)\,dt
+&amp;\approx\Delta t[4.0+7.0+8.5+8.8]\\
+&amp;=4(28.3)\\
+&amp;=113.2\text{ m}
+\end{aligned}
+</span></p>
+<p>Therefore, the estimated distance between the two cars after <span
+class="math inline">16</span> seconds is</p>
+<p><span class="math display">
+\boxed{113.2\text{ m}}
+</span></p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="green" id="example-8">Example 8</h2>
+<p>Figure 17 shows an example of a pathogenesis curve for a measles
+infection. It shows how the disease develops in an individual with no
+immunity after the measles virus spreads to the bloodstream from the
+respiratory tract.</p>
+<div style="text-align: center;">
+<p><img src="../images/06117.png" style="width: 1685px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 17.</strong> A measles pathogenesis curve
+showing the number of infected cells per millilitre of blood plasma
+against time in days. The graph indicates when the pathogen enters the
+plasma, infectiousness begins, symptoms appear, infectiousness ends, and
+the pathogen is cleared.</span></p>
+</div>
+<p>The patient becomes infectious to others once the concentration of
+infected cells becomes great enough and remains infectious until the
+immune system manages to prevent further transmission. However, symptoms
+do not develop until the amount of infection reaches a particular
+threshold. The amount of infection needed to develop symptoms depends on
+both the concentration of infected cells and time, and corresponds to
+the area under the pathogenesis curve until symptoms appear.</p>
+<p><strong>(a)</strong> The pathogenesis curve in Figure 17 has been
+modelled by</p>
+<p><span class="math display">
+f(t)=-t(t-21)(t+1)
+</span></p>
+<p>If infectiousness begins on day <span
+class="math inline">t_1=10</span> and ends on day <span
+class="math inline">t_2=18</span>, what are the corresponding
+concentration levels of infected cells?</p>
+<p><strong>(b)</strong> The level of infectiousness for an infected
+person is the area between <span class="math inline">N=f(t)</span> and
+the line through the points <span
+class="math inline">P_1(t_1,f(t_1))</span> and <span
+class="math inline">P_2(t_2,f(t_2))</span>, measured in <span
+class="math inline">(\text{cells/mL})\cdot\text{days}</span>. Compute
+the level of infectiousness for this particular patient.</p>
+<h2 class="green" id="solution-8">Solution</h2>
+<p><strong>(a) Concentration levels at the beginning and end of
+infectiousness.</strong> The concentration at the beginning of
+infectiousness is obtained by evaluating the function at <span
+class="math inline">t=10</span>:</p>
+<p><span class="math display">
+\begin{aligned}
+f(10)&amp;=-10(10-21)(10+1)\\
+&amp;=-10(-11)(11)\\
+&amp;=1210
+\end{aligned}
+</span></p>
+<p>Thus, infectiousness begins when the concentration reaches <span
+class="math inline">1210</span> cells/mL.</p>
+<p>At the end of infectiousness, <span
+class="math inline">t=18</span>:</p>
+<p><span class="math display">
+\begin{aligned}
+f(18)&amp;=-18(18-21)(18+1)\\
+&amp;=-18(-3)(19)\\
+&amp;=1026
+\end{aligned}
+</span></p>
+<p>Therefore, infectiousness ends when the concentration reduces to
+<span class="math inline">1026</span> cells/mL.</p>
+<p><strong>(b) Level of infectiousness.</strong> The level of
+infectiousness is the area between the pathogenesis curve and the
+straight line joining the points <span class="math inline">P_1</span>
+and <span class="math inline">P_2</span>. These points are</p>
+<p><span class="math display">
+P_1=(10,1210),\qquad P_2=(18,1026)
+</span></p>
+<p>First, we find the slope of the line through these points:</p>
+<p><span class="math display">
+\begin{aligned}
+m&amp;=\frac{1026-1210}{18-10}\\
+&amp;=\frac{-184}{8}\\
+&amp;=-23
+\end{aligned}
+</span></p>
+<p>Using the point-slope form of a straight line and the point <span
+class="math inline">(10,1210)</span>,</p>
+<p><span class="math display">
+N-1210=-23(t-10)
+</span></p>
+<p>Simplifying,</p>
+<p><span class="math display">
+N=-23t+1440
+</span></p>
+<p>The required area is obtained by subtracting the straight-line
+function from the pathogenesis function and integrating from <span
+class="math inline">t=10</span> to <span
+class="math inline">t=18</span>:</p>
+<p><span class="math display">
+A=\int_{10}^{18}[f(t)-(-23t+1440)]\,dt
+</span></p>
+<p>Substituting <span class="math inline">f(t)=-t(t-21)(t+1)</span> and
+expanding,</p>
+<p><span class="math display">
+\begin{aligned}
+A&amp;=\int_{10}^{18}[-t(t-21)(t+1)+23t-1440]\,dt\\
+&amp;=\int_{10}^{18}(-t^3+20t^2+44t-1440)\,dt
+\end{aligned}
+</span></p>
+<p>An antiderivative is</p>
+<p><span class="math display">
+-\frac{t^4}{4}+\frac{20t^3}{3}+\frac{44t^2}{2}-1440t
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+\begin{aligned}
+A&amp;=\left[-\frac{t^4}{4}+\frac{20t^3}{3}+\frac{44t^2}{2}-1440t\right]_{10}^{18}\\
+&amp;=-6156-\left(-8033\frac{1}{3}\right)\\
+&amp;\approx1877
+\end{aligned}
+</span></p>
+<p>Hence, the level of infectiousness for this patient is
+approximately</p>
+<p><span class="math display">
+\boxed{1877\;(\text{cells/mL})\cdot\text{days}}
+</span></p>
+<div style="text-align: center;">
+<p><img src="../images/06118.png" style="width: 788px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 18.</strong> The area between the pathogenesis
+curve <span class="math inline">N=f(t)</span> and the straight line
+joining <span class="math inline">P_1</span> at <span
+class="math inline">t=10</span> and <span class="math inline">P_2</span>
+at <span class="math inline">t=18</span>, representing the level of
+infectiousness.</span></p>
+</div>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="quick-check-1">Quick Check</h1>
+<h2 class="red" id="question-1-1">Question 1</h2>
+<p>A region is bounded on the left by <span
+class="math inline">x=2y</span> and on the right by <span
+class="math inline">x=6-y</span>, for <span class="math inline">0\leq
+y\leq2</span>. Set up the integral for its area using integration with
+respect to <span class="math inline">y</span>.</p>
+<h2 class="red" id="answer-2">Answer</h2>
+<p>The right boundary is <span class="math inline">x_R=6-y</span> and
+the left boundary is <span class="math inline">x_L=2y</span>.
+Therefore,</p>
+<p><span class="math display">
+\begin{aligned}
+A&amp;=\int_0^2(x_R-x_L)\,dy\\
+&amp;=\int_0^2(6-3y)\,dy
+\end{aligned}
+</span></p>
+<h2 class="red" id="question-2-1">Question 2</h2>
+<p>When integrating with respect to <span class="math inline">y</span>,
+should the integrand be the upper function minus the lower function or
+the right function minus the left function?</p>
+<h2 class="red" id="answer-3">Answer</h2>
+<p>The integrand must be the horizontal distance between the boundaries.
+Therefore, we subtract the left boundary from the right boundary:</p>
+<p><span class="math display">
+A=\int_c^d(x_R-x_L)\,dy
+</span></p>
+<div class="question-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="scenario-problem-1">Scenario Problem</h1>
+<h2 class="green" id="problem-1">Problem</h2>
+<p>A computer-controlled laser cutter is used to manufacture a curved
+mechanical plate. In a cross-section, the right boundary of the plate is
+modelled by <span class="math inline">x=6-y</span>, while the left
+boundary is modelled by <span class="math inline">x=y^2</span>. The
+plate extends vertically from <span class="math inline">y=0</span> to
+the point where the two boundaries intersect. Determine the
+cross-sectional area of the plate.</p>
+<h2 class="green" id="solution-9">Solution</h2>
+<p>First, we find the upper limit by equating the left and right
+boundaries:</p>
+<p><span class="math display">
+y^2=6-y
+</span></p>
+<p>Rearranging,</p>
+<p><span class="math display">
+y^2+y-6=0
+</span></p>
+<p>Factoring,</p>
+<p><span class="math display">
+(y+3)(y-2)=0
+</span></p>
+<p>The intersection values are <span class="math inline">y=-3</span> and
+<span class="math inline">y=2</span>. Since the plate extends upward
+from <span class="math inline">y=0</span>, the required interval is
+<span class="math inline">0\leq y\leq2</span>. On this interval, the
+right boundary is <span class="math inline">x_R=6-y</span> and the left
+boundary is <span class="math inline">x_L=y^2</span>.</p>
+<p>Using integration with respect to <span class="math inline">y</span>,
+the cross-sectional area is</p>
+<p><span class="math display">
+\begin{aligned}
+A&amp;=\int_0^2(x_R-x_L)\,dy\\
+&amp;=\int_0^2(6-y-y^2)\,dy
+\end{aligned}
+</span></p>
+<p>Integrating,</p>
+<p><span class="math display">
+\begin{aligned}
+A&amp;=\left[6y-\frac{y^2}{2}-\frac{y^3}{3}\right]_0^2\\
+&amp;=12-2-\frac{8}{3}\\
+&amp;=\frac{22}{3}
+\end{aligned}
+</span></p>
+<p>Therefore, the cross-sectional area of the mechanical plate is</p>
+<p><span class="math display">
+\boxed{A=\frac{22}{3}\text{ square units}}
+</span></p>
+<p>The area is obtained by integrating the horizontal distance between
+the right and left boundaries over the vertical interval. This is the
+same approach that can be used by a computer-controlled manufacturing
+system when the boundaries of a component are represented as functions
+of its vertical position.</p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="summary">Summary</h1>
+<p>The area between two curves can be calculated by dividing the region
+into narrow vertical strips and approximating each strip by a rectangle.
+The height of each rectangle is the difference between the upper and
+lower function values, so the Riemann-sum formula is <span
+class="math inline">A=\lim_{n\to\infty}\sum_{i=1}^{n}[f(x_i^*)-g(x_i^*)]\Delta
+x</span>. Taking the limit gives the definite-integral formula <span
+class="math inline">A=\int_a^b(y_T-y_B)\,dx</span>, where the top
+function is always subtracted by the bottom function. If the curves
+change their relative positions, the interval must be divided at their
+intersection points, and the area is calculated using <span
+class="math inline">A=\int_a^b|f(x)-g(x)|\,dx</span>.</p>
+<p>The worked examples demonstrate how to identify the boundaries,
+determine intersection points, set up the appropriate integral, and
+evaluate the area. When exact intersection points are difficult to
+obtain, graphical or computational methods can provide approximations.
+The method is useful in applications such as determining cross-sectional
+areas of mechanical components and calculating regions bounded by
+mathematical models.</p>
+<p>The area of a region can be calculated by integrating with respect to
+<span class="math inline">y</span> when its left and right boundaries
+are conveniently expressed as functions of <span
+class="math inline">y</span>. A horizontal approximating rectangle has
+height <span class="math inline">\Delta y</span> and length equal to the
+difference between the right and left boundaries. Taking the limit of
+the corresponding Riemann sum gives the formula <span
+class="math inline">A=\int_c^d(x_R-x_L)\,dy</span>. The limits of
+integration are determined by the lower and upper <span
+class="math inline">y</span>-coordinates of the region. If the left or
+right boundary changes within the interval, the region must be divided
+into subregions and the corresponding integrals evaluated
+separately.</p>
+<p>The worked examples demonstrate how to identify intersection points,
+express curves in terms of <span class="math inline">y</span>, select
+the right and left boundaries, and evaluate the area. Example 6 shows
+that the same region can be evaluated using either <span
+class="math inline">x</span> or <span class="math inline">y</span> as
+the variable of integration, while Examples 7 and 8 illustrate
+applications of area between curves to motion and infectiousness.
+Choosing the variable of integration that produces the simplest
+boundaries can reduce the number of calculations required.</p>
+<h1 id="exercises">Exercises</h1>
+<p>Exercises help in transforming theoretical concepts into practical
+understanding. Mathematics is learned by doing and solving exercises
+which train you to analyze problems, select appropriate methods, and
+construct logical solutions. Attempting problems sometimes leads to
+mistakes which provide opportunities for learning and improvement.
+Regular practice increases speed, accuracy, and confidence. Exercises
+are given in the recommended book which has also been provided to you
+and you are expected to solve them on your own.</p>
+<h2 id="exercises-1">Exercises</h2>
+<p>Solve the odd number exercises from exercise 1 to 70 skipping the
+exercises requiring computer algebra system or computerized plotting of
+the curves.</p>
+</body>
+</html>
