@@ -1,0 +1,1695 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>lecture</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="../styles/style.css" />
+  <script defer="" src="../katex/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <link rel="stylesheet" href="../katex/dist/katex.min.css" />
+</head>
+<body>
+<h1 id="calculus-and-analytical-geometry">Calculus and Analytical
+Geometry</h1>
+<h2 id="volume">Volume</h2>
+<h3 id="dr.-aamir-alaud-din">Dr. Aamir Alaud Din</h3>
+<h1 id="objectives">Objectives</h1>
+<p>After preparing this topic, you should be able to</p>
+<ol type="1">
+<li><p>Determine the volume of a solid by expressing its cross-sectional
+area as a function, constructing a Riemann sum of approximating slabs,
+and evaluating the corresponding definite integral.</p></li>
+<li><p>Determine the volume of a solid of revolution by expressing the
+area of a typical cross-section as a function of the variable of
+integration and evaluating the corresponding definite integral using the
+disk or washer method.</p></li>
+<li><p>Determine the volume of a solid by expressing the area of a
+representative cross-section as a function of position and integrating
+that area over the interval occupied by the solid.</p></li>
+</ol>
+<h1 id="the-why-section">The Why Section</h1>
+<p>In engineering and computer science, many objects and systems have
+three-dimensional structures whose volumes cannot be determined directly
+using the familiar formulas for simple geometric solids. Mechanical
+components, machine housings, pipes, robotic parts, and manufactured
+objects may have cross-sections that change in size or shape along their
+length. To determine their volumes, we need a mathematical method that
+can account for these variations.</p>
+<p>For simple solids such as cylinders and rectangular boxes, volume can
+be calculated by multiplying the area of the base by the height.
+However, when the cross-sectional area changes from one position to
+another, this formula is no longer sufficient. Calculus provides a
+systematic method for dividing such a solid into thin slices,
+approximating the volume of each slice, and adding these approximations
+to obtain the exact volume through a definite integral.</p>
+<p>This concept has applications in mechanical engineering,
+mechatronics, computer science, and computer-aided design. For example,
+a computer-controlled manufacturing system may need to determine the
+amount of material required to produce a mechanical component whose
+cross-sectional dimensions vary along its length. Similarly, a
+three-dimensional modelling system can use cross-sectional information
+to calculate the volume of a complex object.</p>
+<p><strong>Mechatronics scenario.</strong> Imagine that a
+computer-controlled manufacturing machine is designed to produce a
+mechanical housing for an actuator. The housing has a nonuniform
+cross-section, meaning that its cross-sectional area changes along its
+length. The manufacturing system needs to calculate the exact volume of
+material required to produce the housing. Studying the definition of
+volume using cross-sections and definite integrals provides the
+mathematical method needed to solve this problem.</p>
+<p>Many objects used in mechanical engineering are three-dimensional and
+have shapes that can be described by rotating a two-dimensional region
+around a straight line. Examples include shafts, rollers, pipes,
+nozzles, pulleys, cylindrical housings, and parts of machine tools. To
+manufacture these components, engineers need to determine their volumes.
+The volume may be used to estimate the amount of material required, the
+mass of a component when its density is known, or the capacity of a
+hollow part.</p>
+<p>The same mathematical idea is useful in mechatronics. A
+computer-controlled manufacturing system may receive a mathematical
+description of the cross-section of a component. The system can use this
+description to calculate the volume of material that will be removed or
+added during production. In computer-aided design, a two-dimensional
+profile can be revolved around an axis to generate a three-dimensional
+model. Calculating the volume of the resulting solid is therefore an
+important step in geometric modelling and manufacturing.</p>
+<p><strong>Mechatronics scenario.</strong> Imagine that a robotic
+manufacturing system is required to produce a rotating mechanical part
+from a specified two-dimensional profile. The profile is represented by
+one or more curves, and the machine generates the component by rotating
+the enclosed region around a prescribed axis. Before manufacturing
+begins, the system must calculate the volume of the resulting solid to
+estimate the material requirement. If the component has a hollow central
+region or is rotated about an axis that does not coincide with a
+coordinate axis, the cross-sectional areas must be determined carefully.
+The disk and washer methods studied in this topic provide the
+mathematical tools needed to solve this problem.</p>
+<p>Many solid objects have shapes that cannot be described conveniently
+by the familiar formulas for cylinders, cones, spheres, or other
+standard solids. However, their volumes can still be determined when the
+areas of their cross-sections are known. The central idea is to divide a
+solid into thin slices, calculate the area of each cross-section, and
+add the volumes of these slices through a definite integral. This method
+is particularly useful when the cross-sectional shape changes along the
+length or height of a solid.</p>
+<p>In mechanical engineering, a component may have a nonuniform shape
+whose cross-sections are designed to be triangular, square, circular, or
+another prescribed shape. In mechatronics, a computer-controlled
+manufacturing system may use a mathematical model of these
+cross-sections to estimate the volume of material required to
+manufacture a component. Similarly, in computer graphics and
+three-dimensional modelling, cross-sectional information can be used to
+represent and calculate the volume of complex objects.</p>
+<p><strong>Mechatronics scenario.</strong> Imagine that a
+computer-controlled manufacturing system is producing a mechanical
+component whose cross-sections perpendicular to a selected axis are
+equilateral triangles. The dimensions of these triangles change along
+the component. The system must estimate the total volume of material
+required before manufacturing begins. This problem can be solved by
+expressing the area of a typical triangular cross-section as a function
+of its position and integrating that area over the length of the
+component. Studying volume using cross-sectional area provides the
+mathematical method needed for this calculation.</p>
+<h1 id="definition-of-volume">Definition of Volume</h1>
+<h2 id="volume-of-a-cylinder">Volume of a Cylinder</h2>
+<p>We begin by considering a simple three-dimensional solid called a
+cylinder. More precisely, we consider a right cylinder, which is bounded
+by two congruent plane regions lying in parallel planes. These regions
+are called the bases of the cylinder. The cylinder consists of all line
+segments perpendicular to the bases that join corresponding points of
+the two regions.</p>
+<p>Suppose the area of each base is <span class="math inline">A</span>
+and the perpendicular distance between the two bases is <span
+class="math inline">h</span>. The volume of the cylinder is the product
+of its base area and height. Therefore,</p>
+<p><span class="math display">
+V=Ah
+</span></p>
+<p>This formula states that the volume of a cylinder can be obtained by
+multiplying the area of its base by its height.</p>
+<p>A circular cylinder is a special case in which the base is a circle
+of radius <span class="math inline">r</span>. Since the area of a circle
+is <span class="math inline">\pi r^2</span>, its volume is</p>
+<p><span class="math display">
+V=\pi r^2h
+</span></p>
+<p>Similarly, if the base is a rectangle with length <span
+class="math inline">l</span> and width <span
+class="math inline">w</span>, the cylinder becomes a rectangular box,
+also called a rectangular parallelepiped. Its base area is <span
+class="math inline">A=lw</span>. Therefore, its volume is</p>
+<p><span class="math display">
+V=lwh
+</span></p>
+<p>These formulas provide the volume of solids whose cross-sectional
+areas remain constant throughout their heights.</p>
+<div style="text-align: center;">
+<p><img src="../images/06201.png" style="width: 1200px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 1.</strong> (a) A cylinder with volume <span
+class="math inline">V=Ah</span>. (b) A circular cylinder with volume
+<span class="math inline">V=\pi r^2h</span>. (c) A rectangular box with
+volume <span class="math inline">V=lwh</span>.</span></p>
+</div>
+<h2 id="finding-the-volume-of-a-general-solid">Finding the Volume of a
+General Solid</h2>
+<p>For a solid that is not a cylinder, its cross-sectional area may
+change as we move from one end of the solid to the other. Consequently,
+we cannot simply multiply one fixed cross-sectional area by the height
+to determine its volume.</p>
+<p>To develop a method for finding the volume of such a solid, consider
+a general solid <span class="math inline">S</span> extending from <span
+class="math inline">x=a</span> to <span class="math inline">x=b</span>.
+We begin by intersecting the solid with a plane perpendicular to the
+<span class="math inline">x</span>-axis. The intersection produces a
+plane region called a cross-section of the solid.</p>
+<p>Let <span class="math inline">A(x)</span> represent the area of the
+cross-section obtained by passing a plane perpendicular to the <span
+class="math inline">x</span>-axis through the point <span
+class="math inline">x</span>, where <span class="math inline">a\leq
+x\leq b</span>. As the position <span class="math inline">x</span>
+changes from <span class="math inline">a</span> to <span
+class="math inline">b</span>, the cross-sectional area may also
+change.</p>
+<p>Imagine cutting the solid into thin slices using planes perpendicular
+to the <span class="math inline">x</span>-axis. Each slice has a small
+thickness, and its cross-sectional area is determined by the position at
+which the slice is taken. By calculating the approximate volume of each
+slice and adding these volumes, we can obtain an approximation to the
+total volume of the solid.</p>
+<div style="text-align: center;">
+<p><img src="../images/06202.png" style="width: 1200px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 2.</strong> A general solid <span
+class="math inline">S</span> between <span
+class="math inline">x=a</span> and <span class="math inline">x=b</span>,
+with cross-sectional areas <span class="math inline">A(a)</span>, <span
+class="math inline">A(x)</span>, and <span
+class="math inline">A(b)</span>.</span></p>
+</div>
+<h2 id="approximating-the-volume-of-one-slice">Approximating the Volume
+of One Slice</h2>
+<p>To construct an approximation, we divide the interval <span
+class="math inline">[a,b]</span> into <span class="math inline">n</span>
+equal subintervals. The width of each subinterval is</p>
+<p><span class="math display">
+\Delta x=\frac{b-a}{n}
+</span></p>
+<p>The corresponding planes perpendicular to the <span
+class="math inline">x</span>-axis divide the solid into <span
+class="math inline">n</span> thin slabs. The <span
+class="math inline">i</span>th slab, denoted by <span
+class="math inline">S_i</span>, lies between two consecutive planes at
+<span class="math inline">x=x_{i-1}</span> and <span
+class="math inline">x=x_i</span>.</p>
+<p>We choose a sample point <span class="math inline">x_i^*</span> in
+the interval <span class="math inline">[x_{i-1},x_i]</span>. The
+cross-sectional area at this sample point is <span
+class="math inline">A(x_i^*)</span>. Since the slab is very thin, we can
+approximate it by a cylinder whose base area is <span
+class="math inline">A(x_i^*)</span> and whose height is <span
+class="math inline">\Delta x</span>.</p>
+<p>Recall that the volume of a cylinder is the product of its base area
+and height. Therefore, the approximate volume of the <span
+class="math inline">i</span>th slab is</p>
+<p><span class="math display">
+V(S_i)\approx A(x_i^*)\Delta x
+</span></p>
+<p>The accuracy of this approximation improves as the thickness of the
+slab decreases. In other words, thinner slabs provide a better
+approximation to the actual shape of the solid.</p>
+<div style="text-align: center;">
+<p><img src="../images/06203_1.png" style="width: 1200px; display: block; margin: 0 auto 10px auto;">
+<img src="../images/06203_2.png" style="width: 1200px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 3.</strong> Approximation of one thin slab <span
+class="math inline">S_i</span> by a cylinder with base area <span
+class="math inline">A(x_i^*)</span> and height <span
+class="math inline">\Delta x</span>.</span></p>
+</div>
+<h2 id="adding-the-volumes-of-all-slices">Adding the Volumes of All
+Slices</h2>
+<p>We have established that the volume of one thin slab can be
+approximated by <span class="math inline">A(x_i^*)\Delta x</span>. To
+approximate the volume of the entire solid, we add the approximate
+volumes of all <span class="math inline">n</span> slabs.</p>
+<p>Thus, the total approximate volume is</p>
+<p><span class="math display">
+V\approx\sum_{i=1}^{n}A(x_i^*)\Delta x
+</span></p>
+<p>This expression is a Riemann sum. Each term represents the
+approximate volume of one cylindrical slab, and the sum represents the
+approximate volume of the entire solid.</p>
+<p>As the number of slabs increases, their individual thicknesses
+decrease. Consequently, the cylindrical approximations become
+increasingly accurate because each thin cylinder more closely resembles
+the corresponding portion of the original solid.</p>
+<h2 class="blue" id="definition-volume">Definition: Volume</h2>
+<p>Let <span class="math inline">S</span> be a solid that lies between
+<span class="math inline">x=a</span> and <span
+class="math inline">x=b</span>. If the cross-sectional area of <span
+class="math inline">S</span> in the plane perpendicular to the <span
+class="math inline">x</span>-axis at position <span
+class="math inline">x</span> is <span class="math inline">A(x)</span>,
+where <span class="math inline">A</span> is a continuous function, then
+the volume of <span class="math inline">S</span> is defined as the limit
+of the Riemann sums</p>
+<p><span class="math display">
+V=\lim_{n\to\infty}\sum_{i=1}^{n}A(x_i^*)\Delta x
+</span></p>
+<p>Since the limit of a Riemann sum represents a definite integral, the
+volume can be expressed as</p>
+<p><span class="math display">
+\boxed{V=\int_a^b A(x)\,dx}
+</span></p>
+<div class="definition-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<p>The definition of volume provides a general method for determining
+the volume of solids whose cross-sectional areas vary along an interval.
+Instead of requiring the solid to have a uniform cross-section, we
+express its cross-sectional area as a function of position and integrate
+this function over the interval.</p>
+<p>It is important to remember that <span
+class="math inline">A(x)</span> represents the area of a moving
+cross-section obtained by slicing the solid with a plane perpendicular
+to the <span class="math inline">x</span>-axis. The integral adds the
+volumes of infinitely many infinitesimally thin slices to determine the
+exact volume.</p>
+<p>For a cylinder, the cross-sectional area is constant, so <span
+class="math inline">A(x)=A</span> throughout the interval. Therefore,
+the definition gives</p>
+<p><span class="math display">
+\begin{aligned}
+V&amp;=\int_a^b A\,dx\\
+&amp;=A\int_a^b dx\\
+&amp;=A(b-a)
+\end{aligned}
+</span></p>
+<p>Since the height of the cylinder is <span
+class="math inline">h=b-a</span>, we obtain</p>
+<p><span class="math display">
+V=Ah
+</span></p>
+<p>Thus, the general definition of volume agrees with the familiar
+formula for a cylinder.</p>
+<p>An important property of this definition is that the calculated
+volume does not depend on how the solid is positioned relative to the
+coordinate axes. We may use different directions of slicing, provided
+that the cross-sectional area and the corresponding integration limits
+are determined correctly. The resulting volume remains the same.</p>
+<h2 class="green" id="example-1">Example 1</h2>
+<p>Show that the volume of a sphere of radius <span
+class="math inline">r</span> is</p>
+<p><span class="math display">
+V=\frac{4}{3}\pi r^3
+</span></p>
+<h2 class="green" id="solution">Solution</h2>
+<p>We place the sphere of radius <span class="math inline">r</span> so
+that its centre is at the origin of the coordinate system. The sphere
+extends from <span class="math inline">x=-r</span> to <span
+class="math inline">x=r</span> along the <span
+class="math inline">x</span>-axis.</p>
+<p>Consider a cross-sectional plane perpendicular to the <span
+class="math inline">x</span>-axis passing through an arbitrary point
+<span class="math inline">x</span>. The intersection of this plane with
+the sphere is a circle.</p>
+<p>Let the radius of this circular cross-section be <span
+class="math inline">y</span>. From the Pythagorean theorem, the
+relationship between <span class="math inline">x</span>, <span
+class="math inline">y</span>, and the radius <span
+class="math inline">r</span> of the sphere is</p>
+<p><span class="math display">
+x^2+y^2=r^2
+</span></p>
+<p>Solving for <span class="math inline">y</span>, we obtain</p>
+<p><span class="math display">
+y=\sqrt{r^2-x^2}
+</span></p>
+<p>The cross-sectional area is the area of a circle with radius <span
+class="math inline">y</span>. Therefore,</p>
+<p><span class="math display">
+\begin{aligned}
+A(x)&amp;=\pi y^2\\
+&amp;=\pi(r^2-x^2)
+\end{aligned}
+</span></p>
+<p>Using the definition of volume, we integrate the cross-sectional area
+from <span class="math inline">x=-r</span> to <span
+class="math inline">x=r</span>.</p>
+<p><span class="math display">
+V=\int_{-r}^{r}A(x)\,dx
+</span></p>
+<p>Substituting the expression for <span class="math inline">A(x)</span>
+gives</p>
+<p><span class="math display">
+V=\int_{-r}^{r}\pi(r^2-x^2)\,dx
+</span></p>
+<p>Taking the constant <span class="math inline">\pi</span> outside the
+integral,</p>
+<p><span class="math display">
+V=\pi\int_{-r}^{r}(r^2-x^2)\,dx
+</span></p>
+<p>Since the integrand is an even function, we can evaluate the integral
+from <span class="math inline">0</span> to <span
+class="math inline">r</span> and multiply the result by <span
+class="math inline">2</span>.</p>
+<p><span class="math display">
+V=2\pi\int_0^r(r^2-x^2)\,dx
+</span></p>
+<p>Integrating,</p>
+<p><span class="math display">
+\begin{aligned}
+V&amp;=2\pi\left[r^2x-\frac{x^3}{3}\right]_0^r\\
+&amp;=2\pi\left[\left(r^3-\frac{r^3}{3}\right)-0\right]\\
+&amp;=2\pi\left(\frac{2r^3}{3}\right)
+\end{aligned}
+</span></p>
+<p>Therefore, the volume of the sphere is</p>
+<p><span class="math display">
+\boxed{V=\frac{4}{3}\pi r^3}
+</span></p>
+<div style="text-align: center;">
+<p><img src="../images/06204.png" style="width: 740px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 4.</strong> A sphere of radius <span
+class="math inline">r</span> centred at the origin, with a circular
+cross-section of radius <span
+class="math inline">y=\sqrt{r^2-x^2}</span> at position <span
+class="math inline">x</span>.</span></p>
+</div>
+<p>The result establishes the familiar formula for the volume of a
+sphere using the general definition of volume developed through
+cross-sectional areas and definite integrals.</p>
+<h3
+id="approximating-the-volume-of-a-sphere-using-riemann-sums">Approximating
+the Volume of a Sphere Using Riemann Sums</h3>
+<p>We now consider a sphere of radius <span class="math inline">1</span>
+to understand how the Riemann sums approximate its volume.</p>
+<p>For a sphere of radius <span class="math inline">1</span>, the
+cross-sectional area at position <span class="math inline">x</span>
+is</p>
+<p><span class="math display">
+A(x)=\pi(1-x^2)
+</span></p>
+<p>The sphere extends from <span class="math inline">x=-1</span> to
+<span class="math inline">x=1</span>. Therefore, the exact volume is
+represented by</p>
+<p><span class="math display">
+V=\int_{-1}^{1}\pi(1-x^2)\,dx
+</span></p>
+<p>To approximate this volume, we divide the interval <span
+class="math inline">[-1,1]</span> into <span
+class="math inline">n</span> equal subintervals. The width of each
+subinterval is</p>
+<p><span class="math display">
+\Delta x=\frac{2}{n}
+</span></p>
+<p>Choosing the midpoint of each subinterval as the sample point, we
+denote it by <span class="math inline">\bar{x}_i</span>. The
+cross-sectional area at this midpoint is</p>
+<p><span class="math display">
+A(\bar{x}_i)=\pi(1-\bar{x}_i^2)
+</span></p>
+<p>Thus, the Riemann sum for approximating the volume is</p>
+<p><span class="math display">
+\sum_{i=1}^{n}A(\bar{x}_i)\Delta x
+=
+\sum_{i=1}^{n}\pi(1-\bar{x}_i^2)\Delta x
+</span></p>
+<p>Each term represents the volume of a thin cylindrical slab whose base
+is a circular cross-section at the midpoint and whose height is <span
+class="math inline">\Delta x</span>.</p>
+<p>As the number of slabs increases, their thickness decreases, and the
+approximation approaches the exact volume of the sphere.</p>
+<p>For a sphere of radius <span class="math inline">1</span>, the exact
+volume is</p>
+<p><span class="math display">
+V=\frac{4}{3}\pi\approx4.18879
+</span></p>
+<p>The book illustrates this approximation using <span
+class="math inline">5</span>, <span class="math inline">10</span>, and
+<span class="math inline">20</span> cylindrical slabs. The corresponding
+approximate volumes are:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Number of disks</th>
+<th style="text-align: right;">Approximate volume</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">5</td>
+<td style="text-align: right;">4.2726</td>
+</tr>
+<tr>
+<td style="text-align: center;">10</td>
+<td style="text-align: right;">4.2097</td>
+</tr>
+<tr>
+<td style="text-align: center;">20</td>
+<td style="text-align: right;">4.1940</td>
+</tr>
+</tbody>
+</table>
+<p>These values demonstrate that increasing the number of approximating
+cylinders produces a more accurate estimate of the actual volume. In
+particular, the approximations approach the exact value <span
+class="math inline">4.18879</span> as the number of slices
+increases.</p>
+<div style="text-align: center;">
+<p><img src="../images/06205_1.png" style="width: 660px; display: block; margin: 0 auto 10px auto;">
+<img src="../images/06205_2.png" style="width: 660px; display: block; margin: 0 auto 10px auto;">
+<img src="../images/06205_3.png" style="width: 660px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 5.</strong> Approximating the volume of a sphere
+of radius <span class="math inline">1</span> using cylindrical slabs:
+(a) 5 disks, <span class="math inline">V\approx4.2726</span>; (b) 10
+disks, <span class="math inline">V\approx4.2097</span>; and (c) 20
+disks, <span class="math inline">V\approx4.1940</span>.</span></p>
+</div>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="quick-check">Quick Check</h1>
+<h2 class="red" id="question-1">Question 1</h2>
+<p>A cylinder has a circular base of radius <span
+class="math inline">3</span> cm and height <span
+class="math inline">5</span> cm. Find its volume.</p>
+<h2 class="red" id="answer">Answer</h2>
+<p>The volume of a circular cylinder is</p>
+<p><span class="math display">
+V=\pi r^2h
+</span></p>
+<p>Substituting <span class="math inline">r=3</span> and <span
+class="math inline">h=5</span>,</p>
+<p><span class="math display">
+\begin{aligned}
+V&amp;=\pi(3)^2(5)\\
+&amp;=45\pi
+\end{aligned}
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+\boxed{V=45\pi\text{ cm}^3}
+</span></p>
+<h2 class="red" id="question-2">Question 2</h2>
+<p>A solid extends from <span class="math inline">x=0</span> to <span
+class="math inline">x=4</span>, and its cross-sectional area
+perpendicular to the <span class="math inline">x</span>-axis is constant
+at <span class="math inline">A(x)=6</span> square units. Find its volume
+using a definite integral.</p>
+<h2 class="red" id="answer-1">Answer</h2>
+<p>Using the definition of volume,</p>
+<p><span class="math display">
+\begin{aligned}
+V&amp;=\int_0^4 A(x)\,dx\\
+&amp;=\int_0^4 6\,dx\\
+&amp;=6[x]_0^4\\
+&amp;=6(4-0)\\
+&amp;=24
+\end{aligned}
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+\boxed{V=24\text{ cubic units}}
+</span></p>
+<div class="question-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="scenario-problem">Scenario Problem</h1>
+<h2 class="green" id="problem">Problem</h2>
+<p>A computer-controlled manufacturing machine is designed to produce a
+cylindrical mechanical housing for an actuator. The housing has a
+circular cross-section perpendicular to its longitudinal axis, but its
+radius increases gradually along its length.</p>
+<p>Suppose the radius of the housing at a distance <span
+class="math inline">x</span> from its starting point is modelled by</p>
+<p><span class="math display">
+r(x)=2+0.1x
+</span></p>
+<p>where <span class="math inline">r</span> and <span
+class="math inline">x</span> are measured in millimetres. The housing
+extends from <span class="math inline">x=0</span> to <span
+class="math inline">x=20</span> mm.</p>
+<p>Determine the volume of material required to manufacture the
+housing.</p>
+<h2 class="green" id="solution-1">Solution</h2>
+<p>The cross-section perpendicular to the longitudinal axis is circular.
+Therefore, its area at position <span class="math inline">x</span>
+is</p>
+<p><span class="math display">
+A(x)=\pi[r(x)]^2
+</span></p>
+<p>Substituting the given radius function,</p>
+<p><span class="math display">
+A(x)=\pi(2+0.1x)^2
+</span></p>
+<p>Since the housing extends from <span class="math inline">x=0</span>
+to <span class="math inline">x=20</span>, the volume can be calculated
+using the definition of volume:</p>
+<p><span class="math display">
+V=\int_0^{20}A(x)\,dx
+</span></p>
+<p>Substituting the cross-sectional area,</p>
+<p><span class="math display">
+V=\pi\int_0^{20}(2+0.1x)^2\,dx
+</span></p>
+<p>Expanding the expression,</p>
+<p><span class="math display">
+V=\pi\int_0^{20}(4+0.4x+0.01x^2)\,dx
+</span></p>
+<p>Integrating,</p>
+<p><span class="math display">
+\begin{aligned}
+V&amp;=\pi\left[4x+0.2x^2+\frac{0.01x^3}{3}\right]_0^{20}\\
+&amp;=\pi\left[80+80+\frac{8}{3}-0\right]\\
+&amp;=\frac{488\pi}{3}
+\end{aligned}
+</span></p>
+<p>Therefore, the required volume of material is</p>
+<p><span class="math display">
+\boxed{V=\frac{488\pi}{3}\text{ mm}^3}
+</span></p>
+<p>Numerically,</p>
+<p><span class="math display">
+\boxed{V\approx511.02\text{ mm}^3}
+</span></p>
+<p>Thus, the manufacturing system requires approximately <span
+class="math inline">511.02</span> cubic millimetres of material to
+produce the mechanical housing. The volume is determined by integrating
+the changing cross-sectional area along the length of the component.</p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="volumes-of-solids-of-revolution">Volumes of Solids of
+Revolution</h1>
+<h2 id="from-cross-sections-to-volume">From Cross-Sections to
+Volume</h2>
+<p>A solid can be studied by examining the areas of its cross-sections.
+Suppose a solid extends from <span class="math inline">x=a</span> to
+<span class="math inline">x=b</span>, and the cross-sectional area
+perpendicular to the <span class="math inline">x</span>-axis at a point
+<span class="math inline">x</span> is <span
+class="math inline">A(x)</span>. Divide the interval <span
+class="math inline">[a,b]</span> into <span class="math inline">n</span>
+subintervals of equal width <span class="math inline">\Delta
+x=(b-a)/n</span>. A thin slice of the solid can be approximated by a
+rectangular slab whose base area is <span
+class="math inline">A(x_i^*)</span> and whose thickness is <span
+class="math inline">\Delta x</span>. Its approximate volume is therefore
+<span class="math inline">A(x_i^*)\Delta x</span>.</p>
+<p>Adding the volumes of all the approximating slabs gives the Riemann
+sum</p>
+<p><span class="math display">
+\sum_{i=1}^{n}A(x_i^*)\Delta x
+</span></p>
+<p>As the number of subintervals increases, the thickness of each slab
+approaches zero and the approximation approaches the exact volume. Thus,
+the volume is defined by</p>
+<p><span class="math display">
+V=\lim_{n\to\infty}\sum_{i=1}^{n}A(x_i^*)\Delta x
+</span></p>
+<p>When the cross-sectional area function is continuous, this limit is
+the definite integral</p>
+<p><span class="math display">
+V=\int_a^b A(x)\,dx
+</span></p>
+<p>Similarly, if the solid is described using cross-sections
+perpendicular to the <span class="math inline">y</span>-axis, its volume
+can be calculated by integrating with respect to <span
+class="math inline">y</span>:</p>
+<p><span class="math display">
+V=\int_c^d A(y)\,dy
+</span></p>
+<p>The main task in a volume problem is therefore to determine the area
+of a typical cross-section and express it in terms of the variable of
+integration.</p>
+<h2 id="volumes-of-solids-of-revolution-1">Volumes of Solids of
+Revolution</h2>
+<p>If a plane region is revolved around a straight line, the resulting
+three-dimensional solid is called a <strong>solid of
+revolution</strong>. When the region is rotated around a horizontal or
+vertical line, cross-sections perpendicular to the axis of rotation are
+circular. Depending on the region and the axis of rotation, these
+cross-sections may be disks or washers.</p>
+<p>A <strong>disk</strong> is a circular cross-section with no hole in
+its centre. A <strong>washer</strong> is a circular cross-section with a
+hole in its centre, similar to an annular ring. The volume of a solid of
+revolution is obtained by integrating the areas of these circular
+cross-sections along the axis of the solid.</p>
+<h2 class="green" id="example-2">Example 2</h2>
+<p>Find the volume of the solid obtained by rotating about the <span
+class="math inline">x</span>-axis the region under the curve <span
+class="math inline">y = \sqrt{x}</span> from 0 to 1. Illustrate the
+definition of volume by sketching a typical approximating cylinder.</p>
+<h2 class="green" id="solution-2">Solution</h2>
+<p>The region under <span class="math inline">y=\sqrt{x}</span> from
+<span class="math inline">x=0</span> to <span
+class="math inline">x=1</span> is revolved around the <span
+class="math inline">x</span>-axis. A cross-section perpendicular to the
+<span class="math inline">x</span>-axis is a circular disk. At a
+position <span class="math inline">x</span>, the radius of the disk is
+the distance from the <span class="math inline">x</span>-axis to the
+curve, so</p>
+<p><span class="math display">
+R(x)=\sqrt{x}
+</span></p>
+<p>The cross-sectional area is</p>
+<p><span class="math display">
+A(x)=\pi[R(x)]^2=\pi(\sqrt{x})^2=\pi x
+</span></p>
+<p>A typical approximating cylinder has this circular base area and
+thickness <span class="math inline">\Delta x</span>. Its approximate
+volume is <span class="math inline">\pi x\Delta x</span>. Integrating
+the cross-sectional area from <span class="math inline">x=0</span> to
+<span class="math inline">x=1</span> gives</p>
+<p><span class="math display">
+\begin{aligned}
+V&amp;=\int_0^1 A(x)\,dx\\
+&amp;=\pi\int_0^1 x\,dx\\
+&amp;=\pi\left[\frac{x^2}{2}\right]_0^1\\
+&amp;=\frac{\pi}{2}
+\end{aligned}
+</span></p>
+<p>Therefore, the volume of the solid is</p>
+<p><span class="math display">
+\boxed{V=\frac{\pi}{2}}
+</span></p>
+<div style="text-align: center;">
+<p><img src="../images/06206.png" style="width: 1200px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 6.</strong> A sphere of radius <span
+class="math inline">r</span> and a typical circular cross-section
+perpendicular to the <span class="math inline">x</span>-axis.</span></p>
+</div>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<p>The definition of volume can also be visualized by approximating the
+sphere with a collection of thin circular cylinders. Each cylinder has a
+circular base and a small thickness. Increasing the number of cylinders
+makes the approximation more accurate because the thickness of each
+cylinder becomes smaller.</p>
+<p>The approximations shown in Figure 5 become progressively closer to
+the exact volume as the number of disks increases. This illustrates the
+limiting process used to define the volume of a solid.</p>
+<h2 id="the-disk-method">The Disk Method</h2>
+<p>When a region is revolved around an axis and each cross-section
+perpendicular to that axis is a disk, the cross-sectional area is the
+area of a circle. If the disk has radius <span
+class="math inline">R</span>, then</p>
+<p><span class="math display">
+A=\pi R^2
+</span></p>
+<p>If the solid extends from <span class="math inline">x=a</span> to
+<span class="math inline">x=b</span>, its volume is</p>
+<p><span class="math display">
+V=\pi\int_a^b [R(x)]^2\,dx
+</span></p>
+<p>For a solid described by horizontal cross-sections, the corresponding
+formula is</p>
+<p><span class="math display">
+V=\pi\int_c^d [R(y)]^2\,dy
+</span></p>
+<p>The radius must be expressed in terms of the variable of integration.
+It is the distance from the axis of rotation to the outer boundary of
+the cross-section.</p>
+<h2 id="choosing-the-variable-of-integration">Choosing the Variable of
+Integration</h2>
+<p>The direction of the cross-sections is determined by the axis of
+rotation. If the axis of rotation is the <span
+class="math inline">y</span>-axis, horizontal cross-sections are
+perpendicular to the axis, so it is natural to integrate with respect to
+<span class="math inline">y</span>. If the axis of rotation is the <span
+class="math inline">x</span>-axis, vertical cross-sections are
+perpendicular to the axis, so it is natural to integrate with respect to
+<span class="math inline">x</span>.</p>
+<p>The curves must be rewritten, when necessary, so that the radius of a
+typical disk is expressed in terms of the variable of integration. The
+limits of integration are the coordinates along the axis of rotation
+over which the solid extends.</p>
+<h2 class="green" id="example-3">Example 3</h2>
+<p>Find the volume of the solid obtained by rotating the region bounded
+by <span class="math inline">y=x^3</span>, <span
+class="math inline">y=8</span>, and <span class="math inline">x=0</span>
+about the <span class="math inline">y</span>-axis.</p>
+<h2 class="green" id="solution-3">Solution</h2>
+<p>The region is bounded by the curve <span
+class="math inline">y=x^3</span>, the horizontal line <span
+class="math inline">y=8</span>, and the vertical line <span
+class="math inline">x=0</span>. Since the region is rotated about the
+<span class="math inline">y</span>-axis, we use horizontal
+cross-sections and integrate with respect to <span
+class="math inline">y</span>.</p>
+<p>First, express <span class="math inline">x</span> in terms of <span
+class="math inline">y</span>:</p>
+<p><span class="math display">
+y=x^3\quad\Longrightarrow\quad x=\sqrt[3]{y}
+</span></p>
+<p>At a height <span class="math inline">y</span>, the cross-section is
+a circular disk whose radius is the horizontal distance from the <span
+class="math inline">y</span>-axis to the curve. Thus,</p>
+<p><span class="math display">
+R(y)=\sqrt[3]{y}
+</span></p>
+<p>The area of the cross-section is</p>
+<p><span class="math display">
+A(y)=\pi[R(y)]^2=\pi(\sqrt[3]{y})^2=\pi y^{2/3}
+</span></p>
+<p>The region extends vertically from <span
+class="math inline">y=0</span> to <span class="math inline">y=8</span>.
+Therefore, the volume is</p>
+<p><span class="math display">
+\begin{aligned}
+V&amp;=\int_0^8 A(y)\,dy\\
+&amp;=\pi\int_0^8 y^{2/3}\,dy\\
+&amp;=\pi\left[\frac{3}{5}y^{5/3}\right]_0^8\\
+&amp;=\frac{3\pi}{5}(8)^{5/3}\\
+&amp;=\frac{3\pi}{5}(32)\\
+&amp;=\frac{96\pi}{5}
+\end{aligned}
+</span></p>
+<p>Hence, the volume of the solid is</p>
+<p><span class="math display">
+\boxed{V=\frac{96\pi}{5}}
+</span></p>
+<div style="text-align: center;">
+<p><img src="../images/06207.png" style="width: 1200px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 7.</strong> Approximating the volume of a sphere
+of radius 1 using 5, 10, and 20 disks.</span></p>
+</div>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 id="the-washer-method">The Washer Method</h2>
+<p>When the region being revolved does not extend all the way to the
+axis of rotation, the cross-section perpendicular to the axis has a hole
+in its centre. Such a cross-section is called a <strong>washer</strong>.
+Its area is the area of the outer circle minus the area of the inner
+circle.</p>
+<p>If <span class="math inline">R_{\text{outer}}</span> is the outer
+radius and <span class="math inline">R_{\text{inner}}</span> is the
+inner radius, then</p>
+<p><span class="math display">
+A=\pi R_{\text{outer}}^2-\pi R_{\text{inner}}^2
+</span></p>
+<p>or, equivalently,</p>
+<p><span class="math display">
+A=\pi\left(R_{\text{outer}}^2-R_{\text{inner}}^2\right)
+</span></p>
+<p>The outer radius is the distance from the axis of rotation to the
+farther boundary of the region, while the inner radius is the distance
+from the axis to the nearer boundary. Both radii are nonnegative
+distances. A sketch of the region and its cross-section is often the
+best way to identify them correctly.</p>
+<h2 class="green" id="example-4">Example 4</h2>
+<p>The region <span class="math inline">S</span> enclosed by the curves
+<span class="math inline">y=x</span> and <span
+class="math inline">y=x^2</span> is rotated about the <span
+class="math inline">x</span>-axis. Find the volume of the resulting
+solid.</p>
+<h2 class="green" id="solution-4">Solution</h2>
+<p>First, find the points of intersection of the curves. Equating their
+expressions gives</p>
+<p><span class="math display">
+x=x^2
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+x(x-1)=0
+</span></p>
+<p>and the curves intersect at <span class="math inline">x=0</span> and
+<span class="math inline">x=1</span>. These values are the limits of
+integration.</p>
+<p>On the interval <span class="math inline">[0,1]</span>, the curve
+<span class="math inline">y=x</span> lies above the curve <span
+class="math inline">y=x^2</span>. When the region is rotated about the
+<span class="math inline">x</span>-axis, a cross-section perpendicular
+to the <span class="math inline">x</span>-axis is a washer. The outer
+radius is the distance from the <span class="math inline">x</span>-axis
+to the upper curve, and the inner radius is the distance from the <span
+class="math inline">x</span>-axis to the lower curve:</p>
+<p><span class="math display">
+R_{\text{outer}}=x,\qquad R_{\text{inner}}=x^2
+</span></p>
+<p>The area of a typical washer is</p>
+<p><span class="math display">
+\begin{aligned}
+A(x)&amp;=\pi R_{\text{outer}}^2-\pi R_{\text{inner}}^2\\
+&amp;=\pi x^2-\pi(x^2)^2\\
+&amp;=\pi(x^2-x^4)
+\end{aligned}
+</span></p>
+<p>Integrating this area from <span class="math inline">0</span> to
+<span class="math inline">1</span> gives</p>
+<p><span class="math display">
+\begin{aligned}
+V&amp;=\int_0^1 A(x)\,dx\\
+&amp;=\pi\int_0^1(x^2-x^4)\,dx\\
+&amp;=\pi\left[\frac{x^3}{3}-\frac{x^5}{5}\right]_0^1\\
+&amp;=\pi\left(\frac13-\frac15\right)\\
+&amp;=\frac{2\pi}{15}
+\end{aligned}
+</span></p>
+<p>Hence, the volume of the solid is</p>
+<p><span class="math display">
+\boxed{V=\frac{2\pi}{15}}
+</span></p>
+<div style="text-align: center;">
+<p><img src="../images/06208.png" style="width: 1200px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 8.</strong> The region under <span
+class="math inline">y=\sqrt{x}</span> and the solid obtained by rotating
+it about the <span class="math inline">x</span>-axis, with a typical
+circular disk of thickness <span class="math inline">\Delta
+x</span>.</span></p>
+</div>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 id="rotation-about-a-line-other-than-a-coordinate-axis">Rotation
+About a Line Other Than a Coordinate Axis</h2>
+<p>When a region is rotated about a horizontal or vertical line that is
+not one of the coordinate axes, the disk or washer method can still be
+used. However, the radii must be measured from the actual axis of
+rotation, not from the <span class="math inline">x</span>-axis or <span
+class="math inline">y</span>-axis.</p>
+<p>For a horizontal axis <span class="math inline">y=k</span>, the
+radius is a vertical distance from <span class="math inline">y=k</span>
+to a boundary of the region. For a vertical axis <span
+class="math inline">x=h</span>, the radius is a horizontal distance from
+<span class="math inline">x=h</span> to a boundary. The outer radius is
+always the larger distance, and the inner radius is the smaller distance
+when the cross-section is a washer.</p>
+<h2 class="green" id="example-5">Example 5</h2>
+<p>Find the volume of the solid obtained by rotating the region in
+Example 4 about the line <span class="math inline">y=2</span>.</p>
+<h2 class="green" id="solution-5">Solution</h2>
+<p>The region is the same as in Example 4: it is enclosed by <span
+class="math inline">y=x</span> and <span
+class="math inline">y=x^2</span>, and extends from <span
+class="math inline">x=0</span> to <span class="math inline">x=1</span>.
+This time, the region is rotated about the horizontal line <span
+class="math inline">y=2</span>.</p>
+<p>A vertical cross-section perpendicular to the axis of rotation is a
+washer. Since the axis <span class="math inline">y=2</span> lies above
+the region, the outer radius is the distance from <span
+class="math inline">y=2</span> to the lower curve <span
+class="math inline">y=x^2</span>, while the inner radius is the distance
+from <span class="math inline">y=2</span> to the upper curve <span
+class="math inline">y=x</span>:</p>
+<p><span class="math display">
+R_{\text{outer}}=2-x^2,\qquad R_{\text{inner}}=2-x
+</span></p>
+<p>The area of a typical washer is</p>
+<p><span class="math display">
+\begin{aligned}
+A(x)&amp;=\pi(2-x^2)^2-\pi(2-x)^2\\
+&amp;=\pi\left[(4-4x^2+x^4)-(4-4x+x^2)\right]\\
+&amp;=\pi(x^4-5x^2+4x)
+\end{aligned}
+</span></p>
+<p>The volume is obtained by integrating this cross-sectional area from
+<span class="math inline">x=0</span> to <span
+class="math inline">x=1</span>:</p>
+<p><span class="math display">
+\begin{aligned}
+V&amp;=\pi\int_0^1(x^4-5x^2+4x)\,dx\\
+&amp;=\pi\left[\frac{x^5}{5}-\frac{5x^3}{3}+2x^2\right]_0^1\\
+&amp;=\pi\left(\frac15-\frac53+2\right)\\
+&amp;=\pi\left(\frac{3-25+30}{15}\right)\\
+&amp;=\frac{8\pi}{15}
+\end{aligned}
+</span></p>
+<p>Therefore, the volume of the solid is</p>
+<p><span class="math display">
+\boxed{V=\frac{8\pi}{15}}
+</span></p>
+<div style="text-align: center;">
+<p><img src="../images/06209.png" style="width: 1200px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 9.</strong> The region bounded by <span
+class="math inline">y=x^3</span>, <span class="math inline">y=8</span>,
+and <span class="math inline">x=0</span>, and the solid of revolution
+about the <span class="math inline">y</span>-axis with a typical disk
+cross-section.</span></p>
+</div>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 id="choosing-between-a-disk-and-a-washer">Choosing Between a Disk
+and a Washer</h2>
+<p>The examples illustrate two possible forms of circular
+cross-sectional area. When the region reaches the axis of rotation, the
+cross-section is a disk. Its area is</p>
+<p><span class="math display">
+A=\pi(\text{radius})^2
+</span></p>
+<p>For example, in Figures 6 and 7, the rotated regions meet the axes of
+rotation. Each cross-section is a disk, and its area is found by
+squaring the radius and multiplying by <span
+class="math inline">\pi</span>.</p>
+<p>When the region does not reach the axis of rotation, the
+cross-section is a washer. Its area is the area of the outer disk minus
+the area of the inner disk:</p>
+<p><span class="math display">
+A=\pi(\text{outer radius})^2-\pi(\text{inner radius})^2
+</span></p>
+<p>Figures 8 and 9 illustrate this situation. The central hole is not
+part of the solid, so its circular area must be subtracted from the area
+of the outer circle. Figure 10 shows the general geometry of a washer,
+identifying its inner radius and outer radius. The radii must be
+measured from the axis of rotation to the two boundaries of the
+region.</p>
+<div style="text-align: center;">
+<p><img src="../images/06210.png" style="width: 1200px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 10.</strong> The region enclosed by <span
+class="math inline">y=x</span> and <span
+class="math inline">y=x^2</span>, its solid of revolution about the
+<span class="math inline">x</span>-axis, and a typical washer
+cross-section.</span></p>
+</div>
+<p>In general, the volume of a solid of revolution can be calculated
+using either of the following formulas, depending on the direction of
+the cross-sections:</p>
+<p><span class="math display">
+V=\int_a^b A(x)\,dx
+\qquad\text{or}\qquad
+V=\int_c^d A(y)\,dy
+</span></p>
+<p>For a disk, the cross-sectional area is <span class="math inline">\pi
+R^2</span>. For a washer, the cross-sectional area is <span
+class="math inline">\pi(R_{\text{outer}}^2-R_{\text{inner}}^2)</span>.
+The appropriate formula is selected after sketching the region,
+identifying the axis of rotation, and determining the shape and
+dimensions of a typical cross-section.</p>
+<h2 class="green" id="example-6">Example 6</h2>
+<p>Find the volume of the solid obtained by rotating the region in
+Example 4 about the line <span class="math inline">x=-1</span>.</p>
+<h2 class="green" id="solution-6">Solution</h2>
+<p>The region is again enclosed by <span class="math inline">y=x</span>
+and <span class="math inline">y=x^2</span>, with intersection points at
+<span class="math inline">(0,0)</span> and <span
+class="math inline">(1,1)</span>. Since the axis of rotation is the
+vertical line <span class="math inline">x=-1</span>, we use horizontal
+cross-sections and integrate with respect to <span
+class="math inline">y</span>.</p>
+<p>To express the boundaries in terms of <span
+class="math inline">y</span>, rewrite the two curves:</p>
+<p><span class="math display">
+y=x\quad\Longrightarrow\quad x=y
+</span></p>
+<p>and</p>
+<p><span class="math display">
+y=x^2\quad\Longrightarrow\quad x=\sqrt{y}
+</span></p>
+<p>For <span class="math inline">0\leq y\leq1</span>, the horizontal
+region extends from <span class="math inline">x=y</span> to <span
+class="math inline">x=\sqrt y</span>. The axis <span
+class="math inline">x=-1</span> is to the left of the entire region.
+Therefore, a horizontal cross-section is a washer. The inner radius is
+the distance from the axis to the nearer boundary <span
+class="math inline">x=y</span>, and the outer radius is the distance
+from the axis to the farther boundary <span class="math inline">x=\sqrt
+y</span>:</p>
+<p><span class="math display">
+R_{\text{inner}}=1+y,\qquad
+R_{\text{outer}}=1+\sqrt y
+</span></p>
+<p>The cross-sectional area is</p>
+<p><span class="math display">
+\begin{aligned}
+A(y)&amp;=\pi(1+\sqrt y)^2
+-\pi(1+y)^2\\
+&amp;=\pi\left[\left(1+2\sqrt y+y\right)
+-\left(1+2y+y^2\right)\right]\\
+&amp;=\pi(2\sqrt y-y-y^2)
+\end{aligned}
+</span></p>
+<p>The solid extends from <span class="math inline">y=0</span> to <span
+class="math inline">y=1</span>. Hence,</p>
+<p><span class="math display">
+\begin{aligned}
+V&amp;=\int_0^1 A(y)\,dy\\
+&amp;=\pi\int_0^1(2\sqrt y-y-y^2)\,dy\\
+&amp;=\pi\left[\frac{4}{3}y^{3/2}-\frac{y^2}{2}-\frac{y^3}{3}\right]_0^1\\
+&amp;=\pi\left(\frac43-\frac12-\frac13\right)\\
+&amp;=\frac{\pi}{2}
+\end{aligned}
+</span></p>
+<p>Therefore, the volume of the solid is</p>
+<p><span class="math display">
+\boxed{V=\frac{\pi}{2}}
+</span></p>
+<div style="text-align: center;">
+<p><img src="../images/06211.png" style="width: 1000px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 11.</strong> The solid obtained by rotating the
+region between <span class="math inline">y=x</span> and <span
+class="math inline">y=x^2</span> about <span
+class="math inline">x=-1</span>, with a typical horizontal washer
+cross-section.</span></p>
+</div>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="quick-check-1">Quick Check</h1>
+<h2 class="red" id="question-1-1">Question 1</h2>
+<p>A region is revolved around the <span
+class="math inline">x</span>-axis. A typical cross-section perpendicular
+to the <span class="math inline">x</span>-axis is a disk of radius <span
+class="math inline">R(x)=3</span>. Find its area.</p>
+<h2 class="red" id="answer-2">Answer</h2>
+<p>The area of a disk is <span class="math inline">A=\pi R^2</span>.
+Therefore,</p>
+<p><span class="math display">
+A=\pi(3)^2=9\pi
+</span></p>
+<p>Thus, the cross-sectional area is</p>
+<p><span class="math display">
+\boxed{A=9\pi}
+</span></p>
+<h2 class="red" id="question-2-1">Question 2</h2>
+<p>A washer has an outer radius of 5 units and an inner radius of 3
+units. Find its cross-sectional area.</p>
+<h2 class="red" id="answer-3">Answer</h2>
+<p>The area of a washer is the area of the outer disk minus the area of
+the inner disk:</p>
+<p><span class="math display">
+\begin{aligned}
+A&amp;=\pi(5)^2-\pi(3)^2\\
+&amp;=25\pi-9\pi\\
+&amp;=16\pi
+\end{aligned}
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+\boxed{A=16\pi}
+</span></p>
+<div class="question-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="scenario-problem-1">Scenario Problem</h1>
+<h2 class="green" id="problem-1">Problem</h2>
+<p>A mechatronics company manufactures a hollow mechanical roller by
+rotating a two-dimensional profile around a horizontal axis. The
+cross-section of the material is bounded above by <span
+class="math inline">y=x</span> and below by <span
+class="math inline">y=x^2</span>, for <span class="math inline">0\leq
+x\leq1</span>. The profile is rotated about the line <span
+class="math inline">y=2</span>. Determine the volume of material in the
+roller.</p>
+<h2 class="green" id="solution-7">Solution</h2>
+<p>The region is bounded by <span class="math inline">y=x</span> and
+<span class="math inline">y=x^2</span>. The curves intersect where</p>
+<p><span class="math display">
+x=x^2
+</span></p>
+<p>which gives <span class="math inline">x=0</span> and <span
+class="math inline">x=1</span>. Thus, the limits of integration are 0
+and 1.</p>
+<p>Since the region is rotated about the horizontal line <span
+class="math inline">y=2</span>, a vertical cross-section perpendicular
+to the axis of rotation is a washer. The outer radius is the distance
+from <span class="math inline">y=2</span> to the lower curve <span
+class="math inline">y=x^2</span>, and the inner radius is the distance
+from <span class="math inline">y=2</span> to the upper curve <span
+class="math inline">y=x</span>:</p>
+<p><span class="math display">
+R_{\text{outer}}=2-x^2,\qquad R_{\text{inner}}=2-x
+</span></p>
+<p>The cross-sectional area is</p>
+<p><span class="math display">
+\begin{aligned}
+A(x)&amp;=\pi(2-x^2)^2-\pi(2-x)^2\\
+&amp;=\pi(x^4-5x^2+4x)
+\end{aligned}
+</span></p>
+<p>The required volume is</p>
+<p><span class="math display">
+\begin{aligned}
+V&amp;=\int_0^1 A(x)\,dx\\
+&amp;=\pi\int_0^1(x^4-5x^2+4x)\,dx\\
+&amp;=\pi\left[\frac{x^5}{5}-\frac{5x^3}{3}+2x^2\right]_0^1\\
+&amp;=\pi\left(\frac15-\frac53+2\right)\\
+&amp;=\frac{8\pi}{15}
+\end{aligned}
+</span></p>
+<p>Therefore, the volume of material in the hollow roller is</p>
+<p><span class="math display">
+\boxed{V=\frac{8\pi}{15}\text{ cubic units}}
+</span></p>
+<p>The calculation shows how a computer-controlled manufacturing system
+can use the mathematical profile of a component to determine the volume
+of material required. The washer method accounts for the hollow central
+portion by subtracting the inner circular area from the outer circular
+area at every cross-section.</p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="finding-volume-using-cross-sectional-area">Finding Volume Using
+Cross-Sectional Area</h1>
+<h2 id="introduction">Introduction</h2>
+<p>The volume of a solid can be determined by using the areas of its
+cross-sections perpendicular to a fixed axis. This method is not
+restricted to solids of revolution. It can also be applied to solids
+whose cross-sections have other shapes, provided that the area of a
+typical cross-section can be expressed as a function of its
+position.</p>
+<p>Consider a solid that extends from <span
+class="math inline">x=a</span> to <span class="math inline">x=b</span>.
+At a position <span class="math inline">x</span>, let <span
+class="math inline">A(x)</span> denote the area of the cross-section
+perpendicular to the <span class="math inline">x</span>-axis. Divide the
+interval <span class="math inline">[a,b]</span> into <span
+class="math inline">n</span> subintervals, each of width <span
+class="math inline">\Delta x</span>. A thin slice of the solid can be
+approximated by a slab whose base area is <span
+class="math inline">A(x_i^*)</span> and whose thickness is <span
+class="math inline">\Delta x</span>. Its approximate volume is therefore
+<span class="math inline">A(x_i^*)\Delta x</span>.</p>
+<p>Adding the volumes of all the slabs gives the Riemann sum</p>
+<p><span class="math display">
+V\approx\sum_{i=1}^{n}A(x_i^*)\Delta x
+</span></p>
+<p>As the number of slices increases and their thicknesses approach
+zero, the approximation approaches the exact volume. Thus, the volume is
+given by the definite integral</p>
+<p><span class="math display">
+V=\int_a^b A(x)\,dx
+</span></p>
+<p>The main task in applying this method is to determine the area
+function <span class="math inline">A(x)</span>. This requires
+identifying the shape of a typical cross-section, expressing its
+dimensions in terms of <span class="math inline">x</span>, and using the
+appropriate geometric area formula. The limits of integration are the
+positions at which the solid begins and ends.</p>
+<h2 class="green" id="example-7">Example 7</h2>
+<p>Figure 12 shows a solid with a circular base of radius 1. Parallel
+cross-sections perpendicular to the base are equilateral triangles. Find
+the volume of the solid.</p>
+<div style="text-align: center;">
+<p><img src="../images/06212.png" style="width: 562px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 12.</strong> A computer-generated picture of the
+solid in Example 7, showing a solid with a circular base and parallel
+equilateral-triangle cross-sections.</span></p>
+</div>
+<h2 class="green" id="solution-8">Solution</h2>
+<p>We take the circular base to be the disk</p>
+<p><span class="math display">
+x^2+y^2=1
+</span></p>
+<p>The solid, its circular base, and a typical cross-section at a
+distance <span class="math inline">x</span> from the origin are
+illustrated in Figure 13. Since the base is a circle of radius 1, its
+equation can be written as</p>
+<p><span class="math display">
+x^2+y^2=1
+</span></p>
+<p>Solving for the positive value of <span class="math inline">y</span>
+gives</p>
+<p><span class="math display">
+y=\sqrt{1-x^2}
+</span></p>
+<p>The point <span class="math inline">B</span> lies on the circle, so
+its vertical coordinate is <span
+class="math inline">y=\sqrt{1-x^2}</span>. By symmetry, the base <span
+class="math inline">AB</span> of the equilateral triangle is twice this
+distance. Therefore, the side length of the triangle is</p>
+<p><span class="math display">
+s=|AB|=2y=2\sqrt{1-x^2}
+</span></p>
+<p>Since the cross-section is an equilateral triangle, its height is
+<span class="math inline">\sqrt{3}/2</span> times its side length.
+Hence,</p>
+<p><span class="math display">
+h=\frac{\sqrt{3}}{2}s
+=\frac{\sqrt{3}}{2}\left(2\sqrt{1-x^2}\right)
+=\sqrt{3}\sqrt{1-x^2}
+</span></p>
+<p>The area of an equilateral triangle is one-half the product of its
+base and height. Thus, the cross-sectional area is</p>
+<p><span class="math display">
+\begin{aligned}
+A(x)
+&amp;=\frac12\left(2\sqrt{1-x^2}\right)
+\left(\sqrt{3}\sqrt{1-x^2}\right)\\
+&amp;=\sqrt{3}(1-x^2)
+\end{aligned}
+</span></p>
+<p>The circular base extends from <span class="math inline">x=-1</span>
+to <span class="math inline">x=1</span>. Therefore, the volume is</p>
+<p><span class="math display">
+V=\int_{-1}^{1}A(x)\,dx
+</span></p>
+<p>Substituting the cross-sectional area gives</p>
+<p><span class="math display">
+V=\int_{-1}^{1}\sqrt{3}(1-x^2)\,dx
+</span></p>
+<p>Since the integrand is an even function, we can write</p>
+<p><span class="math display">
+V=2\sqrt{3}\int_0^1(1-x^2)\,dx
+</span></p>
+<p>Integrating,</p>
+<p><span class="math display">
+\begin{aligned}
+V
+&amp;=2\sqrt{3}\left[x-\frac{x^3}{3}\right]_0^1\\
+&amp;=2\sqrt{3}\left(1-\frac13\right)\\
+&amp;=2\sqrt{3}\left(\frac23\right)\\
+&amp;=\frac{4\sqrt{3}}{3}
+\end{aligned}
+</span></p>
+<p>Therefore, the volume of the solid is</p>
+<p><span class="math display">
+\boxed{V=\frac{4\sqrt{3}}{3}}
+</span></p>
+<div style="text-align: center;">
+<p><img src="../images/06213.png" style="width: 1200px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 13.</strong> The solid in (a), its circular base
+in (b), and a typical equilateral-triangle cross-section in (c), showing
+the chord length and triangle height used to determine the
+cross-sectional area.</span></p>
+</div>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="green" id="example-8">Example 8</h2>
+<p>Find the volume of a pyramid whose base is a square with side <span
+class="math inline">L</span> and whose height is <span
+class="math inline">h</span>.</p>
+<h2 class="green" id="solution-9">Solution</h2>
+<p>We place the origin <span class="math inline">O</span> at the vertex
+of the pyramid and take the <span class="math inline">x</span>-axis
+along its central axis, as shown in Figure 14. The vertex is therefore
+at <span class="math inline">x=0</span>, while the square base is at
+<span class="math inline">x=h</span>.</p>
+<p>A plane perpendicular to the <span class="math inline">x</span>-axis
+at a position <span class="math inline">x</span> intersects the pyramid
+in a square. Let the side length of this square be <span
+class="math inline">s</span>. Figure 15 shows the relationship between
+the side length <span class="math inline">s</span> of the cross-section
+and the side length <span class="math inline">L</span> of the base.</p>
+<p>The cross-section and the base form similar triangles in the diagram.
+Consequently,</p>
+<p><span class="math display">
+\frac{x}{h}=\frac{s/2}{L/2}=\frac{s}{L}
+</span></p>
+<p>Solving for <span class="math inline">s</span> gives</p>
+<p><span class="math display">
+s=\frac{Lx}{h}
+</span></p>
+<p>The cross-sectional area is the area of a square, so</p>
+<p><span class="math display">
+\begin{aligned}
+A(x)
+&amp;=s^2\\
+&amp;=\left(\frac{Lx}{h}\right)^2\\
+&amp;=\frac{L^2}{h^2}x^2
+\end{aligned}
+</span></p>
+<p>The pyramid extends from <span class="math inline">x=0</span> at its
+vertex to <span class="math inline">x=h</span> at its base. Therefore,
+its volume is</p>
+<p><span class="math display">
+V=\int_0^h A(x)\,dx
+</span></p>
+<p>Substituting the expression for <span
+class="math inline">A(x)</span>,</p>
+<p><span class="math display">
+V=\int_0^h\frac{L^2}{h^2}x^2\,dx
+</span></p>
+<p>Since <span class="math inline">L</span> and <span
+class="math inline">h</span> are constants,</p>
+<p><span class="math display">
+\begin{aligned}
+V
+&amp;=\frac{L^2}{h^2}\int_0^h x^2\,dx\\
+&amp;=\frac{L^2}{h^2}\left[\frac{x^3}{3}\right]_0^h\\
+&amp;=\frac{L^2}{h^2}\left(\frac{h^3}{3}\right)\\
+&amp;=\frac{L^2h}{3}
+\end{aligned}
+</span></p>
+<p>Hence, the volume of the pyramid is</p>
+<p><span class="math display">
+\boxed{V=\frac{L^2h}{3}}
+</span></p>
+<div style="text-align: center;">
+<p><img src="../images/06214.png" style="width: 798px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 14.</strong> A pyramid with its vertex at the
+origin, its central axis along the <span
+class="math inline">x</span>-axis, and a typical square cross-section
+perpendicular to the axis.</span></p>
+</div>
+<div style="text-align: center;">
+<p><img src="../images/06215.png" style="width: 798px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 15.</strong> A side view of the pyramid showing
+the similar triangles used to obtain the relationship <span
+class="math inline">s=Lx/h</span> between the side length of the square
+cross-section and its distance from the vertex.</span></p>
+</div>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 id="an-alternative-positioning-of-the-pyramid">An Alternative
+Positioning of the Pyramid</h2>
+<p>The vertex of the pyramid does not have to be placed at the origin.
+In Example 8, this placement was selected because it made the equations
+simple. We could instead place the centre of the square base at the
+origin and the vertex on the positive <span
+class="math inline">y</span>-axis, as shown in Figure 16.</p>
+<p>With this coordinate system, the base is at <span
+class="math inline">y=0</span> and the vertex is at <span
+class="math inline">y=h</span>. A cross-section at height <span
+class="math inline">y</span> is a square whose side length decreases
+linearly from <span class="math inline">L</span> at the base to zero at
+the vertex. By similar triangles, its side length is</p>
+<p><span class="math display">
+s=\frac{L}{h}(h-y)
+</span></p>
+<p>Therefore, its cross-sectional area is</p>
+<p><span class="math display">
+A(y)=s^2=\frac{L^2}{h^2}(h-y)^2
+</span></p>
+<p>The volume can now be expressed by integrating with respect to <span
+class="math inline">y</span>:</p>
+<p><span class="math display">
+V=\int_0^h\frac{L^2}{h^2}(h-y)^2\,dy
+</span></p>
+<p>Evaluating this integral gives</p>
+<p><span class="math display">
+\begin{aligned}
+V
+&amp;=\frac{L^2}{h^2}\int_0^h(h-y)^2\,dy\\
+&amp;=\frac{L^2}{h^2}
+\left[-\frac{(h-y)^3}{3}\right]_0^h\\
+&amp;=\frac{L^2}{h^2}\left(\frac{h^3}{3}\right)\\
+&amp;=\frac{L^2h}{3}
+\end{aligned}
+</span></p>
+<p>Thus, the alternative placement of the coordinate system produces the
+same volume. The choice of coordinate system does not change the solid
+or its volume; it only changes the expression used to describe the
+cross-sectional area.</p>
+<div style="text-align: center;">
+<p><img src="../images/06216.png" style="width: 560px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 16.</strong> A pyramid with its square base
+centred at the origin and its vertex on the positive <span
+class="math inline">y</span>-axis, illustrating the alternative
+coordinate system for calculating the volume.</span></p>
+</div>
+<h2 class="green" id="example-9">Example 9</h2>
+<p>A wedge is cut out of a circular cylinder of radius 4 by two planes.
+One plane is perpendicular to the axis of the cylinder. The other
+intersects the first at an angle of <span
+class="math inline">30^\circ</span> along a diameter of the cylinder.
+Find the volume of the wedge.</p>
+<h2 class="green" id="solution-10">Solution</h2>
+<p>We place the <span class="math inline">x</span>-axis along the
+diameter where the two planes meet. The base of the solid is then a
+semicircle with equation</p>
+<p><span class="math display">
+y=\sqrt{16-x^2}
+</span></p>
+<p>where <span class="math inline">-4\leq x\leq4</span>. A cross-section
+perpendicular to the <span class="math inline">x</span>-axis at a
+distance <span class="math inline">x</span> from the origin is a
+triangle <span class="math inline">ABC</span>, as shown in Figure
+17.</p>
+<p>The base of this triangle is the vertical distance from the diameter
+to the semicircular boundary. Hence,</p>
+<p><span class="math display">
+|AB|=y=\sqrt{16-x^2}
+</span></p>
+<p>The two planes meet at an angle of <span
+class="math inline">30^\circ</span>. From the right triangle shown in
+Figure 17, the height of the cross-sectional triangle is</p>
+<p><span class="math display">
+\begin{aligned}
+|BC|
+&amp;=y\tan30^\circ\\
+&amp;=\sqrt{16-x^2}\left(\frac{1}{\sqrt{3}}\right)\\
+&amp;=\frac{\sqrt{16-x^2}}{\sqrt{3}}
+\end{aligned}
+</span></p>
+<p>The cross-sectional area is one-half the product of the base and
+height:</p>
+<p><span class="math display">
+\begin{aligned}
+A(x)
+&amp;=\frac12|AB||BC|\\
+&amp;=\frac12\sqrt{16-x^2}
+\left(\frac{\sqrt{16-x^2}}{\sqrt{3}}\right)\\
+&amp;=\frac{16-x^2}{2\sqrt{3}}
+\end{aligned}
+</span></p>
+<p>The solid extends from <span class="math inline">x=-4</span> to <span
+class="math inline">x=4</span>. Therefore, its volume is</p>
+<p><span class="math display">
+V=\int_{-4}^{4}A(x)\,dx
+</span></p>
+<p>Substituting the cross-sectional area,</p>
+<p><span class="math display">
+V=\int_{-4}^{4}\frac{16-x^2}{2\sqrt{3}}\,dx
+</span></p>
+<p>The integrand is even, so</p>
+<p><span class="math display">
+V=\frac{1}{\sqrt{3}}\int_0^4(16-x^2)\,dx
+</span></p>
+<p>Integrating,</p>
+<p><span class="math display">
+\begin{aligned}
+V
+&amp;=\frac{1}{\sqrt{3}}
+\left[16x-\frac{x^3}{3}\right]_0^4\\
+&amp;=\frac{1}{\sqrt{3}}
+\left(64-\frac{64}{3}\right)\\
+&amp;=\frac{1}{\sqrt{3}}\left(\frac{128}{3}\right)\\
+&amp;=\frac{128}{3\sqrt{3}}
+\end{aligned}
+</span></p>
+<p>Therefore, the volume of the wedge is</p>
+<p><span class="math display">
+\boxed{V=\frac{128}{3\sqrt{3}}}
+</span></p>
+<div style="text-align: center;">
+<p><img src="../images/06217_1.png" style="width: 789px; display: block; margin: 0 auto 10px auto;">
+<img src="../images/06217_2.png" style="width: 637px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 17.</strong> A typical triangular cross-section
+of the wedge, showing its base <span
+class="math inline">y=\sqrt{16-x^2}</span>, its height <span
+class="math inline">y\tan30^\circ</span>, and the right angle between
+the base and height.</span></p>
+</div>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="quick-check-2">Quick Check</h1>
+<h2 class="red" id="question-1-2">Question 1</h2>
+<p>A solid extends from <span class="math inline">x=0</span> to <span
+class="math inline">x=3</span>. If the area of every cross-section
+perpendicular to the <span class="math inline">x</span>-axis is <span
+class="math inline">A(x)=4</span>, find its volume.</p>
+<h2 class="red" id="answer-4">Answer</h2>
+<p>The volume is the integral of the cross-sectional area over the
+interval:</p>
+<p><span class="math display">
+\begin{aligned}
+V
+&amp;=\int_0^3 4\,dx\\
+&amp;=4[x]_0^3\\
+&amp;=12
+\end{aligned}
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+\boxed{V=12}
+</span></p>
+<h2 class="red" id="question-2-2">Question 2</h2>
+<p>A solid has square cross-sections perpendicular to the <span
+class="math inline">x</span>-axis. If the side length of a typical
+square is <span class="math inline">s(x)=2x</span>, what is its
+cross-sectional area?</p>
+<h2 class="red" id="answer-5">Answer</h2>
+<p>The area of a square is the square of its side length. Thus,</p>
+<p><span class="math display">
+\begin{aligned}
+A(x)
+&amp;=[s(x)]^2\\
+&amp;=(2x)^2\\
+&amp;=4x^2
+\end{aligned}
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+\boxed{A(x)=4x^2}
+</span></p>
+<div class="question-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="scenario-problem-2">Scenario Problem</h1>
+<h2 class="green" id="problem-2">Problem</h2>
+<p>A mechatronics company is designing a tapered mechanical component
+using a computer-controlled manufacturing system. The component has a
+circular base of radius <span class="math inline">2</span> cm. At every
+position <span class="math inline">x</span> along its central axis,
+where <span class="math inline">-2\leq x\leq2</span>, the cross-section
+perpendicular to the axis is an equilateral triangle. The side of each
+triangular cross-section is equal to the chord of the circular base at
+that position. Determine the volume of the component.</p>
+<h2 class="green" id="solution-11">Solution</h2>
+<p>The circular base has radius <span class="math inline">2</span> cm,
+so its equation is</p>
+<p><span class="math display">
+x^2+y^2=4
+</span></p>
+<p>At a position <span class="math inline">x</span>, the positive
+vertical coordinate of the circle is</p>
+<p><span class="math display">
+y=\sqrt{4-x^2}
+</span></p>
+<p>The chord across the circle is twice this value. Therefore, the side
+length of the equilateral-triangle cross-section is</p>
+<p><span class="math display">
+s(x)=2\sqrt{4-x^2}
+</span></p>
+<p>The area of an equilateral triangle with side length <span
+class="math inline">s</span> is <span
+class="math inline">\frac{\sqrt{3}}{4}s^2</span>. Hence,</p>
+<p><span class="math display">
+\begin{aligned}
+A(x)
+&amp;=\frac{\sqrt{3}}{4}
+\left(2\sqrt{4-x^2}\right)^2\\
+&amp;=\sqrt{3}(4-x^2)
+\end{aligned}
+</span></p>
+<p>The component extends from <span class="math inline">x=-2</span> to
+<span class="math inline">x=2</span>. Its volume is therefore</p>
+<p><span class="math display">
+V=\int_{-2}^{2}\sqrt{3}(4-x^2)\,dx
+</span></p>
+<p>Since the integrand is even,</p>
+<p><span class="math display">
+V=2\sqrt{3}\int_0^2(4-x^2)\,dx
+</span></p>
+<p>Evaluating,</p>
+<p><span class="math display">
+\begin{aligned}
+V
+&amp;=2\sqrt{3}\left[4x-\frac{x^3}{3}\right]_0^2\\
+&amp;=2\sqrt{3}\left(8-\frac83\right)\\
+&amp;=2\sqrt{3}\left(\frac{16}{3}\right)\\
+&amp;=\frac{32\sqrt{3}}{3}
+\end{aligned}
+</span></p>
+<p>Therefore, the volume of the mechanical component is</p>
+<p><span class="math display">
+\boxed{V=\frac{32\sqrt{3}}{3}\text{ cm}^3}
+</span></p>
+<p>The manufacturing system can use this result to estimate the volume
+of material required to produce the component. The calculation follows
+the same procedure used throughout this topic: determine the
+cross-sectional area as a function of position and integrate it over the
+length of the solid.</p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="summary">Summary</h1>
+<p>The volume of a general solid can be determined by dividing it into
+thin slabs using planes perpendicular to a coordinate axis. Each slab
+can be approximated by a cylinder whose base area is <span
+class="math inline">A(x_i^*)</span> and whose height is <span
+class="math inline">\Delta x</span>. Adding the approximate volumes
+gives the Riemann sum <span
+class="math inline">V\approx\sum_{i=1}^{n}A(x_i^*)\Delta x</span>.
+Taking the limit as the number of slabs approaches infinity gives the
+definition of volume, <span class="math inline">V=\int_a^b
+A(x)\,dx</span>. This definition applies to solids with varying
+cross-sectional areas and reduces to the familiar formula <span
+class="math inline">V=Ah</span> when the cross-sectional area is
+constant.</p>
+<p>The volume of a sphere was derived by considering its circular
+cross-sections and integrating their areas, resulting in <span
+class="math inline">V=\frac{4}{3}\pi r^3</span>. The approximations for
+a sphere of radius <span class="math inline">1</span> using 5, 10, and
+20 cylindrical slabs demonstrate how Riemann sums approach the exact
+volume as the number of slices increases. The method provides a general
+mathematical foundation for determining the volumes of complex
+mechanical components and other three-dimensional objects.</p>
+<p>The volume of a solid can be calculated by dividing it into thin
+slabs, approximating each slab by a cross-sectional area multiplied by
+its thickness, and taking the limit of the resulting Riemann sum. This
+gives the general formulas <span class="math inline">V=\int_a^b
+A(x)\,dx</span> and <span class="math inline">V=\int_c^d
+A(y)\,dy</span>. When a plane region is revolved around a line, the
+resulting solid is a solid of revolution, and cross-sections
+perpendicular to the axis of rotation are circular. If the cross-section
+is a disk, its area is <span class="math inline">A=\pi R^2</span>. If it
+is a washer, its area is <span
+class="math inline">A=\pi(R_{\text{outer}}^2-R_{\text{inner}}^2)</span>.</p>
+<p>To solve a volume problem, sketch the region and the axis of
+rotation, choose cross-sections perpendicular to that axis, identify the
+radius or the inner and outer radii, and express the cross-sectional
+area in terms of the variable of integration. The examples demonstrate
+disk and washer cross-sections for rotation about both coordinate axes
+and other horizontal or vertical lines. The same method can be applied
+to determine the volume of mechanical components and three-dimensional
+shapes generated from mathematical profiles.</p>
+<p>The volume of a solid can be calculated by dividing it into thin
+slices perpendicular to a selected axis. If <span
+class="math inline">A(x)</span> is the area of a typical cross-section
+at position <span class="math inline">x</span>, then the volume of a
+thin slice is approximately <span class="math inline">A(x)\Delta
+x</span>. Adding these approximations and taking the limit gives the
+volume formula <span class="math inline">V=\int_a^b A(x)\,dx</span>. The
+essential step is to express the dimensions of the cross-section in
+terms of the position variable and then use the appropriate geometric
+area formula.</p>
+<p>The examples demonstrate this method for solids with
+equilateral-triangle, square, and triangular cross-sections. Similar
+triangles, circle equations, and basic trigonometry are used to
+determine the dimensions of the cross-sections. The pyramid example also
+shows that different coordinate systems can be used to describe the same
+solid and produce the same volume. This method applies to solids that
+are not necessarily solids of revolution whenever their cross-sectional
+areas can be determined.</p>
+<h1 id="exercises">Exercises</h1>
+<p>Exercises help in transforming theoretical concepts into practical
+understanding. Mathematics is learned by doing and solving exercises
+which train you to analyze problems, select appropriate methods, and
+construct logical solutions. Attempting problems sometimes leads to
+mistakes which provide opportunities for learning and improvement.
+Regular practice increases speed, accuracy, and confidence. Exercises
+are given in the recommended book which has also been provided to you
+and you are expected to solve them on your own.</p>
+<h2 id="exercises-1">Exercises</h2>
+<p>Solve the odd number exercises from exercise 1 to 87 skipping
+exercises which require computer algebra system or computerized
+graphics.</p>
+</body>
+</html>
