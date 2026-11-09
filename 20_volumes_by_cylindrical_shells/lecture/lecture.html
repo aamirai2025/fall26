@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>lecture</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="../styles/style.css" />
+  <script defer="" src="../katex/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <link rel="stylesheet" href="../katex/dist/katex.min.css" />
+</head>
+<body>
+<h1 id="calculus-and-analytical-geometry">Calculus and Analytical
+Geometry</h1>
+<h2 id="volumes-by-cylindrical-shells">Volumes by Cylindrical
+Shells</h2>
+<h3 id="dr.-aamir-alaud-din">Dr. Aamir Alaud Din</h3>
+<h1 id="objectives">Objectives</h1>
+<p>After preparing this topic, you should be able to:</p>
+<ol type="1">
+<li>Explain the method of cylindrical shells by developing the
+shell-volume formula from the geometry of a hollow cylinder and deriving
+the corresponding definite-integral formula from a Riemann sum.</li>
+<li>Set up and evaluate volumes of solids of revolution using
+cylindrical shells, identify the radius, height, thickness, and limits
+of integration for different axes of rotation, and select an appropriate
+method by comparing shells with disks and washers.</li>
+</ol>
+<h1 id="the-why-section">The Why Section</h1>
+<p>When a two-dimensional region is rotated about a line, it generates a
+three-dimensional solid. Determining the volume of that solid is an
+important application of definite integration. The disk and washer
+methods are effective when cross-sections perpendicular to the axis of
+rotation are easy to describe. However, these methods can become
+difficult when the boundaries of a region are complicated or when
+expressing the boundaries in terms of the other variable requires
+solving a difficult equation. The method of cylindrical shells provides
+an alternative: instead of adding disks or washers, we add the volumes
+of thin cylindrical shells.</p>
+<p>This method is useful in mechanical engineering when estimating the
+volume of a rotational component, such as a hollow-shaped casing, a
+machined part, or a component whose cross-section is described by a
+mathematical curve. It is also relevant to mechatronics, where a
+computer-controlled manufacturing system may use a mathematical model of
+a component to estimate the material required for production. In
+computer science, the same geometric calculation can be used when
+constructing or processing three-dimensional models. A solid can be
+represented as a collection of thin shells, and the volume can be
+estimated by summing their contributions.</p>
+<p><strong>Mechatronics scenario.</strong> Imagine that a
+computer-controlled lathe is used to manufacture a rotational mechanical
+component. The cross-section of the component is described by a curve,
+and the component is produced by rotating the region under that curve
+about an axis. A controller must estimate the volume of material in the
+finished component. In some designs, the disk or washer method requires
+difficult boundary calculations. The method of cylindrical shells
+provides another way to calculate the volume by using the circumference,
+height, and thickness of each thin shell. This manufacturing problem can
+be solved by studying and preparing the method of cylindrical
+shells.</p>
+<h1 id="volumes-by-cylindrical-shells-1">Volumes by Cylindrical
+Shells</h1>
+<h2 id="why-another-method-is-needed">Why Another Method Is Needed</h2>
+<p>In the preceding topic, we studied the disk and washer methods for
+finding the volume of a solid obtained by rotating a plane region about
+an axis. These methods use cross-sections perpendicular to the axis of
+rotation. A disk is obtained when the cross-section has no hole, while a
+washer is obtained when the cross-section has a hole.</p>
+<p>Some volume problems are very difficult to handle by these methods.
+Consider the solid obtained by rotating about the <span
+class="math inline">y</span>-axis the region bounded by</p>
+<p><span class="math display">
+y=2x^2-x^3
+</span></p>
+<p>and the <span class="math inline">x</span>-axis, <span
+class="math inline">y=0</span>. The region extends from <span
+class="math inline">x=0</span> to <span class="math inline">x=2</span>.
+If we take slices perpendicular to the <span
+class="math inline">y</span>-axis, the cross-sections are washers. To
+calculate the inner and outer radii of a typical washer, however, we
+must solve the equation <span class="math inline">y=2x^2-x^3</span> for
+<span class="math inline">x</span> in terms of <span
+class="math inline">y</span>. This requires solving a cubic equation and
+identifying the appropriate left and right branches of the curve. The
+calculation is therefore awkward.</p>
+<div style="text-align: center;">
+<p><img src="../images/06301.png" style="width: 756px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 1.</strong> The region bounded by <span
+class="math inline">y=2x^2-x^3</span> and <span
+class="math inline">y=0</span>, rotated about the <span
+class="math inline">y</span>-axis; a horizontal slice produces a washer
+whose inner and outer radii require solving the cubic equation for <span
+class="math inline">x</span>.</span></p>
+</div>
+<p>The difficulty in this example comes from the choice of
+cross-section. A horizontal slice is perpendicular to the <span
+class="math inline">y</span>-axis and produces a washer, but its radii
+are not easy to express. A vertical slice, on the other hand, is
+parallel to the axis of rotation and produces a cylindrical shell. The
+radius and height of this shell can be read directly from the original
+graph. This motivates the method of cylindrical shells.</p>
+<h2 id="the-method-of-cylindrical-shells">The Method of Cylindrical
+Shells</h2>
+<p>A cylindrical shell is a thin hollow cylinder. It has an inner radius
+<span class="math inline">r_1</span>, an outer radius <span
+class="math inline">r_2</span>, a height <span
+class="math inline">h</span>, and a thickness <span
+class="math inline">\Delta r=r_2-r_1</span>. Its volume can be
+calculated by subtracting the volume of the inner cylinder from the
+volume of the outer cylinder. This gives a useful formula that will form
+the basis of the shell method.</p>
+<div style="text-align: center;">
+<p><img src="../images/06302.png" style="width: 652px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 2.</strong> A cylindrical shell with inner
+radius <span class="math inline">r_1</span>, outer radius <span
+class="math inline">r_2</span>, height <span
+class="math inline">h</span>, and thickness <span
+class="math inline">\Delta r</span>.</span></p>
+</div>
+<h2 id="deriving-the-volume-of-a-cylindrical-shell">Deriving the Volume
+of a Cylindrical Shell</h2>
+<p>Let <span class="math inline">V_2</span> be the volume of the outer
+cylinder and <span class="math inline">V_1</span> be the volume of the
+inner cylinder. The volume of a cylinder is <span
+class="math inline">\pi r^2h</span>. Therefore,</p>
+<p><span class="math display">
+V_2=\pi r_2^2h
+</span></p>
+<p>and</p>
+<p><span class="math display">
+V_1=\pi r_1^2h
+</span></p>
+<p>The volume of the cylindrical shell is the difference between these
+two cylinder volumes:</p>
+<p><span class="math display">
+V=V_2-V_1
+</span></p>
+<p>Substituting the expressions for <span class="math inline">V_2</span>
+and <span class="math inline">V_1</span>, we obtain</p>
+<p><span class="math display">
+\begin{aligned}
+V&amp;=\pi r_2^2h-\pi r_1^2h\\
+&amp;=\pi h(r_2^2-r_1^2)
+\end{aligned}
+</span></p>
+<p>Using the difference-of-squares identity, <span
+class="math inline">r_2^2-r_1^2=(r_2+r_1)(r_2-r_1)</span>, we can
+write</p>
+<p><span class="math display">
+V=\pi h(r_2+r_1)(r_2-r_1)
+</span></p>
+<p>Now define the thickness of the shell as</p>
+<p><span class="math display">
+\Delta r=r_2-r_1
+</span></p>
+<p>and its average radius as</p>
+<p><span class="math display">
+r=\frac{r_2+r_1}{2}
+</span></p>
+<p>Thus, <span class="math inline">r_2+r_1=2r</span>. Substituting these
+expressions into the volume formula gives</p>
+<p><span class="math display">
+\begin{aligned}
+V&amp;=\pi h(2r)(\Delta r)\\
+&amp;=2\pi rh\Delta r
+\end{aligned}
+</span></p>
+<p>Therefore, the volume of a cylindrical shell is</p>
+<p><span class="math display">
+V=2\pi rh\Delta r
+</span></p>
+<p>The quantity <span class="math inline">2\pi r</span> is the
+circumference of a circle of radius <span class="math inline">r</span>.
+Hence, the formula can be remembered as</p>
+<p><span class="math display">
+V=[\text{circumference}][\text{height}][\text{thickness}]
+</span></p>
+<p>This interpretation is especially useful when the shell is very thin.
+Its volume is approximately the product of its circumference, height,
+and thickness.</p>
+<h2 id="applying-the-shell-method-to-a-region-under-a-curve">Applying
+the Shell Method to a Region Under a Curve</h2>
+<p>Let <span class="math inline">S</span> be the region bounded by <span
+class="math inline">y=f(x)</span>, the <span
+class="math inline">x</span>-axis, and the vertical lines <span
+class="math inline">x=a</span> and <span class="math inline">x=b</span>,
+where <span class="math inline">f(x)\geq 0</span> and <span
+class="math inline">0\leq a&lt;b</span>. Rotate this region about the
+<span class="math inline">y</span>-axis. A vertical rectangle in the
+region generates a cylindrical shell when it is revolved around the
+<span class="math inline">y</span>-axis. The shell has radius <span
+class="math inline">x</span>, height <span
+class="math inline">f(x)</span>, and thickness <span
+class="math inline">\Delta x</span>.</p>
+<div style="text-align: center;">
+<p><img src="../images/06303.png" style="width: 1200px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 3.</strong> A region under <span
+class="math inline">y=f(x)</span> between <span
+class="math inline">x=a</span> and <span class="math inline">x=b</span>,
+together with the solid generated by rotating the region about the <span
+class="math inline">y</span>-axis.</span></p>
+</div>
+<p>To understand how the solid is formed, divide the interval <span
+class="math inline">[a,b]</span> into <span class="math inline">n</span>
+subintervals of equal width <span class="math inline">\Delta x</span>.
+In each subinterval, choose a sample point <span
+class="math inline">x_i^*</span>. A vertical rectangle of height <span
+class="math inline">f(x_i^*)</span> and width <span
+class="math inline">\Delta x</span>, when rotated about the <span
+class="math inline">y</span>-axis, produces a thin cylindrical shell.
+Its radius is approximately <span class="math inline">x_i^*</span>, its
+height is <span class="math inline">f(x_i^*)</span>, and its thickness
+is <span class="math inline">\Delta x</span>.</p>
+<div style="text-align: center;">
+<p><img src="../images/06304_1.png" style="width: 780px; display: block; margin: 0 auto 10px auto;">
+<img src="../images/06304_2.png" style="width: 780px; display: block; margin: 0 auto 10px auto;">
+<img src="../images/06304_3.png" style="width: 780px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 4.</strong> A vertical rectangle under <span
+class="math inline">y=f(x)</span> being rotated about the <span
+class="math inline">y</span>-axis to form one cylindrical shell,
+followed by several shells and the resulting solid.</span></p>
+</div>
+<p>Using the cylindrical-shell formula, the volume of the <span
+class="math inline">i</span>th shell is approximately</p>
+<p><span class="math display">
+V_i=2\pi x_i^*f(x_i^*)\Delta x
+</span></p>
+<p>The total volume is approximated by adding the volumes of all the
+shells:</p>
+<p><span class="math display">
+V\approx\sum_{i=1}^{n}V_i
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+V\approx\sum_{i=1}^{n}2\pi x_i^*f(x_i^*)\Delta x
+</span></p>
+<p>As the number of subintervals increases, the thickness <span
+class="math inline">\Delta x</span> becomes smaller and the sum gives a
+better approximation to the volume. Taking the limit as <span
+class="math inline">n\to\infty</span> gives the exact volume:</p>
+<p><span class="math display">
+V=\lim_{n\to\infty}\sum_{i=1}^{n}2\pi x_i^*f(x_i^*)\Delta x
+</span></p>
+<p>By the definition of the definite integral, this limit is</p>
+<p><span class="math display">
+V=\int_a^b2\pi xf(x)\,dx
+</span></p>
+<h2 class="blue"
+id="definition-volume-by-cylindrical-shells">Definition: Volume by
+Cylindrical Shells</h2>
+<p>The volume of the solid obtained by rotating about the <span
+class="math inline">y</span>-axis the region under the curve <span
+class="math inline">y=f(x)</span> from <span
+class="math inline">x=a</span> to <span class="math inline">x=b</span>,
+where <span class="math inline">f(x)\geq0</span> and <span
+class="math inline">0\leq a&lt;b</span>, is</p>
+<p><span class="math display">
+V=\int_a^b2\pi xf(x)\,dx
+</span></p>
+<p>The integrand is the product of the circumference <span
+class="math inline">2\pi x</span> of a typical shell and its height
+<span class="math inline">f(x)</span>. The differential <span
+class="math inline">dx</span> represents the shell’s thickness. Thus,
+the formula is the integral form of the relationship</p>
+<p><span class="math display">
+V=\int_a^b[\text{circumference}][\text{height}][\text{thickness}]
+</span></p>
+<div class="definition-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 id="remembering-the-formula-flattening-a-shell">Remembering the
+Formula: Flattening a Shell</h2>
+<p>A useful way to remember the shell formula is to imagine cutting a
+cylindrical shell vertically and then unrolling or flattening it. The
+curved surface becomes approximately a rectangle. The length of this
+rectangle is the circumference of the shell, <span
+class="math inline">2\pi x</span>, its height is <span
+class="math inline">f(x)</span>, and its width corresponding to the
+shell’s thickness is <span class="math inline">dx</span>. The volume
+contribution is therefore represented by</p>
+<p><span class="math display">
+dV=(2\pi x)f(x)\,dx
+</span></p>
+<p>Adding these contributions from <span class="math inline">x=a</span>
+to <span class="math inline">x=b</span> gives the volume integral.</p>
+<div style="text-align: center;">
+<p><img src="../images/06305.png" style="width: 1200px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 5.</strong> A typical cylindrical shell of
+radius <span class="math inline">x</span>, height <span
+class="math inline">f(x)</span>, and thickness <span
+class="math inline">dx</span>, shown beside its flattened rectangular
+representation with length <span class="math inline">2\pi x</span> and
+thickness <span class="math inline">dx</span>.</span></p>
+</div>
+<p>The shell method is not restricted to rotation about the <span
+class="math inline">y</span>-axis. It can also be used for rotation
+about the <span class="math inline">x</span>-axis or about a vertical or
+horizontal line that is not an axis. In each case, we draw a typical
+rectangle and identify the shell’s radius, circumference, height, and
+thickness. The integration variable is determined by the direction of
+the rectangle’s thickness.</p>
+<h2 class="green" id="example-1">Example 1</h2>
+<p>Find the volume of the solid obtained by rotating about the <span
+class="math inline">y</span>-axis the region bounded by <span
+class="math inline">y=2x^2-x^3</span> and <span
+class="math inline">y=0</span>.</p>
+<h2 class="green" id="solution">Solution</h2>
+<p>The region is bounded above by <span
+class="math inline">y=2x^2-x^3</span> and below by the <span
+class="math inline">x</span>-axis. The curve meets the <span
+class="math inline">x</span>-axis when</p>
+<p><span class="math display">
+2x^2-x^3=0
+</span></p>
+<p>Factoring gives</p>
+<p><span class="math display">
+x^2(2-x)=0
+</span></p>
+<p>Thus, the endpoints of the region are <span
+class="math inline">x=0</span> and <span class="math inline">x=2</span>.
+We rotate the region about the <span class="math inline">y</span>-axis
+and use vertical rectangles. Each rectangle generates a cylindrical
+shell. The radius of a typical shell is the distance from the <span
+class="math inline">y</span>-axis to the rectangle, so <span
+class="math inline">r=x</span>. Its circumference is <span
+class="math inline">2\pi x</span>, its height is the vertical distance
+from the curve to the <span class="math inline">x</span>-axis, so <span
+class="math inline">h=2x^2-x^3</span>, and its thickness is <span
+class="math inline">dx</span>.</p>
+<div style="text-align: center;">
+<p><img src="../images/06306.png" style="width: 755px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 6.</strong> The region under <span
+class="math inline">y=2x^2-x^3</span> from <span
+class="math inline">x=0</span> to <span class="math inline">x=2</span>,
+rotated about the <span class="math inline">y</span>-axis, with a
+typical vertical cylindrical shell labelled by radius <span
+class="math inline">x</span> and height <span
+class="math inline">2x^2-x^3</span>.</span></p>
+</div>
+<p>Using circumference multiplied by height multiplied by thickness, the
+volume is</p>
+<p><span class="math display">
+\begin{aligned}
+V&amp;=\int_0^2(2\pi x)(2x^2-x^3)\,dx\\
+&amp;=2\pi\int_0^2(2x^3-x^4)\,dx
+\end{aligned}
+</span></p>
+<p>Integrating,</p>
+<p><span class="math display">
+\begin{aligned}
+V&amp;=2\pi\left[\frac{x^4}{2}-\frac{x^5}{5}\right]_0^2\\
+&amp;=2\pi\left[\left(\frac{16}{2}-\frac{32}{5}\right)-0\right]\\
+&amp;=2\pi\left(8-\frac{32}{5}\right)\\
+&amp;=2\pi\left(\frac{8}{5}\right)\\
+&amp;=\frac{16\pi}{5}
+\end{aligned}
+</span></p>
+<p>Therefore, the volume of the solid is</p>
+<p><span class="math display">
+\boxed{V=\frac{16\pi}{5}}
+</span></p>
+<p>The shell method is particularly convenient for this problem. As
+discussed earlier, using washers would require horizontal slices and the
+inner and outer radii would be obtained by solving <span
+class="math inline">y=2x^2-x^3</span> for <span
+class="math inline">x</span>. That means solving a cubic equation and
+identifying the two branches that form the washer’s boundaries. With
+cylindrical shells, the radius and height are read directly from the
+original function, and only one integral with respect to <span
+class="math inline">x</span> is needed.</p>
+<div style="text-align: center;">
+<p><img src="../images/06307.png" style="width: 925px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 7.</strong> A computer-generated
+three-dimensional view of the solid obtained by rotating the region
+under <span class="math inline">y=2x^2-x^3</span> about the <span
+class="math inline">y</span>-axis.</span></p>
+</div>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="green" id="example-2">Example 2</h2>
+<p>Find the volume of the solid obtained by rotating about the <span
+class="math inline">y</span>-axis the region between <span
+class="math inline">y=x</span> and <span
+class="math inline">y=x^2</span>.</p>
+<h2 class="green" id="solution-1">Solution</h2>
+<p>First, find the points of intersection of the two curves by setting
+their equations equal:</p>
+<p><span class="math display">
+x=x^2
+</span></p>
+<p>Rearranging and factoring,</p>
+<p><span class="math display">
+x(x-1)=0
+</span></p>
+<p>Therefore, the curves intersect at <span
+class="math inline">x=0</span> and <span class="math inline">x=1</span>.
+On the interval <span class="math inline">[0,1]</span>, the line <span
+class="math inline">y=x</span> lies above the parabola <span
+class="math inline">y=x^2</span>. A vertical rectangle between the
+curves generates a cylindrical shell when rotated about the <span
+class="math inline">y</span>-axis.</p>
+<p>The radius of the shell is <span class="math inline">x</span>, and
+its height is the upper function minus the lower function:</p>
+<p><span class="math display">
+h=x-x^2
+</span></p>
+<p>The circumference is <span class="math inline">2\pi x</span>, and the
+thickness is <span class="math inline">dx</span>. Hence,</p>
+<p><span class="math display">
+\begin{aligned}
+V&amp;=\int_0^1(2\pi x)(x-x^2)\,dx\\
+&amp;=2\pi\int_0^1(x^2-x^3)\,dx
+\end{aligned}
+</span></p>
+<p>Integrating,</p>
+<p><span class="math display">
+\begin{aligned}
+V&amp;=2\pi\left[\frac{x^3}{3}-\frac{x^4}{4}\right]_0^1\\
+&amp;=2\pi\left(\frac13-\frac14\right)\\
+&amp;=2\pi\left(\frac{1}{12}\right)\\
+&amp;=\frac{\pi}{6}
+\end{aligned}
+</span></p>
+<p>Therefore, the required volume is</p>
+<p><span class="math display">
+\boxed{V=\frac{\pi}{6}}
+</span></p>
+<div style="text-align: center;">
+<p><img src="../images/06308.png" style="width: 787px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 8.</strong> The region between <span
+class="math inline">y=x</span> and <span
+class="math inline">y=x^2</span> from <span
+class="math inline">x=0</span> to <span class="math inline">x=1</span>,
+rotated about the <span class="math inline">y</span>-axis, with a
+typical shell whose radius is <span class="math inline">x</span> and
+whose height is <span class="math inline">x-x^2</span>.</span></p>
+</div>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="green" id="example-3">Example 3</h2>
+<p>Use cylindrical shells to find the volume of the solid obtained by
+rotating about the <span class="math inline">x</span>-axis the region
+under the curve <span class="math inline">y=\sqrt{x}</span> from <span
+class="math inline">0</span> to <span class="math inline">1</span>.</p>
+<h2 class="green" id="solution-2">Solution</h2>
+<p>The given region is under <span class="math inline">y=\sqrt{x}</span>
+and above the <span class="math inline">x</span>-axis, between <span
+class="math inline">x=0</span> and <span class="math inline">x=1</span>.
+We are rotating the region about the <span
+class="math inline">x</span>-axis. To use cylindrical shells, we take
+horizontal rectangles, which are parallel to the axis of rotation. These
+rectangles generate cylindrical shells around the <span
+class="math inline">x</span>-axis.</p>
+<p>We first express the curve in terms of <span
+class="math inline">y</span>. From</p>
+<p><span class="math display">
+y=\sqrt{x}
+</span></p>
+<p>we obtain</p>
+<p><span class="math display">
+x=y^2
+</span></p>
+<p>The horizontal extent of the region is from the curve <span
+class="math inline">x=y^2</span> to the vertical line <span
+class="math inline">x=1</span>. Therefore, the height of a typical shell
+is</p>
+<p><span class="math display">
+h=1-y^2
+</span></p>
+<p>The radius is the distance from the <span
+class="math inline">x</span>-axis to the horizontal rectangle, so <span
+class="math inline">r=y</span>. Its circumference is <span
+class="math inline">2\pi y</span>, and its thickness is <span
+class="math inline">dy</span>. The values of <span
+class="math inline">y</span> range from <span
+class="math inline">0</span> to <span class="math inline">1</span>.</p>
+<div style="text-align: center;">
+<p><img src="../images/06309.png" style="width: 709px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 9.</strong> The region under <span
+class="math inline">y=\sqrt{x}</span> from <span
+class="math inline">x=0</span> to <span class="math inline">x=1</span>,
+rewritten as <span class="math inline">x=y^2</span>, with a typical
+horizontal shell labelled by radius <span class="math inline">y</span>
+and height <span class="math inline">1-y^2</span>.</span></p>
+</div>
+<p>The shell formula gives</p>
+<p><span class="math display">
+\begin{aligned}
+V&amp;=\int_0^1(2\pi y)(1-y^2)\,dy\\
+&amp;=2\pi\int_0^1(y-y^3)\,dy
+\end{aligned}
+</span></p>
+<p>Integrating,</p>
+<p><span class="math display">
+\begin{aligned}
+V&amp;=2\pi\left[\frac{y^2}{2}-\frac{y^4}{4}\right]_0^1\\
+&amp;=2\pi\left(\frac12-\frac14\right)\\
+&amp;=2\pi\left(\frac14\right)\\
+&amp;=\frac{\pi}{2}
+\end{aligned}
+</span></p>
+<p>Therefore, the volume is</p>
+<p><span class="math display">
+\boxed{V=\frac{\pi}{2}}
+</span></p>
+<p>For this problem, the disk method is simpler because slices
+perpendicular to the <span class="math inline">x</span>-axis are disks
+with radius <span class="math inline">\sqrt{x}</span>. The example
+nevertheless demonstrates that the shell method can also be applied to
+rotation about the <span class="math inline">x</span>-axis by using
+horizontal rectangles and integrating with respect to <span
+class="math inline">y</span>.</p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 class="green" id="example-4">Example 4</h2>
+<p>Find the volume of the solid obtained by rotating the region bounded
+by <span class="math inline">y=x-x^2</span> and <span
+class="math inline">y=0</span> about the line <span
+class="math inline">x=2</span>.</p>
+<h2 class="green" id="solution-3">Solution</h2>
+<p>The region is bounded by the curve <span
+class="math inline">y=x-x^2</span> and the <span
+class="math inline">x</span>-axis. To find the limits of integration,
+set the curve equal to zero:</p>
+<p><span class="math display">
+x-x^2=0
+</span></p>
+<p>Factoring,</p>
+<p><span class="math display">
+x(1-x)=0
+</span></p>
+<p>Thus, the region extends from <span class="math inline">x=0</span> to
+<span class="math inline">x=1</span>. The axis of rotation is the
+vertical line <span class="math inline">x=2</span>, which is to the
+right of the region. We use vertical rectangles, so the resulting
+cross-sections are cylindrical shells.</p>
+<p>The radius of a typical shell is the horizontal distance from the
+rectangle at <span class="math inline">x</span> to the axis <span
+class="math inline">x=2</span>:</p>
+<p><span class="math display">
+r=2-x
+</span></p>
+<p>The height is the vertical distance between the curve and the <span
+class="math inline">x</span>-axis:</p>
+<p><span class="math display">
+h=x-x^2
+</span></p>
+<p>The circumference is <span class="math inline">2\pi(2-x)</span>, and
+the thickness is <span class="math inline">dx</span>. Therefore,</p>
+<div style="text-align: center;">
+<p><img src="../images/06310.png" style="width: 1200px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 10.</strong> The region under <span
+class="math inline">y=x-x^2</span> from <span
+class="math inline">x=0</span> to <span class="math inline">x=1</span>,
+together with the vertical axis of rotation <span
+class="math inline">x=2</span> and a typical cylindrical shell of radius
+<span class="math inline">2-x</span> and height <span
+class="math inline">x-x^2</span>.</span></p>
+</div>
+<p><span class="math display">
+\begin{aligned}
+V&amp;=\int_0^1 2\pi(2-x)(x-x^2)\,dx\\
+&amp;=2\pi\int_0^1(2x-3x^2+x^3)\,dx
+\end{aligned}
+</span></p>
+<p>Integrating,</p>
+<p><span class="math display">
+\begin{aligned}
+V&amp;=2\pi\left[x^2-x^3+\frac{x^4}{4}\right]_0^1\\
+&amp;=2\pi\left(1-1+\frac14\right)\\
+&amp;=2\pi\left(\frac14\right)\\
+&amp;=\frac{\pi}{2}
+\end{aligned}
+</span></p>
+<p>Hence, the volume of the solid is</p>
+<p><span class="math display">
+\boxed{V=\frac{\pi}{2}}
+</span></p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h2 id="choosing-between-disks-washers-and-cylindrical-shells">Choosing
+Between Disks, Washers, and Cylindrical Shells</h2>
+<p>When finding the volume of a solid of revolution, the choice of
+method depends on the shape of the region, the axis of rotation, and the
+ease of describing the cross-sections. Disks and washers use slices
+perpendicular to the axis of rotation. Cylindrical shells use slices
+parallel to the axis of rotation. A vertical rectangle rotated about a
+vertical axis produces a cylindrical shell, whereas a horizontal
+rectangle rotated about a vertical axis produces a disk or washer.
+Similarly, a horizontal rectangle rotated about a horizontal axis
+produces a shell, while a vertical rectangle rotated about a horizontal
+axis produces a disk or washer.</p>
+<p>The variable of integration follows the thickness of the chosen
+rectangle. A vertical rectangle has thickness <span
+class="math inline">dx</span>, so the integral is with respect to <span
+class="math inline">x</span>. A horizontal rectangle has thickness <span
+class="math inline">dy</span>, so the integral is with respect to <span
+class="math inline">y</span>. Before setting up an integral, draw the
+region, mark the axis of rotation, and sketch a representative
+rectangle. Imagine rotating that rectangle around the axis. This reveals
+whether the cross-section is a disk, washer, or shell and helps identify
+its dimensions.</p>
+<p>For disks and washers, the volume is calculated using the
+cross-sectional area. A disk has radius <span
+class="math inline">R</span>, while a washer has outer radius <span
+class="math inline">R</span> and inner radius <span
+class="math inline">r</span>:</p>
+<p><span class="math display">
+V=\pi\int_a^b R^2\,dx
+</span></p>
+<p>or</p>
+<p><span class="math display">
+V=\pi\int_a^b(R^2-r^2)\,dx
+</span></p>
+<p>when vertical slices are used. For cylindrical shells, the volume is
+calculated using circumference multiplied by height and thickness:</p>
+<p><span class="math display">
+V=2\pi\int_a^b(\text{radius})(\text{height})\,dx
+</span></p>
+<p>or the corresponding integral with respect to <span
+class="math inline">y</span> for horizontal shells.</p>
+<p>The boundaries determine the limits and the shell height. For
+vertical shells, the height is the upper boundary minus the lower
+boundary. For horizontal shells, the height is the right boundary minus
+the left boundary. The radius is always the distance from the
+representative rectangle to the axis of rotation. If the axis is <span
+class="math inline">x=c</span> or <span class="math inline">y=c</span>,
+the radius is the appropriate nonnegative distance from the shell to
+that line. For example, rotation about <span
+class="math inline">x=2</span> gives radius <span
+class="math inline">2-x</span> for a region to the left of the axis,
+while rotation about <span class="math inline">x=-1</span> gives radius
+<span class="math inline">x+1</span> for a region to the right of the
+axis.</p>
+<p>There is no single method that is best for every problem. Consider
+whether the boundaries are easier to express as top and bottom functions
+or as right and left functions, whether the limits are easier to
+determine in <span class="math inline">x</span> or <span
+class="math inline">y</span>, whether one method requires splitting the
+region into multiple integrals, and whether the resulting integral is
+straightforward to evaluate. Sometimes either method gives the same
+volume, as the next example demonstrates.</p>
+<h2 class="green" id="example-5">Example 5</h2>
+<p>The region in the first quadrant bounded by the curves <span
+class="math inline">y=x^2</span> and <span
+class="math inline">y=2x</span> is rotated about the line <span
+class="math inline">x=-1</span>. Find the volume of the solid using (a)
+<span class="math inline">x</span> as the variable of integration and
+(b) <span class="math inline">y</span> as the variable of
+integration.</p>
+<h2 class="green" id="solution-4">Solution</h2>
+<p>First, find the points of intersection of the two curves:</p>
+<p><span class="math display">
+x^2=2x
+</span></p>
+<p>Rearranging and factoring,</p>
+<p><span class="math display">
+x(x-2)=0
+</span></p>
+<p>Thus, the curves intersect at <span class="math inline">x=0</span>
+and <span class="math inline">x=2</span>. In the first quadrant, the
+region lies between <span class="math inline">y=x^2</span> and <span
+class="math inline">y=2x</span> for <span class="math inline">0\leq
+x\leq2</span>. The axis of rotation is the vertical line <span
+class="math inline">x=-1</span>.</p>
+<div style="text-align: center;">
+<p><img src="../images/06311.png" style="width: 593px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 11.</strong> The first-quadrant region bounded
+by <span class="math inline">y=x^2</span> and <span
+class="math inline">y=2x</span>, with the vertical axis of rotation
+<span class="math inline">x=-1</span>.</span></p>
+</div>
+<h3 id="a-using-x-as-the-variable-of-integration">(a) Using <span
+class="math inline">x</span> as the Variable of Integration</h3>
+<p>To integrate with respect to <span class="math inline">x</span>, draw
+a vertical rectangle in the region. Since the rectangle is parallel to
+the vertical axis of rotation, it generates a cylindrical shell. The
+radius is the distance from <span class="math inline">x</span> to <span
+class="math inline">x=-1</span>:</p>
+<p><span class="math display">
+r=x+1
+</span></p>
+<p>The height is the upper curve minus the lower curve:</p>
+<p><span class="math display">
+h=2x-x^2
+</span></p>
+<p>The circumference is <span class="math inline">2\pi(x+1)</span> and
+the thickness is <span class="math inline">dx</span>. Therefore,</p>
+<p><span class="math display">
+\begin{aligned}
+V&amp;=\int_0^2 2\pi(x+1)(2x-x^2)\,dx\\
+&amp;=2\pi\int_0^2(2x+x^2-x^3)\,dx
+\end{aligned}
+</span></p>
+<p>Integrating,</p>
+<p><span class="math display">
+\begin{aligned}
+V&amp;=2\pi\left[x^2+\frac{x^3}{3}-\frac{x^4}{4}\right]_0^2\\
+&amp;=2\pi\left(4+\frac83-4\right)\\
+&amp;=2\pi\left(\frac83\right)\\
+&amp;=\frac{16\pi}{3}
+\end{aligned}
+</span></p>
+<h3 id="b-using-y-as-the-variable-of-integration">(b) Using <span
+class="math inline">y</span> as the Variable of Integration</h3>
+<p>To integrate with respect to <span class="math inline">y</span>, draw
+a horizontal rectangle. Since it is perpendicular to the vertical axis
+of rotation, it generates a washer when revolved about <span
+class="math inline">x=-1</span>. We must express both curves as <span
+class="math inline">x</span> in terms of <span
+class="math inline">y</span>.</p>
+<p>From <span class="math inline">y=x^2</span>, in the first
+quadrant,</p>
+<p><span class="math display">
+x=\sqrt{y}
+</span></p>
+<p>From <span class="math inline">y=2x</span>,</p>
+<p><span class="math display">
+x=\frac{y}{2}
+</span></p>
+<p>The values of <span class="math inline">y</span> range from <span
+class="math inline">0</span> to <span class="math inline">4</span>,
+since the curves meet at <span class="math inline">(2,4)</span>. The
+axis of rotation is <span class="math inline">x=-1</span>. The outer
+radius is the distance from <span class="math inline">x=-1</span> to the
+right boundary <span class="math inline">x=\sqrt{y}</span>:</p>
+<p><span class="math display">
+R=\sqrt{y}+1
+</span></p>
+<p>The inner radius is the distance from <span
+class="math inline">x=-1</span> to the left boundary <span
+class="math inline">x=\frac{y}{2}</span>:</p>
+<p><span class="math display">
+r=\frac{y}{2}+1
+</span></p>
+<p>The washer method therefore gives</p>
+<div style="text-align: center;">
+<p><img src="../images/06312_1.png" style="width: 878px; display: block; margin: 0 auto 10px auto;">
+<img src="../images/06312_2.png" style="width: 770px; display: block; margin: 0 auto 10px auto;">
+<img src="../images/06312_3.png" style="width: 788px; display: block; margin: 0 auto 10px auto;"></p>
+<p><span><strong>Figure 12.</strong> Three views of the solid formed by
+rotating the region bounded by <span class="math inline">y=x^2</span>
+and <span class="math inline">y=2x</span> about <span
+class="math inline">x=-1</span>: (a) the resulting solid, (b) a vertical
+rectangle producing a cylindrical shell, and (c) a horizontal rectangle
+producing a washer with outer radius <span
+class="math inline">\sqrt{y}+1</span> and inner radius <span
+class="math inline">\frac{y}{2}+1</span>.</span></p>
+</div>
+<p><span class="math display">
+\begin{aligned}
+V&amp;=\int_0^4\pi\left[(\sqrt{y}+1)^2-\left(\frac{y}{2}+1\right)^2\right]\,dy\\
+&amp;=\pi\int_0^4\left(2\sqrt{y}-\frac14y^2\right)\,dy
+\end{aligned}
+</span></p>
+<p>Integrating,</p>
+<p><span class="math display">
+\begin{aligned}
+V&amp;=\pi\left[\frac43y^{3/2}-\frac{y^3}{12}\right]_0^4\\
+&amp;=\pi\left(\frac43(8)-\frac{64}{12}\right)\\
+&amp;=\pi\left(\frac{32}{3}-\frac{16}{3}\right)\\
+&amp;=\frac{16\pi}{3}
+\end{aligned}
+</span></p>
+<p>Both methods give the same result:</p>
+<p><span class="math display">
+\boxed{V=\frac{16\pi}{3}}
+</span></p>
+<p>This example illustrates that the same solid can be described using
+different types of cross-sections. With <span
+class="math inline">x</span> as the variable, vertical rectangles
+produce cylindrical shells. With <span class="math inline">y</span> as
+the variable, horizontal rectangles produce washers. The shell method
+avoids expressing the curves as <span
+class="math inline">x</span>-functions, while the washer method requires
+those expressions but is also manageable in this example.</p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="quick-check">Quick Check</h1>
+<h2 class="red" id="question-1">Question 1</h2>
+<p>A cylindrical shell has radius <span class="math inline">3</span>
+units, height <span class="math inline">5</span> units, and thickness
+<span class="math inline">0.1</span> unit. Use the shell formula to find
+its approximate volume.</p>
+<h2 class="red" id="answer">Answer</h2>
+<p>The volume of a thin cylindrical shell is approximately circumference
+multiplied by height multiplied by thickness:</p>
+<p><span class="math display">
+\begin{aligned}
+V&amp;=2\pi rh\Delta r\\
+&amp;=2\pi(3)(5)(0.1)\\
+&amp;=3\pi
+\end{aligned}
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+\boxed{V=3\pi\text{ cubic units}}
+</span></p>
+<h2 class="red" id="question-2">Question 2</h2>
+<p>A region is rotated about the <span
+class="math inline">y</span>-axis. A vertical representative rectangle
+is located at <span class="math inline">x=4</span>, has height <span
+class="math inline">6</span>, and thickness <span
+class="math inline">dx</span>. What are the radius and circumference of
+the cylindrical shell?</p>
+<h2 class="red" id="answer-1">Answer</h2>
+<p>The radius is the distance from the vertical rectangle to the <span
+class="math inline">y</span>-axis, so <span
+class="math inline">r=4</span>. Its circumference is</p>
+<p><span class="math display">
+2\pi r=2\pi(4)=8\pi
+</span></p>
+<p>Thus, the shell has radius <span class="math inline">4</span> units
+and circumference <span class="math inline">8\pi</span> units.</p>
+<div class="question-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="scenario-problem">Scenario Problem</h1>
+<h2 class="green" id="problem">Problem</h2>
+<p>A mechatronics company is designing a rotational protective casing
+for a sensor assembly. The cross-section of the casing’s solid material
+is modelled by the region under the curve</p>
+<p><span class="math display">
+y=4-x^2
+</span></p>
+<p>and above the <span class="math inline">x</span>-axis, for <span
+class="math inline">0\leq x\leq2</span>. The region is rotated about the
+<span class="math inline">y</span>-axis to produce the casing’s
+rotational body. Determine the volume of material required using the
+method of cylindrical shells.</p>
+<h2 class="green" id="solution-5">Solution</h2>
+<p>A vertical rectangle at position <span class="math inline">x</span>
+generates a cylindrical shell when rotated about the <span
+class="math inline">y</span>-axis. Its radius is the distance to the
+<span class="math inline">y</span>-axis:</p>
+<p><span class="math display">
+r=x
+</span></p>
+<p>Its height is the vertical distance between the curve and the <span
+class="math inline">x</span>-axis:</p>
+<p><span class="math display">
+h=4-x^2
+</span></p>
+<p>Its circumference is <span class="math inline">2\pi x</span>, and its
+thickness is <span class="math inline">dx</span>. The interval is <span
+class="math inline">0\leq x\leq2</span>. Therefore, the volume is</p>
+<p><span class="math display">
+\begin{aligned}
+V&amp;=\int_0^2 2\pi x(4-x^2)\,dx\\
+&amp;=2\pi\int_0^2(4x-x^3)\,dx
+\end{aligned}
+</span></p>
+<p>Integrating,</p>
+<p><span class="math display">
+\begin{aligned}
+V&amp;=2\pi\left[2x^2-\frac{x^4}{4}\right]_0^2\\
+&amp;=2\pi\left[(8-4)-0\right]\\
+&amp;=8\pi
+\end{aligned}
+</span></p>
+<p>Therefore, the volume of material required for the rotational casing
+is</p>
+<p><span class="math display">
+\boxed{V=8\pi\text{ cubic units}}
+</span></p>
+<p>The result gives the volume of the idealized solid represented by the
+mathematical model. In an actual manufacturing design, the dimensions
+and units of the model would be specified, and the calculated volume
+could then be used to estimate the required material.</p>
+<div class="example-end">
+<span class="math inline">\blacksquare</span>
+</div>
+<h1 id="summary">Summary</h1>
+<p>The method of cylindrical shells is an alternative to the disk and
+washer methods for finding volumes of solids of revolution. A thin shell
+has volume approximately equal to its circumference multiplied by its
+height and thickness, so <span class="math inline">V=2\pi rh\Delta
+r</span>. This formula is obtained by subtracting the volume of the
+inner cylinder from that of the outer cylinder. When a region under
+<span class="math inline">y=f(x)</span> from <span
+class="math inline">a</span> to <span class="math inline">b</span> is
+rotated about the <span class="math inline">y</span>-axis, vertical
+rectangles generate shells with radius <span
+class="math inline">x</span>, height <span
+class="math inline">f(x)</span>, and thickness <span
+class="math inline">dx</span>. Adding the shell volumes and taking the
+limit of the Riemann sums gives <span class="math inline">V=\int_a^b2\pi
+xf(x)\,dx</span>.</p>
+<p>For other axes of rotation, the same principle applies: identify the
+radius as the distance from the shell to the axis, the height as the
+length of the rectangle within the region, and the thickness as <span
+class="math inline">dx</span> or <span class="math inline">dy</span>.
+Vertical rectangles generate shells about vertical axes, while
+horizontal rectangles generate shells about horizontal axes. The choice
+between disks, washers, and shells depends on the orientation of the
+representative rectangle, the ease of expressing the region’s
+boundaries, the limits of integration, and the simplicity of the
+resulting integral. The worked examples show that different methods can
+describe the same solid and must produce the same volume when applied
+correctly.</p>
+<h1 id="exercises">Exercises</h1>
+<p>Exercises help in transforming theoretical concepts into practical
+understanding. Mathematics is learned by doing and solving exercises
+which train you to analyze problems, select appropriate methods, and
+construct logical solutions. Attempting problems sometimes leads to
+mistakes which provide opportunities for learning and improvement.
+Regular practice increases speed, accuracy, and confidence. Exercises
+are given in the recommended book which has also been provided to you
+and you are expected to solve them on your own.</p>
+<h2 id="exercises-1">Exercises</h2>
+<p>Solve the odd number exercises from exercise 1 to 64 skipping the
+topics requiring computer algebra system or computerized graphics
+generation.</p>
+</body>
+</html>
