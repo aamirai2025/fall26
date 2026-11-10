@@ -37,7 +37,7 @@ Consider a region $S$ bounded by the curves $y=f(x)$ and $y=g(x)$ and by the ver
 <div style="text-align: center;">
 <img src="../images/06101.png" style="width: 739px; display: block; margin: 0 auto 10px auto;">
 
-<span><strong>Figure 1.</strong> A region S bounded above by y=f(x), below by y=g(x), and on the sides by the vertical lines x=a and x=b.</span>
+<span><strong>Figure 1.</strong> A region $S$ bounded above by $y=f(x)$, below by $y=g(x)$, and on the sides by the vertical lines $x=a$ and $x=b$.</span>
 </div>
 
 To determine the area of this region, we divide it into narrow vertical strips. Each strip can be approximated by a rectangle whose width is $\Delta x$ and whose height is the vertical distance between the two curves. At a selected sample point $x_i^*$, this height is $f(x_i^*)-g(x_i^*)$. Therefore, the approximate area of the $i$th rectangle is
@@ -55,7 +55,7 @@ $$
 Figure 2(a) illustrates a typical approximating rectangle. Its height is the difference between the upper and lower function values, and its width is $\Delta x$. Figure 2(b) shows how the collection of rectangles approximates the entire region. As the number of rectangles increases, their widths become smaller and the approximation approaches the exact area.
 
 <div style="text-align: center;">
-<img src="../images/06102.png" style="width: 1600px; display: block; margin: 0 auto 10px auto;">
+<img src="../images/06102.png" style="width: 1200px; display: block; margin: 0 auto 10px auto;">
 
 <span><strong>Figure 2.</strong> (a) A typical approximating rectangle of width Δx and height f(x_i*)−g(x_i*). (b) A collection of vertical rectangles approximating the region between the two curves.</span>
 </div>
@@ -123,7 +123,7 @@ $$
 <div style="text-align: center;">
 <img src="../images/06104.png" style="width: 746px; display: block; margin: 0 auto 10px auto;">
 
-<span><strong>Figure 4.</strong> The region bounded above by y=e^x, below by y=x, and between x=0 and x=1, together with a typical vertical approximating rectangle.</span>
+<span><strong>Figure 4.</strong> The region bounded above by $y=e^x$, below by $y=x$, and between $x=0$ and $x=1$, together with a typical vertical approximating rectangle.</span>
 </div>
 
 <div class="example-end">$\blacksquare$</div>
@@ -154,7 +154,7 @@ The important point is that the upper function must be subtracted from the lower
 <div style="text-align: center;">
 <img src="../images/06105.png" style="width: 746px; display: block; margin: 0 auto 10px auto;">
 
-<span><strong>Figure 5.</strong> A typical vertical rectangle between the top curve y_T and the bottom curve y_B, with height y_T−y_B and width Δx.</span>
+<span><strong>Figure 5.</strong> A typical vertical rectangle between the top curve $y_T$ and the bottom curve $y_B$, with height $y_T − y_B$ and width $\Delta x$.</span>
 </div>
 
 ## Example 2 {.green}
@@ -211,7 +211,7 @@ $$
 <div style="text-align: center;">
 <img src="../images/06106.png" style="width: 738px; display: block; margin: 0 auto 10px auto;">
 
-<span><strong>Figure 6.</strong> The region enclosed by the parabolas y=2x−x^2 and y=x^2, with intersection points (0,0) and (1,1) and a typical vertical rectangle.</span>
+<span><strong>Figure 6.</strong> The region enclosed by the parabolas $y=2x−x^2$ and $y=x^2$, with intersection points $(0,0)$ and $(1,1)$ and a typical vertical rectangle.</span>
 </div>
 
 <div class="example-end">$\blacksquare$</div>
@@ -275,7 +275,7 @@ $$
 <div style="text-align: center;">
 <img src="../images/06107.png" style="width: 693px; display: block; margin: 0 auto 10px auto;">
 
-<span><strong>Figure 7.</strong> Graphs of y=x/√(x²+1) and y=x^4−x, showing their intersection points at the origin and approximately at x=1.18, and the region between the curves.</span>
+<span><strong>Figure 7.</strong> Graphs of $y=x/\sqrt{(x^2+1)}$ and $y=x^4−x$, showing their intersection points at the origin and approximately at $x=1.18$, and the region between the curves.</span>
 </div>
 
 <div class="example-end">$\blacksquare$</div>
@@ -289,7 +289,7 @@ Suppose that $f(x)\geq g(x)$ on one part of the interval. The area of that part 
 <div style="text-align: center;">
 <img src="../images/06108.png" style="width: 719px; display: block; margin: 0 auto 10px auto;">
 
-<span><strong>Figure 8.</strong> A region between two curves whose relative positions change, divided into subregions S_1, S_2, and S_3 at their intersection points.</span>
+<span><strong>Figure 8.</strong> A region between two curves whose relative positions change, divided into subregions $S_1$, $S_2$, and $S_3$ at their intersection points.</span>
 </div>
 
 The area can be represented by the absolute difference between the functions:
@@ -378,7 +378,7 @@ $$
 <div style="text-align: center;">
 <img src="../images/06109.png" style="width: 786px; display: block; margin: 0 auto 10px auto;">
 
-<span><strong>Figure 9.</strong> The region bounded by y=sin x, y=cos x, x=0, and x=π/2, divided at x=π/4 into two regions of equal area.</span>
+<span><strong>Figure 9.</strong> The region bounded by $y=\sin x$, $y=\cos x$, $x=0$, and $x=\pi/2$, divided at $x=\pi/4$ into two regions of equal area.</span>
 </div>
 
 The figure also shows the symmetry of the two regions about $x=\frac{\pi}{4}$. Since the two areas are equal, the total area could alternatively be found by calculating one of them and multiplying by two.
@@ -629,7 +629,7 @@ The region is shown in Figure 14. The curves $y=x$ and $y=\frac{1}{4}x$ intersec
 **(a) Integration with respect to $x$.** When we integrate with respect to $x$, we use vertical approximating rectangles. The upper boundary changes at $x=1$. For $0\leq x\leq1$, the upper curve is $y=x$ and the lower curve is $y=\frac{1}{4}x$. For $1\leq x\leq2$, the upper curve is $y=\frac{1}{x}$ and the lower curve is $y=\frac{1}{4}x$. Therefore, the region must be divided into two parts, as illustrated in Figure 15(a).
 
 <div style="text-align: center;">
-<img src="../images/06115.png" style="width: 1600px; display: block; margin: 0 auto 10px auto;">
+<img src="../images/06115.png" style="width: 1200px; display: block; margin: 0 auto 10px auto;">
 
 <span><strong>Figure 15.</strong> (a) The region of Figure 14 divided into two subregions, $A_1$ and $A_2$, using vertical strips. The top boundary is $y=x$ on the first interval and $y=\frac{1}{x}$ on the second interval. (b) The region of Figure 14 divided into two subregions, $A_1$ and $A_2$, using horizontal strips. The right boundary is $x=4y$ on the first interval and $x=\frac{1}{y}$ on the second interval, while the left boundary is $x=y$.</span>
 </div>
@@ -797,7 +797,7 @@ $$
 Figure 17 shows an example of a pathogenesis curve for a measles infection. It shows how the disease develops in an individual with no immunity after the measles virus spreads to the bloodstream from the respiratory tract.
 
 <div style="text-align: center;">
-<img src="../images/06117.png" style="width: 1685px; display: block; margin: 0 auto 10px auto;">
+<img src="../images/06117.png" style="width: 1200px; display: block; margin: 0 auto 10px auto;">
 
 <span><strong>Figure 17.</strong> A measles pathogenesis curve showing the number of infected cells per millilitre of blood plasma against time in days. The graph indicates when the pathogen enters the plasma, infectiousness begins, symptoms appear, infectiousness ends, and the pathogen is cleared.</span>
 </div>
