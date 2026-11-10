@@ -7,7 +7,9 @@
 # Objectives
 
 After preparing this topic, you should be able to
+
 1. Determine the area of a region bounded by two curves by expressing the area as a Riemann sum and evaluating the corresponding definite integral with respect to $x$, including cases in which the upper and lower curves change order within the interval.
+
 2. Determine the area of a region bounded by curves by integrating with respect to $y$, select an appropriate horizontal-strip representation, and apply the method to geometric and practical problems.
 
 # The Why Section
